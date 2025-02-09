@@ -16,7 +16,7 @@
     A stunning website created using Tailwind CSS, HTML, CSS, and JavaScript to showcase your photography portfolio.
     <br />
     <br />
-    <a href="#">View Demo</a>
+    <a href="https://azmi-gallery.netlify.app/">View Demo</a>
     <br />
     <br />
   </p>
