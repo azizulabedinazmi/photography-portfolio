@@ -10,6 +10,11 @@
     -webkit-backface-visibility: hidden;
   }
 
+  /* Optimized transitions for faster image switching */
+  img[data-fancybox] {
+    will-change: transform;
+  }
+
   .animate-wave {
     animation-name: wave;
     animation-duration: 3.5s; 
