@@ -948,6 +948,9 @@
         let isInGroupedGallery = false;
         let currentGroupType = null;
         let mainFancybox = null;
+        let isNavigating = false;
+        const imageCache = {};
+        const preloadedImages = new Map();
         
         // Bind main gallery with sub-gallery support
         Fancybox.bind('[data-fancybox="gallery"]', {
@@ -977,6 +980,9 @@
                 const currentSrc = slide.$content?.src || slide.src;
                 currentIndex = groupedGalleries[groupType].findIndex(img => img === currentSrc);
                 
+                // Preload all images in this group immediately
+                groupedGalleries[groupType].forEach(preloadImage);
+                
                 // Create sub-gallery controls
                 createSubGalleryControls(fancybox, groupType);
               } else {
@@ -993,6 +999,7 @@
               isInGroupedGallery = false;
               currentGroupType = null;
               mainFancybox = null;
+              isNavigating = false;
             }
           }
         });
@@ -1031,37 +1038,56 @@
             dot.classList.toggle('opacity-100', i === currentIndex);
           });
           
-          // Add event listeners
+          // Add event listeners with debouncing
           const prevBtn = container.querySelector('.prev-group-btn');
           const nextBtn = container.querySelector('.next-group-btn');
           
+          const navigateTo = (direction) => {
+            if (isNavigating) return; // Debounce rapid clicks
+            isNavigating = true;
+            
+            const newIndex = direction === 'next' 
+              ? (currentIndex + 1) % images.length
+              : (currentIndex - 1 + images.length) % images.length;
+            
+            currentIndex = newIndex;
+            updateSubGalleryImageFast(fancybox, groupType);
+            updateSubGalleryDots(container);
+            
+            // Preload adjacent images immediately
+            preloadAdjacentImages(groupType);
+            
+            // Re-enable navigation after transition
+            setTimeout(() => { isNavigating = false; }, 150);
+          };
+          
           prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateSubGalleryImage(fancybox, groupType);
-            updateSubGalleryDots(container);
+            navigateTo('prev');
           });
           
           nextBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            currentIndex = (currentIndex + 1) % images.length;
-            updateSubGalleryImage(fancybox, groupType);
-            updateSubGalleryDots(container);
+            navigateTo('next');
           });
           
           // Dot click listeners
           dots.forEach(dot => {
             dot.addEventListener('click', (e) => {
               e.stopPropagation();
+              if (isNavigating) return;
+              isNavigating = true;
               currentIndex = parseInt(dot.dataset.index);
-              updateSubGalleryImage(fancybox, groupType);
+              updateSubGalleryImageFast(fancybox, groupType);
               updateSubGalleryDots(container);
+              preloadAdjacentImages(groupType);
+              setTimeout(() => { isNavigating = false; }, 150);
             });
           });
           
           // Keyboard navigation for sub-gallery
           const handleKeydown = (e) => {
-            if (isInGroupedGallery && fancybox && fancybox.isVisible) {
+            if (isInGroupedGallery && mainFancybox && mainFancybox.isVisible && !isNavigating) {
               if (e.key === 'ArrowRight') {
                 e.preventDefault();
                 nextBtn.click();
@@ -1075,15 +1101,53 @@
           document.addEventListener('keydown', handleKeydown, true);
         }
         
-        function updateSubGalleryImage(fancybox, groupType) {
+        // Preload images for faster navigation
+        function preloadImage(src) {
+          if (preloadedImages.has(src)) return;
+          const img = new Image();
+          img.onload = () => preloadedImages.set(src, true);
+          img.onerror = () => preloadedImages.delete(src);
+          img.src = src;
+        }
+        
+        function preloadAdjacentImages(groupType) {
+          const images = groupedGalleries[groupType];
+          const nextIdx = (currentIndex + 1) % images.length;
+          const prevIdx = (currentIndex - 1 + images.length) % images.length;
+          
+          preloadImage(images[nextIdx]);
+          preloadImage(images[prevIdx]);
+        }
+        
+        // Optimized image update with fade transition
+        function updateSubGalleryImageFast(fancybox, groupType) {
           const container = fancybox.$container;
           if (!container) return;
           
           const img = container.querySelector('img');
+          if (!img) return;
+          
           const images = groupedGalleries[groupType];
-          if (img) {
-            img.src = images[currentIndex];
-          }
+          const newSrc = images[currentIndex];
+          
+          // Only update if different
+          if (img.src === newSrc) return;
+          
+          // Add fade-out class
+          img.style.opacity = '0.7';
+          img.style.transition = 'opacity 0.15s ease-in-out';
+          
+          // Use requestAnimationFrame for smooth transition
+          requestAnimationFrame(() => {
+            img.src = newSrc;
+            requestAnimationFrame(() => {
+              img.style.opacity = '1';
+            });
+          });
+        }
+        
+        function updateSubGalleryImage(fancybox, groupType) {
+          updateSubGalleryImageFast(fancybox, groupType);
         }
         
         function updateSubGalleryDots(container) {
