@@ -6,8 +6,41 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>〘卂乙爪丨〙ヅ  - Portfolio</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Explore stunning photography portfolio of Azizul Abedin Azmi. Professional photographer showcasing landscape, portrait, and commercial photography work." />
+  <meta name="keywords" content="photography, portfolio, photographer, professional photography, landscape, portrait, commercial photography" />
+  <meta name="author" content="Azizul Abedin Azmi" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#000000" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Azizul Abedin Azmi - Professional Photography Portfolio" />
+  <meta property="og:description" content="Explore stunning photography portfolio of Azizul Abedin Azmi. Professional photographer showcasing landscape, portrait, and commercial photography work." />
+  <meta property="og:url" content="https://azmi-gallery.netlify.app/" />
+  <meta property="og:image" content="https://azmi-gallery.netlify.app/dist/assets/Logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Azizul Abedin Azmi Portfolio" />
+  <meta property="og:locale" content="en_US" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Azizul Abedin Azmi - Professional Photography Portfolio" />
+  <meta name="twitter:description" content="Explore stunning photography portfolio of Azizul Abedin Azmi. Professional photographer showcasing landscape, portrait, and commercial photography work." />
+  <meta name="twitter:image" content="https://azmi-gallery.netlify.app/dist/assets/Logo.png" />
+  <meta name="twitter:creator" content="@azmi" />
+  
+  <!-- Additional SEO Tags -->
+  <link rel="canonical" href="https://azmi-gallery.netlify.app/" />
+  <link rel="alternate" hreflang="en" href="https://azmi-gallery.netlify.app/" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="dist/assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="dist/assets/favicon.ico" />
   <link rel="stylesheet" href="dist/output.css" />
   <link rel="stylesheet" href="src/input.css" />
   <!-- Alpine.js -->
@@ -50,6 +83,50 @@
 </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3474072479588340"
      crossorigin="anonymous"></script>
+  
+  <!-- Structured Data - JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Azizul Abedin Azmi",
+    "url": "https://azmi-gallery.netlify.app/",
+    "sameAs": [
+      "https://bd.linkedin.com/in/azizulabedin",
+      "https://github.com/azizulabedinazmi"
+    ],
+    "jobTitle": "Professional Photographer",
+    "image": "https://azmi-gallery.netlify.app/dist/assets/Logo.png"
+  }
+  </script>
+  
+  <!-- Structured Data - Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hobby",
+    "name": "Azizul Abedin Azmi Photography",
+    "url": "https://azmi-gallery.netlify.app/",
+    "image": "https://azmi-gallery.netlify.app/dist/assets/Logo.png",
+    "description": "Professional photography portfolio showcasing landscape, portrait, and commercial photography",
+    "priceRange": "$$",
+    "sameAs": [
+      "https://bd.linkedin.com/in/azizulabedin",
+      "https://github.com/azizulabedinazmi"
+    ]
+  }
+  </script>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="dist/output.css" as="style" />
+  <link rel="preload" href="dist/fade_in.js" as="script" />
+  
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  
 </head>
 
 <body
@@ -169,7 +246,7 @@
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-46.jpg"
                   data-fancybox="gallery">
-                  <img alt="Ecpa"
+                  <img alt="Ecpa Nikisha Hoque"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-46.jpg" />
                 </a>
@@ -179,7 +256,7 @@
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-60.jpg"
                   data-fancybox="gallery">
-                  <img alt="ECPA"
+                  <img alt="ECPA Nikisha Hoque"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-60.jpg" />
                 </a>
@@ -209,15 +286,24 @@
               </div>
             </div>
             <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-92.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
+              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
+                <!-- Main display -->
+                <a id="groupGalleryLink3" href="dist/assets/Photography/Azmi-92.jpg" data-fancybox="gallery" data-group-slideshow-3="true">
+                  <img id="mainImage3" alt="Grouped Photo Series"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-92.jpg" />
                 </a>
+                <!-- Multi-Image Icon Badge -->
+                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
+                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                  </svg>
+                </div>
               </div>
             </div>
+            <!-- Hidden links for grouped gallery images (sub-gallery) -->
+            <a href="dist/assets/Photography/Azmi-100.jpg" data-fancybox="gallery" data-group-slideshow-3="true" style="display: none;"></a>
+            <a href="dist/assets/Photography/Azmi-102.jpg" data-fancybox="gallery" data-group-slideshow-3="true" style="display: none;"></a>
             <div class="w-full md:w-1/2 p-1">
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-1225.jpg"
@@ -248,16 +334,26 @@
                 </a>
               </div>
             </div>
+            <!-- Grouped Gallery: Azmi-10, Azmi-56, Azmi-8 -->
             <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-56.jpg"
-                  data-fancybox="gallery">
-                  <img alt="Friend"
+              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
+                <!-- Main display -->
+                <a id="groupGalleryLink" href="dist/assets/Photography/Azmi-56.jpg" data-fancybox="gallery" data-group-slideshow="true">
+                  <img id="mainImage" alt="Grouped Photo Series"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-56.jpg" />
                 </a>
+                <!-- Multi-Image Icon Badge -->
+                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
+                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                  </svg>
+                </div>
               </div>
             </div>
+            <!-- Hidden links for grouped gallery images (sub-gallery) -->
+            <a href="dist/assets/Photography/Azmi-10.jpg" data-fancybox="gallery" data-group-slideshow="true" style="display: none;"></a>
+            <a href="dist/assets/Photography/Azmi-8.jpg" data-fancybox="gallery" data-group-slideshow="true" style="display: none;"></a>
           </div>
           <div class="flex w-full md:w-1/2 flex-wrap">
             <div class="w-full p-1">
@@ -293,16 +389,6 @@
           <div class="flex w-full md:w-1/2 flex-wrap">
             <div class="w-full md:w-1/2 p-1">
               <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-8.jpg"
-                  data-fancybox="gallery">
-                  <img alt="Friend"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-8.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-50.jpg"
                   data-fancybox="gallery">
                   <img alt="ECPA"
@@ -311,25 +397,13 @@
                 </a>
               </div>
             </div>
-            <div class="w-full p-1">
+            <div class="w-full md:w-1/2 p-1">
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-58.jpg"
                   data-fancybox="gallery">
                   <img alt="ECPA"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-58.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-10.jpg"
-                  data-fancybox="gallery">
-                  <img alt="Friend"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-10.jpg" />
                 </a>
               </div>
             </div>
@@ -353,11 +427,13 @@
                 </a>
               </div>
             </div>
+          </div>
+          <div class="flex w-full md:w-1/2 flex-wrap">
             <div class="w-full md:w-1/2 p-1">
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-56 (2).jpg"
                   data-fancybox="gallery">
-                  <img alt="ECPA"
+                  <img alt="ECPA Asmita Islam Sharna"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-56 (2).jpg" />
                 </a>
@@ -370,39 +446,6 @@
                   <img alt="ECPA"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-83.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-100 (2).jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-100 (2).jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-143.jpg"
-                  data-fancybox="gallery">
-                  <img alt="Shila"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-143.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-102.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-102.jpg" />
                 </a>
               </div>
             </div>
@@ -427,28 +470,19 @@
               </div>
             </div>
           </div>
+
           <div class="flex w-full md:w-1/2 flex-wrap">
             <div class="w-full md:w-1/2 p-1">
               <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/IMG_9710-02 (2).jpg"
+                <a href="dist/assets/Photography/Azmi-143.jpg"
                   data-fancybox="gallery">
-                  <img alt="ECPA"
+                  <img alt="Sharmin Akter Shila"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/IMG_9710-02 (2).jpg" />
+                    src="dist/assets/Photography/Azmi-143.jpg" />
                 </a>
               </div>
             </div>
             <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-343 (2).jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-343 (2).jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full p-1">
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/Azmi-1044.jpg"
                   data-fancybox="gallery">
@@ -460,6 +494,36 @@
               </div>
             </div>
           </div>
+          <div class="flex w-full md:w-1/2 flex-wrap">
+            <div class="w-full md:w-1/2 p-1">
+              <div class="overflow-hidden h-full w-full">
+                <a href="dist/assets/Photography/IMG_9710-02 (2).jpg"
+                  data-fancybox="gallery">
+                  <img alt="Scout Salsabil Jannat"
+                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
+                    src="dist/assets/Photography/IMG_9710-02 (2).jpg" />
+                </a>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 p-1">
+              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
+                <!-- Main display -->
+                <a id="groupGalleryLink5" href="dist/assets/Photography/Azmi-343.jpg" data-fancybox="gallery" data-group-slideshow-5="true">
+                  <img id="mainImage5" alt="Arpita Das"
+                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
+                    src="dist/assets/Photography/Azmi-343.jpg" />
+                </a>
+                <!-- Multi-Image Icon Badge -->
+                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
+                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <!-- Hidden links for grouped gallery images (sub-gallery) -->
+            <a href="dist/assets/Photography/Azmi-354.jpg" data-fancybox="gallery" data-group-slideshow-5="true" style="display: none;"></a>
+          </div>
         </div>
       </div>
     </section>
@@ -468,16 +532,6 @@
       <div class="container w-full">
         <div class="flex flex-wrap w-full">
           <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-354.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-354.jpg" />
-                </a>
-              </div>
-            </div>
             <div class="w-full p-1">
               <div class="overflow-hidden h-full w-full">
                 <a href="dist/assets/Photography/IMG-20220104-WA0029-01.jpg"
@@ -499,25 +553,31 @@
               </div>
             </div>
           </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-380.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-380.jpg" />
-                </a>
-              </div>
+          <div class="w-full md:w-1/2 p-1">
+            <div class="overflow-hidden h-full w-full">
+              <a href="dist/assets/Photography/Azmi-380.jpg"
+                data-fancybox="gallery">
+                <img alt="ECPA Sakida Meem"
+                  class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
+                  src="dist/assets/Photography/Azmi-380.jpg" />
+              </a>
             </div>
+          </div>
+          <div class="flex w-full md:w-1/2 flex-wrap">
             <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-398.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
+              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
+                <!-- Main display -->
+                <a id="groupGalleryLink6" href="dist/assets/Photography/Azmi-398.jpg" data-fancybox="gallery" data-group-slideshow-6="true">
+                  <img id="mainImage6" alt="Grouped Photo Series"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-398.jpg" />
                 </a>
+                <!-- Multi-Image Icon Badge -->
+                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
+                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                  </svg>
+                </div>
               </div>
             </div>
             <div class="w-full md:w-1/2 p-1">
@@ -530,112 +590,59 @@
                 </a>
               </div>
             </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-437.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA Concert"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-437.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-455.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-455.jpg" />
-                </a>
-              </div>
+            <!-- Hidden links for grouped gallery images (sub-gallery) -->
+            <a href="dist/assets/Photography/Azmi-455.jpg" data-fancybox="gallery" data-group-slideshow-6="true" style="display: none;"></a>
+            <a href="dist/assets/Photography/Azmi-459.jpg" data-fancybox="gallery" data-group-slideshow-6="true" style="display: none;"></a>
+          </div>
+          <div class="w-full md:w-1/2 p-1">
+            <div class="overflow-hidden h-full w-full">
+              <a href="dist/assets/Photography/Azmi-473.jpg"
+                data-fancybox="gallery">
+                <img alt="ECPA"
+                  class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
+                  src="dist/assets/Photography/Azmi-473.jpg" />
+              </a>
             </div>
           </div>
-
           <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-459.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-459.jpg" />
-                </a>
-              </div>
-            </div>
+            <!-- Grouped Gallery: Azmi-522, Azmi-519, Azmi-529.jpg -->
             <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-473.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-473.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-519.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-519.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-522.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
+              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
+                <!-- Main display -->
+                <a id="groupGalleryLink2" href="dist/assets/Photography/Azmi-522.jpg" data-fancybox="gallery" data-group-slideshow-2="true">
+                  <img id="mainImage2" alt="Grouped Photo Series"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-522.jpg" />
                 </a>
+                <!-- Multi-Image Icon Badge -->
+                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
+                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                  </svg>
+                </div>
               </div>
             </div>
+            <!-- Hidden links for grouped gallery images (sub-gallery) -->
+            <a href="dist/assets/Photography/Azmi-529.jpg" data-fancybox="gallery" data-group-slideshow-2="true" style="display: none;"></a>
+            <!-- Grouped Gallery: Azmi-540, Azmi-542 -->
             <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-529 (2).jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-529 (2).jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-529.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-529.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-540.jpg"
-                  data-fancybox="gallery">
-                  <img alt="ECPA"
+              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
+                <!-- Main display -->
+                <a id="groupGalleryLink4" href="dist/assets/Photography/Azmi-540.jpg" data-fancybox="gallery" data-group-slideshow-4="true">
+                  <img id="mainImage4" alt="Grouped Photo Series"
                     class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
                     src="dist/assets/Photography/Azmi-540.jpg" />
                 </a>
+                <!-- Multi-Image Icon Badge -->
+                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
+                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                  </svg>
+                </div>
               </div>
             </div>
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-542.jpg"
-                  data-fancybox="gallery">
-                  <img
-                    alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-542.jpg" />
-                </a>
-              </div>
-            </div>
+            <!-- Hidden links for grouped gallery images (sub-gallery) -->
+            <a href="dist/assets/Photography/Azmi-542.jpg" data-fancybox="gallery" data-group-slideshow-4="true" style="display: none;"></a>
           </div>
         </div>
       </div>
@@ -651,31 +658,31 @@
             <div class="flex w-full md:w-1/2 flex-wrap">
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=85"
+                  <a href="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Nikisha Hoque"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=85" />
+                      src="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=85"
+                  <a href="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=85" />
+                      src="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=100" />
                   </a>
                 </div>
               </div>
-              <div class="w-full  p-1">
+              <div class="w-full p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5e04a611-a997-4bea-bb4d-c2b7b3b146f6.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/5e04a611-a997-4bea-bb4d-c2b7b3b146f6.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5e04a611-a997-4bea-bb4d-c2b7b3b146f6.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/5e04a611-a997-4bea-bb4d-c2b7b3b146f6.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
@@ -683,51 +690,51 @@
             <div class="flex w-full md:w-1/2 flex-wrap">
               <div class="w-full p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/4f180875-5922-4570-87fa-c676b05a3395.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/4f180875-5922-4570-87fa-c676b05a3395.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/4f180875-5922-4570-87fa-c676b05a3395.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/4f180875-5922-4570-87fa-c676b05a3395.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Hafsa Prapti"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/6673895a-4e05-419e-814c-7a062078b223.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/6673895a-4e05-419e-814c-7a062078b223.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Sumaiya Hossain"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/6673895a-4e05-419e-814c-7a062078b223.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/6673895a-4e05-419e-814c-7a062078b223.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/2ea0e2ac-9ed4-4ad3-b3c3-7cd70c1bea42.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/2ea0e2ac-9ed4-4ad3-b3c3-7cd70c1bea42.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Sumaiya Shifa"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/2ea0e2ac-9ed4-4ad3-b3c3-7cd70c1bea42.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/2ea0e2ac-9ed4-4ad3-b3c3-7cd70c1bea42.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Littolpotat"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
@@ -736,61 +743,61 @@
             <div class="flex w-full md:w-1/2 flex-wrap">
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/9493ec34-85fd-47c2-b438-a88ceabaee46.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/9493ec34-85fd-47c2-b438-a88ceabaee46.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/9493ec34-85fd-47c2-b438-a88ceabaee46.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/9493ec34-85fd-47c2-b438-a88ceabaee46.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5c79a656-cbbf-4142-ba61-95a197e8d41d.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/5c79a656-cbbf-4142-ba61-95a197e8d41d.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Nazmun Nahar Meem"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5c79a656-cbbf-4142-ba61-95a197e8d41d.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/5c79a656-cbbf-4142-ba61-95a197e8d41d.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/7c1c327c-af11-4488-83cc-223b6a689cd5.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/7c1c327c-af11-4488-83cc-223b6a689cd5.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/7c1c327c-af11-4488-83cc-223b6a689cd5.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/7c1c327c-af11-4488-83cc-223b6a689cd5.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/693d373b-cb1b-4e74-b288-976f051ddad9.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/693d373b-cb1b-4e74-b288-976f051ddad9.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/693d373b-cb1b-4e74-b288-976f051ddad9.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/693d373b-cb1b-4e74-b288-976f051ddad9.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/ad025232-131c-4b14-bffc-10ac90382ef8.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/ad025232-131c-4b14-bffc-10ac90382ef8.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Zarin Shuvah Mashtura"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/ad025232-131c-4b14-bffc-10ac90382ef8.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/ad025232-131c-4b14-bffc-10ac90382ef8.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full md:w-1/2 p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5868eb18-a598-4701-9244-3558171d17b4.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/5868eb18-a598-4701-9244-3558171d17b4.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
-                    <img alt="PICSART"
+                    <img alt="PICSART Farhat Faiza Taha"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5868eb18-a598-4701-9244-3558171d17b4.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/5868eb18-a598-4701-9244-3558171d17b4.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
@@ -798,21 +805,21 @@
             <div class="flex w-full md:w-1/2 flex-wrap">
               <div class="w-full p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/0ae3b1ff-ce53-4208-b5fe-687b40c399cc.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/0ae3b1ff-ce53-4208-b5fe-687b40c399cc.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/0ae3b1ff-ce53-4208-b5fe-687b40c399cc.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/0ae3b1ff-ce53-4208-b5fe-687b40c399cc.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
               <div class="w-full p-1">
                 <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/be6a8a41-568e-40b1-a622-d4dd281fd362.jpg?to=crop&type=webp&r=1456x1456&q=85"
+                  <a href="https://hcdn.picsart.com/be6a8a41-568e-40b1-a622-d4dd281fd362.jpg?to=crop&type=webp&r=1456x1456&q=100"
                     data-fancybox="gallery">
                     <img alt="PICSART"
                       class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/be6a8a41-568e-40b1-a622-d4dd281fd362.jpg?to=crop&type=webp&r=1456x1456&q=85" />
+                      src="https://hcdn.picsart.com/be6a8a41-568e-40b1-a622-d4dd281fd362.jpg?to=crop&type=webp&r=1456x1456&q=100" />
                   </a>
                 </div>
               </div>
@@ -894,6 +901,197 @@
   <script>
     Fancybox.bind("[data-fancybox]", {});
   </script>
+  
+  <!-- Grouped Slideshow Script (Sub-Gallery) -->
+  <script>
+    (function() {
+      // Wait for Fancybox to be ready
+      setTimeout(() => {
+        // Configuration for grouped slideshows
+        const groupedGalleries = {
+          'data-group-slideshow': [
+            'dist/assets/Photography/Azmi-56.jpg',
+            'dist/assets/Photography/Azmi-10.jpg',
+            'dist/assets/Photography/Azmi-8.jpg'
+          ],
+          'data-group-slideshow-2': [
+            'dist/assets/Photography/Azmi-522.jpg',
+            'dist/assets/Photography/Azmi-519.jpg',
+            'dist/assets/Photography/Azmi-529.jpg'
+          ],
+          'data-group-slideshow-3': [
+            'dist/assets/Photography/Azmi-92.jpg',
+            'dist/assets/Photography/Azmi-100.jpg',
+            'dist/assets/Photography/Azmi-102.jpg'
+          ],
+          'data-group-slideshow-4': [
+            'dist/assets/Photography/Azmi-540.jpg',
+            'dist/assets/Photography/Azmi-542.jpg'
+          ],
+          'data-group-slideshow-5': [
+            'dist/assets/Photography/Azmi-343.jpg',
+            'dist/assets/Photography/Azmi-354.jpg'
+          ],
+          'data-group-slideshow-6': [
+            'dist/assets/Photography/Azmi-398.jpg',
+            'dist/assets/Photography/Azmi-455.jpg',
+            'dist/assets/Photography/Azmi-459.jpg'
+          ]
+        };
+        
+        let currentIndex = 0;
+        let isInGroupedGallery = false;
+        let currentGroupType = null;
+        let mainFancybox = null;
+        
+        // Bind main gallery with sub-gallery support
+        Fancybox.bind('[data-fancybox="gallery"]', {
+          on: {
+            reveal: (fancybox, slide) => {
+              mainFancybox = fancybox;
+              
+              // Check if this is a grouped gallery image
+              let groupType = null;
+              if (slide.$trigger?.dataset.groupSlideshow === 'true') {
+                groupType = 'data-group-slideshow';
+              } else if (slide.$trigger?.dataset.groupSlideshow2 === 'true') {
+                groupType = 'data-group-slideshow-2';
+              } else if (slide.$trigger?.dataset.groupSlideshow3 === 'true') {
+                groupType = 'data-group-slideshow-3';
+              } else if (slide.$trigger?.dataset.groupSlideshow4 === 'true') {
+                groupType = 'data-group-slideshow-4';
+              } else if (slide.$trigger?.dataset.groupSlideshow5 === 'true') {
+                groupType = 'data-group-slideshow-5';
+              } else if (slide.$trigger?.dataset.groupSlideshow6 === 'true') {
+                groupType = 'data-group-slideshow-6';
+              }
+              
+              if (groupType) {
+                isInGroupedGallery = true;
+                currentGroupType = groupType;
+                const currentSrc = slide.$content?.src || slide.src;
+                currentIndex = groupedGalleries[groupType].findIndex(img => img === currentSrc);
+                
+                // Create sub-gallery controls
+                createSubGalleryControls(fancybox, groupType);
+              } else {
+                isInGroupedGallery = false;
+                currentGroupType = null;
+                // Remove sub-gallery controls if they exist
+                const existingControls = document.querySelector('.group-slideshow-controls');
+                const existingDots = document.querySelector('.group-slideshow-dots');
+                if (existingControls) existingControls.remove();
+                if (existingDots) existingDots.remove();
+              }
+            },
+            done: () => {
+              isInGroupedGallery = false;
+              currentGroupType = null;
+              mainFancybox = null;
+            }
+          }
+        });
+        
+        function createSubGalleryControls(fancybox, groupType) {
+          // Remove existing controls if any
+          const existing = document.querySelector('.group-slideshow-controls');
+          if (existing) existing.remove();
+          const existingDots = document.querySelector('.group-slideshow-dots');
+          if (existingDots) existingDots.remove();
+          
+          const container = fancybox.$container;
+          const images = groupedGalleries[groupType];
+          
+          // Create dots HTML dynamically based on number of images
+          let dotsHtml = '<div class="group-slideshow-dots absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 pointer-events-auto z-40">';
+          images.forEach((_, index) => {
+            dotsHtml += `<span class="group-dot w-3 h-3 bg-white rounded-full cursor-pointer transition opacity-60 hover:opacity-100" data-index="${index}"></span>`;
+          });
+          dotsHtml += '</div>';
+          
+          // Create sub-gallery controls wrapper
+          const controlsHtml = `
+            <div class="group-slideshow-controls absolute inset-0 flex items-center justify-between pointer-events-none z-40">
+              <button class="prev-group-btn px-4 py-2 text-white text-3xl font-bold hover:bg-black hover:bg-opacity-60 transition pointer-events-auto">❮</button>
+              <button class="next-group-btn px-4 py-2 text-white text-3xl font-bold hover:bg-black hover:bg-opacity-60 transition pointer-events-auto">❯</button>
+            </div>
+            ${dotsHtml}
+          `;
+          
+          container.insertAdjacentHTML('beforeend', controlsHtml);
+          
+          // Update active dot
+          const dots = container.querySelectorAll('.group-dot');
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('opacity-100', i === currentIndex);
+          });
+          
+          // Add event listeners
+          const prevBtn = container.querySelector('.prev-group-btn');
+          const nextBtn = container.querySelector('.next-group-btn');
+          
+          prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateSubGalleryImage(fancybox, groupType);
+            updateSubGalleryDots(container);
+          });
+          
+          nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            updateSubGalleryImage(fancybox, groupType);
+            updateSubGalleryDots(container);
+          });
+          
+          // Dot click listeners
+          dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+              e.stopPropagation();
+              currentIndex = parseInt(dot.dataset.index);
+              updateSubGalleryImage(fancybox, groupType);
+              updateSubGalleryDots(container);
+            });
+          });
+          
+          // Keyboard navigation for sub-gallery
+          const handleKeydown = (e) => {
+            if (isInGroupedGallery && fancybox && fancybox.isVisible) {
+              if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextBtn.click();
+              } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevBtn.click();
+              }
+            }
+          };
+          
+          document.addEventListener('keydown', handleKeydown, true);
+        }
+        
+        function updateSubGalleryImage(fancybox, groupType) {
+          const container = fancybox.$container;
+          if (!container) return;
+          
+          const img = container.querySelector('img');
+          const images = groupedGalleries[groupType];
+          if (img) {
+            img.src = images[currentIndex];
+          }
+        }
+        
+        function updateSubGalleryDots(container) {
+          const dots = container.querySelectorAll('.group-dot');
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('opacity-100', i === currentIndex);
+            dot.classList.toggle('opacity-60', i !== currentIndex);
+          });
+        }
+      }, 100);
+    })();
+  </script>
+  
   <script src="dist/fade_in.js"></script>
   <script src="dist/menu.js"></script>
 </body>
