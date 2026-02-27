@@ -2,6 +2,7 @@
 <a name="readme-top"></a>
 
 [![LinkedIn][linkedin-shield]](https://bd.linkedin.com/in/azizulabedin)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3421d5e3-e586-4553-bfc8-86d59a3c514c/deploy-status)](https://app.netlify.com/projects/azmi-gallery/deploys)
 
 <!-- PROJECT LOGO -->
 <br />
