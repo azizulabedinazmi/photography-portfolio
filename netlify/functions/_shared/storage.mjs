@@ -12,7 +12,7 @@ export function json(statusCode, body, headers = {}) {
 }
 
 export function cookieValue(event, name) {
-  const cookies = event.headers.cookie || event.headers.Cookie || "";
+  const cookies = typeof event.headers?.get === "function" ? event.headers.get("cookie") || "" : event.headers.cookie || event.headers.Cookie || "";
   return cookies.split(";").map((item) => item.trim().split("=")).find(([key]) => key === name)?.[1];
 }
 
@@ -35,6 +35,8 @@ export function isAdmin(event) {
 }
 
 export function requireAdmin(event) { if (!isAdmin(event)) throw new Error("Admin authentication required"); }
+export function methodOf(request) { return request.method || request.httpMethod || "GET"; }
+export async function bodyJson(request) { return typeof request.json === "function" ? request.json() : JSON.parse(request.body || "{}"); }
 
 export async function readJson(key, fallback) { return (await store.get(key, { type: "json" })) || fallback; }
 export async function writeJson(key, value) { await store.setJSON(key, value); }
