@@ -112,7 +112,7 @@ This version uses **Netlify Blobs**, so no Supabase or separate database is requ
 Configure these Netlify environment variables:
 
 ```text
-ADMIN_USERNAME=azmi-admin
+ADMIN_USERNAME=your-admin-username
 ADMIN_PASSWORD=use-a-long-password
 ADMIN_SESSION_SECRET=use-a-long-random-secret
 ```
