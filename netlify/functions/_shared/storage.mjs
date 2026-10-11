@@ -5,7 +5,10 @@ export const store = getStore({ name: "azmi-portfolio", consistency: "strong" })
 const secret = process.env.ADMIN_SESSION_SECRET || "local-development-secret";
 
 export function json(statusCode, body, headers = {}) {
-  return { statusCode, headers: { "content-type": "application/json; charset=utf-8", ...headers }, body: JSON.stringify(body) };
+  return new Response(JSON.stringify(body), {
+    status: statusCode,
+    headers: { "content-type": "application/json; charset=utf-8", ...headers },
+  });
 }
 
 export function cookieValue(event, name) {
