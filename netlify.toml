@@ -30,6 +30,11 @@
   to = "/.netlify/functions/logout"
   status = 200
 
+[[redirects]]
+  from = "/api/stats"
+  to = "/.netlify/functions/stats"
+  status = 200
+
 [[headers]]
   for = "/ads.txt"
   [headers.values]

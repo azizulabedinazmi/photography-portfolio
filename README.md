@@ -121,6 +121,8 @@ Use a private admin-only username that does not appear elsewhere in the site sou
 
 Deploy with the included `netlify.toml`. The admin page is available at `/admin/`.
 
+The admin studio includes dashboard statistics, photo search and category/status filters, photo editing, publishing controls, featured flags, display ordering, safe deletion, story drafts, story editing, publishing/unpublishing, and story deletion. Uploaded image files and content indexes remain in Netlify Blobs rather than being committed to GitHub.
+
 The admin username and password are read only by Netlify Functions. The password is never sent to the browser or stored in Blobs. Public visitors can read published photos and stories. `ads.txt` and `robots.txt` remain at the site root and are explicitly preserved by the Netlify configuration.
 
 Netlify Blobs is a good fit for a small or medium portfolio and removes database setup. For a very large catalogue, a dedicated database would eventually provide stronger querying and editorial workflows.
