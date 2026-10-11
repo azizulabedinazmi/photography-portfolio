@@ -115,7 +115,6 @@ Configure these Netlify environment variables:
 ADMIN_USERNAME=azmi-admin
 ADMIN_PASSWORD=use-a-long-password
 ADMIN_SESSION_SECRET=use-a-long-random-secret
-SITE_URL=https://your-domain.example
 ```
 
 Deploy with the included `netlify.toml`. The admin page is available at `/admin/`.
