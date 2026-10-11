@@ -109,13 +109,13 @@ The project now includes a Netlify-compatible Node.js content layer. The public 
 
 This version uses **Netlify Blobs**, so no Supabase or separate database is required. Netlify Blobs stores the image files and JSON metadata outside the deploy filesystem. Uploaded images are served through the `media` Netlify Function.
 
-Configure these Netlify environment variables:
+<!-- Configure these Netlify environment variables:
 
 ```text
 ADMIN_USERNAME=your-admin-username
 ADMIN_PASSWORD=use-a-long-password
 ADMIN_SESSION_SECRET=use-a-long-random-secret
-```
+``` -->
 
 Use a private admin-only username that does not appear elsewhere in the site source. Do not reuse the public GitHub or portfolio username, because Netlify's secrets scanner can detect it in the deployed files.
 
