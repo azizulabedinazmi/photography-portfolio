@@ -117,6 +117,8 @@ ADMIN_PASSWORD=use-a-long-password
 ADMIN_SESSION_SECRET=use-a-long-random-secret
 ```
 
+Use a private admin-only username that does not appear elsewhere in the site source. Do not reuse the public GitHub or portfolio username, because Netlify's secrets scanner can detect it in the deployed files.
+
 Deploy with the included `netlify.toml`. The admin page is available at `/admin/`.
 
 The admin username and password are read only by Netlify Functions. The password is never sent to the browser or stored in Blobs. Public visitors can read published photos and stories. `ads.txt` and `robots.txt` remain at the site root and are explicitly preserved by the Netlify configuration.
