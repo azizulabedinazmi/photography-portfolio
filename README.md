@@ -101,6 +101,38 @@ To get a local copy up and running follow these simple example steps.
 
 5. Publish it using your preferred hosting platform.
 
+## Node.js admin and storage
+
+The project now includes a Netlify-compatible Node.js content layer. The public site still keeps the existing static portfolio as a fallback, while new photos and stories can be managed from `/admin/`.
+
+### Recommended hosting setup
+
+This version uses **Netlify Blobs**, so no Supabase or separate database is required. Netlify Blobs stores the image files and JSON metadata outside the deploy filesystem. Uploaded images are served through the `media` Netlify Function.
+
+Configure these Netlify environment variables:
+
+```text
+ADMIN_USERNAME=azmi-admin
+ADMIN_PASSWORD=use-a-long-password
+ADMIN_SESSION_SECRET=use-a-long-random-secret
+SITE_URL=https://your-domain.example
+```
+
+Deploy with the included `netlify.toml`. The admin page is available at `/admin/`.
+
+The admin username and password are read only by Netlify Functions. The password is never sent to the browser or stored in Blobs. Public visitors can read published photos and stories. `ads.txt` and `robots.txt` remain at the site root and are explicitly preserved by the Netlify configuration.
+
+Netlify Blobs is a good fit for a small or medium portfolio and removes database setup. For a very large catalogue, a dedicated database would eventually provide stronger querying and editorial workflows.
+
+### Local commands
+
+```sh
+npm install
+npm run check
+npm run dev
+```
+
+The existing static gallery remains available if Supabase is not configured. Once configured, photos uploaded from the admin studio appear in the new “Latest uploads” section on the homepage.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- buymeacoffee -->
@@ -164,4 +196,3 @@ Project Link: [https://github.com/azizulabedinazmi/photography-portfolio](https:
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/joão-franco-452161195/
 [product-screenshot]: dist/assets/mockup.png
-

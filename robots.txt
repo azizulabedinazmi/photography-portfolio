@@ -6,9 +6,10 @@ Allow: /
 Allow: /dist/
 Allow: /src/
 
-# Disallow private pages if any
-# Disallow: /admin/
-# Disallow: /private/
+# The admin interface and serverless API are private application routes.
+Disallow: /admin/
+Disallow: /.netlify/
+Disallow: /api/
 
 # Sitemap location
 Sitemap: https://azmi-gallery.netlify.app/sitemap.xml

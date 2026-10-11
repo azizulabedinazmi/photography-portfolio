@@ -184,6 +184,13 @@
   <!-- Content -->
   <div class="container mx-auto">
     <h1 class="text-4xl pt-10 pb-8 font-bold">PORTFOLIO</h1>
+    <section class="mb-12" aria-labelledby="managed-gallery-title">
+      <div class="flex items-end justify-between gap-4 mb-5">
+        <div><p class="text-xs tracking-[.25em] opacity-60">CURATED WORK</p><h2 id="managed-gallery-title" class="text-3xl font-bold">Latest uploads</h2></div>
+        <p class="text-sm opacity-60">Managed from the admin studio</p>
+      </div>
+      <div id="managedGallery"><p class="text-sm opacity-60">Loading managed work…</p></div>
+    </section>
     <section class="text-neutral-700">
       <div class="container w-full">
         <div class="flex flex-wrap w-full">
@@ -1163,6 +1170,6 @@
   <script src="dist/menu.js"></script>
   <!-- Smart Image Preloader - loads all images in background automatically -->
   <script src="dist/preload_images.js"></script>
+  <script src="dist/gallery-live.js"></script>
 </body>
 </html>
-

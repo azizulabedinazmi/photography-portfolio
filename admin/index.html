@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><div><span class="eyebrow">AZMI GALLERY</span><h1>Content studio</h1></div><button id="logout" class="ghost hidden">Log out</button></header>
+    <section id="loginCard" class="card narrow">
+      <h2>Admin sign in</h2><p>Use the Supabase Auth account included in <code>ADMIN_EMAILS</code>.</p>
+      <form id="loginForm"><label>Username<input id="username" required autocomplete="username"></label><label>Password<input id="password" type="password" required autocomplete="current-password"></label><button>Sign in</button></form><p id="loginError" class="error"></p>
+    </section>
+    <section id="studio" class="hidden grid">
+      <div class="card"><h2>Upload photograph</h2><form id="photoForm"><label>Image<input id="image" type="file" accept="image/jpeg,image/png,image/webp" required></label><label>Title<input id="title" required></label><label>Alt text<input id="altText" required></label><label>Category<select id="category"><option>Photography</option><option>Portraits</option><option>Art</option><option>Commercial</option></select></label><label>Description<textarea id="description"></textarea></label><button>Upload and publish</button></form><p id="photoStatus" class="status"></p></div>
+      <div class="card"><h2>Publish story</h2><form id="storyForm"><label>Title<input id="storyTitle" required></label><label>Excerpt<textarea id="excerpt"></textarea></label><label>Markdown story<textarea id="bodyMarkdown" rows="12" required></textarea></label><label>Cover image path<input id="coverImagePath" placeholder="optional/path.webp"></label><button>Save published story</button></form><p id="storyStatus" class="status"></p></div>
+      <div class="card full"><h2>Published photos</h2><div id="photos" class="photo-list"></div></div>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
