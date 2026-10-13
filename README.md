@@ -140,6 +140,29 @@ npm run dev
 ```
 
 The existing static gallery remains available if Netlify Blobs has no managed photos yet. Once configured, photos uploaded from the admin studio appear in the new “Latest uploads” section on the homepage.
+
+## TypeScript frontend and SEO files
+
+The public application is now a Vite + React + TypeScript + Tailwind CSS single-page application. The old page templates were removed; the only HTML source file is the Vite entry shell, `index.html`. Routes such as `/`, `/stories`, `/stories/:slug`, `/about`, `/contact`, and `/admin` are rendered by `src/App.tsx`.
+
+### `ads.txt`
+
+Keep the Google publisher record at the website root. It is also copied into the Vite `public/` directory so the production build serves it at `/ads.txt`. If Google AdSense gives you a new record, replace the line in both `ads.txt` and `public/ads.txt`, then deploy again. Do not put secrets or API keys in this file.
+
+### `robots.txt`
+
+The production file is copied from `public/robots.txt` and currently allows public pages while excluding private routes:
+
+```text
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /.netlify/
+Sitemap: https://azmi-gallery.netlify.app/sitemap.xml
+```
+
+If you change domains, update the `Sitemap:` URL in `robots.txt`, `public/robots.txt`, and the sitemap. `robots.txt` is not authentication; the admin is protected by the Netlify Function session.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- buymeacoffee -->

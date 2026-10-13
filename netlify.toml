@@ -1,43 +1,24 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/api/gallery"
-  to = "/.netlify/functions/gallery"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
 
 [[redirects]]
-  from = "/api/stories"
-  to = "/.netlify/functions/stories"
+  from = "/stories/*"
+  to = "/index.html"
   status = 200
 
 [[redirects]]
-  from = "/stories/:slug"
-  to = "/stories/story.html"
-  status = 200
-
-[[redirects]]
-  from = "/api/upload"
-  to = "/.netlify/functions/upload"
-  status = 200
-
-[[redirects]]
-  from = "/api/login"
-  to = "/.netlify/functions/login"
-  status = 200
-
-[[redirects]]
-  from = "/api/logout"
-  to = "/.netlify/functions/logout"
-  status = 200
-
-[[redirects]]
-  from = "/api/stats"
-  to = "/.netlify/functions/stats"
+  from = "/admin/*"
+  to = "/index.html"
   status = 200
 
 [[headers]]

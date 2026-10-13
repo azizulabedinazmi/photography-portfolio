@@ -1,0 +1,2 @@
+export type Photo = { id: string; title: string; slug: string; alt_text: string; description?: string; category: string; image_path: string; storage_path?: string; published: boolean; featured?: boolean; sort_order?: number; created_at?: string };
+export type Story = { id: string; title: string; slug: string; excerpt?: string; body_markdown: string; cover_image_path?: string; status: "draft" | "published"; published_at?: string; updated_at?: string; created_at?: string };

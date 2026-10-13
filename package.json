@@ -1,14 +1,27 @@
 {
   "name": "azmi-photography-portfolio",
   "private": true,
-  "version": "1.0.0",
-  "description": "Photography portfolio with a Netlify-hosted Node.js content API.",
+  "version": "2.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "npx netlify-cli dev",
-    "build": "node scripts/check-project.mjs",
-    "check": "node scripts/check-project.mjs"
+    "dev": "vite",
+    "build": "node scripts/prepare-public.mjs && tsc --noEmit && vite build",
+    "check": "node scripts/check-project.mjs && tsc --noEmit",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@netlify/blobs": "^8.1.0"
+    "@netlify/blobs": "^8.1.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.5",
+    "typescript": "^5.8.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "lucide-react": "^0.511.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.7",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2"
   }
 }
