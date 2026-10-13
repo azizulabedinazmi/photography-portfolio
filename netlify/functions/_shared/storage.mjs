@@ -42,6 +42,10 @@ export async function readJson(key, fallback) {
   const value = await store.get(key, { type: "json" });
   return value ?? fallback;
 }
+
+export function hasAdminConfig() {
+  return Boolean(process.env.ADMIN_USERNAME && process.env.ADMIN_PASSWORD && process.env.ADMIN_SESSION_SECRET);
+}
 export async function writeJson(key, value) { await store.setJSON(key, value); }
 export async function deleteBlob(key) { if (key && key.startsWith("photos/")) await store.delete(key); }
 export function publicMediaUrl(key) { return `/.netlify/functions/media?key=${encodeURIComponent(key)}`; }

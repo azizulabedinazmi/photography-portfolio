@@ -125,6 +125,10 @@ The admin studio includes dashboard statistics, photo search and category/status
 
 The admin username and password are read only by Netlify Functions. The password is never sent to the browser or stored in Blobs. Public visitors can read published photos and stories. `ads.txt` and `robots.txt` remain at the site root and are explicitly preserved by the Netlify configuration.
 
+### Public stories
+
+Published stories are available at `/stories/`, with individual stories at `/stories/<slug>`. These pages read from `GET /api/stories`; the public page filters to `status: "published"` and renders story text safely as DOM text. Drafts remain available only in the admin studio and never appear in the public listing or detail page.
+
 Netlify Blobs is a good fit for a small or medium portfolio and removes database setup. For a very large catalogue, a dedicated database would eventually provide stronger querying and editorial workflows.
 
 ### Local commands
@@ -135,7 +139,7 @@ npm run check
 npm run dev
 ```
 
-The existing static gallery remains available if Supabase is not configured. Once configured, photos uploaded from the admin studio appear in the new “Latest uploads” section on the homepage.
+The existing static gallery remains available if Netlify Blobs has no managed photos yet. Once configured, photos uploaded from the admin studio appear in the new “Latest uploads” section on the homepage.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- buymeacoffee -->

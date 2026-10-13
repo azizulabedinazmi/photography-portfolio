@@ -15,6 +15,7 @@ function showStudio() { $("loginCard").classList.add("hidden"); $("studio").clas
 $("loginForm").addEventListener("submit", async (event) => { event.preventDefault(); try { await call("/api/login", { method: "POST", body: JSON.stringify({ username: $("username").value, password: $("password").value }) }); showStudio(); } catch (error) { $("loginError").textContent = error.message; } });
 $("logout").addEventListener("click", async () => { await call("/api/logout", { method: "POST" }); location.reload(); });
 $("newPhoto").addEventListener("click", () => openPhoto()); $("newStory").addEventListener("click", () => openStory());
+document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => { document.querySelectorAll(".tab").forEach((item) => item.classList.toggle("active", item === tab)); document.querySelectorAll(".tab-panel").forEach((panel) => panel.classList.toggle("hidden", panel.id !== tab.dataset.tab)); }));
 $("photoSearch").addEventListener("input", renderPhotos); $("photoCategory").addEventListener("change", renderPhotos); $("photoStatus").addEventListener("change", renderPhotos); $("storySearch").addEventListener("input", renderStories); $("storyStatus").addEventListener("change", renderStories);
 document.querySelectorAll("[data-close]").forEach((button) => button.addEventListener("click", () => $(button.dataset.close).close()));
 
