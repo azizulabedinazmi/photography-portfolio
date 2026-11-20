@@ -1,87 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> 〘卂乙爪丨〙ヅ  - Portfolio</title>
+  <title>Azizul Abedin Azmi — Photography & Digital Art Portfolio</title>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Explore stunning photography portfolio of Azizul Abedin Azmi. Professional photographer showcasing landscape, portrait, and commercial photography work." />
-  <meta name="keywords" content="photography, portfolio, photographer, professional photography, landscape, portrait, commercial photography" />
+  <meta name="description" content="Explore the fine art photography and PicsArt digital artwork portfolio of Azizul Abedin Azmi. Professional portraiture, cultural street photojournalism, and creative digital edits in Narayanganj & Dhaka." />
+  <meta name="keywords" content="Azizul Abedin Azmi, photography, portfolio, photographer, PicsArt, digital art, photo manipulation, portrait photography, Dhaka photographer, ECPA photography" />
   <meta name="author" content="Azizul Abedin Azmi" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#0a0a0a" />
   
   <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Azizul Abedin Azmi - Professional Photography Portfolio" />
-  <meta property="og:description" content="Explore stunning photography portfolio of Azizul Abedin Azmi. Professional photographer showcasing landscape, portrait, and commercial photography work." />
+  <meta property="og:title" content="Azizul Abedin Azmi — Photography & Digital Art Portfolio" />
+  <meta property="og:description" content="Fine art portraiture, street photojournalism, and PicsArt creative edits by Azizul Abedin Azmi." />
   <meta property="og:url" content="https://azmi-gallery.netlify.app/" />
   <meta property="og:image" content="https://azmi-gallery.netlify.app/dist/assets/Logo.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Azizul Abedin Azmi Portfolio" />
+  <meta property="og:site_name" content="Azizul Abedin Azmi Photography & Art" />
   <meta property="og:locale" content="en_US" />
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Azizul Abedin Azmi - Professional Photography Portfolio" />
-  <meta name="twitter:description" content="Explore stunning photography portfolio of Azizul Abedin Azmi. Professional photographer showcasing landscape, portrait, and commercial photography work." />
+  <meta name="twitter:title" content="Azizul Abedin Azmi — Photography & Digital Art Portfolio" />
+  <meta name="twitter:description" content="Fine art portraiture and creative digital art by Azizul Abedin Azmi." />
   <meta name="twitter:image" content="https://azmi-gallery.netlify.app/dist/assets/Logo.png" />
   <meta name="twitter:creator" content="@azmi" />
   
-  <!-- Additional SEO Tags -->
   <link rel="canonical" href="https://azmi-gallery.netlify.app/" />
-  <link rel="alternate" hreflang="en" href="https://azmi-gallery.netlify.app/" />
-  <meta name="language" content="English" />
-  <meta name="revisit-after" content="7 days" />
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="dist/assets/favicon.ico" />
   <link rel="apple-touch-icon" href="dist/assets/favicon.ico" />
-  <link rel="stylesheet" href="dist/output.css" />
-  <link rel="stylesheet" href="src/input.css" />
-  <!-- Alpine.js -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- Start - Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Playfair Display, Cinzel, JetBrains Mono, Signika -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;700&display=swap" rel="stylesheet">
-  <!-- End - Fonts -->
-  <!-- Start - Fancybox Scripts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Signika:wght@400;700&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+  
+  <!-- Fancybox v5 -->
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <!-- End - Fancybox Scripts -->
+  
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  <!-- Tailwind CSS CDN & Config -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      content: ["./dist/*.{html,js}"],
+      darkMode: 'class',
       theme: {
-        extend:
-                {
-                  fontFamily: {
-                    'nothingyoucoulddo': ['Nothing You Could Do', 'cursive'],
-                    'signika': ['Signika', 'sans-serif'],
-                  },
-                },
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Signika', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Cinzel', 'serif'],
+            display: ['Cinzel', '"Playfair Display"', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            nothingyoucoulddo: ['Nothing You Could Do', 'cursive'],
+            signika: ['Signika', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fafafa',
+              100: '#f4f4f5',
+              200: '#e4e4e7',
+              300: '#d4d4d8',
+              400: '#a1a1aa',
+              500: '#71717a',
+              600: '#52525b',
+              700: '#3f3f46',
+              800: '#27272a',
+              900: '#18181b',
+              950: '#09090b',
+            }
+          }
+        },
       },
-      plugins: [],
     }
   </script>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LYGXJF62M9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-LYGXJF62M9');
-</script>
-  <!-- Structured Data - JSON-LD Schema -->
+  <link rel="stylesheet" href="dist/output.css" />
+  <link rel="stylesheet" href="src/input.css" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LYGXJF62M9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LYGXJF62M9');
+  </script>
+
+  <!-- Structured Data JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -90,1079 +106,476 @@
     "url": "https://azmi-gallery.netlify.app/",
     "sameAs": [
       "https://bd.linkedin.com/in/azizulabedin",
-      "https://github.com/azizulabedinazmi"
+      "https://github.com/azizulabedinazmi",
+      "https://www.instagram.com/azizulabedin/"
     ],
-    "jobTitle": "Professional Photographer",
+    "jobTitle": "Professional Photographer & Digital Visual Artist",
     "image": "https://azmi-gallery.netlify.app/dist/assets/Logo.png"
   }
   </script>
-  
-  <!-- Structured Data - Organization Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Hobby",
-    "name": "Azizul Abedin Azmi Photography",
-    "url": "https://azmi-gallery.netlify.app/",
-    "image": "https://azmi-gallery.netlify.app/dist/assets/Logo.png",
-    "description": "Professional photography portfolio showcasing landscape, portrait, and commercial photography",
-    "priceRange": "$$",
-    "sameAs": [
-      "https://bd.linkedin.com/in/azizulabedin",
-      "https://github.com/azizulabedinazmi"
-    ]
-  }
-  </script>
-  
-  <!-- Preload critical resources -->
-  <link rel="preload" href="dist/output.css" as="style" />
-  <link rel="preload" href="dist/fade_in.js" as="script" />
-  <link rel="preload" href="dist/preload_images.js" as="script" />
-  
-  <!-- DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-  
 </head>
 
-<body
-  class="dark:bg-black bg-white h-screen text-black dark:text-white px-5 md:px-20 opacity-0 animate-fade-in transition duration-500">
-  <!-- Navbar -->
-  <header class="flex w-full overflow-hidden pt-10 pb-1">
-    <!-- Navbar -->
-    <nav id="nav" x-data="{ open: false }" role="navigation" class="w-full">
-      <div class="container mx-auto flex flex-wrap items-center md:flex-no-wrap">
-        <div class="mr-4 md:mr-8">
-          <a href="index.html" class="text-2xl font-signika font-bold">Azizul Abedin Azmi</a>
-        </div>
-        <div class="ml-auto md:hidden flex items-center justify-start">
-          <button onclick="menuToggle()" @click="open = !open"
-            class="tap-highlight-transparent text-black dark:text-white w-5 h-5 relative focus:outline-none"
-            @click="open = !open">
-            <span class="sr-only">Open main menu</span>
-            <div class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <span aria-hidden="true"
-                class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
-                :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
-              <span aria-hidden="true"
-                class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
-                :class="{'opacity-0': open } "></span>
-              <span aria-hidden="true"
-                class="block absolute h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
-                :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
+<body class="bg-white dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 min-h-screen transition-colors duration-300 font-sans selection:bg-neutral-800 selection:text-white dark:selection:bg-white dark:selection:text-black overflow-x-hidden">
+
+  <!-- Sticky Glassmorphic Navbar -->
+  <header class="sticky top-0 z-40 w-full glass-header border-b border-neutral-200/70 dark:border-neutral-800/80 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo / Name -->
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-bold font-serif text-lg tracking-wider shadow-md group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
+            A
+          </div>
+          <div>
+            <div class="text-lg sm:text-xl font-bold font-serif tracking-tight leading-none text-neutral-900 dark:text-white group-hover:opacity-80 transition">
+              Azizul Abedin Azmi
             </div>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Available for Shoots</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center Nav Links (Desktop) -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide">
+        <a href="index.html" class="relative py-1 text-black dark:text-white font-semibold transition group">
+          PORTFOLIO & ART
+          <span class="absolute inset-x-0 bottom-0 h-0.5 bg-black dark:bg-white rounded-full"></span>
+        </a>
+        <a href="dist/about_me.html" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition group">
+          ABOUT ME
+          <span class="absolute inset-x-0 bottom-0 h-0.5 bg-black dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+        </a>
+        <a href="dist/contact.html" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition group">
+          CONTACT
+          <span class="absolute inset-x-0 bottom-0 h-0.5 bg-black dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+        </a>
+      </nav>
+
+      <!-- Right Utility Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        
+        <!-- Sound FX Toggle Button -->
+        <button type="button" class="sound-toggle-btn p-2.5 rounded-full text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition active:scale-95" title="Toggle Shutter Sounds & Camera Flash (S)">
+          <svg class="sound-icon-on w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.414 0-.75-.336-.75-.75V9c0-.414.336-.75.75-.75h2.24z"/></svg>
+          <svg class="sound-icon-off w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-3l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.414 0-.75-.336-.75-.75V9c0-.414.336-.75.75-.75h2.24z"/></svg>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button type="button" class="theme-toggle-btn p-2.5 rounded-full text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition active:rotate-45" title="Toggle Theme (T)">
+          <svg class="theme-icon-sun w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          <svg class="theme-icon-moon w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+        </button>
+
+        <!-- Moodboard / Favorites Pill Button -->
+        <button type="button" class="open-moodboard-btn relative inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 font-medium text-xs sm:text-sm transition shadow-sm active:scale-95" title="View Shortlisted Moodboard (M)">
+          <svg class="w-4 h-4 text-rose-500 fill-rose-500" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+          <span class="hidden sm:inline">Moodboard</span>
+          <span class="moodboard-count inline-flex items-center justify-center px-1.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500 text-white min-w-[18px]">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="md:hidden" x-data="{ open: false }">
+          <button @click="open = !open" class="p-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          </button>
+          
+          <div x-show="open" @click.away="open = false" x-transition class="absolute top-20 left-0 right-0 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 px-6 py-6 shadow-2xl flex flex-col space-y-4 text-lg font-serif">
+            <a href="index.html" class="font-bold text-black dark:text-white">PORTFOLIO & ART</a>
+            <a href="dist/about_me.html" class="text-neutral-600 dark:text-neutral-400">ABOUT ME</a>
+            <a href="dist/contact.html" class="text-neutral-600 dark:text-neutral-400">CONTACT</a>
+            <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+              <span class="text-sm font-sans text-neutral-500">Curate moodboard & inquire</span>
+              <button class="open-moodboard-btn px-4 py-1.5 rounded-full bg-rose-500 text-white text-xs font-sans font-semibold">Open Moodboard</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Editorial Animated Hero Section -->
+  <section class="relative pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    
+    <!-- Ambient Animated Aurora Glow Orbs in Background -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-gradient-to-tr from-amber-500/15 via-rose-500/15 to-purple-500/15 filter blur-3xl pointer-events-none animate-aurora-1"></div>
+    <div class="absolute top-1/2 -right-24 w-96 h-96 rounded-full bg-gradient-to-bl from-blue-500/15 via-indigo-500/15 to-pink-500/15 filter blur-3xl pointer-events-none animate-aurora-2"></div>
+
+    <div class="max-w-4xl relative z-10">
+      
+      <!-- Animated Status Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-neutral-100/80 dark:bg-neutral-900/80 backdrop-blur-md text-neutral-800 dark:text-neutral-200 border border-neutral-200/80 dark:border-neutral-800 mb-6 shadow-sm">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+        </span>
+        Photography & PicsArt Digital Artworks
+      </div>
+
+      <!-- Animated Rotating Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold tracking-tight text-neutral-950 dark:text-white leading-[1.08] mb-6">
+        Capturing <br class="sm:hidden" />
+        <span id="rotating-headline-word" class="inline-block text-amber-500 dark:text-amber-400 underline decoration-amber-400/40 underline-offset-8 transition-all duration-300">
+          Soul & Light
+        </span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl font-light mb-8">
+        Portfolio of <strong class="text-neutral-900 dark:text-white font-medium">Azizul Abedin Azmi</strong> — exploring human vulnerability, cultural street stories, and imaginative PicsArt digital photo edits across Narayanganj & Dhaka.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="#gallery-section" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:opacity-90 transition shadow-xl hover:scale-105 active:scale-95">
+          <span>Explore Works ↓</span>
+          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/></svg>
+        </a>
+
+        <button type="button" class="open-zen-btn inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-800 font-medium text-sm hover:bg-neutral-200 dark:hover:bg-neutral-800 transition hover:scale-105 active:scale-95 shadow-sm">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+          <span>✨ Zen Exhibition Mode (Z)</span>
+        </button>
+
+        <a href="dist/contact.html" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white font-medium text-sm transition">
+          <span>Book a Session →</span>
+        </a>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-10 mt-10 border-t border-neutral-200/80 dark:border-neutral-800/80">
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">55+</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Master Works</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">16</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Digital Artworks</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">6 Series</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Curated Stories</div>
+        </div>
+        <div>
+          <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">Canon & PicsArt</div>
+          <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Dual Mediums</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cinematic Continuous Rolling Filmstrip Marquee -->
+    <div class="mt-14 pt-8 border-t border-neutral-200/70 dark:border-neutral-800/80">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-xs font-mono uppercase tracking-widest text-neutral-400 dark:text-neutral-500 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          Featured Highlights Filmstrip (Hover to Pause)
+        </span>
+      </div>
+      <div class="overflow-hidden relative select-none">
+        <div id="filmstrip-marquee-inner" class="animate-marquee flex gap-4">
+          <!-- Injected dynamically by FilmstripMarquee -->
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Interactive Gallery Toolbar & Controls -->
+  <section id="gallery-section" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+      
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="button" data-category="all" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black transition shadow-sm active:scale-95">
+          All Works (55)
+        </button>
+        <button type="button" data-category="portraits" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+          Portraits (28)
+        </button>
+        <button type="button" data-category="art" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95 flex items-center gap-1.5">
+          <span>🎨 Digital Art & PicsArt (16)</span>
+        </button>
+        <button type="button" data-category="events" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+          Events & Street (8)
+        </button>
+        <button type="button" data-category="nature" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+          Nature & Details (3)
+        </button>
+        <button type="button" data-category="series" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+          Curated Series (6)
+        </button>
+        <button type="button" data-category="moodboard" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95 flex items-center gap-1.5">
+          <span>❤️ My Moodboard</span>
+        </button>
+      </div>
+
+      <!-- Search & Layout Switcher -->
+      <div class="flex flex-wrap items-center gap-3">
+        
+        <!-- Quick Search Input -->
+        <div class="relative w-full sm:w-64">
+          <svg class="w-4 h-4 absolute left-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+          <input type="text" id="gallery-search-input" placeholder="Search by name, art, camera..." class="w-full pl-9 pr-8 py-2 rounded-full text-xs bg-neutral-100 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
+          <button id="gallery-search-clear" class="hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-white">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
-        <div id="menu"
-          class="w-full h-0 transition-all ease-out duration-500 md:transition-none md:w-auto md:flex-grow md:flex md:items-center">
-          <ul id="ulMenu"
-            class="flex flex-col duration-300 ease-out md:space-x-5 sm:transition-none mt-5 md:flex-row md:items-center md:ml-auto md:mt-0 md:pt-0 md:border-0">
-            <li class="group transition duration-300">
-              <a href="index.html" class="font-signika text-2xl tap-highlight-transparent">PORTFOLIO
-                <span class="hidden md:block h-0.5 bg-black dark:bg-white"></span>
-              </a>
-            </li>
-            <li class="group transition duration-300">
-              <a href="dist/about_me.html" class="font-signika text-2xl tap-highlight-transparent">ABOUT ME
-                <span
-                  class="hidden md:block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black dark:bg-white"></span>
-              </a>
-            </li>
-            <li class="group transition duration-300">
-              <a href="dist/contact.html" class="font-signika text-2xl tap-highlight-transparent">CONTACT
-                <span
-                  class="hidden md:block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black dark:bg-white"></span>
-              </a>
-            </li>
-          </ul>
+
+        <!-- View Density Switcher -->
+        <div class="inline-flex p-1 bg-neutral-100 dark:bg-neutral-900 rounded-full border border-neutral-200/80 dark:border-neutral-800">
+          <button type="button" data-view="masonry" class="view-switcher-btn p-1.5 rounded-full text-black dark:text-white bg-white dark:bg-neutral-800 shadow-sm transition" title="Masonry Layout">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          </button>
+          <button type="button" data-view="editorial" class="view-switcher-btn p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition" title="Editorial Magazine Layout (2 Columns)">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h4a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM11 4a1 1 0 011-1h4a1 1 0 011 1v12a1 1 0 01-1 1h-4a1 1 0 01-1-1V4z"/></svg>
+          </button>
+          <button type="button" data-view="compact" class="view-switcher-btn p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition" title="Compact Contact Sheet Grid">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1V4zM8 4a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H9a1 1 0 01-1-1V4zM14 4a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1V4zM2 10a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2zM8 10a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H9a1 1 0 01-1-1v-2zM14 10a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2zM2 16a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2zM8 16a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H9a1 1 0 01-1-1v-2zM14 16a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2z"/></svg>
+          </button>
         </div>
+
       </div>
-    </nav>
-  </header>
-  <!-- Content -->
-  <div class="container mx-auto">
-    <h1 class="text-4xl pt-10 pb-8 font-bold">PORTFOLIO</h1>
-    <section class="text-neutral-700">
-      <div class="container w-full">
-        <div class="flex flex-wrap w-full">
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/IMG_20200908_021024_949.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Sanzana Bashar"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/IMG_20200908_021024_949.jpg" title="Sanzana Bashar" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/_MG_3944-01 (1).jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Scout"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/_MG_3944-01 (1).jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/20210723182456_IMG_5546-01.jpeg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="a cat"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/20210723182456_IMG_5546-01.jpeg" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/20210802144001_IMG_5708.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="flowers"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/20210802144001_IMG_5708.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/20220413163432__MG_7932-01 (1).jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Hafsa Prapti"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/20220413163432__MG_7932-01 (1).jpg" title="Hafsa Prapti" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-46.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Ecpa Nikisha Hoque"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-46.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-60.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA Nikisha Hoque"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-60.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-86.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-86.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
 
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-363.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-363.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
-                <!-- Main display -->
-                <a id="groupGalleryLink3" href="dist/assets/Photography/Azmi-92.jpg" data-fancybox="gallery" data-group-slideshow-3="true">
-                  <img loading="lazy" id="mainImage3" alt="Grouped Photo Series"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-92.jpg" />
-                </a>
-                <!-- Multi-Image Icon Badge -->
-                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
-                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <!-- Hidden links for grouped gallery images (sub-gallery) -->
-            <a href="dist/assets/Photography/Azmi-100.jpg" data-fancybox="gallery" data-group-slideshow-3="true" style="display: none;"></a>
-            <a href="dist/assets/Photography/Azmi-102.jpg" data-fancybox="gallery" data-group-slideshow-3="true" style="display: none;"></a>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-1225.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-1225.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/20210802144133_IMG_5711.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="TREE"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/20210802144133_IMG_5711.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/20210824200717_IMG_0546-01.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Nayeem"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/20210824200717_IMG_0546-01.jpg" />
-                </a>
-              </div>
-            </div>
-            <!-- Grouped Gallery: Azmi-10, Azmi-56, Azmi-8 -->
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
-                <!-- Main display -->
-                <a id="groupGalleryLink" href="dist/assets/Photography/Azmi-56.jpg" data-fancybox="gallery" data-group-slideshow="true">
-                  <img loading="lazy" id="mainImage" alt="Grouped Photo Series"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-56.jpg" />
-                </a>
-                <!-- Multi-Image Icon Badge -->
-                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
-                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <!-- Hidden links for grouped gallery images (sub-gallery) -->
-            <a href="dist/assets/Photography/Azmi-10.jpg" data-fancybox="gallery" data-group-slideshow="true" style="display: none;"></a>
-            <a href="dist/assets/Photography/Azmi-8.jpg" data-fancybox="gallery" data-group-slideshow="true" style="display: none;"></a>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-24.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-24.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/IMG_5500-01.jpg"
-                  data-fancybox="gallery">
-                  <img
-                    loading="lazy" alt="Scout"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/IMG_5500-01.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-    <section class="text-neutral-700">
-      <div class="container w-full">
-        <div class="flex flex-wrap w-full">
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-50.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-50.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-58.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-58.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-73.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-73.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/AZMI-226.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA Barisha Apu"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/AZMI-226.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-56 (2).jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA Asmita Islam Sharna, Asmita Islam Sharna"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-56 (2).jpg" title="Asmita Islam Sharna" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-83.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-83.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-145.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-145.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-168.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-168.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-143.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Sharmin Akter Shila"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-143.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-1044.jpg"
-                  data-fancybox="gallery">
-                  <img
-                    loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-1044.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/IMG_9710-02 (2).jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Scout Salsabil Jannat"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/IMG_9710-02 (2).jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
-                <!-- Main display -->
-                <a id="groupGalleryLink5" href="dist/assets/Photography/Azmi-343.jpg" data-fancybox="gallery" data-group-slideshow-5="true">
-                  <img loading="lazy" id="mainImage5" alt="Arpita Das"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-343.jpg" title="Arpita Das"/>
-                </a>
-                <!-- Multi-Image Icon Badge -->
-                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
-                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <!-- Hidden links for grouped gallery images (sub-gallery) -->
-            <a href="dist/assets/Photography/Azmi-354.jpg" data-fancybox="gallery" data-group-slideshow-5="true" style="display: none;"></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="text-neutral-700">
-      <div class="container w-full">
-        <div class="flex flex-wrap w-full">
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/IMG-20220104-WA0029-01.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="Scout"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/IMG-20220104-WA0029-01.jpg" />
-                </a>
-              </div>
-            </div>
-            <div class="w-full p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-367.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-367.jpg" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="w-full md:w-1/2 p-1">
-            <div class="overflow-hidden h-full w-full">
-              <a href="dist/assets/Photography/Azmi-380.jpg"
-                data-fancybox="gallery">
-                <img loading="lazy" alt="ECPA Sakida Meem"
-                  class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                  src="dist/assets/Photography/Azmi-380.jpg" />
-              </a>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
-                <!-- Main display -->
-                <a id="groupGalleryLink6" href="dist/assets/Photography/Azmi-398.jpg" data-fancybox="gallery" data-group-slideshow-6="true">
-                  <img loading="lazy" id="mainImage6" alt="Grouped Photo Series"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-398.jpg" />
-                </a>
-                <!-- Multi-Image Icon Badge -->
-                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
-                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
-                <!-- Main display -->
-                <a id="groupGalleryLink2" href="dist/assets/Photography/Azmi-522.jpg" data-fancybox="gallery" data-group-slideshow-2="true">
-                  <img loading="lazy" id="mainImage2" alt="Grouped Photo Series"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-522.jpg" />
-                </a>
-                <!-- Multi-Image Icon Badge -->
-                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
-                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Hidden links for grouped gallery images (sub-gallery) -->
-            <a href="dist/assets/Photography/Azmi-455.jpg" data-fancybox="gallery" data-group-slideshow-6="true" style="display: none;"></a>
-            <a href="dist/assets/Photography/Azmi-459.jpg" data-fancybox="gallery" data-group-slideshow-6="true" style="display: none;"></a>
-          </div>
-          <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full">
-                <a href="dist/assets/Photography/Azmi-409.jpg"
-                  data-fancybox="gallery">
-                  <img loading="lazy" alt="ECPA"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-409.jpg" />
-                </a>
-              </div>
-            </div>
-          <div class="w-full md:w-1/2 p-1">
-            <div class="overflow-hidden h-full w-full">
-              <a href="dist/assets/Photography/Azmi-473.jpg"
-                data-fancybox="gallery">
-                <img loading="lazy" alt="ECPA"
-                  class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                  src="dist/assets/Photography/Azmi-473.jpg" />
-              </a>
-            </div>
-          </div>
-          <div class="flex w-full md:w-1/2 flex-wrap">
-            <!-- Grouped Gallery: Azmi-522, Azmi-519, Azmi-529.jpg -->
-            
-            <!-- Hidden links for grouped gallery images (sub-gallery) -->
-            <a href="dist/assets/Photography/Azmi-529.jpg" data-fancybox="gallery" data-group-slideshow-2="true" style="display: none;"></a>
-            <!-- Grouped Gallery: Azmi-540, Azmi-542 -->
-            <div class="w-full md:w-1/2 p-1">
-              <div class="overflow-hidden h-full w-full relative bg-black cursor-pointer group">
-                <!-- Main display -->
-                <a id="groupGalleryLink4" href="dist/assets/Photography/Azmi-540.jpg" data-fancybox="gallery" data-group-slideshow-4="true">
-                  <img loading="lazy" id="mainImage4" alt="Grouped Photo Series"
-                    class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                    src="dist/assets/Photography/Azmi-540.jpg" />
-                </a>
-                <!-- Multi-Image Icon Badge -->
-                <div class="absolute top-3 right-3 bg-white bg-opacity-80 rounded-full p-2 group-hover:bg-opacity-100 transition pointer-events-none">
-                  <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <!-- Hidden links for grouped gallery images (sub-gallery) -->
-            <a href="dist/assets/Photography/Azmi-542.jpg" data-fancybox="gallery" data-group-slideshow-4="true" style="display: none;"></a>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-
-
-    <div class="container mx-auto">
-      <h1 class="text-4xl pt-10 pb-8 font-bold">ART</h1>
-      <section class="text-neutral-700">
-        <div class="container w-full">
-          <div class="flex flex-wrap w-full">
-            <div class="flex w-full md:w-1/2 flex-wrap">
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=100"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Nikisha Hoque"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=100" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=100"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=100" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5e04a611-a997-4bea-bb4d-c2b7b3b146f6.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5e04a611-a997-4bea-bb4d-c2b7b3b146f6.jpg" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="flex w-full md:w-1/2 flex-wrap">
-              <div class="w-full p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/4f180875-5922-4570-87fa-c676b05a3395.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/4f180875-5922-4570-87fa-c676b05a3395.jpg" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Hafsa Prapti"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg" title="Hafsa Prapti" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/6673895a-4e05-419e-814c-7a062078b223.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Sumaiya Hossain"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/6673895a-4e05-419e-814c-7a062078b223.jpg" title="Sumaiya Hossain" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/2ea0e2ac-9ed4-4ad3-b3c3-7cd70c1bea42.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Sumaiya Shifa"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/2ea0e2ac-9ed4-4ad3-b3c3-7cd70c1bea42.jpg" title="Sumaiya Shifa" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Littolpotat"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg" title="Littolpotat" />
-                  </a>
-                </div>
-              </div>
-            </div>
-  
-            <div class="flex w-full md:w-1/2 flex-wrap">
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/9493ec34-85fd-47c2-b438-a88ceabaee46.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/9493ec34-85fd-47c2-b438-a88ceabaee46.jpg" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5c79a656-cbbf-4142-ba61-95a197e8d41d.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Nazmun Nahar Meem"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5c79a656-cbbf-4142-ba61-95a197e8d41d.jpg" title="Nazmun Nahar Meem" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/7c1c327c-af11-4488-83cc-223b6a689cd5.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/7c1c327c-af11-4488-83cc-223b6a689cd5.jpg" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/693d373b-cb1b-4e74-b288-976f051ddad9.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/693d373b-cb1b-4e74-b288-976f051ddad9.jpg" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/ad025232-131c-4b14-bffc-10ac90382ef8.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Zarin Shuvah Mashtura"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/ad025232-131c-4b14-bffc-10ac90382ef8.jpg" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full md:w-1/2 p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/5868eb18-a598-4701-9244-3558171d17b4.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART Farhat Faiza Taha"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/5868eb18-a598-4701-9244-3558171d17b4.jpg" />
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="flex w-full md:w-1/2 flex-wrap">
-              <div class="w-full p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/0ae3b1ff-ce53-4208-b5fe-687b40c399cc.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/0ae3b1ff-ce53-4208-b5fe-687b40c399cc.jpg" />
-                  </a>
-                </div>
-              </div>
-              <div class="w-full p-1">
-                <div class="overflow-hidden h-full w-full">
-                  <a href="https://hcdn.picsart.com/be6a8a41-568e-40b1-a622-d4dd281fd362.jpg"
-                    data-fancybox="gallery">
-                    <img loading="lazy" alt="PICSART"
-                      class="block h-full w-full object-cover object-center opacity-0 animate-fade-in transition duration-500 transform scale-100 hover:scale-110"
-                      src="https://hcdn.picsart.com/be6a8a41-568e-40b1-a622-d4dd281fd362.jpg" />
-                  </a>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
 
+    <!-- Active Results Status -->
+    <div class="flex items-center justify-between text-xs font-mono text-neutral-500 dark:text-neutral-400 py-4">
+      <span id="gallery-results-count">Showing 55 Curated Works</span>
+      <span class="hidden sm:inline">Click any photo to zoom · 3D hover tilt · Press ♡ to shortlist</span>
+    </div>
 
+    <!-- The Masonry Grid (Rendered dynamically from GALLERY_DATA with 3D tilt & smooth scroll reveal) -->
+    <div id="portfolio-gallery" class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+      <!-- Injected by portfolio-smart.js from dist/gallery-data.js -->
+    </div>
 
+    <!-- Empty State for Zero Search Results -->
+    <div id="gallery-no-results" class="hidden py-24 text-center">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-400">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+      </div>
+      <h3 class="text-xl font-serif font-bold text-neutral-900 dark:text-white mb-2">No matching works found</h3>
+      <p class="text-sm text-neutral-500 max-w-sm mx-auto mb-6">Try adjusting your search terms or clearing the category filter.</p>
+      <button onclick="document.getElementById('gallery-search-clear').click(); document.querySelector('[data-category=\'all\']').click();" class="px-5 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-semibold">
+        Reset All Filters
+      </button>
+    </div>
 
-  
+  </section>
+
+  <!-- Editorial Quote Strip -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center border-t border-neutral-200 dark:border-neutral-800">
+    <div class="max-w-3xl mx-auto">
+      <svg class="w-10 h-10 mx-auto text-neutral-300 dark:text-neutral-700 mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+      <blockquote class="text-xl sm:text-2xl font-serif italic text-neutral-800 dark:text-neutral-200 leading-relaxed mb-4">
+        “What I love about photographs is that they capture a fleeting human moment that is gone forever — impossible to reproduce, yet etched in light eternally.”
+      </blockquote>
+      <div class="text-xs font-mono tracking-widest uppercase text-neutral-500">— Azizul Abedin Azmi</div>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer>
-    <div class="max-w-screen-xl py-16 mx-auto">
-      <div class="grid grid-cols-1 gap-8 text-center mx-auto">
-        <div>
-          <p class="font-signika"><b>Azizul Abedin Azmi</b></p>
-          <p class="mt-4 text-sm text-gray-600 dark:text-gray-300">
-      <a href="https://goo.gl/maps/z6j5uv4FpEB2" target="_blank">Narayanganj, Shiddhirganj, Sanarpar, Sahebpara</a>
-            <br />
+  <footer class="border-t border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50 dark:bg-black/50 py-16 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Brand & Location -->
+        <div class="md:col-span-5 text-center md:text-left">
+          <div class="font-serif text-2xl font-bold text-neutral-900 dark:text-white">Azizul Abedin Azmi</div>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 max-w-sm">
+            Professional fine art photography, portrait sessions, and PicsArt creative digital artworks. Based in Narayanganj & Dhaka.
           </p>
-          <div class="flex mx-auto">
-            <div class="mx-auto space-x-6 flex mt-8 text-gray-600 dark:text-gray-300">
-              <a class="transition duration-300 hover:opacity-75" href="https://www.facebook.com/azizul.abedin.azmi" target="_blank"
-                rel="noreferrer">
-                <span class="sr-only"> Facebook </span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                  <path
-                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                </svg>
-              </a>
-              <a class="transition duration-300 hover:opacity-75" href="https://www.instagram.com/azizulabedin" target="_blank"
-                rel="noreferrer">
-                <span class="sr-only"> Instagram </span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                  <path
-                    d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
-                </svg>
-              </a>
-                <a class="transition duration-300 hover:opacity-75" href="https://x.com/AzmiAbedin/" target="_blank"
-                rel="noreferrer">
-                <span class="sr-only"> X </span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                  d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.608 1.794-1.574 2.163-2.723-.949.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124-4.087-.205-7.713-2.164-10.141-5.144-.423.722-.666 1.561-.666 2.457 0 1.69.86 3.179 2.169 4.055-.798-.025-1.55-.245-2.205-.612v.061c0 2.362 1.679 4.337 3.911 4.779-.409.111-.84.171-1.285.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.6 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.395 0-.779-.023-1.17-.067 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 14.307-14.417 0-.22-.004-.439-.014-.657.986-.713 1.84-1.6 2.515-2.614z" />
-                </svg>
-                </a>
-              <a class="transition duration-300 hover:opacity-75" href="https://bd.linkedin.com/in/azizulabedin" target="_blank"
-                rel="noreferrer">
-                <span class="sr-only">LinkedIn</span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                  <path
-                    d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
-                </svg>
-              </a>
-                <a class="transition duration-300 hover:opacity-75" href="https://github.com/azizulabedinazmi" target="_blank"
-                rel="noreferrer">
-                <span class="sr-only">GitHub</span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                  <path
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                </svg>
-                </a>
-                <a class="transition duration-300 hover:opacity-75" href="http://azizulabedinazmi.is-a.dev/" target="_blank"
-                rel="noreferrer">
-                <span class="sr-only">Resume</span>
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
-                  <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
-                </svg>
-                </a>
-            </div>
+          <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 mt-3">
+            📍 Narayanganj, Shiddhirganj, Sahebpara, Bangladesh
           </div>
         </div>
+
+        <!-- Center: Quick Nav -->
+        <div class="md:col-span-4 flex items-center justify-center space-x-6 text-sm font-medium">
+          <a href="index.html" class="text-neutral-900 dark:text-white underline underline-offset-4">Portfolio & Art</a>
+          <a href="dist/about_me.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">About Me</a>
+          <a href="dist/contact.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">Contact</a>
+          <button type="button" class="open-moodboard-btn text-rose-500 hover:underline">Moodboard</button>
+        </div>
+
+        <!-- Right: Social Links -->
+        <div class="md:col-span-3 flex items-center justify-center md:justify-end space-x-5 text-neutral-600 dark:text-neutral-400">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/azizulabedin" target="_blank" rel="noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white transition" title="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/azizul.abedin.azmi" target="_blank" rel="noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white transition" title="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://bd.linkedin.com/in/azizulabedin" target="_blank" rel="noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white transition" title="LinkedIn">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+          </a>
+          <!-- GitHub -->
+          <a href="https://github.com/azizulabedinazmi" target="_blank" rel="noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white transition" title="GitHub">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+        </div>
+
       </div>
-      <p class="mt-8 text-xs text-gray-600 dark:text-gray-300 text-center">
-        © 2025 Developed and Designed by
-        <a href="https://bd.linkedin.com/in/azizulabedin" class="underline">Azizul Abedin Azmi</a>
-      </p>
+
+      <div class="mt-12 pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 font-mono gap-4">
+        <div>© 2026 Azizul Abedin Azmi · Photography & PicsArt Creative Works.</div>
+        <div class="flex items-center gap-4">
+          <span>Press <kbd class="px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 text-[10px]">T</kbd> for Theme</span>
+          <span><kbd class="px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 text-[10px]">S</kbd> for Sound</span>
+          <span><kbd class="px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 text-[10px]">Z</kbd> for Zen Mode</span>
+        </div>
+      </div>
     </div>
   </footer>
-  <!-- Script for the LightBox -->
-  <script>
-    Fancybox.bind("[data-fancybox]", {});
-  </script>
+
+  <!-- Floating Moodboard Pill (Bottom Right) -->
+  <div id="moodboard-floating-pill" class="fixed bottom-6 right-6 z-40 transform translate-y-24 opacity-0 pointer-events-none transition-all duration-300">
+    <button type="button" class="open-moodboard-btn flex items-center gap-3 px-5 py-3 rounded-full bg-neutral-900/90 dark:bg-white/95 text-white dark:text-neutral-900 shadow-2xl backdrop-blur-md hover:scale-105 active:scale-95 transition">
+      <span class="flex h-2.5 w-2.5 relative">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+      </span>
+      <span class="text-sm font-semibold tracking-tight"><span class="moodboard-count">0</span> Works Shortlisted</span>
+      <span class="text-xs opacity-75">View Moodboard →</span>
+    </button>
+  </div>
+
+  <!-- Floating Scroll To Top Button -->
+  <button id="back-to-top-btn" class="fixed bottom-6 left-6 z-40 p-3 rounded-full bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 shadow-xl border border-neutral-200 dark:border-neutral-700 opacity-0 pointer-events-none translate-y-4 hover:scale-110 active:scale-95 transition-all duration-300" title="Back to top">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+  </button>
+
+  <!-- Client Moodboard Sliding Drawer -->
+  <div id="moodboard-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <div id="moodboard-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-[450px] bg-white dark:bg-neutral-950 z-50 transform translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-2xl border-l border-neutral-200 dark:border-neutral-800">
+    
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+      <div>
+        <h3 class="font-serif font-bold text-xl text-neutral-900 dark:text-white flex items-center gap-2">
+          <span>Client Moodboard</span>
+          <span class="moodboard-count px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-rose-500 text-white">0</span>
+        </h3>
+        <p class="text-xs text-neutral-500 mt-1">Shortlist photography and digital art styles you love for your upcoming project.</p>
+      </div>
+      <button id="close-moodboard-btn" class="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-500 hover:text-black dark:hover:text-white transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Drawer Items List -->
+    <div id="moodboard-items-container" class="flex-1 overflow-y-auto p-6 space-y-3">
+      <!-- Injected dynamically by portfolio-smart.js -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="moodboard-empty-state" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+      <div class="w-16 h-16 rounded-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center text-neutral-400 mb-4">
+        <svg class="w-8 h-8 text-neutral-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+      </div>
+      <h4 class="font-serif font-bold text-neutral-900 dark:text-white text-lg mb-1">Your Moodboard is Empty</h4>
+      <p class="text-xs text-neutral-500 max-w-xs mb-6">Browse the gallery and click the heart icon (♡) on photographs or digital artworks that inspire your desired project.</p>
+      <button onclick="document.getElementById('close-moodboard-btn').click();" class="px-5 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-semibold">
+        Explore Portfolio Works
+      </button>
+    </div>
+
+    <!-- Drawer Footer Actions -->
+    <div id="moodboard-footer-actions" class="p-6 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/50 space-y-3">
+      <a id="moodboard-inquire-btn" href="dist/contact.html" class="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:opacity-90 transition shadow-lg">
+        <span>Inquire with this Moodboard →</span>
+      </a>
+      <button id="clear-moodboard-btn" class="w-full py-2 text-xs font-mono text-neutral-500 hover:text-rose-500 transition">
+        Clear All Shortlisted Works
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Zen Exhibition Fullscreen Modal -->
+  <div id="zen-exhibition-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden opacity-0 transition-opacity duration-300 flex flex-col justify-between p-6 sm:p-10 select-none">
+    
+    <!-- Ambient Dynamic Blurred Glow Background -->
+    <div id="zen-ambient-bg" class="absolute inset-0 bg-cover bg-center filter blur-3xl opacity-20 pointer-events-none transition-all duration-700"></div>
+
+    <!-- Modal Top Bar -->
+    <div class="relative z-10 flex items-center justify-between w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-3">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+        <span class="text-xs font-mono tracking-widest uppercase text-white/80">Zen Exhibition Mode</span>
+        <span id="zen-photo-counter" class="text-xs font-mono text-white/50 pl-2 border-l border-white/20">1 / 55</span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Play / Pause Auto Slideshow -->
+        <button id="zen-play-btn" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition" title="Auto-advance slideshow (Space)">
+          <svg id="zen-play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="zen-pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+
+        <!-- Close Button -->
+        <button id="zen-close-btn" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition" title="Exit Zen Mode (Esc)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center Stage: Photo Display -->
+    <div class="relative z-10 flex-1 flex items-center justify-center max-w-7xl mx-auto w-full my-4 overflow-hidden">
+      
+      <!-- Previous Button -->
+      <button id="zen-prev-btn" class="absolute left-0 p-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition z-20" title="Previous Photo (←)">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+      </button>
+
+      <!-- Main Photo -->
+      <div class="max-h-[75vh] max-w-full flex items-center justify-center">
+        <img id="zen-main-img" src="" alt="Exhibition Photo" class="max-h-[75vh] max-w-full object-contain rounded-xl shadow-2xl transition-opacity duration-300" />
+      </div>
+
+      <!-- Next Button -->
+      <button id="zen-next-btn" class="absolute right-0 p-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition z-20" title="Next Photo (→)">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      </button>
+
+    </div>
+
+    <!-- Modal Bottom Caption -->
+    <div class="relative z-10 max-w-3xl mx-auto text-center w-full">
+      <h3 id="zen-photo-title" class="text-xl sm:text-2xl font-serif font-bold text-white tracking-tight drop-shadow-md">Photo Title</h3>
+      <p id="zen-photo-meta" class="text-xs sm:text-sm font-mono text-neutral-400 mt-1">Portrait · Canon EOS · Narayanganj</p>
+      <div class="text-[11px] font-mono text-white/40 mt-3">Navigate with Arrow Keys [← / →] · Space to Play/Pause · Esc to Exit</div>
+    </div>
+
+  </div>
+
+  <!-- Load Gallery Dataset (55 Curated Works: Photography + PicsArt Digital Art) -->
+  <script src="dist/gallery-data.js"></script>
+  <!-- Smart Portfolio JavaScript Logic -->
+  <script src="dist/portfolio-smart.js"></script>
   
-  <!-- Grouped Slideshow Script (Sub-Gallery) -->
+  <!-- Fancybox v5 Binding -->
   <script>
-    (function() {
-      // Configuration for grouped slideshows
-      const groupedGalleries = {
-          'data-group-slideshow': [
-            'dist/assets/Photography/Azmi-56.jpg',
-            'dist/assets/Photography/Azmi-10.jpg',
-            'dist/assets/Photography/Azmi-8.jpg'
-          ],
-          'data-group-slideshow-2': [
-            'dist/assets/Photography/Azmi-522.jpg',
-            'dist/assets/Photography/Azmi-519.jpg',
-            'dist/assets/Photography/Azmi-529.jpg'
-          ],
-          'data-group-slideshow-3': [
-            'dist/assets/Photography/Azmi-92.jpg',
-            'dist/assets/Photography/Azmi-100.jpg',
-            'dist/assets/Photography/Azmi-102.jpg'
-          ],
-          'data-group-slideshow-4': [
-            'dist/assets/Photography/Azmi-540.jpg',
-            'dist/assets/Photography/Azmi-542.jpg'
-          ],
-          'data-group-slideshow-5': [
-            'dist/assets/Photography/Azmi-343.jpg',
-            'dist/assets/Photography/Azmi-354.jpg'
-          ],
-          'data-group-slideshow-6': [
-            'dist/assets/Photography/Azmi-398.jpg',
-            'dist/assets/Photography/Azmi-455.jpg',
-            'dist/assets/Photography/Azmi-459.jpg'
-          ]
-        };
-        
-        let currentIndex = 0;
-        let isInGroupedGallery = false;
-        let currentGroupType = null;
-        let mainFancybox = null;
-        let isNavigating = false;
-        const imageCache = {};
-        const preloadedImages = new Map();
-        
-        // Bind main gallery with sub-gallery support
-        Fancybox.bind('[data-fancybox="gallery"]', {
-          on: {
-            reveal: (fancybox, slide) => {
-              mainFancybox = fancybox;
-              
-              // Check if this is a grouped gallery image
-              let groupType = null;
-              if (slide.$trigger?.dataset.groupSlideshow === 'true') {
-                groupType = 'data-group-slideshow';
-              } else if (slide.$trigger?.dataset.groupSlideshow2 === 'true') {
-                groupType = 'data-group-slideshow-2';
-              } else if (slide.$trigger?.dataset.groupSlideshow3 === 'true') {
-                groupType = 'data-group-slideshow-3';
-              } else if (slide.$trigger?.dataset.groupSlideshow4 === 'true') {
-                groupType = 'data-group-slideshow-4';
-              } else if (slide.$trigger?.dataset.groupSlideshow5 === 'true') {
-                groupType = 'data-group-slideshow-5';
-              } else if (slide.$trigger?.dataset.groupSlideshow6 === 'true') {
-                groupType = 'data-group-slideshow-6';
-              }
-              
-              if (groupType) {
-                isInGroupedGallery = true;
-                currentGroupType = groupType;
-                const currentSrc = slide.$content?.src || slide.src;
-                currentIndex = groupedGalleries[groupType].findIndex(img => img === currentSrc);
-                
-                // Preload all images in this group immediately
-                groupedGalleries[groupType].forEach(preloadImage);
-                
-                // Create sub-gallery controls
-                createSubGalleryControls(fancybox, groupType);
-              } else {
-                isInGroupedGallery = false;
-                currentGroupType = null;
-                // Remove sub-gallery controls if they exist
-                const existingControls = document.querySelector('.group-slideshow-controls');
-                const existingDots = document.querySelector('.group-slideshow-dots');
-                if (existingControls) existingControls.remove();
-                if (existingDots) existingDots.remove();
-              }
-            },
-            done: () => {
-              isInGroupedGallery = false;
-              currentGroupType = null;
-              mainFancybox = null;
-              isNavigating = false;
-            }
-          }
-        });
-        
-        function createSubGalleryControls(fancybox, groupType) {
-          // Remove existing controls if any
-          const existing = document.querySelector('.group-slideshow-controls');
-          if (existing) existing.remove();
-          const existingDots = document.querySelector('.group-slideshow-dots');
-          if (existingDots) existingDots.remove();
-          
-          const container = fancybox.$container;
-          const images = groupedGalleries[groupType];
-          
-          // Create dots HTML dynamically based on number of images
-          let dotsHtml = '<div class="group-slideshow-dots absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 pointer-events-auto z-40">';
-          images.forEach((_, index) => {
-            dotsHtml += `<span class="group-dot w-3 h-3 bg-white rounded-full cursor-pointer transition opacity-60 hover:opacity-100" data-index="${index}"></span>`;
-          });
-          dotsHtml += '</div>';
-          
-          // Create sub-gallery controls wrapper
-          const controlsHtml = `
-            <div class="group-slideshow-controls absolute inset-0 flex items-center justify-between pointer-events-none z-40">
-              <button class="prev-group-btn px-4 py-2 text-white text-3xl font-bold hover:bg-black hover:bg-opacity-60 transition pointer-events-auto">❮</button>
-              <button class="next-group-btn px-4 py-2 text-white text-3xl font-bold hover:bg-black hover:bg-opacity-60 transition pointer-events-auto">❯</button>
-            </div>
-            ${dotsHtml}
-          `;
-          
-          container.insertAdjacentHTML('beforeend', controlsHtml);
-          
-          // Update active dot
-          const dots = container.querySelectorAll('.group-dot');
-          dots.forEach((dot, i) => {
-            dot.classList.toggle('opacity-100', i === currentIndex);
-          });
-          
-          // Add event listeners with debouncing
-          const prevBtn = container.querySelector('.prev-group-btn');
-          const nextBtn = container.querySelector('.next-group-btn');
-          
-          const navigateTo = (direction) => {
-            if (isNavigating) return; // Debounce rapid clicks
-            isNavigating = true;
-            
-            const newIndex = direction === 'next' 
-              ? (currentIndex + 1) % images.length
-              : (currentIndex - 1 + images.length) % images.length;
-            
-            currentIndex = newIndex;
-            updateSubGalleryImageFast(fancybox, groupType);
-            updateSubGalleryDots(container);
-            
-            // Preload adjacent images immediately
-            preloadAdjacentImages(groupType);
-            
-            // Re-enable navigation after transition
-            setTimeout(() => { isNavigating = false; }, 150);
-          };
-          
-          prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigateTo('prev');
-          });
-          
-          nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navigateTo('next');
-          });
-          
-          // Dot click listeners
-          dots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-              e.stopPropagation();
-              if (isNavigating) return;
-              isNavigating = true;
-              currentIndex = parseInt(dot.dataset.index);
-              updateSubGalleryImageFast(fancybox, groupType);
-              updateSubGalleryDots(container);
-              preloadAdjacentImages(groupType);
-              setTimeout(() => { isNavigating = false; }, 150);
-            });
-          });
-          
-          // Keyboard navigation for sub-gallery
-          const handleKeydown = (e) => {
-            if (isInGroupedGallery && mainFancybox && mainFancybox.isVisible && !isNavigating) {
-              if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                nextBtn.click();
-              } else if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                prevBtn.click();
-              }
-            }
-          };
-          
-          document.addEventListener('keydown', handleKeydown, true);
-        }
-        
-        // Preload images for faster navigation
-        function preloadImage(src) {
-          if (preloadedImages.has(src)) return;
-          const img = new Image();
-          img.onload = () => preloadedImages.set(src, true);
-          img.onerror = () => preloadedImages.delete(src);
-          img.src = src;
-        }
-        
-        function preloadAdjacentImages(groupType) {
-          const images = groupedGalleries[groupType];
-          const nextIdx = (currentIndex + 1) % images.length;
-          const prevIdx = (currentIndex - 1 + images.length) % images.length;
-          
-          preloadImage(images[nextIdx]);
-          preloadImage(images[prevIdx]);
-        }
-        
-        // Optimized image update with fade transition
-        function updateSubGalleryImageFast(fancybox, groupType) {
-          const container = fancybox.$container;
-          if (!container) return;
-          
-          const img = container.querySelector('img');
-          if (!img) return;
-          
-          const images = groupedGalleries[groupType];
-          const newSrc = images[currentIndex];
-          
-          // Only update if different
-          if (img.src === newSrc) return;
-          
-          // Add fade-out class
-          img.style.opacity = '0.7';
-          img.style.transition = 'opacity 0.15s ease-in-out';
-          
-          // Use requestAnimationFrame for smooth transition
-          requestAnimationFrame(() => {
-            img.src = newSrc;
-            requestAnimationFrame(() => {
-              img.style.opacity = '1';
-            });
-          });
-        }
-        
-        function updateSubGalleryImage(fancybox, groupType) {
-          updateSubGalleryImageFast(fancybox, groupType);
-        }
-        
-        function updateSubGalleryDots(container) {
-          const dots = container.querySelectorAll('.group-dot');
-          dots.forEach((dot, i) => {
-            dot.classList.toggle('opacity-100', i === currentIndex);
-            dot.classList.toggle('opacity-60', i !== currentIndex);
-          });
-        }
-    })();
+    Fancybox.bind('[data-fancybox="gallery"]', {
+      Thumbs: {
+        autoStart: true,
+      },
+      Toolbar: {
+        display: {
+          left: ["infobar"],
+          middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW", "flipX", "flipY"],
+          right: ["slideshow", "thumbs", "close"],
+        },
+      },
+    });
   </script>
-  
-  <script src="dist/fade_in.js"></script>
-  <script src="dist/menu.js"></script>
-  <!-- Smart Image Preloader - loads all images in background automatically -->
-  <script src="dist/preload_images.js"></script>
 </body>
 </html>
-

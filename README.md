@@ -56,7 +56,19 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/azizulabedinazmi/photography-portfolio)
 
-This project is a web-based portfolio that beautifully showcases the photography work of Sophia Williams, a fictional photographer. The portfolio was skillfully built using a combination of powerful front-end technologies, including Tailwind CSS, CSS, HTML, and JavaScript.
+This project is a modern, designful web-based photography portfolio showcasing the fine art, portrait, and documentary photography of **Azizul Abedin Azmi**, based in Narayanganj & Dhaka, Bangladesh.
+
+### ✨ Key Features
+- **Modern Editorial Aesthetic**: Glassmorphism navbar, refined editorial serif & sans typography (Plus Jakarta Sans, Playfair Display, Cinzel, JetBrains Mono).
+- **🌗 Dark / Light Theme Engine**: Instant Sun/Moon toggle with persistent memory (`localStorage`) and smooth color transitions.
+- **🔊 Realistic DSLR Mechanical Shutter Sound**: Real-time synthesized camera click via the Web Audio API with zero external audio assets.
+- **❤️ Client Moodboard / Favorites Drawer**: Visitors and potential clients can shortlist photos with a heart click (♡), view their selection in a sliding glass drawer, and click **"Inquire with this Moodboard"** which auto-fills the contact form with their shortlisted styles!
+- **⚡ Smart Category & Live Search Filtering**: Instantly filter between All Works, Portraits, Events & Street, Nature & Details, Curated Series, or My Moodboard.
+- **📐 Adaptive Layout Switcher**: Switch on-the-fly between Fluid Masonry, Editorial Magazine Duo (2-column), and Compact Contact Sheet Grid.
+- **🎚️ Interactive Before / After Color Grading Slider**: Drag to compare flat RAW camera sensor capture vs final cinematic color grade.
+- **✨ Fullscreen Zen Exhibition Mode**: An immersive, distraction-free digital gallery exhibition with ambient background glow and auto-play slideshow (`Z` key).
+- **⌨️ Pro Keyboard Shortcuts**: Quick navigation (`T` for Theme, `S` for Sound, `M` for Moodboard, `Z` for Zen Mode, `Esc` to Close).
+- **📷 Data-Driven Gallery Architecture**: Manage all photos, categories, EXIF metadata, and series in a clean, maintainable dataset in `dist/gallery-data.js`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

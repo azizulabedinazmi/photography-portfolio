@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer utilities {
   .tap-highlight-transparent {
     -webkit-tap-highlight-color: transparent;
@@ -24,12 +25,120 @@
   }
   @keyframes wave {
     0% { transform: rotate( 0.0deg) }
-   10% { transform: rotate(14.0deg) }
-   20% { transform: rotate(-8.0deg) }
-   30% { transform: rotate(14.0deg) }
-   40% { transform: rotate(-4.0deg) }
-   50% { transform: rotate(10.0deg) }
-   60% { transform: rotate( 0.0deg) }
-  100% { transform: rotate( 0.0deg) }
+    10% { transform: rotate(14.0deg) }
+    20% { transform: rotate(-8.0deg) }
+    30% { transform: rotate(14.0deg) }
+    40% { transform: rotate(-4.0deg) }
+    50% { transform: rotate(10.0deg) }
+    60% { transform: rotate( 0.0deg) }
+    100% { transform: rotate( 0.0deg) }
+  }
+
+  /* Custom subtle glass panel */
+  .glass-header {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .dark .glass-header {
+    background-color: rgba(10, 10, 10, 0.85);
+  }
+
+  /* Photo card hover vignette */
+  .photo-card-overlay {
+    background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+  }
+
+  /* Break-inside avoid for smooth CSS columns masonry */
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Infinite Highlights Marquee */
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Aurora Ambient Glow Animation */
+  @keyframes auroraGlow {
+    0%, 100% {
+      transform: translate(0px, 0px) scale(1);
+      opacity: 0.25;
+    }
+    33% {
+      transform: translate(30px, -20px) scale(1.15);
+      opacity: 0.4;
+    }
+    66% {
+      transform: translate(-25px, 25px) scale(0.9);
+      opacity: 0.3;
+    }
+  }
+
+  .animate-aurora-1 {
+    animation: auroraGlow 12s ease-in-out infinite;
+  }
+  .animate-aurora-2 {
+    animation: auroraGlow 16s ease-in-out infinite reverse;
+  }
+
+  /* Camera Flash Burst Effect */
+  @keyframes cameraFlash {
+    0% { opacity: 0; }
+    20% { opacity: 0.55; }
+    100% { opacity: 0; }
+  }
+  .camera-flash-active {
+    animation: cameraFlash 0.18s ease-out forwards;
+  }
+
+  /* Heart Pop Animation */
+  @keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+  .heart-pop {
+    animation: heartPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* 3D Tilt Card Container */
+  .tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease-out;
+  }
+  .tilt-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  .dark .tilt-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(255, 255, 255, 0.08);
+  }
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5);
 }
