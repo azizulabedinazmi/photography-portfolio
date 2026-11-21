@@ -1,3 +1,5 @@
 node_modules/
 .netlify/
 .DS_Store
+dist/assets/Photography/_web/
+dist/image-variants.js

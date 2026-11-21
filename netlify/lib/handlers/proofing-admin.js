@@ -6,7 +6,7 @@
  * Identity is invite-only on this site, so any logged-in user is the photographer.
  */
 
-const P = require('../lib/proofing');
+const P = require('../proofing');
 
 const MAX_PHOTOS = 600;
 const MAX_UPLOAD_BYTES = 4.5 * 1024 * 1024;

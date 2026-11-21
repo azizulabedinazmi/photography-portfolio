@@ -9,7 +9,7 @@
  * The PIN is checked here on the server; it never reaches the browser.
  */
 
-const P = require('../lib/proofing');
+const P = require('../proofing');
 
 const GENERIC_ERROR = 'That gallery code or PIN is not right. Please check your invite.';
 

@@ -3,6 +3,7 @@
   "private": true,
   "description": "Azizul Abedin Azmi photography portfolio (static site + Netlify Functions)",
   "dependencies": {
-    "@netlify/blobs": "^8.1.0"
+    "@netlify/blobs": "^8.1.0",
+    "sharp": "^0.34.5"
   }
 }

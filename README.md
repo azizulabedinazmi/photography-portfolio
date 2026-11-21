@@ -207,7 +207,15 @@ git clone https://github.com/azizulabedinazmi/photography-portfolio.git
 cd photography-portfolio
 ```
 
-### 2. Run Local Development Server
+### 2. Build the fast-loading images (optional locally, automatic on Netlify)
+Every deploy runs `node scripts/build-images.js && node scripts/build-seo.js`. The first creates small WebP copies of each photo (480/960/1600px, about 20× smaller than the originals) in `dist/assets/Photography/_web/`; the second updates the sitemap and search data. To see the same thing locally:
+```bash
+npm install
+node scripts/build-images.js && node scripts/build-seo.js
+```
+Without this step the site still works locally; it just loads the original full-size photos.
+
+### 3. Run Local Development Server
 Any static HTTP server works:
 ```bash
 # Python
@@ -217,7 +225,7 @@ python -m http.server 3000
 npx serve .
 ```
 
-### 3. Test Netlify Functions Locally (Optional)
+### 4. Test Netlify Functions Locally (Optional)
 If you have the Netlify CLI installed:
 ```bash
 npm install

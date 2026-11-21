@@ -1,5 +1,5 @@
 [build]
-  command = "node scripts/build-seo.js"
+  command = "node scripts/build-images.js && node scripts/build-seo.js"
   publish = "."
   functions = "netlify/functions"
 

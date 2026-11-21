@@ -5,7 +5,7 @@
  * The token comes from a successful PIN unlock (or the admin dashboard) and expires after 12 hours.
  */
 
-const P = require('../lib/proofing');
+const P = require('../proofing');
 
 exports.handler = async function (event) {
   const q = event.queryStringParameters || {};

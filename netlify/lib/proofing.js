@@ -12,14 +12,15 @@
 
 const crypto = require('crypto');
 const https = require('https');
-const { getStore, connectLambda } = require('@netlify/blobs');
+const { getStore } = require('@netlify/blobs');
 
 const TOKEN_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
 const MAX_PIN_FAILURES = 8;
 const PIN_WINDOW_MS = 15 * 60 * 1000;
 
-function stores(event) {
-  connectLambda(event);
+// Functions run in Netlify's v2 runtime (see v2() below), which configures Blobs automatically,
+// including the uncached endpoint that strong-consistency reads need.
+function stores() {
   return {
     sessions: getStore({ name: 'proofing-sessions', consistency: 'strong' }),
     photos: getStore({ name: 'proofing-photos', consistency: 'strong' }),
@@ -243,7 +244,54 @@ async function fetchGooglePhotosAlbum(albumUrl) {
   return photos;
 }
 
+// ---------- Netlify Functions v2 adapter ----------
+
+/**
+ * Checks a Netlify Identity JWT by asking the site's own Identity service who it belongs to.
+ * (v2 functions don't get the user decoded for them like v1 functions did.)
+ */
+async function identityUser(req) {
+  const auth = req.headers.get('authorization') || '';
+  if (!/^Bearer\s+\S+/i.test(auth)) return null;
+  try {
+    const origin = new URL(req.url).origin;
+    const res = await fetch(`${origin}/.netlify/identity/user`, { headers: { Authorization: auth } });
+    if (!res.ok) return null;
+    const user = await res.json();
+    return user && (user.id || user.email) ? user : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Wraps an (event, context) => { statusCode, headers, body } handler as a v2 function
+ * (Request => Response), so the handlers stay simple and testable.
+ */
+function v2(handler, { auth = false } = {}) {
+  return async (req) => {
+    const url = new URL(req.url);
+    const hasBody = !['GET', 'HEAD'].includes(req.method);
+    const event = {
+      httpMethod: req.method,
+      queryStringParameters: Object.fromEntries(url.searchParams),
+      headers: Object.fromEntries(req.headers),
+      body: hasBody ? await req.text() : null,
+      isBase64Encoded: false
+    };
+    const context = {};
+    if (auth) {
+      const user = await identityUser(req);
+      if (user) context.clientContext = { user };
+    }
+    const out = await handler(event, context);
+    const body = out.isBase64Encoded ? Buffer.from(out.body, 'base64') : out.body;
+    return new Response(body, { status: out.statusCode, headers: out.headers || {} });
+  };
+}
+
 module.exports = {
+  v2, identityUser,
   stores, json, parseBody, slugify, randomId, randomPin, isValidSlug, safeEqual,
   signToken, verifyToken, pinLocked, recordPinFailure, clearPinFailures,
   isExpired, publicPhotos,

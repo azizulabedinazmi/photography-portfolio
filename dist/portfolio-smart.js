@@ -29,7 +29,32 @@
     return attr(item.alt || item.title);
   }
 
+  // Optimized WebP sizes made at deploy time by scripts/build-images.js (dist/image-variants.js).
+  const VARIANT_WIDTH = { w480: 480, w600: 480, w960: 960, w1600: 1600 };
+  function variantUrl(url, size) {
+    const v = window.IMAGE_VARIANTS && window.IMAGE_VARIANTS[url];
+    if (!v) return null;
+    const want = VARIANT_WIDTH[size] || 1600;
+    const hit = v.srcset.find(([, w]) => w >= want) || v.srcset[v.srcset.length - 1];
+    return encodeURI(hit[0]);
+  }
+
+  // srcset/sizes/width/height so the browser downloads only the size it needs and the layout doesn't jump.
+  function responsiveAttrs(url) {
+    const v = window.IMAGE_VARIANTS && window.IMAGE_VARIANTS[url];
+    if (!v) return '';
+    const set = v.srcset.map(([p, w]) => `${encodeURI(p)} ${w}w`).join(', ');
+    return `srcset="${set}" sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" width="${v.w}" height="${v.h}"`;
+  }
+
+  // Display URL: the optimized WebP when one exists, otherwise the original (Drive links become Google's CDN).
   function resolveMediaUrl(url, size = 'w1600') {
+    if (!url) return '';
+    return variantUrl(url, size) || sourceUrl(url, size);
+  }
+
+  // The photo's own address (used as its stable ID, e.g. for saved favourites).
+  function sourceUrl(url, size = 'w1600') {
     if (!url) return '';
     // Google Drive URL formats:
     // https://drive.google.com/file/d/ID/view, https://drive.google.com/open?id=ID, uc?id=ID, gdrive:ID
@@ -51,7 +76,9 @@
         container.innerHTML = window.GALLERY_DATA.map((item, index) => {
           const isSeries = item.isSeries;
           const isArt = item.category === 'art';
-          const itemSrc = resolveMediaUrl(item.src);
+          const itemSrc = sourceUrl(item.src);
+          const fullSrc = resolveMediaUrl(item.src);
+          const gridSrc = resolveMediaUrl(item.src, 'w960');
           
           let badge = '';
           if (isSeries) {
@@ -72,7 +99,7 @@
           }
 
           const extraLinks = (isSeries && item.seriesExtra) ? item.seriesExtra.map(extra => `
-            <a href="${resolveMediaUrl(extra)}" data-fancybox="gallery" ${item.seriesGroup}="true" data-caption="<strong>${item.title}</strong> (Series)" style="display: none;"></a>
+            <a href="${resolveMediaUrl(extra)}" data-thumb-src="${resolveMediaUrl(extra, 'w480')}" data-fancybox="gallery" ${item.seriesGroup}="true" data-caption="<strong>${item.title}</strong> (Series)" style="display: none;"></a>
           `).join('') : '';
 
           const seriesAttr = isSeries ? `${item.seriesGroup}="true"` : '';
@@ -95,15 +122,17 @@
                  data-photo-src="${itemSrc}"
                  data-is-series="${isSeries ? 'true' : 'false'}">
               
-              <a href="${itemSrc}" 
+              <a href="${fullSrc}" 
                  data-fancybox="gallery" 
+                 data-thumb-src="${resolveMediaUrl(item.src, 'w480')}"
                  ${seriesAttr}
                  data-caption="<strong>${item.title}</strong><br><span class='text-xs opacity-75'>${item.camera} · ${item.location}</span>"
                  class="block w-full h-full overflow-hidden cursor-zoom-in">
-                <img src="${itemSrc}" 
+                <img src="${gridSrc}" 
+                     ${responsiveAttrs(item.src)}
                      alt="${altText(item)}" 
                      title="${attr(item.title)}"
-                     loading="lazy"
+                     loading="${index < 4 ? 'eager' : 'lazy'}" decoding="async" ${index < 2 ? 'fetchpriority="high"' : ''}
                      class="w-full h-auto object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
               </a>
 
@@ -227,7 +256,7 @@
       marqueeInner.innerHTML = allItems.map(item => {
         const imgSrc = resolveMediaUrl(item.src, 'w600');
         return `
-        <a href="${resolveMediaUrl(item.src)}" data-fancybox="gallery" class="inline-block flex-shrink-0 w-36 sm:w-48 aspect-[3/4] rounded-xl overflow-hidden relative group border border-neutral-200/60 dark:border-neutral-800 shadow-md transform hover:scale-105 transition-all duration-300">
+        <a href="${resolveMediaUrl(item.src)}" data-thumb-src="${imgSrc}" data-fancybox="gallery" class="inline-block flex-shrink-0 w-36 sm:w-48 aspect-[3/4] rounded-xl overflow-hidden relative group border border-neutral-200/60 dark:border-neutral-800 shadow-md transform hover:scale-105 transition-all duration-300">
           <img src="${imgSrc}" alt="${altText(item)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-end">
             <span class="text-[10px] font-mono uppercase text-amber-400 font-semibold truncate">${item.category === 'art' ? '🎨 Digital Art' : '📷 Photography'}</span>
@@ -531,7 +560,7 @@
 
       container.innerHTML = this.items.map(item => `
         <div class="flex items-center gap-4 p-3 bg-neutral-100 dark:bg-neutral-900 rounded-xl border border-neutral-200/60 dark:border-neutral-800 group hover:border-neutral-300 dark:hover:border-neutral-700 transition">
-          <img src="${item.src}" alt="${altText(item)}" class="w-16 h-16 object-cover rounded-lg shadow-sm" />
+          <img src="${resolveMediaUrl(item.src, 'w480')}" alt="${altText(item)}" class="w-16 h-16 object-cover rounded-lg shadow-sm" />
           <div class="flex-1 min-w-0">
             <h4 class="font-medium text-sm text-neutral-900 dark:text-neutral-100 truncate">${item.title}</h4>
             <p class="text-xs text-neutral-500 dark:text-neutral-400 capitalize">${item.category === 'art' ? '🎨 PicsArt Digital Art' : (item.category || 'Fine Art')}</p>
@@ -909,7 +938,7 @@
       if (img) {
         img.style.opacity = '0';
         setTimeout(() => {
-          img.src = current.src;
+          img.src = resolveMediaUrl(current.src);
           img.alt = current.alt || current.title;
           img.onload = () => {
             img.style.opacity = '1';
@@ -918,7 +947,7 @@
       }
 
       if (bg) {
-        bg.style.backgroundImage = `url('${current.src}')`;
+        bg.style.backgroundImage = `url('${resolveMediaUrl(current.src, 'w480')}')`;
       }
 
       if (title) title.textContent = current.title;
