@@ -3,348 +3,405 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Client Proofing Room — Azizul Abedin Azmi</title>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../dist/assets/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../dist/assets/favicon-32x32.png" />
-  
-  <!-- Google Fonts -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Client Proofing — Azizul Abedin Azmi</title>
+
+  <link rel="icon" type="image/x-icon" href="/dist/assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/assets/favicon-32x32.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            serif: ['"Playfair Display"', 'serif'],
-            display: ['Cinzel', 'serif'],
-            mono: ['"JetBrains Mono"', 'monospace']
-          }
-        }
-      }
+      theme: { extend: { fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        serif: ['"Playfair Display"', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      } } }
     }
   </script>
+  <style>
+    .masonry { column-gap: 1rem; columns: 1; }
+    @media (min-width: 560px) { .masonry { columns: 2; } }
+    @media (min-width: 900px) { .masonry { columns: 3; } }
+    @media (min-width: 1280px) { .masonry { columns: 4; } }
+    .masonry > * { break-inside: avoid; margin-bottom: 1rem; }
+    img.proof { -webkit-user-drag: none; user-select: none; }
+  </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col font-sans antialiased selection:bg-purple-500 selection:text-white">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <a href="../index.html" class="flex items-center gap-2 group">
-          <div class="w-9 h-9 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center font-mono">
-            A
-          </div>
-          <div>
-            <div class="text-base font-bold font-serif text-white tracking-tight leading-none">Azizul Abedin Azmi</div>
-            <div class="text-[11px] font-mono uppercase tracking-widest text-purple-400 mt-1">Private Client Proofing</div>
-          </div>
-        </a>
-      </div>
-
-      <!-- Live Selection Status (Shown when unlocked) -->
-      <div id="selection-header-pill" class="hidden flex items-center gap-3">
-        <div class="text-xs font-mono text-neutral-400 hidden sm:block">
-          Selections: <strong id="counter-text" class="text-white">0 / 20</strong>
-        </div>
-        <button id="open-submit-modal-btn" class="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-lg transition active:scale-95 flex items-center gap-2">
-          <span>Review & Submit Picks</span>
+  <header class="sticky top-0 z-30 bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-3">
+      <a href="/" class="flex items-center gap-3 min-w-0">
+        <img src="/dist/assets/AZMI-LOGO@2x.png" alt="AZMI" class="h-6 sm:h-7 w-auto" />
+        <span class="hidden sm:block text-[11px] font-mono uppercase tracking-widest text-purple-400 border-l border-neutral-800 pl-3">Private Proofing</span>
+      </a>
+      <div id="header-actions" class="hidden flex items-center gap-2 sm:gap-3">
+        <span class="text-xs font-mono text-neutral-400 hidden sm:block">Picked <strong id="counter-text" class="text-white">0</strong></span>
+        <button id="open-submit-btn" class="px-3.5 sm:px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-lg transition active:scale-95 flex items-center gap-2">
+          <span>Review &amp; submit</span>
           <span id="badge-count" class="px-1.5 py-0.5 rounded-full bg-white/20 text-[10px]">0</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main View -->
-  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-10">
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-10">
 
-    <!-- 1. PIN Verification Modal (Default if locked) -->
-    <section id="pin-screen" class="max-w-md mx-auto my-12 p-8 rounded-3xl bg-neutral-900 border border-neutral-800 text-center space-y-6 shadow-2xl">
-      <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/10 text-purple-400 flex items-center justify-center text-2xl font-bold">
-        🔒
-      </div>
+    <!-- Unlock -->
+    <section id="pin-screen" class="max-w-md mx-auto my-10 p-7 sm:p-8 rounded-3xl bg-neutral-900 border border-neutral-800 text-center space-y-6 shadow-2xl">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/10 text-purple-300 flex items-center justify-center text-2xl">🔒</div>
       <div>
-        <h2 class="text-2xl font-serif font-bold text-white">Private Client Gallery</h2>
-        <p class="text-xs text-neutral-400 font-mono mt-1">Enter your 4-digit session access PIN code</p>
+        <h1 class="text-2xl font-serif font-bold text-white">Your private gallery</h1>
+        <p class="text-sm text-neutral-400 mt-1">Enter the PIN from your invite to see your photos.</p>
       </div>
-
-      <form id="pin-form" class="space-y-4">
-        <input type="password" id="pin-input" maxlength="8" placeholder="••••" class="w-48 mx-auto tracking-widest text-center text-2xl px-4 py-3 rounded-2xl bg-black border border-neutral-700 text-white focus:outline-none focus:border-purple-500 font-mono" />
-        <p id="pin-error" class="text-xs text-rose-500 hidden">Incorrect PIN. Please check your shoot invite.</p>
-        <button type="submit" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition">
-          Unlock Gallery →
-        </button>
+      <form id="pin-form" class="space-y-4" autocomplete="off">
+        <input id="code-input" placeholder="Gallery code (from your link)" class="hidden w-full text-center px-4 py-3 rounded-2xl bg-black border border-neutral-700 text-white text-sm focus:outline-none focus:border-purple-500 font-mono" />
+        <input id="pin-input" type="password" inputmode="text" maxlength="12" placeholder="PIN" class="w-56 mx-auto block tracking-[0.4em] text-center text-2xl px-4 py-3 rounded-2xl bg-black border border-neutral-700 text-white focus:outline-none focus:border-purple-500 font-mono" />
+        <p id="pin-error" class="text-xs text-rose-400 hidden"></p>
+        <button id="unlock-btn" type="submit" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-60 text-white font-semibold text-sm transition">Open gallery →</button>
       </form>
-
-      <div class="pt-4 border-t border-neutral-800/80 text-[11px] text-neutral-500 font-mono">
-        Default client demo PIN is <code class="text-neutral-300">2026</code>
-      </div>
+      <p class="text-[11px] text-neutral-500">Don't have a PIN? Ask your photographer for your invite.</p>
     </section>
 
-    <!-- 2. Unlocked Proofing Gallery -->
+    <!-- Loading -->
+    <section id="loading-screen" class="hidden py-24 text-center text-neutral-500 text-sm font-mono">Opening your gallery…</section>
+
+    <!-- Gallery -->
     <section id="gallery-screen" class="hidden space-y-8">
-      
-      <!-- Session Banner -->
-      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-neutral-900 via-neutral-900 to-purple-950/30 border border-neutral-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono uppercase bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-3">
-            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-            Private Proofing Session
-          </div>
-          <h2 id="session-title" class="text-2xl sm:text-4xl font-serif font-bold text-white">Client Proofing Session</h2>
-          <p class="text-xs sm:text-sm text-neutral-400 font-light mt-1">
-            Browse your unwatermarked session proofs below. Heart (♡) up to <span id="max-allowed-text" class="text-purple-400 font-semibold">20 photos</span> for signature color retouching and final delivery.
-          </p>
+      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-neutral-900 via-neutral-900 to-purple-950/30 border border-neutral-800 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p id="client-greeting" class="text-[11px] font-mono uppercase tracking-widest text-purple-400 mb-2"></p>
+          <h1 id="session-title" class="text-2xl sm:text-4xl font-serif font-bold text-white"></h1>
+          <p id="session-message" class="text-sm text-neutral-300 mt-3 whitespace-pre-line"></p>
+          <p id="session-hint" class="text-xs text-neutral-500 mt-3"></p>
         </div>
-
-        <div class="flex items-center gap-3">
-          <button id="filter-all-btn" class="px-3.5 py-1.5 rounded-full bg-purple-600 text-white text-xs font-medium">All Proofs</button>
-          <button id="filter-selected-btn" class="px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium">Only Selected (0)</button>
+        <div class="flex items-center gap-2 shrink-0">
+          <button id="filter-all-btn" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium">All photos</button>
+          <button id="filter-picked-btn" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium">Picked (0)</button>
         </div>
       </div>
 
-      <!-- Proofing Grid -->
-      <div id="proofing-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Rendered dynamically -->
-      </div>
+      <div id="submitted-banner" class="hidden p-4 rounded-2xl bg-emerald-950/40 border border-emerald-800/60 text-sm text-emerald-200"></div>
+
+      <div id="proof-grid" class="masonry"></div>
     </section>
-
   </main>
 
-  <!-- Submit Selections Modal -->
-  <div id="submit-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="max-w-lg w-full bg-neutral-900 border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl relative">
-      <button id="close-modal-btn" class="absolute top-5 right-5 text-neutral-400 hover:text-white p-2">✕</button>
+  <footer class="border-t border-neutral-900 py-6 text-center text-[11px] text-neutral-600 font-mono">
+    © Azizul Abedin Azmi · Proofs are for selection only and not for sharing.
+  </footer>
 
-      <div>
-        <h3 class="text-xl font-serif font-bold text-white">Submit Your Retouching Selections</h3>
-        <p class="text-xs text-neutral-400 font-mono mt-1">Your chosen frames will be sent directly to Azizul Abedin Azmi for final retouching.</p>
+  <!-- Lightbox -->
+  <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/95 flex flex-col">
+    <div class="flex items-center justify-between px-4 py-3 text-sm">
+      <span id="lb-label" class="font-mono text-neutral-300 truncate"></span>
+      <div class="flex items-center gap-2">
+        <a id="lb-download" class="hidden px-3 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 text-xs" download>Download</a>
+        <button id="lb-heart" class="px-3 py-1.5 rounded-full text-xs font-semibold"></button>
+        <button id="lb-close" class="w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700" aria-label="Close">✕</button>
       </div>
-
-      <div class="max-h-48 overflow-y-auto p-4 bg-black rounded-2xl border border-neutral-800 space-y-2 text-xs font-mono" id="selected-list-box">
-        <!-- Populated via JS -->
-      </div>
-
-      <div class="space-y-3">
-        <!-- WhatsApp Submit -->
-        <a id="whatsapp-submit-btn" href="#" target="_blank" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition">
-          <span>💬 Send Selections via WhatsApp</span>
-        </a>
-
-        <!-- Email Submit -->
-        <a id="email-submit-btn" href="#" class="w-full py-3.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition">
-          <span>✉️ Send via Email</span>
-        </a>
-
-        <!-- Download TXT -->
-        <button id="download-txt-btn" class="w-full py-2.5 text-xs text-neutral-400 hover:text-white font-mono transition">
-          Download Selection Sheet (.txt) ↓
-        </button>
-      </div>
+    </div>
+    <div class="flex-1 relative flex items-center justify-center min-h-0 px-2 pb-4">
+      <button id="lb-prev" class="absolute left-2 sm:left-4 z-10 w-11 h-11 rounded-full bg-black/60 hover:bg-neutral-800 text-xl" aria-label="Previous">‹</button>
+      <img id="lb-img" class="proof max-h-full max-w-full object-contain" alt="" referrerpolicy="no-referrer" draggable="false" />
+      <button id="lb-next" class="absolute right-2 sm:right-4 z-10 w-11 h-11 rounded-full bg-black/60 hover:bg-neutral-800 text-xl" aria-label="Next">›</button>
     </div>
   </div>
 
-  <!-- Load Master Dataset as default proofs demo -->
-  <script src="../dist/gallery-data.js"></script>
+  <!-- Submit modal -->
+  <div id="submit-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="max-w-lg w-full bg-neutral-900 border border-neutral-800 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl relative">
+      <button id="close-modal-btn" class="absolute top-4 right-4 w-9 h-9 rounded-full text-neutral-400 hover:text-white hover:bg-neutral-800" aria-label="Close">✕</button>
+      <div>
+        <h2 class="text-xl font-serif font-bold text-white">Send your picks</h2>
+        <p id="modal-sub" class="text-xs text-neutral-400 mt-1"></p>
+      </div>
+      <div id="picked-strip" class="grid grid-cols-5 gap-2 max-h-48 overflow-y-auto"></div>
+      <label class="block text-xs text-neutral-400 space-y-1">
+        <span>Anything to add? (optional)</span>
+        <textarea id="note-input" rows="3" maxlength="3000" placeholder="e.g. Please soften the background on #12, and make #7 black &amp; white." class="w-full px-3 py-2.5 rounded-xl bg-black border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
+      </label>
+      <p id="submit-error" class="hidden text-xs text-rose-400"></p>
+      <button id="submit-btn" class="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-60 text-white font-semibold text-sm transition">Submit picks</button>
+      <p class="text-[11px] text-neutral-500 text-center">You can change your picks and submit again while the gallery is open.</p>
+    </div>
+  </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const sessionSlug = params.get('session') || 'sample-shoot';
-    const prefilledPin = params.get('pin') || '';
+  (function () {
+    const API = '/.netlify/functions/proofing-client';
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-    // Load custom session or fallback to default dataset
-    let storedSession = null;
-    try {
-      const raw = localStorage.getItem('client_session_' + sessionSlug);
-      if (raw) storedSession = JSON.parse(raw);
-    } catch (e) {}
+    // Slug comes from /client/<slug>, or ?s= / ?session= for older links.
+    const params = new URLSearchParams(location.search);
+    const pathSlug = (location.pathname.match(/\/client\/([a-z0-9-]{3,61})\/?$/i) || [])[1];
+    let slug = (pathSlug || params.get('s') || params.get('session') || '').toLowerCase();
 
-    const sessionData = storedSession || {
-      name: 'Azmi Editorial Portrait Session',
-      pin: '2026',
-      maxSelections: 20,
-      photos: (window.GALLERY_DATA || []).slice(0, 16).map(p => p.src)
+    let token = null;
+    let session = null;
+    let picked = new Set();
+    let filter = 'all';
+    let lbIndex = -1;
+    let submittedAt = null;
+
+    const tokenKey = () => `proof_token_${slug}`;
+    const draftKey = () => `proof_draft_${slug}`;
+    const store = {
+      get(k, area) { try { return (area || localStorage).getItem(k); } catch (e) { return null; } },
+      set(k, v, area) { try { (area || localStorage).setItem(k, v); } catch (e) {} },
+      del(k, area) { try { (area || localStorage).removeItem(k); } catch (e) {} }
     };
 
-    let selectedIds = new Set();
-    let currentFilter = 'all';
-
-    // PIN Authentication
-    const pinScreen = document.getElementById('pin-screen');
-    const galleryScreen = document.getElementById('gallery-screen');
-    const selectionHeaderPill = document.getElementById('selection-header-pill');
-    const pinInput = document.getElementById('pin-input');
-    const pinError = document.getElementById('pin-error');
-
-    if (prefilledPin && prefilledPin === sessionData.pin) {
-      unlockGallery();
+    async function call(payload) {
+      const res = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      let data = {};
+      try { data = await res.json(); } catch (e) {}
+      if (!res.ok || !data.success) {
+        const err = new Error(data.error || 'Something went wrong. Please try again.');
+        err.relock = data.relock;
+        throw err;
+      }
+      return data;
     }
 
-    document.getElementById('pin-form').addEventListener('submit', (e) => {
+    // ---------- Unlock ----------
+    if (!slug) $('code-input').classList.remove('hidden');
+    if (params.get('pin')) $('pin-input').value = params.get('pin');
+
+    function showScreen(name) {
+      ['pin-screen', 'loading-screen', 'gallery-screen'].forEach((id) => $(id).classList.toggle('hidden', id !== name));
+      $('header-actions').classList.toggle('hidden', name !== 'gallery-screen');
+    }
+
+    $('pin-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const entered = pinInput.value.trim();
-      if (entered === sessionData.pin) {
-        unlockGallery();
-      } else {
-        pinError.classList.remove('hidden');
+      if (!slug) slug = $('code-input').value.trim().toLowerCase().replace(/^.*\/client\//, '').replace(/[^a-z0-9-]/g, '');
+      const pin = $('pin-input').value.trim();
+      if (!slug || !pin) return showError('Please enter your gallery code and PIN.');
+      $('unlock-btn').disabled = true;
+      $('pin-error').classList.add('hidden');
+      try {
+        const data = await call({ action: 'unlock', slug, pin });
+        if (!pathSlug) history.replaceState(null, '', `/client/${slug}`);
+        open(data);
+      } catch (err) {
+        showError(err.message);
+      } finally {
+        $('unlock-btn').disabled = false;
       }
     });
 
-    function unlockGallery() {
-      pinScreen.classList.add('hidden');
-      galleryScreen.classList.remove('hidden');
-      selectionHeaderPill.classList.remove('hidden');
-      document.getElementById('session-title').textContent = sessionData.name;
-      document.getElementById('max-allowed-text').textContent = sessionData.maxSelections + ' photos';
-      renderProofingGrid();
+    function showError(msg) {
+      $('pin-error').textContent = msg;
+      $('pin-error').classList.remove('hidden');
     }
 
-    function renderProofingGrid() {
-      const grid = document.getElementById('proofing-grid');
-      const photos = sessionData.photos;
-
-      let displayPhotos = photos.map((src, idx) => ({
-        id: `frame-${idx + 1}`,
-        src: src.startsWith('dist/') ? '../' + src : src,
-        originalSrc: src,
-        frameNum: (idx + 1).toString().padStart(2, '0')
-      }));
-
-      if (currentFilter === 'selected') {
-        displayPhotos = displayPhotos.filter(p => selectedIds.has(p.id));
+    // Resume after a reload without asking for the PIN again (token lasts 12h, this tab only).
+    (async function resume() {
+      const saved = slug && store.get(tokenKey(), sessionStorage);
+      if (!saved) return;
+      showScreen('loading-screen');
+      try {
+        open(await call({ action: 'resume', slug, token: saved }));
+      } catch (err) {
+        store.del(tokenKey(), sessionStorage);
+        showScreen('pin-screen');
+        if (!err.relock) showError(err.message);
       }
+    })();
 
-      if (displayPhotos.length === 0) {
-        grid.innerHTML = '<div class="col-span-full py-16 text-center text-neutral-500 font-mono text-sm">No photos match filter.</div>';
-        return;
+    function open(data) {
+      token = data.token;
+      session = data.session;
+      store.set(tokenKey(), token, sessionStorage);
+      // Picks: unsent draft on this device wins, then whatever was last submitted.
+      const draft = JSON.parse(store.get(draftKey()) || 'null');
+      const valid = new Set(session.photos.map((p) => p.id));
+      const initial = draft || (data.selection ? data.selection.ids : []);
+      picked = new Set(initial.filter((id) => valid.has(id)));
+      submittedAt = data.selection ? data.selection.submittedAt : null;
+      if (data.selection && data.selection.note) $('note-input').value = data.selection.note;
+
+      document.title = `${session.title} — Private Proofing`;
+      $('client-greeting').textContent = session.clientName ? `For ${session.clientName}` : 'Private proofing gallery';
+      $('session-title').textContent = session.title;
+      $('session-message').textContent = session.message || '';
+      const limit = session.maxSelections ? `up to ${session.maxSelections}` : 'as many as you like';
+      $('session-hint').textContent = `${session.photos.length} photos · Tap ♡ to pick ${limit} · Tap a photo to see it full size` +
+        (session.expiresAt ? ` · Open until ${new Date(session.expiresAt).toLocaleDateString()}` : '');
+      showScreen('gallery-screen');
+      renderSubmitted();
+      render();
+    }
+
+    // ---------- Grid ----------
+    function visible() {
+      return filter === 'picked' ? session.photos.filter((p) => picked.has(p.id)) : session.photos;
+    }
+
+    function heartSvg(on) {
+      return `<svg class="w-4 h-4 ${on ? 'fill-white' : 'fill-none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>`;
+    }
+
+    function render() {
+      const list = visible();
+      const grid = $('proof-grid');
+      if (!list.length) {
+        grid.innerHTML = `<p class="py-16 text-center text-neutral-500 text-sm">${filter === 'picked' ? 'You haven\'t picked any photos yet.' : 'No photos in this gallery yet.'}</p>`;
+      } else {
+        grid.innerHTML = list.map((p) => {
+          const on = picked.has(p.id);
+          const ratio = p.width && p.height ? `aspect-ratio:${p.width}/${p.height};` : '';
+          return `
+          <figure class="relative rounded-2xl overflow-hidden bg-neutral-900 border ${on ? 'border-purple-500 ring-2 ring-purple-500/30' : 'border-neutral-800'} transition">
+            <button data-open="${esc(p.id)}" class="block w-full bg-black" style="${ratio}">
+              <img src="${esc(p.thumb)}" alt="Frame ${p.frame}" loading="lazy" referrerpolicy="no-referrer" draggable="false" class="proof w-full h-full object-cover" />
+            </button>
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur text-[10px] font-mono font-semibold">#${p.frame}</span>
+            <button data-pick="${esc(p.id)}" aria-label="${on ? 'Unpick' : 'Pick'} frame ${p.frame}" class="absolute top-2.5 right-2.5 p-2.5 rounded-full ${on ? 'bg-purple-600 text-white' : 'bg-black/60 text-white/85 hover:bg-black/80'} backdrop-blur transition shadow-md">${heartSvg(on)}</button>
+          </figure>`;
+        }).join('');
+        grid.querySelectorAll('[data-pick]').forEach((b) => { b.onclick = () => togglePick(b.dataset.pick); });
+        grid.querySelectorAll('[data-open]').forEach((b) => { b.onclick = () => openLightbox(b.dataset.open); });
       }
-
-      grid.innerHTML = displayPhotos.map(photo => {
-        const isSelected = selectedIds.has(photo.id);
-        return `
-          <div class="proof-card group relative rounded-2xl overflow-hidden bg-neutral-900 border ${isSelected ? 'border-purple-500 ring-2 ring-purple-500/30' : 'border-neutral-800'} transition-all shadow-lg flex flex-col justify-between">
-            <div class="relative aspect-[3/4] w-full overflow-hidden bg-black cursor-pointer">
-              <img src="${photo.src}" alt="Proof ${photo.frameNum}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
-              
-              <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-mono text-white font-semibold">
-                Frame #${photo.frameNum}
-              </div>
-
-              <!-- Selection Heart Button -->
-              <button data-select-id="${photo.id}" data-photo-src="${photo.originalSrc}" data-frame="${photo.frameNum}"
-                      class="select-heart-btn absolute top-3 right-3 p-2.5 rounded-full ${isSelected ? 'bg-purple-600 text-white' : 'bg-black/60 text-white/80 hover:text-white hover:bg-black/80'} backdrop-blur-md transition shadow-md">
-                <svg class="w-4 h-4 ${isSelected ? 'fill-white' : 'fill-none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-              </button>
-            </div>
-
-            <div class="p-3.5 flex items-center justify-between border-t border-neutral-800/80 bg-neutral-900">
-              <span class="text-xs font-mono text-neutral-300 truncate">${photo.originalSrc.split('/').pop()}</span>
-              <span class="text-[10px] font-mono font-semibold ${isSelected ? 'text-purple-400' : 'text-neutral-500'}">
-                ${isSelected ? '✓ SELECTED' : 'UNSELECTED'}
-              </span>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      initSelectListeners();
       updateCounters();
     }
 
-    function initSelectListeners() {
-      document.querySelectorAll('.select-heart-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const id = btn.dataset.selectId;
-          if (selectedIds.has(id)) {
-            selectedIds.delete(id);
-          } else {
-            if (selectedIds.size >= sessionData.maxSelections) {
-              alert(`You can select up to ${sessionData.maxSelections} photos for this session.`);
-              return;
-            }
-            selectedIds.add(id);
-          }
-          renderProofingGrid();
-        });
-      });
+    function togglePick(id) {
+      if (picked.has(id)) {
+        picked.delete(id);
+      } else {
+        if (session.maxSelections && picked.size >= session.maxSelections) {
+          alert(`You can pick up to ${session.maxSelections} photos. Unpick one to choose another.`);
+          return;
+        }
+        picked.add(id);
+      }
+      store.set(draftKey(), JSON.stringify([...picked]));
+      render();
+      if (lbIndex >= 0) renderLightbox();
     }
 
     function updateCounters() {
-      const count = selectedIds.size;
-      const max = sessionData.maxSelections;
-      document.getElementById('counter-text').textContent = `${count} / ${max}`;
-      document.getElementById('badge-count').textContent = count;
-      document.getElementById('filter-selected-btn').textContent = `Only Selected (${count})`;
+      const n = picked.size;
+      const max = session.maxSelections;
+      $('counter-text').textContent = max ? `${n} / ${max}` : String(n);
+      $('badge-count').textContent = n;
+      $('filter-picked-btn').textContent = `Picked (${n})`;
+      $('filter-all-btn').className = `filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium ${filter === 'all' ? 'bg-purple-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300'}`;
+      $('filter-picked-btn').className = `filter-btn px-3.5 py-1.5 rounded-full text-xs font-medium ${filter === 'picked' ? 'bg-purple-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300'}`;
     }
 
-    document.getElementById('filter-all-btn').addEventListener('click', () => {
-      currentFilter = 'all';
-      document.getElementById('filter-all-btn').className = 'px-3.5 py-1.5 rounded-full bg-purple-600 text-white text-xs font-medium';
-      document.getElementById('filter-selected-btn').className = 'px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium';
-      renderProofingGrid();
-    });
+    $('filter-all-btn').onclick = () => { filter = 'all'; render(); };
+    $('filter-picked-btn').onclick = () => { filter = 'picked'; render(); };
 
-    document.getElementById('filter-selected-btn').addEventListener('click', () => {
-      currentFilter = 'selected';
-      document.getElementById('filter-selected-btn').className = 'px-3.5 py-1.5 rounded-full bg-purple-600 text-white text-xs font-medium';
-      document.getElementById('filter-all-btn').className = 'px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 text-neutral-300 text-xs font-medium';
-      renderProofingGrid();
-    });
+    function renderSubmitted() {
+      const b = $('submitted-banner');
+      if (!submittedAt) { b.classList.add('hidden'); return; }
+      b.textContent = `✓ Your picks were sent on ${new Date(submittedAt).toLocaleString()}. You can still change them and submit again.`;
+      b.classList.remove('hidden');
+    }
 
-    // Submit Modal Logic
-    const submitModal = document.getElementById('submit-modal');
-    document.getElementById('open-submit-modal-btn').addEventListener('click', () => {
-      if (selectedIds.size === 0) {
-        alert('Please select at least 1 photo first by clicking the heart button on any proof.');
-        return;
+    // ---------- Lightbox ----------
+    function openLightbox(id) {
+      lbIndex = visible().findIndex((p) => p.id === id);
+      if (lbIndex < 0) return;
+      $('lightbox').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      renderLightbox();
+    }
+    function closeLightbox() {
+      lbIndex = -1;
+      $('lightbox').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    function renderLightbox() {
+      const list = visible();
+      if (!list.length) return closeLightbox();
+      lbIndex = Math.max(0, Math.min(lbIndex, list.length - 1));
+      const p = list[lbIndex];
+      const on = picked.has(p.id);
+      $('lb-img').src = p.src;
+      $('lb-label').textContent = `#${p.frame}  ·  ${lbIndex + 1} of ${list.length}`;
+      $('lb-heart').innerHTML = on ? '♥ Picked' : '♡ Pick';
+      $('lb-heart').className = `px-3 py-1.5 rounded-full text-xs font-semibold ${on ? 'bg-purple-600 text-white' : 'bg-neutral-800 hover:bg-neutral-700 text-white'}`;
+      const dl = $('lb-download');
+      if (session.allowDownload) {
+        dl.href = p.source === 'upload' ? `${p.src}&download=1` : p.src;
+        dl.classList.remove('hidden');
+      } else {
+        dl.classList.add('hidden');
       }
-      populateSubmitModal();
-      submitModal.classList.remove('hidden');
-    });
-
-    document.getElementById('close-modal-btn').addEventListener('click', () => {
-      submitModal.classList.add('hidden');
-    });
-
-    function populateSubmitModal() {
-      const list = Array.from(selectedIds);
-      const listBox = document.getElementById('selected-list-box');
-      listBox.innerHTML = list.map((id, idx) => `
-        <div class="flex items-center justify-between text-neutral-300">
-          <span>${idx + 1}. Proof ${id}</span>
-          <span class="text-purple-400">Ready for Retouching</span>
-        </div>
-      `).join('');
-
-      const msg = `Hello Azmi! Here are my final ${list.length} selected photos from session [${sessionData.name}]:\n\n` +
-        list.map((id, idx) => `${idx + 1}. ${id}`).join('\n') +
-        `\n\nLooking forward to the final color-graded masters!`;
-
-      // WhatsApp link
-      const waUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-      document.getElementById('whatsapp-submit-btn').href = waUrl;
-
-      // Email link
-      const mailUrl = `mailto:azizulabedinazmi@gmail.com?subject=${encodeURIComponent('Retouching Selections: ' + sessionData.name)}&body=${encodeURIComponent(msg)}`;
-      document.getElementById('email-submit-btn').href = mailUrl;
-
-      // Text download
-      document.getElementById('download-txt-btn').onclick = () => {
-        const blob = new Blob([msg], { type: 'text/plain' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `selections-${sessionSlug}.txt`;
-        a.click();
-      };
+      $('lb-prev').style.visibility = lbIndex > 0 ? 'visible' : 'hidden';
+      $('lb-next').style.visibility = lbIndex < list.length - 1 ? 'visible' : 'hidden';
     }
+    $('lb-close').onclick = closeLightbox;
+    $('lb-prev').onclick = () => { lbIndex--; renderLightbox(); };
+    $('lb-next').onclick = () => { lbIndex++; renderLightbox(); };
+    $('lb-heart').onclick = () => togglePick(visible()[lbIndex].id);
+    document.addEventListener('keydown', (e) => {
+      if (lbIndex < 0) { if (e.key === 'Escape') closeModal(); return; }
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' && lbIndex > 0) { lbIndex--; renderLightbox(); }
+      if (e.key === 'ArrowRight' && lbIndex < visible().length - 1) { lbIndex++; renderLightbox(); }
+      if (e.key.toLowerCase() === 'h' || e.key === ' ') { e.preventDefault(); togglePick(visible()[lbIndex].id); }
+    });
+    // Swipe on phones
+    let touchX = null;
+    $('lightbox').addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    $('lightbox').addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) { lbIndex += dx < 0 ? 1 : -1; renderLightbox(); }
+      touchX = null;
+    });
+    document.addEventListener('contextmenu', (e) => { if (e.target.classList && e.target.classList.contains('proof')) e.preventDefault(); });
+
+    // ---------- Submit ----------
+    function closeModal() { $('submit-modal').classList.add('hidden'); }
+    $('close-modal-btn').onclick = closeModal;
+
+    $('open-submit-btn').onclick = () => {
+      if (!picked.size) { alert('Tap the ♡ on the photos you love first.'); return; }
+      const list = session.photos.filter((p) => picked.has(p.id));
+      $('modal-sub').textContent = `${list.length} photo${list.length === 1 ? '' : 's'} picked${session.maxSelections ? ` (of ${session.maxSelections} allowed)` : ''}.`;
+      $('picked-strip').innerHTML = list.map((p) => `
+        <div class="relative rounded-lg overflow-hidden border border-purple-500/50">
+          <img src="${esc(p.thumb)}" alt="" referrerpolicy="no-referrer" draggable="false" class="proof w-full aspect-square object-cover" />
+          <span class="absolute bottom-1 left-1 px-1 rounded bg-black/70 text-[10px] font-mono">#${p.frame}</span>
+        </div>`).join('');
+      $('submit-error').classList.add('hidden');
+      $('submit-modal').classList.remove('hidden');
+    };
+
+    $('submit-btn').onclick = async () => {
+      $('submit-btn').disabled = true;
+      $('submit-btn').textContent = 'Sending…';
+      try {
+        const ids = session.photos.filter((p) => picked.has(p.id)).map((p) => p.id);
+        const data = await call({ action: 'submit', slug, token, ids, note: $('note-input').value });
+        submittedAt = data.submittedAt;
+        store.del(draftKey());
+        closeModal();
+        renderSubmitted();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        if (err.relock) { store.del(tokenKey(), sessionStorage); closeModal(); showScreen('pin-screen'); showError(err.message); return; }
+        $('submit-error').textContent = err.message;
+        $('submit-error').classList.remove('hidden');
+      } finally {
+        $('submit-btn').disabled = false;
+        $('submit-btn').textContent = 'Submit picks';
+      }
+    };
+  })();
   </script>
 </body>
 </html>

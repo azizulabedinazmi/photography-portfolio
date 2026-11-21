@@ -25,6 +25,7 @@ collections:
             fields:
               - { label: "Unique ID", name: "id", widget: "string", hint: "e.g. photo-golden-hour or picsart-mirage" }
               - { label: "Title", name: "title", widget: "string" }
+              - { label: "Alt text for Google (who / what is in the photo)", name: "alt", widget: "string", required: false, hint: "Describe who/what is in the photo, e.g. Hafsa Prapti — outdoor portrait. Searching that name on Google can then find this photo. Leave your own name out so a search for you doesn't list every photo." }
               - { label: "Image Source (Upload local image, PicsArt URL, or Google Drive link/ID)", name: "src", widget: "image" }
               - { label: "Category", name: "category", widget: "select", options: [
                   { label: "Portraits", value: "portraits" },

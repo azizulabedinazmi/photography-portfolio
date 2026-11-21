@@ -1,7 +1,10 @@
 [build]
-  command = "echo 'Static site: ready'"
+  command = "node scripts/build-seo.js"
   publish = "."
   functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/*"
@@ -10,14 +13,222 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Keep admin and client proofing pages out of search engines
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/client/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"
+
 # Netlify Identity & Decap CMS Single-Page App rule
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
 
-# Client Proofing Room Pretty URLs (/client/sarah-session)
+# Client proofing gallery links (/client/<session-code>)
 [[redirects]]
   from = "/client/:slug"
   to = "/client/index.html?session=:slug"
   status = 200
+
+# Old photo file names (renamed to descriptive names) -> new names, so existing links and Google keep working
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-56.jpg"
+  to = "/dist/assets/Photography/expressions-of-sharna.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-10.jpg"
+  to = "/dist/assets/Photography/expressions-of-sharna-2.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-8.jpg"
+  to = "/dist/assets/Photography/expressions-of-sharna-3.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-522.jpg"
+  to = "/dist/assets/Photography/golden-hour-reverie.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-519.jpg"
+  to = "/dist/assets/Photography/golden-hour-reverie-2.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-529.jpg"
+  to = "/dist/assets/Photography/golden-hour-reverie-3.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-529%20(2).jpg"
+  to = "/dist/assets/Photography/golden-hour-reverie-4.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-92.jpg"
+  to = "/dist/assets/Photography/shadow-radiance.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-100.jpg"
+  to = "/dist/assets/Photography/shadow-radiance-2.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-102.jpg"
+  to = "/dist/assets/Photography/shadow-radiance-3.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-46.jpg"
+  to = "/dist/assets/Photography/nikisha-hoque-dramatic-light.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/AZMI-226.jpg"
+  to = "/dist/assets/Photography/barisha-apu-heritage-saree.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-56%20(2).jpg"
+  to = "/dist/assets/Photography/asmita-islam-sharna-radiant-focus.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-540.jpg"
+  to = "/dist/assets/Photography/ecpa-celebration-energy.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-542.jpg"
+  to = "/dist/assets/Photography/ecpa-celebration-energy-2.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-60.jpg"
+  to = "/dist/assets/Photography/nikisha-hoque-monochromatic-noir.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-343.jpg"
+  to = "/dist/assets/Photography/classical-grace-arpita-das.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-354.jpg"
+  to = "/dist/assets/Photography/classical-grace-arpita-das-2.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-143.jpg"
+  to = "/dist/assets/Photography/sharmin-akter-shila-poise.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-398.jpg"
+  to = "/dist/assets/Photography/the-editorial-cut.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-455.jpg"
+  to = "/dist/assets/Photography/the-editorial-cut-2.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-459.jpg"
+  to = "/dist/assets/Photography/the-editorial-cut-3.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-86.jpg"
+  to = "/dist/assets/Photography/the-gathering-ecpa-moments.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-380.jpg"
+  to = "/dist/assets/Photography/sakida-meem-ambient-portrait.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-363.jpg"
+  to = "/dist/assets/Photography/spotlight-stage-energy.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-24.jpg"
+  to = "/dist/assets/Photography/ecpa-silhouette-gaze.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-50.jpg"
+  to = "/dist/assets/Photography/character-presence.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-58.jpg"
+  to = "/dist/assets/Photography/introspection-in-warm-tone.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-73.jpg"
+  to = "/dist/assets/Photography/youth-natural-radiance.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-83.jpg"
+  to = "/dist/assets/Photography/harmony-stillness.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-145.jpg"
+  to = "/dist/assets/Photography/cultural-elegance.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-168.jpg"
+  to = "/dist/assets/Photography/traditional-poise.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-1044.jpg"
+  to = "/dist/assets/Photography/serenity-soft-focus.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-367.jpg"
+  to = "/dist/assets/Photography/the-storyteller-gaze.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-1225.jpg"
+  to = "/dist/assets/Photography/joy-jubilation.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-409.jpg"
+  to = "/dist/assets/Photography/festive-radiance.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-473.jpg"
+  to = "/dist/assets/Photography/candid-warmth.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-844.jpg"
+  to = "/dist/assets/Photography/reflection-form.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/dist/assets/Photography/Azmi-912.jpg"
+  to = "/dist/assets/Photography/shadow-study-monochromatic-gaze.jpg"
+  status = 301

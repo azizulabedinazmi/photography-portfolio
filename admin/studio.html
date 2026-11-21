@@ -65,9 +65,9 @@
         <button type="button" class="tab-btn px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white" data-tab="tab-gdrive">
           ☁️ Drive & Photos
         </button>
-        <button type="button" class="tab-btn px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white" data-tab="tab-client">
-          🔒 Client Proofing
-        </button>
+        <a href="proofing.html" class="px-3 py-1.5 rounded-lg text-purple-300 hover:text-white">
+          🔒 Client Proofing →
+        </a>
       </nav>
 
       <div class="flex items-center gap-3 text-xs">
@@ -277,62 +277,6 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 4: PRIVATE CLIENT PROOFING ROOM ==================== -->
-    <section id="tab-client" class="tab-content hidden space-y-8">
-      <div class="p-6 rounded-2xl bg-neutral-900 border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 class="text-xl font-bold text-white">Private Client Proofing Manager</h2>
-          <p class="text-sm text-neutral-400 mt-1">
-            Create password-protected viewing galleries for clients to review unedited proofs and select their favorites for retouching.
-          </p>
-        </div>
-        <a href="../client/index.html" target="_blank" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition">
-          Open Client Proofing Room ↗
-        </a>
-      </div>
-
-      <div class="p-6 sm:p-8 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-6 max-w-2xl">
-        <h3 class="font-bold text-base text-white">Create New Client Session</h3>
-
-        <div class="space-y-4 text-xs font-mono">
-          <div>
-            <label class="block text-neutral-400 mb-1">Client / Project Name</label>
-            <input type="text" id="client-name" placeholder="Sarah & David Wedding" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400" />
-          </div>
-
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-neutral-400 mb-1">Session URL Slug</label>
-              <input type="text" id="client-slug" placeholder="sarah-wedding" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400" />
-            </div>
-            <div>
-              <label class="block text-neutral-400 mb-1">Access PIN Code</label>
-              <input type="text" id="client-pin" placeholder="1234" value="2026" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400 font-bold" />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-neutral-400 mb-1">Max Retouching Selections Allowed</label>
-            <input type="number" id="client-max" value="20" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400" />
-          </div>
-
-          <div>
-            <label class="block text-neutral-400 mb-1">Photo Image URLs (one per line, local paths, Drive links, or web URLs)</label>
-            <textarea id="client-photos-input" rows="4" placeholder="dist/assets/Photography/Azmi-56.jpg&#10;dist/assets/Photography/Azmi-522.jpg&#10;https://lh3.googleusercontent.com/d/..." class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400"></textarea>
-          </div>
-        </div>
-
-        <button id="generate-client-btn" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition">
-          Generate Client Session Link
-        </button>
-
-        <div id="client-link-card" class="hidden p-4 rounded-xl bg-black border border-purple-500/30 space-y-2">
-          <div class="text-xs text-purple-300 font-semibold">Share this private link with your client:</div>
-          <input type="text" id="client-share-url" readonly class="w-full px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400" />
-          <p class="text-[11px] text-neutral-400">PIN: <strong id="client-share-pin" class="text-white"></strong> · Clients can view, heart their top picks, and send choices via WhatsApp or Email.</p>
-        </div>
-      </div>
-    </section>
 
   </main>
 
@@ -658,29 +602,6 @@
         btn.textContent = 'Fetch Album Photos (Live Sync)';
         btn.disabled = false;
       }
-    });
-
-    // --- TAB 4: PRIVATE CLIENT PROOFING ROOM ---
-    document.getElementById('generate-client-btn').addEventListener('click', () => {
-      const name = document.getElementById('client-name').value.trim() || 'Client Session';
-      let slug = document.getElementById('client-slug').value.trim();
-      if (!slug) slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-      const pin = document.getElementById('client-pin').value.trim() || '2026';
-      const photosRaw = document.getElementById('client-photos-input').value.trim();
-      const photos = photosRaw.split('\n').map(s => s.trim()).filter(Boolean);
-
-      // Store in localStorage for instant testing
-      const sessionData = {
-        name, slug, pin, photos, maxSelections: parseInt(document.getElementById('client-max').value, 10) || 20
-      };
-      localStorage.setItem('client_session_' + slug, JSON.stringify(sessionData));
-
-      const origin = window.location.origin;
-      const shareUrl = `${origin}/client/index.html?session=${slug}&pin=${pin}`;
-
-      document.getElementById('client-share-url').value = shareUrl;
-      document.getElementById('client-share-pin').textContent = pin;
-      document.getElementById('client-link-card').classList.remove('hidden');
     });
   </script>
 </body>

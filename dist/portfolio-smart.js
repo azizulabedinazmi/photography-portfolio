@@ -19,6 +19,16 @@
   'use strict';
 
   // --- HELPER: UNIVERSAL MEDIA URL RESOLVER (Google Drive, PicsArt, Local) ---
+  // Escape a value for use inside an HTML attribute.
+  function attr(value) {
+    return String(value == null ? '' : value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  }
+
+  // SEO alt text: the descriptive `alt` (with people's names) when set, else the title.
+  function altText(item) {
+    return attr(item.alt || item.title);
+  }
+
   function resolveMediaUrl(url, size = 'w1600') {
     if (!url) return '';
     // Google Drive URL formats:
@@ -91,7 +101,8 @@
                  data-caption="<strong>${item.title}</strong><br><span class='text-xs opacity-75'>${item.camera} · ${item.location}</span>"
                  class="block w-full h-full overflow-hidden cursor-zoom-in">
                 <img src="${itemSrc}" 
-                     alt="${item.title}" 
+                     alt="${altText(item)}" 
+                     title="${attr(item.title)}"
                      loading="lazy"
                      class="w-full h-auto object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
               </a>
@@ -217,7 +228,7 @@
         const imgSrc = resolveMediaUrl(item.src, 'w600');
         return `
         <a href="${resolveMediaUrl(item.src)}" data-fancybox="gallery" class="inline-block flex-shrink-0 w-36 sm:w-48 aspect-[3/4] rounded-xl overflow-hidden relative group border border-neutral-200/60 dark:border-neutral-800 shadow-md transform hover:scale-105 transition-all duration-300">
-          <img src="${imgSrc}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+          <img src="${imgSrc}" alt="${altText(item)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-end">
             <span class="text-[10px] font-mono uppercase text-amber-400 font-semibold truncate">${item.category === 'art' ? '🎨 Digital Art' : '📷 Photography'}</span>
             <span class="text-xs font-serif text-white font-bold truncate">${item.title}</span>
@@ -520,7 +531,7 @@
 
       container.innerHTML = this.items.map(item => `
         <div class="flex items-center gap-4 p-3 bg-neutral-100 dark:bg-neutral-900 rounded-xl border border-neutral-200/60 dark:border-neutral-800 group hover:border-neutral-300 dark:hover:border-neutral-700 transition">
-          <img src="${item.src}" alt="${item.title}" class="w-16 h-16 object-cover rounded-lg shadow-sm" />
+          <img src="${item.src}" alt="${altText(item)}" class="w-16 h-16 object-cover rounded-lg shadow-sm" />
           <div class="flex-1 min-w-0">
             <h4 class="font-medium text-sm text-neutral-900 dark:text-neutral-100 truncate">${item.title}</h4>
             <p class="text-xs text-neutral-500 dark:text-neutral-400 capitalize">${item.category === 'art' ? '🎨 PicsArt Digital Art' : (item.category || 'Fine Art')}</p>
@@ -899,7 +910,7 @@
         img.style.opacity = '0';
         setTimeout(() => {
           img.src = current.src;
-          img.alt = current.title;
+          img.alt = current.alt || current.title;
           img.onload = () => {
             img.style.opacity = '1';
           };

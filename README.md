@@ -35,7 +35,7 @@
     ·
     <a href="https://azmi-gallery.netlify.app/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
     ·
-    <a href="https://azmi-gallery.netlify.app/client/"><strong>🔒 Client Proofing Room »</strong></a>
+    <a href="https://azmi-gallery.netlify.app/admin/proofing.html"><strong>🔒 Client Proofing Manager »</strong></a>
     ·
     <a href="http://azizulabedinazmi.is-a.dev/"><strong>💻 Developer Portfolio »</strong></a>
     <br />
@@ -54,7 +54,7 @@
     <li><a href="#studio-admin-suite">Studio Admin Suite (EXIF & WebP)</a></li>
     <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
     <li><a href="#google-photos-live-sync">Google Photos Album Import (Admin)</a></li>
-    <li><a href="#private-client-proofing">Private Client Proofing Room</a></li>
+    <li><a href="#private-client-proofing">Private Client Proofing</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#getting-started">Getting Started & Local Dev</a></li>
     <li><a href="#license">License</a></li>
@@ -69,7 +69,7 @@
 This repository contains the complete portfolio and creative studio system for **Azizul Abedin Azmi**, showcasing:
 - **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
 - **PicsArt Digital Art & Photo Manipulations**: 16 surreal, concept art, and high-aesthetic digital edits.
-- **Client Proofing & Selection Suite**: Private, password-protected galleries for clients to review unedited proofs and submit selections.
+- **Private Client Proofing**: PIN-protected galleries built from uploads, Google Drive or Google Photos, where clients pick their favourites for retouching.
 - **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).
 
 ---
@@ -168,18 +168,17 @@ Behind the scenes the Studio calls `/.netlify/functions/google-photos-album?albu
 
 ---
 
-## 🔒 Private Client Proofing Room <a name="private-client-proofing"></a>
+## 🔒 Private Client Proofing <a name="private-client-proofing"></a>
 
-Deliver an agency-grade proofing experience to photoshoot clients at `https://azmi-gallery.netlify.app/client/`:
+Build a private gallery for each shoot and let the client pick their favourites.
 
-- **PIN Gate**: Each session sits behind a 4-digit client access code. Change the default PIN before sharing real client work (see [ADMIN_SETUP.md](ADMIN_SETUP.md#5-private-client-proofing-room--pin-setup)). The check runs in the browser, so treat it as a light privacy gate, not real security.
-- **Interactive Hearting**: Clients review unwatermarked or proof frames and heart up to 20 photos for final retouching.
-- **Progress Tracker**: Top sticky counter displays real-time selection progress (`Selected: 12 / 20`).
-- **One-Click Submission**:
-  - **WhatsApp**: Generates a pre-formatted message sent directly to you with frame numbers.
-  - **Email**: Pre-filled email with client selections.
-  - **Download TXT**: Saves the client's selection sheet.
-- **Shareable Direct Links**: Send clients `https://azmi-gallery.netlify.app/client/?session=SESSION_NAME&pin=YOUR_PIN`.
+- **Proofing Manager** (`/admin/proofing.html`, Netlify Identity login): create a session per client with a title, message, PIN, max picks, expiry date and optional downloads.
+- **Three photo sources**: upload straight from your computer (resized to WebP in the browser), paste Google Drive links (or a whole folder with `GDRIVE_API_KEY`), or import a Google Photos shared album. Mix them and drag to reorder.
+- **Private by design**: sessions, PINs, uploads and picks live in Netlify Blobs, not in this public repo. The PIN is checked on the server, uploaded photos are served only through short-lived signed links, and repeated wrong PINs lock the gallery for 15 minutes.
+- **Client gallery** (`/client/<code>`): masonry grid, full-screen viewer with swipe and arrow keys, ♡ picking with a live counter, an optional note, and resubmitting until the gallery closes.
+- **Picks in your dashboard**: see chosen frames, the client's note and submit time; copy or download the list.
+
+Full walkthrough: [ADMIN_SETUP.md → Client Proofing Manager](ADMIN_SETUP.md#5-client-proofing-manager).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -191,7 +190,7 @@ Deliver an agency-grade proofing experience to photoshoot clients at `https://az
 - **Tailwind CSS**: Modern utility-first styling with dark/light variables.
 - **Vanilla JavaScript (ES6+)**: Zero bulky frameworks, high frame-rate performance.
 - **Decap CMS**: Git-based headless content management system.
-- **Netlify Serverless Functions**: Google Photos album import & Google Drive folder sync (used by the admin Studio).
+- **Netlify Functions + Netlify Blobs**: private client proofing storage, Google Photos album import and Google Drive folder sync.
 - **Web Audio API**: Synthetic mechanical DSLR shutter sound.
 - **exifr**: Client-side EXIF metadata parsing.
 - **Fancybox v5**: Lightbox presentation.
@@ -221,6 +220,7 @@ npx serve .
 ### 3. Test Netlify Functions Locally (Optional)
 If you have the Netlify CLI installed:
 ```bash
+npm install
 npm install -g netlify-cli
 netlify dev
 ```

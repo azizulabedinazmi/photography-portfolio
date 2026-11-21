@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Client Proofing Manager — Azizul Abedin Azmi</title>
+
+  <link rel="icon" type="image/x-icon" href="../dist/assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../dist/assets/favicon-32x32.png" />
+
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+      } } }
+    }
+  </script>
+  <style>
+    .drop-active { border-color: #a78bfa !important; background: rgba(167, 139, 250, 0.08) !important; }
+    .photo-tile.dragging { opacity: .35; }
+    .photo-tile.drag-target { outline: 2px dashed #a78bfa; outline-offset: 2px; }
+    .tab-on { background: #404040; color: #fff; }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen font-sans antialiased">
+
+  <!-- Header -->
+  <header class="border-b border-neutral-800 bg-neutral-900/90 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-6 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-purple-600 text-white font-bold flex items-center justify-center font-mono">P</div>
+        <div>
+          <h1 class="font-bold text-base text-white leading-none">Client Proofing Manager</h1>
+          <p class="text-xs text-neutral-400 font-mono mt-0.5">Private galleries for your clients</p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap items-center gap-2 text-xs">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200">Decap CMS</a>
+        <a href="studio.html" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200">Studio Suite</a>
+        <a href="../index.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200">Live site ↗</a>
+        <span id="user-email" class="hidden sm:inline text-neutral-500 font-mono px-2"></span>
+        <button id="logout-btn" class="hidden px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-rose-900/60 text-neutral-300">Log out</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login gate -->
+  <section id="login-gate" class="hidden max-w-md mx-auto mt-24 p-8 rounded-3xl bg-neutral-900 border border-neutral-800 text-center space-y-5">
+    <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/10 text-purple-300 flex items-center justify-center text-2xl">🔐</div>
+    <div>
+      <h2 class="text-xl font-bold text-white">Admin login required</h2>
+      <p class="text-sm text-neutral-400 mt-1">Log in with the same Netlify Identity account you use for Decap CMS.</p>
+    </div>
+    <button id="login-btn" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm">Log in</button>
+  </section>
+
+  <!-- App -->
+  <main id="app" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-6 grid lg:grid-cols-[300px_1fr] gap-6">
+
+    <!-- Session list -->
+    <aside class="space-y-3">
+      <button id="new-session-btn" class="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold">+ New client session</button>
+      <div id="session-list" class="space-y-2"></div>
+    </aside>
+
+    <!-- Editor -->
+    <section id="editor-empty" class="rounded-3xl border border-dashed border-neutral-800 p-10 text-center text-neutral-500 text-sm self-start">
+      Pick a session on the left, or create a new one.
+    </section>
+
+    <section id="editor" class="hidden space-y-6 min-w-0">
+
+      <!-- Details -->
+      <form id="details-form" class="p-5 sm:p-6 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-4">
+        <div class="flex items-center justify-between gap-3">
+          <h2 id="editor-heading" class="text-lg font-bold text-white">New session</h2>
+          <span id="editor-status-badge" class="text-[11px] font-mono px-2 py-1 rounded-full"></span>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <label class="block text-xs text-neutral-400 space-y-1">
+            <span>Session title</span>
+            <input name="title" required maxlength="120" placeholder="e.g. Sarah — Graduation Portraits" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-400" />
+          </label>
+          <label class="block text-xs text-neutral-400 space-y-1">
+            <span>Client name</span>
+            <input name="clientName" maxlength="120" placeholder="Sarah Rahman" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-400" />
+          </label>
+          <label class="block text-xs text-neutral-400 space-y-1">
+            <span>Access PIN (4–12 letters/digits)</span>
+            <div class="flex gap-2">
+              <input name="pin" maxlength="12" placeholder="auto-generated" class="flex-1 min-w-0 px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white font-mono tracking-widest focus:outline-none focus:border-purple-400" />
+              <button type="button" id="gen-pin-btn" class="px-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs text-neutral-200">New PIN</button>
+            </div>
+          </label>
+          <label class="block text-xs text-neutral-400 space-y-1">
+            <span>Max selections (0 = no limit)</span>
+            <input name="maxSelections" type="number" min="0" max="1000" value="20" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-400" />
+          </label>
+          <label class="block text-xs text-neutral-400 space-y-1">
+            <span>Expires on (optional)</span>
+            <input name="expiresAt" type="date" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-400 [color-scheme:dark]" />
+          </label>
+          <label class="block text-xs text-neutral-400 space-y-1">
+            <span>Status</span>
+            <select name="status" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-400">
+              <option value="active">Open — client can view and pick</option>
+              <option value="closed">Closed — client can't open it</option>
+            </select>
+          </label>
+        </div>
+        <label class="block text-xs text-neutral-400 space-y-1">
+          <span>Message to client (shown at the top of their gallery)</span>
+          <textarea name="message" rows="3" maxlength="2000" placeholder="Hi Sarah! Pick your favourite 20 frames and I'll retouch them for final delivery." class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-purple-400"></textarea>
+        </label>
+        <label class="flex items-center gap-2 text-sm text-neutral-300">
+          <input name="allowDownload" type="checkbox" class="w-4 h-4 accent-purple-500" />
+          Let the client download uploaded photos
+        </label>
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <button type="submit" id="save-btn" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold">Save session</button>
+          <span id="save-msg" class="text-xs text-neutral-400"></span>
+          <button type="button" id="delete-btn" class="hidden ml-auto px-4 py-2.5 rounded-xl bg-neutral-800 hover:bg-rose-900/60 text-rose-300 text-xs font-semibold">Delete session</button>
+        </div>
+      </form>
+
+      <div id="saved-only" class="hidden space-y-6">
+
+        <!-- Share -->
+        <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-neutral-900 to-purple-950/40 border border-neutral-800 space-y-3">
+          <h3 class="font-bold text-white">Share with your client</h3>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input id="share-link" readonly class="flex-1 min-w-0 px-3 py-2.5 rounded-xl bg-black/60 border border-neutral-700 text-xs text-neutral-200 font-mono" />
+            <button id="copy-link-btn" class="px-4 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-semibold">Copy link</button>
+            <button id="copy-invite-btn" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-xs font-semibold text-white">Copy invite message</button>
+            <a id="open-client-btn" target="_blank" class="px-4 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-semibold text-center">Open as client ↗</a>
+          </div>
+          <p class="text-xs text-neutral-400">PIN: <code id="share-pin" class="text-purple-300 font-mono tracking-widest"></code> · Send the PIN separately from the link when you can.</p>
+        </div>
+
+        <!-- Add photos -->
+        <div class="p-5 sm:p-6 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h3 class="font-bold text-white">Add photos</h3>
+            <div class="flex gap-1 bg-neutral-800/80 p-1 rounded-xl text-xs">
+              <button class="src-tab px-3 py-1.5 rounded-lg tab-on" data-src="upload">Upload</button>
+              <button class="src-tab px-3 py-1.5 rounded-lg text-neutral-300" data-src="gdrive">Google Drive</button>
+              <button class="src-tab px-3 py-1.5 rounded-lg text-neutral-300" data-src="gphotos">Google Photos</button>
+            </div>
+          </div>
+
+          <div data-panel="upload">
+            <label id="dropzone" class="block cursor-pointer rounded-2xl border-2 border-dashed border-neutral-700 p-8 text-center hover:border-purple-400 transition">
+              <input id="file-input" type="file" accept="image/*" multiple class="hidden" />
+              <div class="text-3xl mb-2">⬆️</div>
+              <p class="text-sm text-neutral-200 font-medium">Drop photos here or click to choose</p>
+              <p class="text-xs text-neutral-500 mt-1">Resized to 2400px WebP in your browser before upload. Stored privately; only someone with the PIN can see them.</p>
+            </label>
+            <div id="upload-progress" class="hidden mt-3">
+              <div class="flex justify-between text-xs text-neutral-400 font-mono mb-1"><span id="upload-label">Uploading…</span><span id="upload-count"></span></div>
+              <div class="h-2 rounded-full bg-neutral-800 overflow-hidden"><div id="upload-bar" class="h-full bg-purple-500 transition-all" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <div data-panel="gdrive" class="hidden space-y-3">
+            <textarea id="gdrive-input" rows="4" placeholder="Paste Google Drive file links or IDs, one per line.&#10;https://drive.google.com/file/d/1AbC.../view&#10;A folder link also works if GDRIVE_API_KEY is set in Netlify." class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-xs text-white font-mono focus:outline-none focus:border-purple-400"></textarea>
+            <div class="flex items-center gap-3">
+              <button id="gdrive-btn" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold">Add from Drive</button>
+              <p class="text-xs text-neutral-500">Files must be shared as "Anyone with the link".</p>
+            </div>
+          </div>
+
+          <div data-panel="gphotos" class="hidden space-y-3">
+            <input id="gphotos-input" placeholder="https://photos.app.goo.gl/..." class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-xs text-white font-mono focus:outline-none focus:border-purple-400" />
+            <div class="flex items-center gap-3">
+              <button id="gphotos-btn" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold">Import album</button>
+              <p class="text-xs text-neutral-500">In Google Photos: open the album → Share → Create link.</p>
+            </div>
+          </div>
+          <p id="source-msg" class="text-xs"></p>
+        </div>
+
+        <!-- Photos -->
+        <div class="p-5 sm:p-6 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h3 class="font-bold text-white">Photos in this gallery <span id="photo-count" class="text-neutral-500 font-normal text-sm"></span></h3>
+            <p class="text-xs text-neutral-500">Drag to reorder. Frame numbers follow this order.</p>
+          </div>
+          <div id="photo-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-6 gap-3"></div>
+        </div>
+
+        <!-- Client selections -->
+        <div class="p-5 sm:p-6 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h3 class="font-bold text-white">Client's picks</h3>
+            <div id="selection-actions" class="hidden flex gap-2">
+              <button id="copy-picks-btn" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-xs">Copy list</button>
+              <button id="download-picks-btn" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-xs">Download .txt</button>
+              <button id="clear-picks-btn" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-rose-900/60 text-xs text-rose-300">Clear</button>
+            </div>
+          </div>
+          <div id="selection-box" class="text-sm text-neutral-400"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white shadow-2xl"></div>
+
+  <script>
+  (function () {
+    const API = '/.netlify/functions/proofing-admin';
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    let current = null;      // full session object from the API
+    let selection = null;    // client's picks
+    let sessionsCache = [];
+
+    // ---------- Auth ----------
+    const identity = window.netlifyIdentity;
+
+    function showApp(user) {
+      $('login-gate').classList.add('hidden');
+      $('app').classList.remove('hidden');
+      $('logout-btn').classList.remove('hidden');
+      $('user-email').textContent = user.email || '';
+      $('user-email').classList.remove('hidden');
+      loadList();
+    }
+    function showLogin() {
+      $('app').classList.add('hidden');
+      $('logout-btn').classList.add('hidden');
+      $('user-email').classList.add('hidden');
+      $('login-gate').classList.remove('hidden');
+    }
+
+    if (identity) {
+      identity.on('init', (user) => (user ? showApp(user) : showLogin()));
+      identity.on('login', (user) => { identity.close(); showApp(user); });
+      identity.on('logout', showLogin);
+      identity.init();
+    } else {
+      showLogin();
+    }
+    $('login-btn').onclick = () => identity && identity.open('login');
+    $('logout-btn').onclick = () => identity && identity.logout();
+
+    async function api(action, { body, slug } = {}) {
+      const user = identity && identity.currentUser();
+      if (!user) { showLogin(); throw new Error('Please log in again.'); }
+      const token = await user.jwt();
+      const url = `${API}?action=${encodeURIComponent(action)}${slug ? `&slug=${encodeURIComponent(slug)}` : ''}`;
+      const res = await fetch(url, {
+        method: body ? 'POST' : 'GET',
+        headers: { Authorization: `Bearer ${token}`, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+        body: body ? JSON.stringify(body) : undefined
+      });
+      let data = {};
+      try { data = await res.json(); } catch (e) { /* non-JSON */ }
+      if (res.status === 401) { showLogin(); }
+      if (!res.ok || data.success === false) throw new Error(data.error || `Request failed (${res.status})`);
+      return data;
+    }
+
+    function toast(msg, isError) {
+      const t = $('toast');
+      t.textContent = msg;
+      t.className = `fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-xl border text-sm shadow-2xl ${isError ? 'bg-rose-950 border-rose-800 text-rose-100' : 'bg-neutral-800 border-neutral-700 text-white'}`;
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => t.classList.add('hidden'), 3200);
+    }
+
+    // ---------- Session list ----------
+    async function loadList() {
+      try {
+        const data = await api('list');
+        sessionsCache = data.sessions || [];
+        renderList();
+      } catch (e) {
+        $('session-list').innerHTML = `<p class="text-xs text-rose-300 p-3">${esc(e.message)}</p>`;
+      }
+    }
+
+    function statusBadge(s) {
+      if (s.status === 'closed') return '<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-neutral-800 text-neutral-400">CLOSED</span>';
+      if (s.expired) return '<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-900/40 text-amber-300">EXPIRED</span>';
+      return '<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-900/40 text-emerald-300">OPEN</span>';
+    }
+
+    function renderList() {
+      const box = $('session-list');
+      if (!sessionsCache.length) {
+        box.innerHTML = '<p class="text-xs text-neutral-500 p-3">No client sessions yet.</p>';
+        return;
+      }
+      box.innerHTML = sessionsCache.map((s) => `
+        <div class="relative">
+        <button data-slug="${esc(s.slug)}" class="session-item w-full text-left p-3 pr-10 rounded-2xl border ${current && current.slug === s.slug ? 'border-purple-500 bg-purple-950/30' : 'border-neutral-800 bg-neutral-900 hover:border-neutral-700'} transition">
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <div class="text-sm font-semibold text-white truncate">${esc(s.title)}</div>
+              <div class="text-xs text-neutral-400 truncate">${esc(s.clientName || '—')}</div>
+            </div>
+            ${statusBadge(s)}
+          </div>
+          <div class="mt-2 flex gap-3 text-[11px] font-mono text-neutral-500">
+            <span>${s.photoCount} photos</span>
+            <span class="${s.submittedAt ? 'text-purple-300' : ''}">${s.submittedAt ? `♥ ${s.selectedCount} picked` : 'no picks yet'}</span>
+          </div>
+        </button>
+        <button data-delete="${esc(s.slug)}" title="Delete this session" aria-label="Delete ${esc(s.title)}" class="absolute bottom-2 right-2 w-7 h-7 rounded-lg text-neutral-500 hover:text-rose-300 hover:bg-rose-900/50 text-sm">🗑</button>
+        </div>`).join('');
+      box.querySelectorAll('.session-item').forEach((b) => { b.onclick = () => openSession(b.dataset.slug); });
+      box.querySelectorAll('[data-delete]').forEach((b) => {
+        b.onclick = () => {
+          const s = sessionsCache.find((x) => x.slug === b.dataset.delete);
+          if (s) deleteSession(s.slug, s.title);
+        };
+      });
+    }
+
+    // ---------- Editor ----------
+    const form = $('details-form');
+
+    function fillForm(s) {
+      form.title.value = s ? s.title : '';
+      form.clientName.value = s ? s.clientName || '' : '';
+      form.pin.value = s ? s.pin || '' : randomPin();
+      form.maxSelections.value = s ? s.maxSelections ?? 20 : 20;
+      form.expiresAt.value = s && s.expiresAt ? s.expiresAt.slice(0, 10) : '';
+      form.status.value = s ? s.status || 'active' : 'active';
+      form.message.value = s ? s.message || '' : '';
+      form.allowDownload.checked = s ? Boolean(s.allowDownload) : false;
+      $('editor-heading').textContent = s ? s.title : 'New client session';
+      $('delete-btn').classList.toggle('hidden', !s);
+      $('saved-only').classList.toggle('hidden', !s);
+      $('save-msg').textContent = '';
+      const badge = $('editor-status-badge');
+      badge.className = '';
+      badge.innerHTML = s ? statusBadge({ status: s.status, expired: s.expiresAt && new Date(s.expiresAt) < new Date() }) : '';
+    }
+
+    function randomPin() {
+      const a = new Uint32Array(1); crypto.getRandomValues(a);
+      return String(a[0] % 1000000).padStart(6, '0');
+    }
+    $('gen-pin-btn').onclick = () => { form.pin.value = randomPin(); };
+
+    $('new-session-btn').onclick = () => {
+      current = null; selection = null;
+      $('editor-empty').classList.add('hidden');
+      $('editor').classList.remove('hidden');
+      fillForm(null);
+      renderList();
+      form.title.focus();
+    };
+
+    async function openSession(slug) {
+      $('editor-empty').classList.add('hidden');
+      $('editor').classList.remove('hidden');
+      try {
+        const data = await api('get', { slug });
+        setCurrent(data);
+        renderList();
+      } catch (e) { toast(e.message, true); }
+    }
+
+    function setCurrent(data) {
+      current = data.session;
+      selection = data.selection;
+      fillForm(current);
+      renderShare();
+      renderPhotos();
+      renderSelection();
+    }
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const body = {
+        title: form.title.value,
+        clientName: form.clientName.value,
+        pin: form.pin.value.trim(),
+        maxSelections: form.maxSelections.value,
+        expiresAt: form.expiresAt.value ? `${form.expiresAt.value}T23:59:59` : '',
+        status: form.status.value,
+        message: form.message.value,
+        allowDownload: form.allowDownload.checked
+      };
+      if (current) body.slug = current.slug;
+      $('save-btn').disabled = true;
+      $('save-msg').textContent = 'Saving…';
+      try {
+        const data = await api('save', { body });
+        const isNew = !current;
+        setCurrent(data);
+        await loadList();
+        $('save-msg').textContent = isNew ? 'Created. Now add photos below.' : 'Saved.';
+      } catch (err) {
+        $('save-msg').textContent = err.message;
+      } finally {
+        $('save-btn').disabled = false;
+      }
+    };
+
+    async function deleteSession(slug, title) {
+      const ok = confirm(`Delete "${title}"?\n\nThis permanently removes the gallery, its uploaded photos and the client's picks. The client link stops working. It can't be undone.`);
+      if (!ok) return;
+      try {
+        await api('delete', { body: { slug } });
+        if (current && current.slug === slug) {
+          current = null; selection = null;
+          $('editor').classList.add('hidden');
+          $('editor-empty').classList.remove('hidden');
+        }
+        await loadList();
+        toast('Session deleted.');
+      } catch (e) { toast(e.message, true); }
+    }
+    $('delete-btn').onclick = () => current && deleteSession(current.slug, current.title);
+
+    // ---------- Share ----------
+    function clientLink() { return `${location.origin}/client/${current.slug}`; }
+
+    function renderShare() {
+      $('share-link').value = clientLink();
+      $('share-pin').textContent = current.pin;
+      $('open-client-btn').href = clientLink();
+    }
+    async function copy(text, msg) {
+      try { await navigator.clipboard.writeText(text); toast(msg); }
+      catch (e) { prompt('Copy this:', text); }
+    }
+    $('copy-link-btn').onclick = () => copy(clientLink(), 'Link copied.');
+    $('copy-invite-btn').onclick = () => {
+      const name = current.clientName ? current.clientName.split(' ')[0] : 'there';
+      const limit = current.maxSelections ? `up to ${current.maxSelections} favourites` : 'your favourites';
+      const text = `Hi ${name}! Your photos from "${current.title}" are ready to review.\n\nOpen your private gallery: ${clientLink()}\nAccess PIN: ${current.pin}\n\nTap the heart on ${limit}, then press "Review & submit".` +
+        (current.expiresAt ? `\nThe gallery is open until ${new Date(current.expiresAt).toLocaleDateString()}.` : '');
+      copy(text, 'Invite message copied.');
+    };
+
+    // ---------- Photo sources ----------
+    document.querySelectorAll('.src-tab').forEach((btn) => {
+      btn.onclick = () => {
+        document.querySelectorAll('.src-tab').forEach((b) => { b.classList.remove('tab-on'); b.classList.add('text-neutral-300'); });
+        btn.classList.add('tab-on'); btn.classList.remove('text-neutral-300');
+        document.querySelectorAll('[data-panel]').forEach((p) => p.classList.toggle('hidden', p.dataset.panel !== btn.dataset.src));
+        sourceMsg('');
+      };
+    });
+    function sourceMsg(text, isError) {
+      $('source-msg').textContent = text;
+      $('source-msg').className = `text-xs ${isError ? 'text-rose-300' : 'text-emerald-300'}`;
+    }
+
+    $('gdrive-btn').onclick = async () => {
+      const input = $('gdrive-input').value.trim();
+      if (!input) return sourceMsg('Paste at least one Drive link.', true);
+      $('gdrive-btn').disabled = true; sourceMsg('Adding…');
+      try {
+        const before = current.photos.length;
+        const data = await api('add-gdrive', { body: { slug: current.slug, input } });
+        setCurrent(data);
+        sourceMsg(`Added ${current.photos.length - before} photo(s) from Google Drive.`);
+        $('gdrive-input').value = '';
+        loadList();
+      } catch (e) { sourceMsg(e.message, true); }
+      finally { $('gdrive-btn').disabled = false; }
+    };
+
+    $('gphotos-btn').onclick = async () => {
+      const albumUrl = $('gphotos-input').value.trim();
+      if (!albumUrl) return sourceMsg('Paste a Google Photos album link.', true);
+      $('gphotos-btn').disabled = true; sourceMsg('Importing album… this can take a few seconds.');
+      try {
+        const data = await api('add-gphotos', { body: { slug: current.slug, albumUrl } });
+        setCurrent(data);
+        sourceMsg(`Imported ${data.added} photo(s) from Google Photos.`);
+        $('gphotos-input').value = '';
+        loadList();
+      } catch (e) { sourceMsg(e.message, true); }
+      finally { $('gphotos-btn').disabled = false; }
+    };
+
+    // ---------- Uploads (resize in browser, upload one by one) ----------
+    const dz = $('dropzone');
+    $('file-input').onchange = (e) => { uploadFiles([...e.target.files]); e.target.value = ''; };
+    ['dragenter', 'dragover'].forEach((ev) => dz.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.add('drop-active'); }));
+    ['dragleave', 'drop'].forEach((ev) => dz.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.remove('drop-active'); }));
+    dz.addEventListener('drop', (e) => uploadFiles([...e.dataTransfer.files]));
+
+    async function loadBitmap(file) {
+      if ('createImageBitmap' in window) {
+        try { return await createImageBitmap(file, { imageOrientation: 'from-image' }); } catch (e) { /* fall through */ }
+      }
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Could not read image'));
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    function encode(source, maxEdge, quality) {
+      const w0 = source.width, h0 = source.height;
+      const scale = Math.min(1, maxEdge / Math.max(w0, h0));
+      const w = Math.round(w0 * scale), h = Math.round(h0 * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(source, 0, 0, w, h);
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          if (blob && blob.type === 'image/webp') return resolve({ blob, w, h });
+          canvas.toBlob((jpg) => resolve({ blob: jpg, w, h }), 'image/jpeg', quality); // Safari can't encode WebP
+        }, 'image/webp', quality);
+      });
+    }
+
+    function toBase64(blob) {
+      return new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result).split(',')[1]);
+        r.onerror = reject;
+        r.readAsDataURL(blob);
+      });
+    }
+
+    async function uploadFiles(files) {
+      files = files.filter((f) => f.type.startsWith('image/'));
+      if (!files.length || !current) return;
+      const prog = $('upload-progress');
+      prog.classList.remove('hidden');
+      let done = 0, failed = 0;
+      const update = (label) => {
+        $('upload-label').textContent = label;
+        $('upload-count').textContent = `${done + failed} / ${files.length}`;
+        $('upload-bar').style.width = `${((done + failed) / files.length) * 100}%`;
+      };
+      for (const file of files) {
+        update(`Uploading ${file.name}…`);
+        try {
+          const bmp = await loadBitmap(file);
+          let full = await encode(bmp, 2400, 0.86);
+          if (full.blob.size > 4.4 * 1024 * 1024) full = await encode(bmp, 2000, 0.78);
+          const thumb = await encode(bmp, 700, 0.78);
+          await api('upload', { body: {
+            slug: current.slug,
+            name: file.name,
+            type: full.blob.type, data: await toBase64(full.blob),
+            thumbType: thumb.blob.type, thumb: await toBase64(thumb.blob),
+            width: full.w, height: full.h
+          } });
+          done++;
+        } catch (e) {
+          failed++;
+          console.warn('Upload failed', file.name, e);
+          toast(`${file.name}: ${e.message}`, true);
+        }
+        update(`Uploading…`);
+      }
+      update(failed ? `Done — ${failed} failed` : 'All uploaded');
+      setTimeout(() => prog.classList.add('hidden'), 2500);
+      await openSession(current.slug);
+      loadList();
+    }
+
+    // ---------- Photo grid (drag to reorder) ----------
+    const SOURCE_LABEL = { upload: 'Upload', gdrive: 'Drive', gphotos: 'Photos' };
+    let dragId = null;
+
+    function renderPhotos() {
+      const grid = $('photo-grid');
+      const photos = current.photos || [];
+      $('photo-count').textContent = `(${photos.length})`;
+      if (!photos.length) {
+        grid.innerHTML = '<p class="col-span-full text-sm text-neutral-500 py-6 text-center">No photos yet. Add some above.</p>';
+        return;
+      }
+      const picked = new Set(selection ? selection.ids : []);
+      grid.innerHTML = photos.map((p, i) => `
+        <div class="photo-tile group relative rounded-xl overflow-hidden bg-black border ${picked.has(p.id) ? 'border-purple-500' : 'border-neutral-800'} cursor-grab" draggable="true" data-id="${esc(p.id)}">
+          <img src="${esc(p.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" class="w-full aspect-square object-cover pointer-events-none" onerror="this.outerHTML='<div class=&quot;w-full aspect-square flex items-center justify-center p-2 text-center text-[10px] text-amber-300 bg-neutral-900&quot;>Cannot load. Check the file is shared publicly</div>'" />
+          <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-md bg-black/70 text-[10px] font-mono">#${i + 1}</span>
+          ${picked.has(p.id) ? '<span class="absolute top-1.5 right-8 px-1.5 py-0.5 rounded-md bg-purple-600 text-[10px]">♥</span>' : ''}
+          <button data-remove="${esc(p.id)}" title="Remove photo" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-md bg-black/70 hover:bg-rose-700 text-xs opacity-80 group-hover:opacity-100">✕</button>
+          <div class="absolute bottom-0 inset-x-0 px-1.5 py-1 bg-gradient-to-t from-black/90 to-transparent text-[10px] text-neutral-300 truncate">
+            <span class="text-purple-300">${SOURCE_LABEL[p.source] || ''}</span> · ${esc(p.name)}
+          </div>
+        </div>`).join('');
+
+      grid.querySelectorAll('[data-remove]').forEach((b) => {
+        b.onclick = async (e) => {
+          e.stopPropagation();
+          if (!confirm('Remove this photo from the gallery?')) return;
+          try { setCurrent(await api('remove-photo', { body: { slug: current.slug, id: b.dataset.remove } })); loadList(); }
+          catch (err) { toast(err.message, true); }
+        };
+      });
+
+      grid.querySelectorAll('.photo-tile').forEach((tile) => {
+        tile.addEventListener('dragstart', () => { dragId = tile.dataset.id; tile.classList.add('dragging'); });
+        tile.addEventListener('dragend', () => { tile.classList.remove('dragging'); grid.querySelectorAll('.drag-target').forEach((t) => t.classList.remove('drag-target')); });
+        tile.addEventListener('dragover', (e) => { e.preventDefault(); tile.classList.add('drag-target'); });
+        tile.addEventListener('dragleave', () => tile.classList.remove('drag-target'));
+        tile.addEventListener('drop', async (e) => {
+          e.preventDefault();
+          const targetId = tile.dataset.id;
+          if (!dragId || dragId === targetId) return;
+          const list = current.photos.slice();
+          const from = list.findIndex((p) => p.id === dragId);
+          const [moved] = list.splice(from, 1);
+          list.splice(list.findIndex((p) => p.id === targetId), 0, moved);
+          current.photos = list;
+          renderPhotos();
+          try { await api('reorder', { body: { slug: current.slug, ids: list.map((p) => p.id) } }); }
+          catch (err) { toast(err.message, true); openSession(current.slug); }
+        });
+      });
+    }
+
+    // ---------- Client selections ----------
+    function picksText() {
+      const byId = new Map(current.photos.map((p, i) => [p.id, { ...p, frame: i + 1 }]));
+      const lines = selection.ids.map((id, i) => {
+        const p = byId.get(id);
+        return p ? `${i + 1}. Frame #${p.frame} — ${p.name}` : `${i + 1}. (photo removed: ${id})`;
+      });
+      return `${current.title}${current.clientName ? ` — ${current.clientName}` : ''}\nSubmitted: ${new Date(selection.submittedAt).toLocaleString()}\n\n${lines.join('\n')}` +
+        (selection.note ? `\n\nClient note:\n${selection.note}` : '');
+    }
+
+    function renderSelection() {
+      const box = $('selection-box');
+      const has = selection && selection.ids && selection.ids.length;
+      $('selection-actions').classList.toggle('hidden', !has);
+      if (!has) { box.innerHTML = 'The client hasn\'t submitted any picks yet.'; return; }
+      const byId = new Map(current.photos.map((p, i) => [p.id, { ...p, frame: i + 1 }]));
+      box.innerHTML = `
+        <p class="mb-3"><span class="text-white font-semibold">${selection.ids.length} photos picked</span> · submitted ${esc(new Date(selection.submittedAt).toLocaleString())}</p>
+        ${selection.note ? `<div class="mb-4 p-3 rounded-xl bg-black/50 border border-neutral-800 text-neutral-200 whitespace-pre-wrap">${esc(selection.note)}</div>` : ''}
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+          ${selection.ids.map((id) => {
+            const p = byId.get(id);
+            if (!p) return '';
+            return `<div class="relative rounded-lg overflow-hidden border border-purple-500/50">
+              <img src="${esc(p.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" class="w-full aspect-square object-cover" />
+              <span class="absolute bottom-1 left-1 px-1 rounded bg-black/70 text-[10px] font-mono">#${p.frame}</span>
+            </div>`;
+          }).join('')}
+        </div>`;
+    }
+
+    $('copy-picks-btn').onclick = () => copy(picksText(), 'Picks copied.');
+    $('download-picks-btn').onclick = () => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([picksText()], { type: 'text/plain' }));
+      a.download = `picks-${current.slug}.txt`;
+      a.click();
+    };
+    $('clear-picks-btn').onclick = async () => {
+      if (!confirm('Clear the client\'s submitted picks? They can submit again afterwards.')) return;
+      try { setCurrent(await api('clear-selection', { body: { slug: current.slug } })); loadList(); }
+      catch (e) { toast(e.message, true); }
+    };
+  })();
+  </script>
+</body>
+</html>
