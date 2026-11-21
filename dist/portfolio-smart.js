@@ -18,6 +18,19 @@
 (function () {
   'use strict';
 
+  // --- HELPER: UNIVERSAL MEDIA URL RESOLVER (Google Drive, PicsArt, Local) ---
+  function resolveMediaUrl(url, size = 'w1600') {
+    if (!url) return '';
+    // Google Drive URL formats:
+    // https://drive.google.com/file/d/ID/view, https://drive.google.com/open?id=ID, uc?id=ID, gdrive:ID
+    const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|gdrive:)?([a-zA-Z0-9_\-]{25,})/i;
+    const match = url.match(driveRegex);
+    if (match && match[1] && !url.includes('picsart.com') && !url.startsWith('dist/')) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}=${size}`;
+    }
+    return url;
+  }
+
   // --- 0. GALLERY RENDERER ---
   const GalleryRenderer = {
     render() {
@@ -28,6 +41,7 @@
         container.innerHTML = window.GALLERY_DATA.map((item, index) => {
           const isSeries = item.isSeries;
           const isArt = item.category === 'art';
+          const itemSrc = resolveMediaUrl(item.src);
           
           let badge = '';
           if (isSeries) {
@@ -48,7 +62,7 @@
           }
 
           const extraLinks = (isSeries && item.seriesExtra) ? item.seriesExtra.map(extra => `
-            <a href="${extra}" data-fancybox="gallery" ${item.seriesGroup}="true" data-caption="<strong>${item.title}</strong> (Series)" style="display: none;"></a>
+            <a href="${resolveMediaUrl(extra)}" data-fancybox="gallery" ${item.seriesGroup}="true" data-caption="<strong>${item.title}</strong> (Series)" style="display: none;"></a>
           `).join('') : '';
 
           const seriesAttr = isSeries ? `${item.seriesGroup}="true"` : '';
@@ -68,15 +82,15 @@
                  data-camera="${item.camera}"
                  data-location="${item.location}"
                  data-photo-id="${item.id}"
-                 data-photo-src="${item.src}"
+                 data-photo-src="${itemSrc}"
                  data-is-series="${isSeries ? 'true' : 'false'}">
               
-              <a href="${item.src}" 
+              <a href="${itemSrc}" 
                  data-fancybox="gallery" 
                  ${seriesAttr}
                  data-caption="<strong>${item.title}</strong><br><span class='text-xs opacity-75'>${item.camera} · ${item.location}</span>"
                  class="block w-full h-full overflow-hidden cursor-zoom-in">
-                <img src="${item.src}" 
+                <img src="${itemSrc}" 
                      alt="${item.title}" 
                      loading="lazy"
                      class="w-full h-auto object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
@@ -87,7 +101,7 @@
               <button type="button"
                       class="favorite-btn absolute top-3 right-3 z-10 p-2.5 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-md border border-white/15 text-white transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 hover:scale-110 focus:opacity-100"
                       data-photo-id="${item.id}"
-                      data-photo-src="${item.src}"
+                      data-photo-src="${itemSrc}"
                       data-photo-title="${item.title}"
                       data-photo-category="${item.category}"
                       data-photo-camera="${item.camera}"
@@ -199,15 +213,18 @@
       const highlights = window.GALLERY_DATA.slice(0, 10);
       const allItems = [...highlights, ...highlights]; // duplicate for seamless loop
 
-      marqueeInner.innerHTML = allItems.map(item => `
-        <a href="${item.src}" data-fancybox="gallery" class="inline-block flex-shrink-0 w-36 sm:w-48 aspect-[3/4] rounded-xl overflow-hidden relative group border border-neutral-200/60 dark:border-neutral-800 shadow-md transform hover:scale-105 transition-all duration-300">
-          <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+      marqueeInner.innerHTML = allItems.map(item => {
+        const imgSrc = resolveMediaUrl(item.src, 'w600');
+        return `
+        <a href="${resolveMediaUrl(item.src)}" data-fancybox="gallery" class="inline-block flex-shrink-0 w-36 sm:w-48 aspect-[3/4] rounded-xl overflow-hidden relative group border border-neutral-200/60 dark:border-neutral-800 shadow-md transform hover:scale-105 transition-all duration-300">
+          <img src="${imgSrc}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-end">
             <span class="text-[10px] font-mono uppercase text-amber-400 font-semibold truncate">${item.category === 'art' ? '🎨 Digital Art' : '📷 Photography'}</span>
             <span class="text-xs font-serif text-white font-bold truncate">${item.title}</span>
           </div>
         </a>
-      `).join('');
+      `;
+      }).join('');
     }
   };
 
@@ -771,7 +788,7 @@
         title: item.dataset.title || 'Untitled Work',
         category: item.dataset.category === 'art' ? '🎨 PicsArt Digital Art' : (item.dataset.category || 'Fine Art'),
         camera: item.dataset.camera || 'Canon EOS',
-        location: item.dataset.location || 'Dhaka, Bangladesh'
+        location: item.dataset.location || 'Fine Art Series'
       })).filter(p => p.src);
 
       document.querySelectorAll('.open-zen-btn').forEach(btn => {
@@ -982,8 +999,93 @@
     }
   };
 
+  // --- 10. CLOUD & GOOGLE DATA LOADER ---
+  const DataLoader = {
+    async init() {
+      // 1. Asynchronously load dist/gallery-data.json if needed
+      if (!window.GALLERY_DATA || window.GALLERY_DATA.length === 0) {
+        try {
+          const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/dist/');
+          const res = await fetch(isRoot ? 'dist/gallery-data.json' : 'gallery-data.json');
+          if (res.ok) {
+            const data = await res.json();
+            window.GALLERY_DATA = data.items || data;
+            const container = document.getElementById('portfolio-gallery');
+            if (container) container.innerHTML = '';
+            GalleryRenderer.render();
+            FilmstripMarquee.render();
+            ZenMode.init();
+          }
+        } catch (e) {
+          console.warn('Using embedded gallery dataset', e);
+        }
+      }
+
+      // 2. Check for Google Photos live album sync (?gphotos=ALBUM_URL)
+      const params = new URLSearchParams(window.location.search);
+      const gphotosUrl = params.get('gphotos');
+      if (gphotosUrl) {
+        try {
+          const res = await fetch(`/.netlify/functions/google-photos-album?albumUrl=${encodeURIComponent(gphotosUrl)}`);
+          const data = await res.json();
+          if (data.success && data.photos && data.photos.length > 0) {
+            window.GALLERY_DATA = [...data.photos, ...(window.GALLERY_DATA || [])];
+            const container = document.getElementById('portfolio-gallery');
+            if (container) container.innerHTML = '';
+            GalleryRenderer.render();
+            ZenMode.init();
+          }
+        } catch (err) {
+          console.warn('Could not load Google Photos live stream', err);
+        }
+      }
+
+      // 3. Google Photos Live Sync toolbar button
+      const gphotosBtn = document.getElementById('load-gphotos-btn');
+      if (gphotosBtn) {
+        gphotosBtn.addEventListener('click', async () => {
+          const defaultUrl = 'https://photos.app.goo.gl/';
+          const albumUrl = prompt('Enter a public Google Photos shared album URL to view live:\n(e.g., https://photos.app.goo.gl/...):', defaultUrl);
+          if (!albumUrl || albumUrl === defaultUrl) return;
+
+          gphotosBtn.innerHTML = '<span>⏳ Syncing...</span>';
+          try {
+            const res = await fetch(`/.netlify/functions/google-photos-album?albumUrl=${encodeURIComponent(albumUrl)}`);
+            const data = await res.json();
+            if (data.success && data.photos && data.photos.length > 0) {
+              window.GALLERY_DATA = [...data.photos, ...(window.GALLERY_DATA || [])];
+              const container = document.getElementById('portfolio-gallery');
+              if (container) container.innerHTML = '';
+              GalleryRenderer.render();
+              ZenMode.init();
+              alert(`🎉 Successfully synced ${data.photos.length} live photos from Google Photos!`);
+            } else {
+              alert('Could not find photos in album. Please ensure the album is shared publicly.');
+            }
+          } catch (err) {
+            alert('Error syncing album: ' + err.message);
+          } finally {
+            gphotosBtn.innerHTML = '<span>📸 Sync Google Photos</span>';
+          }
+        });
+      }
+
+      // 3. Netlify Identity Login Redirect for Decap CMS
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    }
+  };
+
   // Initialize all smart modules when DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
+    DataLoader.init();
     GalleryRenderer.render();
     RotatingHeadline.init();
     ThemeManager.init();

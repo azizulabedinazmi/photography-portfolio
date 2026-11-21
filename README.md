@@ -1,179 +1,244 @@
-
 <a name="readme-top"></a>
 
 [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://bd.linkedin.com/in/azizulabedin)
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/azizulabedin/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717.svg?logo=GitHub&logoColor=white)](https://github.com/azizulabedinazmi)
+[![Dev Portfolio](https://img.shields.io/badge/Dev_Portfolio-azizulabedinazmi.is--a.dev-amber?logo=code&logoColor=black)](http://azizulabedinazmi.is-a.dev/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3421d5e3-e586-4553-bfc8-86d59a3c514c/deploy-status)](https://app.netlify.com/projects/azmi-gallery/deploys)
 
-<!-- PROJECT LOGO -->
+<!-- HERO SHOWCASE BANNER -->
 <br />
 <div align="center">
-  <a href="https://github.com/azizulabedinazmi/photography-portfolio">
-    <img src="dist/assets/Logo.png" alt="Logo" width="185" height="80">
+  <a href="https://azmi-gallery.netlify.app/">
+    <img src="dist/assets/banner.png" alt="Azizul Abedin Azmi Photography & Digital Art Portfolio" width="100%" style="max-width: 1000px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+  </a>
+  <br /><br />
+
+  <!-- DYNAMIC THEME-AWARE LOGO -->
+  <a href="https://azmi-gallery.netlify.app/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="dist/assets/AZMI-LOGO@2x.png">
+      <source media="(prefers-color-scheme: light)" srcset="dist/assets/AZMI-LOGO-Black@2x.png">
+      <img src="dist/assets/AZMI-LOGO-Black@2x.png" alt="Azizul Abedin Azmi" width="460" style="max-width: 90%; height: auto;">
+    </picture>
   </a>
 
-  <h3 align="center">Photography Portfolio</h3>
+  <h1 align="center">Azizul Abedin Azmi — Photography & Digital Art Portfolio</h1>
 
   <p align="center">
-    A stunning website created using Tailwind CSS, HTML, CSS, and JavaScript to showcase your photography portfolio.
+    An editorial fine art photography, PicsArt digital manipulation, and client proofing platform built with Tailwind CSS, Decap CMS, Netlify Functions, and the Web Audio API.
     <br />
     <br />
-    <a href="https://azmi-gallery.netlify.app/">View Demo</a>
+    <a href="https://azmi-gallery.netlify.app/"><strong>🌐 View Live Portfolio »</strong></a>
+    ·
+    <a href="https://azmi-gallery.netlify.app/admin/"><strong>⚡ Admin CMS »</strong></a>
+    ·
+    <a href="https://azmi-gallery.netlify.app/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
+    ·
+    <a href="https://azmi-gallery.netlify.app/client/"><strong>🔒 Client Proofing Room »</strong></a>
+    ·
+    <a href="http://azizulabedinazmi.is-a.dev/"><strong>💻 Developer Portfolio »</strong></a>
     <br />
     <br />
+    <a href="ADMIN_SETUP.md"><strong>📖 Read the Step-by-Step Admin & PIN Setup Guide »</strong></a>
   </p>
 </div>
 
 <!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
+<details open>
+  <summary><strong>Table of Contents</strong></summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
-    <li>
-      <a href="#built-with">Built With</a>
-      <ul>
-        <li><a href="#html-badge">HTML</a></li>
-        <li><a href="#css-badge">CSS</a></li>
-        <li><a href="#js-badge">JavaScript</a></li>
-        <li><a href="#tailwind-badge">Tailwind CSS</a></li>
-      </ul>
-    </li>
-    <li><a href="#quick-start">Quick Start</a></li>
-    <li><a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#core-features">Core Features</a></li>
+    <li><a href="#admin-panel--cms">Admin Panel & Decap CMS</a></li>
+    <li><a href="#studio-admin-suite">Studio Admin Suite (EXIF & WebP)</a></li>
+    <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
+    <li><a href="#google-photos-live-sync">Google Photos Album Live Sync</a></li>
+    <li><a href="#private-client-proofing">Private Client Proofing Room</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#getting-started">Getting Started & Local Dev</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
+---
 
-# 📋 About The Project <a name="about-the-project"></a>
+## 📋 About The Project <a name="about-the-project"></a>
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/azizulabedinazmi/photography-portfolio)
+This repository contains the complete portfolio and creative studio system for **Azizul Abedin Azmi**, showcasing:
+- **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
+- **PicsArt Digital Art & Photo Manipulations**: 16 surreal, concept art, and high-aesthetic digital edits.
+- **Client Proofing & Selection Suite**: Private, password-protected galleries for clients to review unedited proofs and submit selections.
+- **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).
 
-This project is a modern, designful web-based photography portfolio showcasing the fine art, portrait, and documentary photography of **Azizul Abedin Azmi**, based in Narayanganj & Dhaka, Bangladesh.
+---
 
-### ✨ Key Features
-- **Modern Editorial Aesthetic**: Glassmorphism navbar, refined editorial serif & sans typography (Plus Jakarta Sans, Playfair Display, Cinzel, JetBrains Mono).
-- **🌗 Dark / Light Theme Engine**: Instant Sun/Moon toggle with persistent memory (`localStorage`) and smooth color transitions.
-- **🔊 Realistic DSLR Mechanical Shutter Sound**: Real-time synthesized camera click via the Web Audio API with zero external audio assets.
-- **❤️ Client Moodboard / Favorites Drawer**: Visitors and potential clients can shortlist photos with a heart click (♡), view their selection in a sliding glass drawer, and click **"Inquire with this Moodboard"** which auto-fills the contact form with their shortlisted styles!
-- **⚡ Smart Category & Live Search Filtering**: Instantly filter between All Works, Portraits, Events & Street, Nature & Details, Curated Series, or My Moodboard.
-- **📐 Adaptive Layout Switcher**: Switch on-the-fly between Fluid Masonry, Editorial Magazine Duo (2-column), and Compact Contact Sheet Grid.
-- **🎚️ Interactive Before / After Color Grading Slider**: Drag to compare flat RAW camera sensor capture vs final cinematic color grade.
-- **✨ Fullscreen Zen Exhibition Mode**: An immersive, distraction-free digital gallery exhibition with ambient background glow and auto-play slideshow (`Z` key).
-- **⌨️ Pro Keyboard Shortcuts**: Quick navigation (`T` for Theme, `S` for Sound, `M` for Moodboard, `Z` for Zen Mode, `Esc` to Close).
-- **📷 Data-Driven Gallery Architecture**: Manage all photos, categories, EXIF metadata, and series in a clean, maintainable dataset in `dist/gallery-data.js`.
+## ✨ Core Features <a name="core-features"></a>
+
+- **🎨 55+ Curated Works**: Complete dataset of portraits, street stories, botanical studies, and restored PicsArt masterworks.
+- **🎞️ Cinematic Hero Filmstrip Marquee**: Auto-scrolling, infinite continuous filmstrip highlight reel in the hero section.
+- **🎭 3D Perspective Tilt & Scroll Reveal**: Cards tilt dynamically based on cursor movement (`.tilt-card`) with subtle glare and smooth entry animations (`IntersectionObserver`).
+- **🌓 Dark / Light Theme Engine**: Instant theme switcher with memory persistence (`localStorage`) and smooth transitions (`T` key).
+- **🔊 Synthesized DSLR Shutter Audio & Camera Flash**: Real-time mechanical camera click powered by the browser's Web Audio API with zero audio files, plus an optional screen flash burst (`S` key).
+- **❤️ Client Moodboard & Favorites Drawer**: Visitors shortlist works with a heart click (♡), view their selection in a sliding glass drawer, and click **"Inquire with this Moodboard"** to pre-fill inquiry forms automatically.
+- **✨ Fullscreen Zen Exhibition Mode**: Distraction-free digital gallery exhibition with ambient background lighting and auto-play slideshow (`Z` key).
+- **⚡ Live Search & Category Filtering**: Instantly filter between *All Works*, *Portraits*, *Digital Art & PicsArt*, *Events & Street*, *Nature & Details*, *Curated Series*, and *My Moodboard*.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## ⚡ Admin Panel & Decap CMS <a name="admin-panel--cms"></a>
+
+Manage your portfolio without writing a single line of code!
+
+- **URL**: `https://azmi-gallery.netlify.app/admin/`
+- **Powered by**: Decap CMS (formerly Netlify CMS) via Git Gateway.
+- **Detailed Setup Guide**: See [ADMIN_SETUP.md](ADMIN_SETUP.md) for full instructions on enabling Identity, user invitations, and setting your password.
+- **How it works**:
+  1. Go to your Netlify dashboard → **Settings** → **Identity** → Enable **Netlify Identity**.
+  2. Set registration to **Invite only**.
+  3. Enable **Git Gateway** under **Services** → **Git Gateway**.
+  4. Invite your email address (`azmi00121@gmail.com`) in the Identity tab.
+  5. Accept the invite in your email and create your password.
+  6. Visit `https://azmi-gallery.netlify.app/admin/`, log in with your credentials.
+  7. Add new photos, change categories, update camera gear, or reorder items.
+  8. Click **Publish** — Netlify automatically commits the changes to GitHub and redeploys the live site in ~15 seconds.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🛠️ Studio Admin Suite (EXIF & WebP) <a name="studio-admin-suite"></a>
+
+Located at `https://azmi-gallery.netlify.app/admin/studio.html`:
+
+1. **🔁 Visual Drag-and-Drop Reordering**:
+   - Live visual grid of all portfolio cards.
+   - Drag and drop cards to change the display order on your homepage.
+   - Click **Save / Copy Updated JSON** or **Download JSON** to export `dist/gallery-data.json`.
+2. **📷 Smart Auto-EXIF Reader**:
+   - Drag and drop any raw camera JPEG (from Canon, Sony, Nikon, etc.).
+   - Automatically extracts Camera Body, Lens, Aperture (`f/1.8`), Shutter Speed (`1/640s`), and ISO via `exifr`.
+   - Pre-fills all metadata fields automatically.
+3. **⚡ In-Browser WebP Compressor**:
+   - Compresses large 20MB+ camera files directly in the browser down to ~600KB WebP files (up to 96% size savings).
+   - Generates a ready-to-use gallery entry object.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## ☁️ Google Drive Storage Integration <a name="google-drive-integration"></a>
+
+Host your photographs on Google Drive with two flexible options:
+
+### 1. Direct Google Drive File IDs (Zero Backend)
+Upload photos to Google Drive, set sharing to *"Anyone with the link can view"*, and use either format in your gallery data or admin panel:
+- Share link: `https://drive.google.com/file/d/1A2B3C4D5E.../view`
+- Or File ID: `1A2B3C4D5E...`
+
+The site automatically converts it into a high-speed Google CDN link:
+```
+https://lh3.googleusercontent.com/d/1A2B3C4D5E...=w1600
+```
+
+### 2. Automated Google Drive Folder Sync (Serverless Function)
+- Serverless endpoint: `/.netlify/functions/gdrive-sync?folderId=YOUR_FOLDER_ID&apiKey=YOUR_API_KEY`
+- Reads all images in a Google Drive folder and returns structured gallery JSON automatically.
+- Pass batch IDs with zero API key needed: `/.netlify/functions/gdrive-sync?fileIds=ID1,ID2,ID3`.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📸 Google Photos Album Live Sync <a name="google-photos-live-sync"></a>
+
+Sync live public albums from Google Photos directly into your portfolio!
+
+- **Serverless Endpoint**: `/.netlify/functions/google-photos-album?albumUrl=https://photos.app.goo.gl/...`
+- **Frontend Sync Button**: Click **"📸 Sync Google Photos"** in the gallery toolbar, paste any public shared album link, and the portfolio instantly loads all photos dynamically.
+- **URL Parameter Sync**: Visit `https://azmi-gallery.netlify.app/?gphotos=YOUR_ALBUM_URL` to automatically stream that album on page load.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🔒 Private Client Proofing Room <a name="private-client-proofing"></a>
+
+Deliver an agency-grade proofing experience to photoshoot clients at `https://azmi-gallery.netlify.app/client/`:
+
+- **PIN Security**: Each session is protected by a 4-digit client access code (Default demo PIN: `2026`).
+- **Interactive Hearting**: Clients review unwatermarked or proof frames and heart up to 20 photos for final retouching.
+- **Progress Tracker**: Top sticky counter displays real-time selection progress (`Selected: 12 / 20`).
+- **One-Click Submission**:
+  - **WhatsApp**: Generates a pre-formatted message sent directly to you with frame numbers.
+  - **Email**: Pre-filled email with client selections.
+  - **Download TXT**: Saves the client's selection sheet.
+- **Shareable Direct Links**: Send clients `https://azmi-gallery.netlify.app/client/?session=sarah-portrait&pin=2026`.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
 
 ## 🛠️ Built With <a name="built-with"></a>
 
-- [![HTML][html-badge]][html-url]
-- [![CSS][css-badge]][css-url]
-- [![JavaScript][js-badge]][js-url]
-- [![Tailwind][tailwind-badge]][tailwind-url]
+- **HTML5 & Semantic Markup**: Structured for SEO and accessibility.
+- **Tailwind CSS**: Modern utility-first styling with dark/light variables.
+- **Vanilla JavaScript (ES6+)**: Zero bulky frameworks, high frame-rate performance.
+- **Decap CMS**: Git-based headless content management system.
+- **Netlify Serverless Functions**: Dynamic Google Photos & Google Drive API sync.
+- **Web Audio API**: Synthetic mechanical DSLR shutter sound.
+- **exifr**: Client-side EXIF metadata parsing.
+- **Fancybox v5**: Lightbox presentation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🚀 Quick Start <a name="quick-start"></a>
+---
 
-Create your own page with one click on [Netlify](https://app.netlify.com/signup):
+## 🎯 Getting Started & Local Dev <a name="getting-started"></a>
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/azizulabedinazmi/photography-portfolio)
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## 🎯 Getting Started <a name="getting-started"></a>
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### 🏗️ Installation <a name="installation"></a>
-
-1. Clone the repo
-
-```sh
- git clone https://github.com/azizulabedinazmi/photography-portfolio.git
+### 1. Clone the Repository
+```bash
+git clone https://github.com/azizulabedinazmi/photography-portfolio.git
+cd photography-portfolio
 ```
 
-2. Run the following command:
+### 2. Run Local Development Server
+Any static HTTP server works:
+```bash
+# Python
+python -m http.server 3000
 
-```sh
- npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+# Or Node.js
+npx serve .
 ```
 
-3. Run the Project in a Server
-
-4. Change it with your own photos, about me and contact info.
-
-5. Publish it using your preferred hosting platform.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- buymeacoffee -->
-
-## ☕ Support Me on buymeacoffee
-
-If you find this project useful, consider supporting me on buymeacoffee. Thanks for checking it out!  
-
-<a href="https://www.buymeacoffee.com/azizulabedinazmi" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+### 3. Test Netlify Functions Locally (Optional)
+If you have the Netlify CLI installed:
+```bash
+npm install -g netlify-cli
+netlify dev
+```
+This serves both the static site and the serverless functions (`/.netlify/functions/google-photos-album` and `/.netlify/functions/gdrive-sync`) at `http://localhost:8888`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LICENSE -->
+---
 
 ## 📜 License <a name="license"></a>
 
-Distributed under the GPL-3.0 License. See `LICENSE.txt` for more information.
+Distributed under the GPL-3.0 License. See [LICENSE](LICENSE) for more information.
+
+---
+
+## 📧 Contact & Connect <a name="contact"></a>
+
+- **Azizul Abedin Azmi**
+- **Developer Portfolio**: [http://azizulabedinazmi.is-a.dev/](http://azizulabedinazmi.is-a.dev/)
+- **LinkedIn**: [https://bd.linkedin.com/in/azizulabedin](https://bd.linkedin.com/in/azizulabedin)
+- **Instagram**: [@azizulabedin](https://www.instagram.com/azizulabedin/)
+- **GitHub**: [@azizulabedinazmi](https://github.com/azizulabedinazmi)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## 📧 Contact <a name="contact"></a>
-
-Azizul Abedin Azmi - [LinkedIn](https://bd.linkedin.com/in/azizulabedin)
-
-Project Link: [https://github.com/azizulabedinazmi/photography-portfolio](https://github.com/azizulabedinazmi/photography-portfolio)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## 🌟 Acknowledgments <a name="acknowledgments"></a>
-
-- [FancyBox](https://fancyapps.com/fancybox/)
-- [Unsplash](https://unsplash.com/)
-- [Tailwind Documentation](https://tailwindcss.com/docs/installation)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[tailwind-badge]: https://img.shields.io/badge/Tailwind_CSS-62BAF3?style=for-the-badge&logo=tailwind-css&logoColor=white
-[tailwind-url]: https://tailwindcss.com
-[html-badge]: https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white
-[html-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
-[css-badge]: https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white
-[css-url]: https://developer.mozilla.org/en-US/docs/Web/CSS
-[js-badge]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-[js-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
-[license-url]: https://github.com/JoaoFranco03/photography-portfolio/blob/main/LICENSE.md
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/joão-franco-452161195/
-[product-screenshot]: dist/assets/mockup.png
-

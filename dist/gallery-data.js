@@ -16,7 +16,7 @@ window.GALLERY_DATA = [
     seriesExtra: ['dist/assets/Photography/Azmi-10.jpg', 'dist/assets/Photography/Azmi-8.jpg'],
     tags: 'portrait, sharna, series, emotion, gaze, studio',
     camera: 'Canon EOS · 50mm f/1.8 · 1/640s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 2. Standalone Portrait: Sanzana Bashar
   {
@@ -27,7 +27,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, sanzana bashar, golden hour, smile, warmth',
     camera: 'Canon EOS · 50mm f/1.8 · 1/640s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 3. Series: Golden Hour Reverie (4 Photos)
   {
@@ -41,7 +41,7 @@ window.GALLERY_DATA = [
     seriesExtra: ['dist/assets/Photography/Azmi-519.jpg', 'dist/assets/Photography/Azmi-529.jpg', 'dist/assets/Photography/Azmi-529 (2).jpg'],
     tags: 'portrait, golden hour, reverie, outdoor, light, series',
     camera: 'Canon EOS · 85mm f/1.8 · 1/800s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 4. Scout Brotherhood & Assembly
   {
@@ -52,7 +52,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'events, scout, brotherhood, assembly, photojournalism',
     camera: 'Canon EOS · 24-70mm f/2.8 · 1/1000s · ISO 200',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 5. Nature: Whiskers at Dusk (Cat)
   {
@@ -63,7 +63,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'nature, cat, feline, pet, golden hour, whiskers',
     camera: 'Canon EOS · 50mm f/1.8 · 1/320s · ISO 400',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 6. Standalone Portrait: Hafsa Prapti
   {
@@ -74,7 +74,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, hafsa prapti, outdoor, studio, bokeh',
     camera: 'Canon EOS · 85mm f/1.8 · 1/800s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 7. Series: Shadow & Radiance (3 Photos)
   {
@@ -88,7 +88,7 @@ window.GALLERY_DATA = [
     seriesExtra: ['dist/assets/Photography/Azmi-100.jpg', 'dist/assets/Photography/Azmi-102.jpg'],
     tags: 'portrait, monochrome, high contrast, fine art, series',
     camera: 'Canon EOS · 50mm f/1.8 · 1/400s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 8. Portrait: Nikisha Hoque Dramatic
   {
@@ -99,7 +99,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, nikisha hoque, ecpa, dramatic light, gaze',
     camera: 'Canon EOS · 50mm f/1.8 · 1/500s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 9. Nature: Botanical Bloom
   {
@@ -110,7 +110,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'nature, flower, botanical, flora, macro, red',
     camera: 'Canon EOS · 50mm f/2.8 · 1/1000s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 10. Portrait: Barisha Apu Heritage
   {
@@ -121,7 +121,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, barisha apu, ecpa, traditional, saree, culture',
     camera: 'Canon EOS · 85mm f/1.8 · 1/1000s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 11. Portrait: Asmita Islam Sharna
   {
@@ -132,7 +132,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, asmita islam sharna, expressive, natural light',
     camera: 'Canon EOS · 50mm f/1.8 · 1/640s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 12. Series: Celebration & Energy (2 Photos)
   {
@@ -146,7 +146,7 @@ window.GALLERY_DATA = [
     seriesExtra: ['dist/assets/Photography/Azmi-542.jpg'],
     tags: 'events, ecpa, celebration, stage, dance, movement',
     camera: 'Canon EOS · 35mm f/2.0 · 1/320s · ISO 400',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 13. Portrait: Nikisha Hoque Noir
   {
@@ -157,7 +157,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, nikisha hoque, ecpa, noir, monochrome',
     camera: 'Canon EOS · 50mm f/2.2 · 1/400s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 14. Portrait: Nayeem Candid
   {
@@ -168,7 +168,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, nayeem, candid, natural, street portrait',
     camera: 'Canon EOS · 50mm f/1.8 · 1/250s · ISO 400',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 15. Scout Campfire Vigil
   {
@@ -179,7 +179,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'events, scout, campfire, night, fellowship, flames',
     camera: 'Canon EOS · 50mm f/1.8 · 1/200s · ISO 800',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 16. Series: Classical Grace — Arpita Das (2 Photos)
   {
@@ -193,7 +193,7 @@ window.GALLERY_DATA = [
     seriesExtra: ['dist/assets/Photography/Azmi-354.jpg'],
     tags: 'portrait, arpita das, traditional, culture, grace, series',
     camera: 'Canon EOS · 85mm f/1.8 · 1/500s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 17. Portrait: Sharmin Akter Shila
   {
@@ -204,7 +204,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, sharmin akter shila, elegance, traditional, saree',
     camera: 'Canon EOS · 50mm f/2.0 · 1/500s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 18. Nature: Verdant Canopy
   {
@@ -215,7 +215,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'nature, tree, green, canopy, foliage, sky',
     camera: 'Canon EOS · 35mm f/4.0 · 1/640s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 19. Series: The Editorial Cut (3 Photos)
   {
@@ -229,7 +229,7 @@ window.GALLERY_DATA = [
     seriesExtra: ['dist/assets/Photography/Azmi-455.jpg', 'dist/assets/Photography/Azmi-459.jpg'],
     tags: 'portrait, editorial, fashion, series, mood, styling',
     camera: 'Canon EOS · 50mm f/1.8 · 1/500s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 20. Events: ECPA Gathering
   {
@@ -240,7 +240,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'events, ecpa, gathering, youth, festival',
     camera: 'Canon EOS · 35mm f/2.0 · 1/320s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 21. Portrait: Sakida Meem
   {
@@ -251,7 +251,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, sakida meem, ecpa, ambient, smile',
     camera: 'Canon EOS · 50mm f/1.8 · 1/320s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 22. Events: ECPA Stage Spotlight
   {
@@ -262,7 +262,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'events, ecpa, stage, performance, applause, theater',
     camera: 'Canon EOS · 50mm f/1.8 · 1/250s · ISO 800',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 23. Portrait: Salsabil Jannat Scout
   {
@@ -273,7 +273,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, salsabil jannat, scout, honor, uniform',
     camera: 'Canon EOS · 50mm f/2.2 · 1/800s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 24. Portrait: ECPA Silhouette & Gaze
   {
@@ -284,7 +284,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, silhouette, gaze, natural light',
     camera: 'Canon EOS · 50mm f/2.0 · 1/640s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 25. Portrait: ECPA Character
   {
@@ -295,7 +295,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, character, expression, close up',
     camera: 'Canon EOS · 50mm f/1.8 · 1/500s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 26. Portrait: ECPA Warm Introspection
   {
@@ -306,7 +306,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, warm, mood, golden',
     camera: 'Canon EOS · 50mm f/2.0 · 1/400s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 27. Portrait: ECPA Youth Radiance
   {
@@ -317,7 +317,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, youth, natural light, smile',
     camera: 'Canon EOS · 50mm f/1.8 · 1/800s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 28. Portrait: ECPA Stillness
   {
@@ -328,7 +328,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, harmony, candid, peaceful',
     camera: 'Canon EOS · 50mm f/2.2 · 1/500s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 29. Portrait: ECPA Cultural Elegance
   {
@@ -339,7 +339,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, traditional, elegance, saree',
     camera: 'Canon EOS · 85mm f/1.8 · 1/1000s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 30. Portrait: ECPA Traditional Poise
   {
@@ -350,7 +350,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, traditional, saree, culture',
     camera: 'Canon EOS · 50mm f/1.8 · 1/500s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 31. Events: Honor Guard March
   {
@@ -361,7 +361,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'events, scout, march, parade, discipline',
     camera: 'Canon EOS · 24mm f/4.0 · 1/500s · ISO 100',
-    location: 'Narayanganj, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 32. Portrait: Serenity in Soft Focus
   {
@@ -372,7 +372,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, serenity, soft light, dreamy',
     camera: 'Canon EOS · 50mm f/2.0 · 1/400s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 33. Portrait: Environmental Storyteller
   {
@@ -383,7 +383,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, environmental portrait, narrative',
     camera: 'Canon EOS · 50mm f/1.8 · 1/640s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 34. Events: ECPA Joy & Jubilation
   {
@@ -394,7 +394,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'events, ecpa, celebration, joy, festival, smiles',
     camera: 'Canon EOS · 50mm f/2.0 · 1/400s · ISO 400',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 35. Portrait: Festive Radiance
   {
@@ -405,7 +405,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, festival, vibrant, candid',
     camera: 'Canon EOS · 50mm f/2.2 · 1/320s · ISO 400',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 36. Portrait: Candid Warmth
   {
@@ -416,7 +416,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, ecpa, smile, candid, authentic',
     camera: 'Canon EOS · 50mm f/1.8 · 1/500s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 37. Street: Dusk Transit
   {
@@ -427,7 +427,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'street, city, dusk, urban, transit, commute',
     camera: 'Canon EOS · 28mm f/2.8 · 1/1250s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 38. Fine Art: Reflection & Form
   {
@@ -438,7 +438,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, fine art, reflection, composition, silhouette',
     camera: 'Canon EOS · 50mm f/2.0 · 1/500s · ISO 100',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   },
   // 39. Fine Art: Shadow Study
   {
@@ -449,7 +449,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'portrait, fine art, shadow, monochrome, noir',
     camera: 'Canon EOS · 50mm f/1.8 · 1/400s · ISO 200',
-    location: 'Dhaka, Bangladesh'
+    location: 'Fine Art Series'
   }
 ,
   // --- DIGITAL ART & PICSART EDITS ---
@@ -461,7 +461,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, digital art, nikisha hoque, photo edit, manipulation, glow',
     camera: 'PicsArt Digital Edit · Mixed Media',
-    location: 'Digital Darkroom, Dhaka'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-celestial',
@@ -501,7 +501,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, hafsa prapti, digital art, portrait, manipulation',
     camera: 'PicsArt Photo Manipulation · Portrait Art',
-    location: 'Digital Darkroom, Narayanganj'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-sumaiya-hossain',
@@ -511,7 +511,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, sumaiya hossain, digital art, portrait, aesthetic',
     camera: 'PicsArt Photo Manipulation · Glow Aesthetic',
-    location: 'Digital Darkroom, Dhaka'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-sumaiya-shifa',
@@ -521,7 +521,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, sumaiya shifa, digital art, fantasy, edit',
     camera: 'PicsArt Photo Manipulation · Fantasy Grade',
-    location: 'Digital Darkroom, Dhaka'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-littolpotat',
@@ -551,7 +551,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, nazmun nahar meem, digital art, fine art, portrait',
     camera: 'PicsArt Photo Manipulation · Fine Art',
-    location: 'Digital Darkroom, Dhaka'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-cosmic-solitude',
@@ -581,7 +581,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, zarin shuvah mashtura, portrait, digital edit, style',
     camera: 'PicsArt Photo Manipulation · Portrait Cut',
-    location: 'Digital Darkroom, Dhaka'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-farhat',
@@ -591,7 +591,7 @@ window.GALLERY_DATA = [
     isSeries: false,
     tags: 'art, picsart, farhat faiza taha, dreamscape, atmospheric, digital art',
     camera: 'PicsArt Photo Manipulation · Atmospheric',
-    location: 'Digital Darkroom, Dhaka'
+    location: 'Digital Darkroom'
   },
   {
     id: 'picsart-aurora',

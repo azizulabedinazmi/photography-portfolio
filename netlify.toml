@@ -1,6 +1,7 @@
 [build]
-  command = "echo 'Static site: no build step required'"
+  command = "echo 'Static site: ready'"
   publish = "."
+  functions = "netlify/functions"
 
 [[headers]]
   for = "/*"
@@ -8,3 +9,15 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Netlify Identity & Decap CMS Single-Page App rule
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+# Client Proofing Room Pretty URLs (/client/sarah-session)
+[[redirects]]
+  from = "/client/:slug"
+  to = "/client/index.html?session=:slug"
+  status = 200

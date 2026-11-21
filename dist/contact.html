@@ -7,12 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact & Bookings — Azizul Abedin Azmi</title>
   
-  <meta name="description" content="Get in touch with Azizul Abedin Azmi for portrait sessions, documentary events, and photography commissions in Narayanganj & Dhaka, Bangladesh." />
+  <meta name="description" content="Get in touch with Azizul Abedin Azmi for portrait sessions, documentary events, and photography commissions worldwide." />
   <meta name="author" content="Azizul Abedin Azmi" />
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
-  <link rel="apple-touch-icon" href="./assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,8 +71,8 @@
       <!-- Brand Logo / Name -->
       <div class="flex items-center gap-3">
         <a href="../index.html" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-bold font-serif text-lg tracking-wider shadow-md group-hover:scale-105 transition-transform duration-300">
-            A
+          <div class="w-10 h-10 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center p-1 shadow-md group-hover:scale-105 group-hover:border-amber-400/60 transition-all duration-300 overflow-hidden">
+            <img src="./assets/favicon-32x32.png" alt="Azmi Brand Icon" class="w-full h-full object-contain rounded-lg">
           </div>
           <div>
             <div class="text-lg sm:text-xl font-bold font-serif tracking-tight leading-none text-neutral-900 dark:text-white group-hover:opacity-80 transition">
@@ -88,7 +89,7 @@
       <!-- Center Nav Links (Desktop) -->
       <nav class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide">
         <a href="../index.html" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition group">
-          PORTFOLIO
+          PORTFOLIO & ART
           <span class="absolute inset-x-0 bottom-0 h-0.5 bg-black dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
         </a>
         <a href="about_me.html" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition group">
@@ -98,6 +99,10 @@
         <a href="contact.html" class="relative py-1 text-black dark:text-white font-semibold transition group">
           CONTACT
           <span class="absolute inset-x-0 bottom-0 h-0.5 bg-black dark:bg-white rounded-full"></span>
+        </a>
+        <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-amber-500 dark:hover:text-amber-400 transition group inline-flex items-center gap-1 font-mono text-xs uppercase" title="Visit Developer Portfolio">
+          <span>&lt;/&gt; DEV PORTFOLIO</span>
+          <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
         </a>
       </nav>
 
@@ -123,9 +128,13 @@
           </button>
           
           <div x-show="open" @click.away="open = false" x-transition class="absolute top-20 left-0 right-0 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 px-6 py-6 shadow-2xl flex flex-col space-y-4 text-lg font-serif">
-            <a href="../index.html" class="text-neutral-600 dark:text-neutral-400">PORTFOLIO</a>
+            <a href="../index.html" class="text-neutral-600 dark:text-neutral-400">PORTFOLIO & ART</a>
             <a href="about_me.html" class="text-neutral-600 dark:text-neutral-400">ABOUT ME</a>
             <a href="contact.html" class="font-bold text-black dark:text-white">CONTACT</a>
+            <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="text-neutral-600 dark:text-neutral-400 font-sans text-sm flex items-center justify-between border-t border-neutral-200 dark:border-neutral-800 pt-3">
+              <span>&lt;/&gt; DEV PORTFOLIO & CODE</span>
+              <span class="text-xs font-mono text-amber-500">azizulabedinazmi.is-a.dev ↗</span>
+            </a>
           </div>
         </div>
 
@@ -256,16 +265,19 @@
               </div>
             </a>
 
-            <!-- Location -->
-            <div class="flex items-center gap-4 p-3.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700">
-              <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            <!-- Developer Portfolio -->
+            <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700 hover:border-amber-500/50 hover:shadow-md transition group">
+              <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
               </div>
               <div>
-                <div class="text-xs font-mono uppercase tracking-wider text-neutral-400">Location Base</div>
-                <div class="text-sm font-semibold text-neutral-900 dark:text-white">Narayanganj & Dhaka, Bangladesh</div>
+                <div class="text-xs font-mono uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
+                  <span>Developer Portfolio</span>
+                  <span class="text-amber-500 font-bold">↗</span>
+                </div>
+                <div class="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-amber-500 transition">azizulabedinazmi.is-a.dev</div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 
@@ -281,7 +293,7 @@
 
             <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
               <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Do you travel for shoots?</h4>
-              <p class="text-neutral-500 font-light leading-relaxed">Yes! While based in Narayanganj and Dhaka, I am available for destination shoots and outstation projects across Bangladesh.</p>
+              <p class="text-neutral-500 font-light leading-relaxed">Yes! Available worldwide for travel sessions, remote digital commissions, and on-location editorial projects.</p>
             </div>
 
             <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
@@ -304,20 +316,25 @@
         <div class="md:col-span-5 text-center md:text-left">
           <div class="font-serif text-2xl font-bold text-neutral-900 dark:text-white">Azizul Abedin Azmi</div>
           <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 max-w-sm">
-            Professional fine art photography, portrait sessions, and documentary events. Based in Narayanganj & Dhaka.
+            Professional fine art photography, portrait sessions, and PicsArt creative digital artworks.
           </p>
-          <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 mt-3">
-            📍 Narayanganj, Shiddhirganj, Sahebpara, Bangladesh
+          <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 mt-3 flex items-center justify-center md:justify-start gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Available Worldwide for Commissions & Shoots</span>
           </div>
         </div>
 
         <div class="md:col-span-4 flex items-center justify-center space-x-6 text-sm font-medium">
-          <a href="../index.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">Portfolio</a>
+          <a href="../index.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">Portfolio & Art</a>
           <a href="about_me.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">About Me</a>
           <a href="contact.html" class="text-neutral-900 dark:text-white underline underline-offset-4">Contact</a>
+          <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-amber-500 transition font-mono text-xs">Dev Portfolio ↗</a>
         </div>
 
         <div class="md:col-span-3 flex items-center justify-center md:justify-end space-x-5 text-neutral-600 dark:text-neutral-400">
+          <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-amber-500 transition" title="Developer Portfolio (azizulabedinazmi.is-a.dev)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+          </a>
           <a href="https://www.instagram.com/azizulabedin" target="_blank" rel="noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white transition">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
           </a>

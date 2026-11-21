@@ -8,8 +8,8 @@
   <title>Azizul Abedin Azmi — Photography & Digital Art Portfolio</title>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Explore the fine art photography and PicsArt digital artwork portfolio of Azizul Abedin Azmi. Professional portraiture, cultural street photojournalism, and creative digital edits in Narayanganj & Dhaka." />
-  <meta name="keywords" content="Azizul Abedin Azmi, photography, portfolio, photographer, PicsArt, digital art, photo manipulation, portrait photography, Dhaka photographer, ECPA photography" />
+  <meta name="description" content="Explore the fine art photography and PicsArt digital artwork portfolio of Azizul Abedin Azmi. Professional portraiture, cultural street photojournalism, and creative digital edits." />
+  <meta name="keywords" content="Azizul Abedin Azmi, photography, portfolio, photographer, PicsArt, digital art, photo manipulation, portrait photography, developer portfolio, ECPA photography" />
   <meta name="author" content="Azizul Abedin Azmi" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#0a0a0a" />
@@ -34,9 +34,13 @@
   
   <link rel="canonical" href="https://azmi-gallery.netlify.app/" />
   
+  <!-- Netlify Identity Widget for Decap CMS -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="dist/assets/favicon.ico" />
-  <link rel="apple-touch-icon" href="dist/assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="dist/assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="dist/assets/apple-touch-icon.png" />
   
   <!-- Google Fonts: Plus Jakarta Sans, Playfair Display, Cinzel, JetBrains Mono, Signika -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -124,8 +128,8 @@
       <!-- Brand Logo / Name -->
       <div class="flex items-center gap-3">
         <a href="index.html" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-bold font-serif text-lg tracking-wider shadow-md group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
-            A
+          <div class="w-10 h-10 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-center p-1 shadow-md group-hover:scale-105 group-hover:border-amber-400/60 transition-all duration-300 overflow-hidden">
+            <img src="dist/assets/favicon-32x32.png" alt="Azmi Brand Icon" class="w-full h-full object-contain rounded-lg">
           </div>
           <div>
             <div class="text-lg sm:text-xl font-bold font-serif tracking-tight leading-none text-neutral-900 dark:text-white group-hover:opacity-80 transition">
@@ -152,6 +156,10 @@
         <a href="dist/contact.html" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition group">
           CONTACT
           <span class="absolute inset-x-0 bottom-0 h-0.5 bg-black dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+        </a>
+        <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="relative py-1 text-neutral-600 dark:text-neutral-400 hover:text-amber-500 dark:hover:text-amber-400 transition group inline-flex items-center gap-1 font-mono text-xs uppercase" title="Visit Developer Portfolio">
+          <span>&lt;/&gt; DEV PORTFOLIO</span>
+          <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
         </a>
       </nav>
 
@@ -187,6 +195,10 @@
             <a href="index.html" class="font-bold text-black dark:text-white">PORTFOLIO & ART</a>
             <a href="dist/about_me.html" class="text-neutral-600 dark:text-neutral-400">ABOUT ME</a>
             <a href="dist/contact.html" class="text-neutral-600 dark:text-neutral-400">CONTACT</a>
+            <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="text-neutral-600 dark:text-neutral-400 font-sans text-sm flex items-center justify-between border-t border-neutral-200 dark:border-neutral-800 pt-3">
+              <span>&lt;/&gt; DEV PORTFOLIO & CODE</span>
+              <span class="text-xs font-mono text-amber-500">azizulabedinazmi.is-a.dev ↗</span>
+            </a>
             <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
               <span class="text-sm font-sans text-neutral-500">Curate moodboard & inquire</span>
               <button class="open-moodboard-btn px-4 py-1.5 rounded-full bg-rose-500 text-white text-xs font-sans font-semibold">Open Moodboard</button>
@@ -227,7 +239,7 @@
 
       <!-- Subtitle -->
       <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl font-light mb-8">
-        Portfolio of <strong class="text-neutral-900 dark:text-white font-medium">Azizul Abedin Azmi</strong> — exploring human vulnerability, cultural street stories, and imaginative PicsArt digital photo edits across Narayanganj & Dhaka.
+        Portfolio of <strong class="text-neutral-900 dark:text-white font-medium">Azizul Abedin Azmi</strong> — exploring human vulnerability, cultural street stories, and imaginative PicsArt digital photo edits. Also a software developer.
       </p>
 
       <!-- Action Buttons -->
@@ -241,6 +253,11 @@
           <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
           <span>✨ Zen Exhibition Mode (Z)</span>
         </button>
+
+        <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 font-medium text-sm transition hover:scale-105 active:scale-95">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+          <span>Developer Portfolio ↗</span>
+        </a>
 
         <a href="dist/contact.html" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white font-medium text-sm transition">
           <span>Book a Session →</span>
@@ -311,6 +328,9 @@
         </button>
         <button type="button" data-category="moodboard" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95 flex items-center gap-1.5">
           <span>❤️ My Moodboard</span>
+        </button>
+        <button type="button" id="load-gphotos-btn" class="px-3.5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 border border-rose-500/25 transition active:scale-95 flex items-center gap-1.5" title="Sync & view photos live from any Google Photos public album">
+          <span>📸 Sync Google Photos</span>
         </button>
       </div>
 
@@ -384,27 +404,35 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
         
-        <!-- Left: Brand & Location -->
+        <!-- Left: Brand & Status -->
         <div class="md:col-span-5 text-center md:text-left">
           <div class="font-serif text-2xl font-bold text-neutral-900 dark:text-white">Azizul Abedin Azmi</div>
           <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2 max-w-sm">
-            Professional fine art photography, portrait sessions, and PicsArt creative digital artworks. Based in Narayanganj & Dhaka.
+            Professional fine art photography, portrait sessions, and PicsArt creative digital artworks.
           </p>
-          <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 mt-3">
-            📍 Narayanganj, Shiddhirganj, Sahebpara, Bangladesh
+          <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 mt-3 flex items-center justify-center md:justify-start gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Available Worldwide for Commissions & Shoots</span>
           </div>
         </div>
 
         <!-- Center: Quick Nav -->
-        <div class="md:col-span-4 flex items-center justify-center space-x-6 text-sm font-medium">
+        <div class="md:col-span-4 flex items-center justify-center flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
           <a href="index.html" class="text-neutral-900 dark:text-white underline underline-offset-4">Portfolio & Art</a>
           <a href="dist/about_me.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">About Me</a>
           <a href="dist/contact.html" class="text-neutral-500 hover:text-black dark:hover:text-white transition">Contact</a>
+          <a href="client/index.html" class="text-purple-500 hover:text-purple-400 transition font-mono text-xs">Client Room ↗</a>
+          <a href="admin/index.html" class="text-amber-500 hover:text-amber-400 transition font-mono text-xs">Admin Studio ↗</a>
+          <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-amber-500 transition font-mono text-xs">Dev Portfolio ↗</a>
           <button type="button" class="open-moodboard-btn text-rose-500 hover:underline">Moodboard</button>
         </div>
 
         <!-- Right: Social Links -->
         <div class="md:col-span-3 flex items-center justify-center md:justify-end space-x-5 text-neutral-600 dark:text-neutral-400">
+          <!-- Developer Portfolio -->
+          <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-amber-500 transition" title="Developer Portfolio (azizulabedinazmi.is-a.dev)">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+          </a>
           <!-- Instagram -->
           <a href="https://www.instagram.com/azizulabedin" target="_blank" rel="noreferrer" class="p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-black dark:hover:text-white transition" title="Instagram">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
@@ -551,7 +579,7 @@
     <!-- Modal Bottom Caption -->
     <div class="relative z-10 max-w-3xl mx-auto text-center w-full">
       <h3 id="zen-photo-title" class="text-xl sm:text-2xl font-serif font-bold text-white tracking-tight drop-shadow-md">Photo Title</h3>
-      <p id="zen-photo-meta" class="text-xs sm:text-sm font-mono text-neutral-400 mt-1">Portrait · Canon EOS · Narayanganj</p>
+      <p id="zen-photo-meta" class="text-xs sm:text-sm font-mono text-neutral-400 mt-1">Portrait · Canon EOS · Fine Art Series</p>
       <div class="text-[11px] font-mono text-white/40 mt-3">Navigate with Arrow Keys [← / →] · Space to Play/Pause · Esc to Exit</div>
     </div>
 

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Studio Suite — Azizul Abedin Azmi</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../dist/assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../dist/assets/favicon-32x32.png" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- EXIF Reader (exifr) -->
+  <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
+  
+  <style>
+    .drag-over {
+      border-color: #fbbf24 !important;
+      background-color: rgba(251, 191, 36, 0.08) !important;
+    }
+    .draggable-card.dragging {
+      opacity: 0.4;
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col font-sans antialiased">
+
+  <!-- Top Navigation Bar -->
+  <header class="border-b border-neutral-800 bg-neutral-900/90 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-amber-500 text-black font-bold flex items-center justify-center font-mono">
+          A
+        </div>
+        <div>
+          <h1 class="font-bold text-base text-white leading-none">Studio Admin Suite</h1>
+          <p class="text-xs text-neutral-400 font-mono mt-0.5">Azizul Abedin Azmi Photography & Art</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center gap-1 sm:gap-2 bg-neutral-800/80 p-1 rounded-xl text-xs sm:text-sm font-medium">
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-lg bg-neutral-700 text-white shadow-sm" data-tab="tab-reorder">
+          🔁 Visual Reorder
+        </button>
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white" data-tab="tab-upload">
+          ⚡ Auto-EXIF & WebP
+        </button>
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white" data-tab="tab-gdrive">
+          ☁️ Drive & Photos
+        </button>
+        <button type="button" class="tab-btn px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white" data-tab="tab-client">
+          🔒 Client Proofing
+        </button>
+      </nav>
+
+      <div class="flex items-center gap-3 text-xs">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300 transition">
+          ← Decap CMS
+        </a>
+        <a href="../index.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold transition">
+          View Live Site ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 flex-1">
+
+    <!-- ==================== TAB 1: VISUAL DRAG-AND-DROP REORDER ==================== -->
+    <section id="tab-reorder" class="tab-content space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+        <div>
+          <h2 class="text-xl font-bold text-white">Visual Gallery Reordering</h2>
+          <p class="text-sm text-neutral-400 mt-1">
+            Drag and drop photo cards below to change the order they appear on your homepage.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="save-order-btn" class="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg">
+            <span>💾 Save / Copy Updated JSON</span>
+          </button>
+          <button id="download-json-btn" class="px-4 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-medium text-xs sm:text-sm transition">
+            Download JSON
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Drag & Drop Grid -->
+      <div id="reorder-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <!-- Rendered dynamically -->
+        <div class="col-span-full py-16 text-center text-neutral-500 font-mono text-sm">
+          Loading gallery works...
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: AUTO-EXIF & IN-BROWSER WEBP COMPRESSOR ==================== -->
+    <section id="tab-upload" class="tab-content hidden space-y-8">
+      <div class="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+        <h2 class="text-xl font-bold text-white">Smart Upload Studio: Auto-EXIF & WebP Compression</h2>
+        <p class="text-sm text-neutral-400 mt-1">
+          Drop any raw camera JPEG (even 25MB). The browser will automatically extract EXIF camera gear specs, compress the image to high-efficiency WebP, and generate a gallery item ready to publish.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left: Drop Zone -->
+        <div class="lg:col-span-5 space-y-6">
+          <div id="drop-zone" class="border-2 border-dashed border-neutral-700 hover:border-amber-500 rounded-3xl p-8 text-center bg-neutral-900/60 transition cursor-pointer flex flex-col items-center justify-center min-h-[300px]">
+            <input type="file" id="file-input" accept="image/*" class="hidden" />
+            <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-3xl mb-4">
+              📷
+            </div>
+            <h3 class="font-bold text-lg text-white mb-1">Click or Drop Photo Here</h3>
+            <p class="text-xs text-neutral-400 max-w-xs">Supports RAW JPEGs, PNGs from Canon, Sony, Nikon, or Phone cameras.</p>
+            <div class="mt-4 px-3 py-1 rounded-full bg-neutral-800 text-[11px] font-mono text-neutral-300">
+              Compression: WebP @ 82% Quality
+            </div>
+          </div>
+
+          <!-- Compression Results Card -->
+          <div id="compress-stats" class="hidden p-5 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-3 font-mono text-xs">
+            <div class="text-neutral-400 uppercase tracking-wider font-semibold text-[10px]">Compression Results</div>
+            <div class="flex justify-between">
+              <span class="text-neutral-500">Original Size:</span>
+              <span id="stat-orig-size" class="text-neutral-300">-</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-neutral-500">Compressed WebP:</span>
+              <span id="stat-webp-size" class="text-emerald-400 font-bold">-</span>
+            </div>
+            <div class="flex justify-between border-t border-neutral-800 pt-2">
+              <span class="text-neutral-500">Reduction:</span>
+              <span id="stat-reduction" class="text-amber-400 font-bold">-</span>
+            </div>
+            <button id="download-webp-btn" class="w-full mt-2 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-sans text-xs font-semibold transition">
+              Download Optimized .webp File ↓
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Auto-Extracted Metadata & Output -->
+        <div class="lg:col-span-7 bg-neutral-900 p-6 sm:p-8 rounded-3xl border border-neutral-800 space-y-5">
+          <h3 class="font-bold text-base text-white">Extracted Metadata & Gallery Item Form</h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+            <div>
+              <label class="block text-neutral-400 mb-1">Photo Title</label>
+              <input type="text" id="meta-title" placeholder="Golden Hour Reverie" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-amber-500" />
+            </div>
+
+            <div>
+              <label class="block text-neutral-400 mb-1">Category</label>
+              <select id="meta-category" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-amber-500">
+                <option value="portraits">Portraits</option>
+                <option value="events">Events & Documentary</option>
+                <option value="nature">Nature & Details</option>
+                <option value="art">🎨 PicsArt Digital Art</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-neutral-400 mb-1">Camera Gear (Auto-Extracted from EXIF)</label>
+              <input type="text" id="meta-camera" placeholder="Canon EOS · 50mm f/1.8 · 1/640s · ISO 100" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-amber-500" />
+            </div>
+
+            <div>
+              <label class="block text-neutral-400 mb-1">Series / Tagline</label>
+              <input type="text" id="meta-location" value="Fine Art Series" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-amber-500" />
+            </div>
+
+            <div>
+              <label class="block text-neutral-400 mb-1">Search Tags</label>
+              <input type="text" id="meta-tags" placeholder="portrait, golden hour, studio" class="w-full px-3 py-2.5 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-amber-500" />
+            </div>
+          </div>
+
+          <!-- Generated JSON Output -->
+          <div>
+            <div class="flex items-center justify-between mb-1 text-xs">
+              <span class="text-neutral-400 font-mono">Generated Gallery Item Object:</span>
+              <button id="copy-json-snippet-btn" class="text-amber-400 hover:underline">Copy Code</button>
+            </div>
+            <pre id="json-snippet" class="p-4 rounded-xl bg-black border border-neutral-800 text-[11px] font-mono text-emerald-400 overflow-x-auto max-h-48">Drop a photo to generate entry...</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: GOOGLE DRIVE & GOOGLE PHOTOS CONVERTER ==================== -->
+    <section id="tab-gdrive" class="tab-content hidden space-y-8">
+      <div class="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+        <h2 class="text-xl font-bold text-white">Google Drive & Google Photos Integration Hub</h2>
+        <p class="text-sm text-neutral-400 mt-1">
+          Convert Google Drive links into high-speed CDN URLs, or test live Google Photos shared albums.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Google Drive Direct CDN Transformer -->
+        <div class="p-6 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl font-bold">
+              ☁️
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-base">Google Drive Link Transformer</h3>
+              <p class="text-xs text-neutral-400">Zero backend needed · Serves via Google CDN</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-neutral-400 mb-1">Paste Google Drive Share Link or File ID</label>
+            <input type="text" id="gdrive-input" placeholder="https://drive.google.com/file/d/1A2B3C.../view" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-blue-400 font-mono" />
+          </div>
+
+          <button id="gdrive-convert-btn" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition">
+            Convert to Google CDN URL
+          </button>
+
+          <div id="gdrive-result" class="hidden space-y-2 pt-2">
+            <span class="text-xs text-neutral-400 font-mono">High-Speed CDN Link:</span>
+            <input type="text" id="gdrive-output" readonly class="w-full px-3 py-2 rounded-lg bg-black border border-neutral-800 text-xs font-mono text-emerald-400" />
+            <div class="aspect-video rounded-xl overflow-hidden bg-black border border-neutral-800 mt-2">
+              <img id="gdrive-preview" src="" alt="Google Drive Preview" class="w-full h-full object-contain" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Photos Live Shared Album Tester -->
+        <div class="p-6 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl font-bold">
+              📸
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-base">Google Photos Shared Album Sync</h3>
+              <p class="text-xs text-neutral-400">Syncs public albums directly to your site</p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-neutral-400 mb-1">Paste Public Shared Album Link</label>
+            <input type="text" id="gphotos-input" placeholder="https://photos.app.goo.gl/abcdefg12345" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-sm text-white focus:outline-none focus:border-rose-400 font-mono" />
+          </div>
+
+          <button id="gphotos-sync-btn" class="w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold transition">
+            Fetch Album Photos (Live Sync)
+          </button>
+
+          <div id="gphotos-results" class="hidden space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs text-neutral-400 font-mono">
+              <span id="gphotos-count">0 photos found</span>
+              <button id="gphotos-copy-all" class="text-rose-400 hover:underline">Copy As Gallery JSON</button>
+            </div>
+            <div id="gphotos-grid" class="grid grid-cols-3 gap-2 max-h-56 overflow-y-auto p-2 bg-black rounded-xl border border-neutral-800"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: PRIVATE CLIENT PROOFING ROOM ==================== -->
+    <section id="tab-client" class="tab-content hidden space-y-8">
+      <div class="p-6 rounded-2xl bg-neutral-900 border border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white">Private Client Proofing Manager</h2>
+          <p class="text-sm text-neutral-400 mt-1">
+            Create password-protected viewing galleries for clients to review unedited proofs and select their favorites for retouching.
+          </p>
+        </div>
+        <a href="../client/index.html" target="_blank" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition">
+          Open Client Proofing Room ↗
+        </a>
+      </div>
+
+      <div class="p-6 sm:p-8 rounded-3xl bg-neutral-900 border border-neutral-800 space-y-6 max-w-2xl">
+        <h3 class="font-bold text-base text-white">Create New Client Session</h3>
+
+        <div class="space-y-4 text-xs font-mono">
+          <div>
+            <label class="block text-neutral-400 mb-1">Client / Project Name</label>
+            <input type="text" id="client-name" placeholder="Sarah & David Wedding" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-neutral-400 mb-1">Session URL Slug</label>
+              <input type="text" id="client-slug" placeholder="sarah-wedding" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400" />
+            </div>
+            <div>
+              <label class="block text-neutral-400 mb-1">Access PIN Code</label>
+              <input type="text" id="client-pin" placeholder="1234" value="2026" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400 font-bold" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-neutral-400 mb-1">Max Retouching Selections Allowed</label>
+            <input type="number" id="client-max" value="20" class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400" />
+          </div>
+
+          <div>
+            <label class="block text-neutral-400 mb-1">Photo Image URLs (one per line, local paths, Drive links, or web URLs)</label>
+            <textarea id="client-photos-input" rows="4" placeholder="dist/assets/Photography/Azmi-56.jpg&#10;dist/assets/Photography/Azmi-522.jpg&#10;https://lh3.googleusercontent.com/d/..." class="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white focus:outline-none focus:border-purple-400"></textarea>
+          </div>
+        </div>
+
+        <button id="generate-client-btn" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition">
+          Generate Client Session Link
+        </button>
+
+        <div id="client-link-card" class="hidden p-4 rounded-xl bg-black border border-purple-500/30 space-y-2">
+          <div class="text-xs text-purple-300 font-semibold">Share this private link with your client:</div>
+          <input type="text" id="client-share-url" readonly class="w-full px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400" />
+          <p class="text-[11px] text-neutral-400">PIN: <strong id="client-share-pin" class="text-white"></strong> · Clients can view, heart their top picks, and send choices via WhatsApp or Email.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Load Master Dataset for Reordering -->
+  <script src="../dist/gallery-data.js"></script>
+
+  <script>
+    // --- TAB SWITCHER LOGIC ---
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(b => {
+          b.classList.remove('bg-neutral-700', 'text-white', 'shadow-sm');
+          b.classList.add('text-neutral-400');
+        });
+        btn.classList.add('bg-neutral-700', 'text-white', 'shadow-sm');
+        btn.classList.remove('text-neutral-400');
+
+        const target = btn.dataset.tab;
+        contents.forEach(c => {
+          if (c.id === target) c.classList.remove('hidden');
+          else c.classList.add('hidden');
+        });
+      });
+    });
+
+    // --- TAB 1: VISUAL DRAG-AND-DROP REORDER ---
+    let currentGallery = window.GALLERY_DATA ? [...window.GALLERY_DATA] : [];
+
+    function renderReorderGrid() {
+      const grid = document.getElementById('reorder-grid');
+      if (!grid) return;
+
+      if (!currentGallery || currentGallery.length === 0) {
+        grid.innerHTML = '<div class="col-span-full py-12 text-center text-neutral-500 font-mono">No photos loaded.</div>';
+        return;
+      }
+
+      grid.innerHTML = currentGallery.map((item, index) => {
+        let imgSrc = item.src;
+        if (imgSrc.startsWith('dist/')) imgSrc = '../' + imgSrc;
+
+        return `
+          <div class="draggable-card relative group bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing hover:border-amber-500/50 transition p-2 flex flex-col justify-between"
+               draggable="true" data-index="${index}">
+            <div class="relative aspect-square w-full rounded-xl overflow-hidden bg-black mb-2">
+              <img src="${imgSrc}" alt="${item.title}" class="w-full h-full object-cover pointer-events-none" />
+              <div class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded bg-black/75 backdrop-blur-sm text-[10px] font-mono text-white font-bold">
+                #${index + 1}
+              </div>
+            </div>
+            <div class="text-[11px] font-semibold text-white truncate px-1">${item.title}</div>
+            <div class="text-[10px] font-mono text-neutral-400 truncate px-1 uppercase">${item.category}</div>
+          </div>
+        `;
+      }).join('');
+
+      initDragEvents();
+    }
+
+    let dragSrcIndex = null;
+
+    function initDragEvents() {
+      const cards = document.querySelectorAll('.draggable-card');
+
+      cards.forEach(card => {
+        card.addEventListener('dragstart', (e) => {
+          dragSrcIndex = parseInt(card.dataset.index, 10);
+          card.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        card.addEventListener('dragend', () => {
+          card.classList.remove('dragging');
+          cards.forEach(c => c.classList.remove('drag-over'));
+        });
+
+        card.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          card.classList.add('drag-over');
+        });
+
+        card.addEventListener('dragleave', () => {
+          card.classList.remove('drag-over');
+        });
+
+        card.addEventListener('drop', (e) => {
+          e.stopPropagation();
+          const targetIndex = parseInt(card.dataset.index, 10);
+
+          if (dragSrcIndex !== null && dragSrcIndex !== targetIndex) {
+            const movedItem = currentGallery.splice(dragSrcIndex, 1)[0];
+            currentGallery.splice(targetIndex, 0, movedItem);
+            renderReorderGrid();
+          }
+        });
+      });
+    }
+
+    renderReorderGrid();
+
+    // Save & Copy JSON
+    document.getElementById('save-order-btn').addEventListener('click', () => {
+      const jsonStr = JSON.stringify({ items: currentGallery }, null, 2);
+      navigator.clipboard.writeText(jsonStr).then(() => {
+        alert('✅ Reordered gallery data copied to clipboard! You can also click "Download JSON" to save dist/gallery-data.json.');
+      });
+    });
+
+    document.getElementById('download-json-btn').addEventListener('click', () => {
+      const jsonStr = JSON.stringify({ items: currentGallery }, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'gallery-data.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // --- TAB 2: AUTO-EXIF & IN-BROWSER WEBP COMPRESSOR ---
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    let compressedBlob = null;
+    let compressedFilename = 'photo.webp';
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processUploadedImage(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        processUploadedImage(e.target.files[0]);
+      }
+    });
+
+    async function processUploadedImage(file) {
+      const origSizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      document.getElementById('stat-orig-size').textContent = `${origSizeMb} MB (${file.name})`;
+      compressedFilename = file.name.replace(/\.[^/.]+$/, '') + '.webp';
+
+      // 1. Auto-extract EXIF via exifr
+      let cameraSpec = 'Canon EOS · 50mm f/1.8';
+      let titleGuess = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+
+      try {
+        if (window.exifr) {
+          const exif = await exifr.parse(file, true);
+          if (exif) {
+            const parts = [];
+            if (exif.Make || exif.Model) {
+              const model = exif.Model || exif.Make;
+              parts.push(model.includes(exif.Make) ? model : `${exif.Make} ${model}`);
+            }
+            if (exif.FocalLength) parts.push(`${Math.round(exif.FocalLength)}mm`);
+            if (exif.FNumber) parts.push(`f/${exif.FNumber}`);
+            if (exif.ExposureTime) {
+              const exp = exif.ExposureTime < 1 ? `1/${Math.round(1 / exif.ExposureTime)}s` : `${exif.ExposureTime}s`;
+              parts.push(exp);
+            }
+            if (exif.ISO) parts.push(`ISO ${exif.ISO}`);
+
+            if (parts.length > 0) cameraSpec = parts.join(' · ');
+          }
+        }
+      } catch (err) {
+        console.warn('EXIF read error:', err);
+      }
+
+      document.getElementById('meta-title').value = titleGuess;
+      document.getElementById('meta-camera').value = cameraSpec;
+
+      // 2. In-browser Canvas WebP Compression
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const maxDim = 2400;
+          let w = img.width;
+          let h = img.height;
+
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+
+          canvas.toBlob((blob) => {
+            compressedBlob = blob;
+            const webpSizeKb = Math.round(blob.size / 1024);
+            const reduction = Math.round((1 - blob.size / file.size) * 100);
+
+            document.getElementById('stat-webp-size').textContent = `${webpSizeKb} KB`;
+            document.getElementById('stat-reduction').textContent = `-${reduction}% Size Saved`;
+            document.getElementById('compress-stats').classList.remove('hidden');
+
+            updateJsonSnippet(compressedFilename);
+          }, 'image/webp', 0.82);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateJsonSnippet(filename) {
+      const title = document.getElementById('meta-title').value || 'New Artwork';
+      const category = document.getElementById('meta-category').value;
+      const camera = document.getElementById('meta-camera').value;
+      const location = document.getElementById('meta-location').value;
+      const tags = document.getElementById('meta-tags').value;
+
+      const obj = {
+        id: 'photo-' + Date.now(),
+        src: 'dist/assets/Photography/' + filename,
+        title: title,
+        category: category,
+        isSeries: false,
+        tags: tags,
+        camera: camera,
+        location: location
+      };
+
+      document.getElementById('json-snippet').textContent = JSON.stringify(obj, null, 2);
+    }
+
+    ['meta-title', 'meta-category', 'meta-camera', 'meta-location', 'meta-tags'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => updateJsonSnippet(compressedFilename));
+    });
+
+    document.getElementById('download-webp-btn').addEventListener('click', () => {
+      if (!compressedBlob) return;
+      const url = URL.createObjectURL(compressedBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = compressedFilename;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('copy-json-snippet-btn').addEventListener('click', () => {
+      const snippet = document.getElementById('json-snippet').textContent;
+      navigator.clipboard.writeText(snippet).then(() => alert('Copied snippet!'));
+    });
+
+    // --- TAB 3: GOOGLE DRIVE & GOOGLE PHOTOS CONVERTER ---
+    document.getElementById('gdrive-convert-btn').addEventListener('click', () => {
+      const input = document.getElementById('gdrive-input').value.trim();
+      const match = input.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|gdrive:)?([a-zA-Z0-9_\-]{25,})/i);
+
+      if (match && match[1]) {
+        const fileId = match[1];
+        const cdnUrl = `https://lh3.googleusercontent.com/d/${fileId}=w1600`;
+        document.getElementById('gdrive-output').value = cdnUrl;
+        document.getElementById('gdrive-preview').src = cdnUrl;
+        document.getElementById('gdrive-result').classList.remove('hidden');
+      } else {
+        alert('Please paste a valid Google Drive file link or ID.');
+      }
+    });
+
+    document.getElementById('gphotos-sync-btn').addEventListener('click', async () => {
+      const url = document.getElementById('gphotos-input').value.trim();
+      if (!url) return alert('Enter a Google Photos shared album URL');
+
+      const btn = document.getElementById('gphotos-sync-btn');
+      btn.textContent = 'Syncing Album...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`/.netlify/functions/google-photos-album?albumUrl=${encodeURIComponent(url)}`);
+        const data = await res.json();
+
+        if (data.success && data.photos.length > 0) {
+          document.getElementById('gphotos-count').textContent = `${data.photos.length} photos found`;
+          const grid = document.getElementById('gphotos-grid');
+          grid.innerHTML = data.photos.map(p => `
+            <div class="aspect-square rounded-lg overflow-hidden bg-neutral-900">
+              <img src="${p.thumbnail}" alt="Photo" class="w-full h-full object-cover" />
+            </div>
+          `).join('');
+          document.getElementById('gphotos-results').classList.remove('hidden');
+
+          document.getElementById('gphotos-copy-all').onclick = () => {
+            navigator.clipboard.writeText(JSON.stringify(data.photos, null, 2)).then(() => {
+              alert('Copied all album photos as JSON!');
+            });
+          };
+        } else {
+          alert('Could not find photos in album. Ensure the album link is public and sharing is on.');
+        }
+      } catch (err) {
+        alert('Error syncing Google Photos album: ' + err.message);
+      } finally {
+        btn.textContent = 'Fetch Album Photos (Live Sync)';
+        btn.disabled = false;
+      }
+    });
+
+    // --- TAB 4: PRIVATE CLIENT PROOFING ROOM ---
+    document.getElementById('generate-client-btn').addEventListener('click', () => {
+      const name = document.getElementById('client-name').value.trim() || 'Client Session';
+      let slug = document.getElementById('client-slug').value.trim();
+      if (!slug) slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const pin = document.getElementById('client-pin').value.trim() || '2026';
+      const photosRaw = document.getElementById('client-photos-input').value.trim();
+      const photos = photosRaw.split('\n').map(s => s.trim()).filter(Boolean);
+
+      // Store in localStorage for instant testing
+      const sessionData = {
+        name, slug, pin, photos, maxSelections: parseInt(document.getElementById('client-max').value, 10) || 20
+      };
+      localStorage.setItem('client_session_' + slug, JSON.stringify(sessionData));
+
+      const origin = window.location.origin;
+      const shareUrl = `${origin}/client/index.html?session=${slug}&pin=${pin}`;
+
+      document.getElementById('client-share-url').value = shareUrl;
+      document.getElementById('client-share-pin').textContent = pin;
+      document.getElementById('client-link-card').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
