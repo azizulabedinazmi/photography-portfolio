@@ -6,9 +6,9 @@ Allow: /
 Allow: /dist/
 Allow: /src/
 
-# Disallow private pages if any
-# Disallow: /admin/
-# Disallow: /private/
+# Keep private pages out of search results
+Disallow: /admin/
+Disallow: /client/
 
 # Sitemap location
 Sitemap: https://azmi-gallery.netlify.app/sitemap.xml
