@@ -37,4 +37,4 @@ collections:
               - { label: "Search Tags (comma separated)", name: "tags", widget: "string", required: false }
               - { label: "Is Curated Series?", name: "isSeries", widget: "boolean", default: false, required: false }
               - { label: "Series Count", name: "seriesCount", widget: "number", default: 1, required: false }
-              - { label: "Series Extra Photos", name: "seriesExtra", widget: "list", field: { label: "Extra Image", widget: "image" }, required: false }
+              - { label: "Series Extra Photos", name: "seriesExtra", widget: "list", field: { label: "Extra Image", name: "image", widget: "image" }, required: false }
