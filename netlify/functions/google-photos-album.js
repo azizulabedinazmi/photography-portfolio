@@ -63,6 +63,18 @@ exports.handler = async function (event, context) {
       albumUrl = `https://photos.app.goo.gl/${albumUrl}`;
     }
 
+    // Only fetch Google Photos share links; never act as an open proxy.
+    const ALLOWED_HOSTS = ['photos.app.goo.gl', 'photos.google.com', 'goo.gl'];
+    let parsed;
+    try { parsed = new URL(albumUrl); } catch (e) { parsed = null; }
+    if (!parsed || parsed.protocol !== 'https:' || !ALLOWED_HOSTS.includes(parsed.hostname)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ success: false, error: 'Only Google Photos shared album links are allowed.' })
+      };
+    }
+
     const { data: html } = await followRedirects(albumUrl);
 
     // Regex to match Google Photos CDN image URLs and dimensions

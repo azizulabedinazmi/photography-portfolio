@@ -53,7 +53,7 @@ Git Gateway allows Decap CMS to create Git commits using your GitHub credentials
 ### Step 4: Invite Your Admin Email & Set Your Password
 1. In the main top tabs of your Netlify site dashboard, click **Identity**.
 2. Click the **Invite users** button.
-3. Enter your email address: `azmi00121@gmail.com`.
+3. Enter your own email address.
 4. Click **Send**.
 5. Check your email inbox for an invitation from Netlify:
    - Subject: *"You've been invited to join azmi-gallery"*
@@ -70,7 +70,7 @@ Git Gateway allows Decap CMS to create Git commits using your GitHub credentials
    https://azmi-gallery.netlify.app/admin/
    ```
 2. The Netlify Identity login modal will appear.
-3. Enter your email (`azmi00121@gmail.com`) and the password you created.
+3. Enter your email and the password you created.
 4. You will be greeted by the **Decap CMS Dashboard**:
    - **Gallery Collection**: View and edit all 55+ photo records.
    - **New Entry (+)**: Upload a new photo, select category (*Portraits, Digital Art, Street, Nature*), enter camera body, lens, exposure, and story.
@@ -158,11 +158,13 @@ You can host full-resolution images on Google Drive without backend storage:
    https://lh3.googleusercontent.com/d/1AbC...=w1600
    ```
 
-### Google Photos Live Album Sync
-1. In Google Photos, open any album → click **Share** → **Create public link**.
-2. On your live portfolio homepage, click the **"📸 Sync Google Photos"** button in the gallery filter bar.
-3. Paste the public album link and click **Sync Stream**.
-4. The serverless function (`/.netlify/functions/google-photos-album`) fetches the album frames and streams them directly into your masonry grid.
+### Google Photos Album Import (admin only)
+1. In Google Photos, open any album → click **Share** → **Create link**.
+2. Open the Studio Suite (`/admin/studio.html`) → **Google Drive & Google Photos** tab.
+3. Paste the public album link and click **Fetch Album Photos**.
+4. Click **Copy As Gallery JSON**, keep the photos you want, and add them to `dist/gallery-data.json` (or via Decap CMS).
+
+The public homepage has no sync button, so visitors can't load other albums into your gallery. The serverless function (`/.netlify/functions/google-photos-album`) only accepts Google Photos share links.
 
 ---
 

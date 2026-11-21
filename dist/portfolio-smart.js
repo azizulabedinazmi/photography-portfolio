@@ -1021,56 +1021,7 @@
         }
       }
 
-      // 2. Check for Google Photos live album sync (?gphotos=ALBUM_URL)
-      const params = new URLSearchParams(window.location.search);
-      const gphotosUrl = params.get('gphotos');
-      if (gphotosUrl) {
-        try {
-          const res = await fetch(`/.netlify/functions/google-photos-album?albumUrl=${encodeURIComponent(gphotosUrl)}`);
-          const data = await res.json();
-          if (data.success && data.photos && data.photos.length > 0) {
-            window.GALLERY_DATA = [...data.photos, ...(window.GALLERY_DATA || [])];
-            const container = document.getElementById('portfolio-gallery');
-            if (container) container.innerHTML = '';
-            GalleryRenderer.render();
-            ZenMode.init();
-          }
-        } catch (err) {
-          console.warn('Could not load Google Photos live stream', err);
-        }
-      }
-
-      // 3. Google Photos Live Sync toolbar button
-      const gphotosBtn = document.getElementById('load-gphotos-btn');
-      if (gphotosBtn) {
-        gphotosBtn.addEventListener('click', async () => {
-          const defaultUrl = 'https://photos.app.goo.gl/';
-          const albumUrl = prompt('Enter a public Google Photos shared album URL to view live:\n(e.g., https://photos.app.goo.gl/...):', defaultUrl);
-          if (!albumUrl || albumUrl === defaultUrl) return;
-
-          gphotosBtn.innerHTML = '<span>⏳ Syncing...</span>';
-          try {
-            const res = await fetch(`/.netlify/functions/google-photos-album?albumUrl=${encodeURIComponent(albumUrl)}`);
-            const data = await res.json();
-            if (data.success && data.photos && data.photos.length > 0) {
-              window.GALLERY_DATA = [...data.photos, ...(window.GALLERY_DATA || [])];
-              const container = document.getElementById('portfolio-gallery');
-              if (container) container.innerHTML = '';
-              GalleryRenderer.render();
-              ZenMode.init();
-              alert(`🎉 Successfully synced ${data.photos.length} live photos from Google Photos!`);
-            } else {
-              alert('Could not find photos in album. Please ensure the album is shared publicly.');
-            }
-          } catch (err) {
-            alert('Error syncing album: ' + err.message);
-          } finally {
-            gphotosBtn.innerHTML = '<span>📸 Sync Google Photos</span>';
-          }
-        });
-      }
-
-      // 3. Netlify Identity Login Redirect for Decap CMS
+      // 2. Netlify Identity Login Redirect for Decap CMS
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", user => {
           if (!user) {

@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://azmi-gallery.netlify.app/">
-    <img src="dist/assets/banner.png" alt="Azizul Abedin Azmi Photography & Digital Art Portfolio" width="100%" style="max-width: 1000px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+    <img src="dist/assets/banner.png" alt="Azizul Abedin Azmi — Photography & Digital Art Portfolio" width="100%">
   </a>
   <br /><br />
 
@@ -19,7 +19,7 @@
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="dist/assets/AZMI-LOGO@2x.png">
       <source media="(prefers-color-scheme: light)" srcset="dist/assets/AZMI-LOGO-Black@2x.png">
-      <img src="dist/assets/AZMI-LOGO-Black@2x.png" alt="Azizul Abedin Azmi" width="460" style="max-width: 90%; height: auto;">
+      <img src="dist/assets/AZMI-LOGO-Black@2x.png" alt="Azizul Abedin Azmi" width="460">
     </picture>
   </a>
 
@@ -53,7 +53,7 @@
     <li><a href="#admin-panel--cms">Admin Panel & Decap CMS</a></li>
     <li><a href="#studio-admin-suite">Studio Admin Suite (EXIF & WebP)</a></li>
     <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
-    <li><a href="#google-photos-live-sync">Google Photos Album Live Sync</a></li>
+    <li><a href="#google-photos-live-sync">Google Photos Album Import (Admin)</a></li>
     <li><a href="#private-client-proofing">Private Client Proofing Room</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#getting-started">Getting Started & Local Dev</a></li>
@@ -100,7 +100,7 @@ Manage your portfolio without writing a single line of code!
   1. Go to your Netlify dashboard → **Settings** → **Identity** → Enable **Netlify Identity**.
   2. Set registration to **Invite only**.
   3. Enable **Git Gateway** under **Services** → **Git Gateway**.
-  4. Invite your email address (`azmi00121@gmail.com`) in the Identity tab.
+  4. Invite your own email address in the Identity tab.
   5. Accept the invite in your email and create your password.
   6. Visit `https://azmi-gallery.netlify.app/admin/`, log in with your credentials.
   7. Add new photos, change categories, update camera gear, or reorder items.
@@ -153,13 +153,16 @@ https://lh3.googleusercontent.com/d/1A2B3C4D5E...=w1600
 
 ---
 
-## 📸 Google Photos Album Live Sync <a name="google-photos-live-sync"></a>
+## 📸 Google Photos Album Import (Admin) <a name="google-photos-live-sync"></a>
 
-Sync live public albums from Google Photos directly into your portfolio!
+Pull photos from a public Google Photos shared album into the portfolio. This is an **admin-only workflow**: there is no sync button or URL parameter on the public site, so visitors can't load outside albums into the gallery.
 
-- **Serverless Endpoint**: `/.netlify/functions/google-photos-album?albumUrl=https://photos.app.goo.gl/...`
-- **Frontend Sync Button**: Click **"📸 Sync Google Photos"** in the gallery toolbar, paste any public shared album link, and the portfolio instantly loads all photos dynamically.
-- **URL Parameter Sync**: Visit `https://azmi-gallery.netlify.app/?gphotos=YOUR_ALBUM_URL` to automatically stream that album on page load.
+1. In Google Photos, open an album → **Share** → **Create link**.
+2. Open the **Studio Suite** (`/admin/studio.html`) → **Google Drive & Google Photos** tab.
+3. Paste the album link and click **Fetch Album Photos**.
+4. Click **Copy As Gallery JSON**, pick the photos you want, and add them to `dist/gallery-data.json` (or through Decap CMS). Commit, and Netlify redeploys.
+
+Behind the scenes the Studio calls `/.netlify/functions/google-photos-album?albumUrl=...`. The function only accepts `photos.app.goo.gl` / `photos.google.com` links.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -169,14 +172,14 @@ Sync live public albums from Google Photos directly into your portfolio!
 
 Deliver an agency-grade proofing experience to photoshoot clients at `https://azmi-gallery.netlify.app/client/`:
 
-- **PIN Security**: Each session is protected by a 4-digit client access code (Default demo PIN: `2026`).
+- **PIN Gate**: Each session sits behind a 4-digit client access code. Change the default PIN before sharing real client work (see [ADMIN_SETUP.md](ADMIN_SETUP.md#5-private-client-proofing-room--pin-setup)). The check runs in the browser, so treat it as a light privacy gate, not real security.
 - **Interactive Hearting**: Clients review unwatermarked or proof frames and heart up to 20 photos for final retouching.
 - **Progress Tracker**: Top sticky counter displays real-time selection progress (`Selected: 12 / 20`).
 - **One-Click Submission**:
   - **WhatsApp**: Generates a pre-formatted message sent directly to you with frame numbers.
   - **Email**: Pre-filled email with client selections.
   - **Download TXT**: Saves the client's selection sheet.
-- **Shareable Direct Links**: Send clients `https://azmi-gallery.netlify.app/client/?session=sarah-portrait&pin=2026`.
+- **Shareable Direct Links**: Send clients `https://azmi-gallery.netlify.app/client/?session=SESSION_NAME&pin=YOUR_PIN`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -188,7 +191,7 @@ Deliver an agency-grade proofing experience to photoshoot clients at `https://az
 - **Tailwind CSS**: Modern utility-first styling with dark/light variables.
 - **Vanilla JavaScript (ES6+)**: Zero bulky frameworks, high frame-rate performance.
 - **Decap CMS**: Git-based headless content management system.
-- **Netlify Serverless Functions**: Dynamic Google Photos & Google Drive API sync.
+- **Netlify Serverless Functions**: Google Photos album import & Google Drive folder sync (used by the admin Studio).
 - **Web Audio API**: Synthetic mechanical DSLR shutter sound.
 - **exifr**: Client-side EXIF metadata parsing.
 - **Fancybox v5**: Lightbox presentation.
