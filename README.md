@@ -9,13 +9,13 @@
 <!-- HERO SHOWCASE BANNER -->
 <br />
 <div align="center">
-  <a href="https://azmi-gallery.netlify.app/">
-    <img src="dist/assets/banner.png" alt="Azizul Abedin Azmi — Photography & Digital Art Portfolio" width="100%">
+  <a href="https://azmi.is-cool.dev/">
+    <img src="dist/assets/banner.svg" alt="〘卂乙爪丨〙ヅ — Azizul Abedin Azmi photography & digital art portfolio" width="100%">
   </a>
   <br /><br />
 
   <!-- DYNAMIC THEME-AWARE LOGO -->
-  <a href="https://azmi-gallery.netlify.app/">
+  <a href="https://azmi.is-cool.dev/">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="dist/assets/AZMI-LOGO@2x.png">
       <source media="(prefers-color-scheme: light)" srcset="dist/assets/AZMI-LOGO-Black@2x.png">
@@ -29,13 +29,13 @@
     An editorial fine art photography, PicsArt digital manipulation, and client proofing platform built with Tailwind CSS, Decap CMS, Netlify Functions, and the Web Audio API.
     <br />
     <br />
-    <a href="https://azmi-gallery.netlify.app/"><strong>🌐 View Live Portfolio »</strong></a>
+    <a href="https://azmi.is-cool.dev/"><strong>🌐 View Live Portfolio »</strong></a>
     ·
-    <a href="https://azmi-gallery.netlify.app/admin/"><strong>⚡ Admin CMS »</strong></a>
+    <a href="https://azmi.is-cool.dev/admin/"><strong>⚡ Admin CMS »</strong></a>
     ·
-    <a href="https://azmi-gallery.netlify.app/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
+    <a href="https://azmi.is-cool.dev/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
     ·
-    <a href="https://azmi-gallery.netlify.app/admin/proofing.html"><strong>🔒 Client Proofing Manager »</strong></a>
+    <a href="https://azmi.is-cool.dev/admin/proofing.html"><strong>🔒 Client Proofing Manager »</strong></a>
     ·
     <a href="http://azizulabedinazmi.is-a.dev/"><strong>💻 Developer Portfolio »</strong></a>
     <br />
@@ -93,7 +93,7 @@ This repository contains the complete portfolio and creative studio system for *
 
 Manage your portfolio without writing a single line of code!
 
-- **URL**: `https://azmi-gallery.netlify.app/admin/`
+- **URL**: `https://azmi.is-cool.dev/admin/`
 - **Powered by**: Decap CMS (formerly Netlify CMS) via Git Gateway.
 - **Detailed Setup Guide**: See [ADMIN_SETUP.md](ADMIN_SETUP.md) for full instructions on enabling Identity, user invitations, and setting your password.
 - **How it works**:
@@ -102,7 +102,7 @@ Manage your portfolio without writing a single line of code!
   3. Enable **Git Gateway** under **Services** → **Git Gateway**.
   4. Invite your own email address in the Identity tab.
   5. Accept the invite in your email and create your password.
-  6. Visit `https://azmi-gallery.netlify.app/admin/`, log in with your credentials.
+  6. Visit `https://azmi.is-cool.dev/admin/`, log in with your credentials.
   7. Add new photos, change categories, update camera gear, or reorder items.
   8. Click **Publish** — Netlify automatically commits the changes to GitHub and redeploys the live site in ~15 seconds.
 
@@ -112,7 +112,7 @@ Manage your portfolio without writing a single line of code!
 
 ## 🛠️ Studio Admin Suite (EXIF & WebP) <a name="studio-admin-suite"></a>
 
-Located at `https://azmi-gallery.netlify.app/admin/studio.html`:
+Located at `https://azmi.is-cool.dev/admin/studio.html`:
 
 1. **🔁 Visual Drag-and-Drop Reordering**:
    - Live visual grid of all portfolio cards.

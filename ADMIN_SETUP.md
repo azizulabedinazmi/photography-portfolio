@@ -22,10 +22,10 @@ Your portfolio features a dual-tier administration suite:
 
 | Interface | URL | Purpose |
 |---|---|---|
-| **Decap CMS** | `https://azmi-gallery.netlify.app/admin/` | Form-based content manager. Add new photos, change titles, update camera gear, and publish directly to GitHub without code. |
-| **Studio Suite** | `https://azmi-gallery.netlify.app/admin/studio.html` | Client-side power tools: Visual drag-and-drop gallery reordering, auto-EXIF camera metadata extractor, and in-browser WebP compressor. |
-| **Client Proofing Manager** | `https://azmi-gallery.netlify.app/admin/proofing.html` | Create private galleries for clients from uploads, Google Drive or Google Photos, and see which photos they picked. |
-| **Client gallery** | `https://azmi-gallery.netlify.app/client/<code>` | What your client opens. Needs the session PIN. |
+| **Decap CMS** | `https://azmi.is-cool.dev/admin/` | Form-based content manager. Add new photos, change titles, update camera gear, and publish directly to GitHub without code. |
+| **Studio Suite** | `https://azmi.is-cool.dev/admin/studio.html` | Client-side power tools: Visual drag-and-drop gallery reordering, auto-EXIF camera metadata extractor, and in-browser WebP compressor. |
+| **Client Proofing Manager** | `https://azmi.is-cool.dev/admin/proofing.html` | Create private galleries for clients from uploads, Google Drive or Google Photos, and see which photos they picked. |
+| **Client gallery** | `https://azmi.is-cool.dev/client/<code>` | What your client opens. Needs the session PIN. |
 
 ---
 
@@ -68,7 +68,7 @@ Git Gateway allows Decap CMS to create Git commits using your GitHub credentials
 
 1. Open your browser and navigate to:
    ```
-   https://azmi-gallery.netlify.app/admin/
+   https://azmi.is-cool.dev/admin/
    ```
 2. The Netlify Identity login modal will appear.
 3. Enter your email and the password you created.
@@ -81,7 +81,7 @@ Git Gateway allows Decap CMS to create Git commits using your GitHub credentials
 
 ## 4. Using the Studio Suite (/admin/studio.html)
 
-Located at `https://azmi-gallery.netlify.app/admin/studio.html`, this standalone tool runs 100% in your browser:
+Located at `https://azmi.is-cool.dev/admin/studio.html`, this standalone tool runs 100% in your browser:
 
 ### 1. Visual Drag-and-Drop Reordering (Tab 1)
 - See all current photos in a responsive grid.
@@ -111,7 +111,7 @@ Located at `https://azmi-gallery.netlify.app/admin/studio.html`, this standalone
 
 ## 5. Client Proofing Manager
 
-Open **`https://azmi-gallery.netlify.app/admin/proofing.html`** and log in with your Netlify Identity account (the same one you use for Decap CMS).
+Open **`https://azmi.is-cool.dev/admin/proofing.html`** and log in with your Netlify Identity account (the same one you use for Decap CMS).
 
 ### Where the data lives
 Client sessions, PINs, uploaded photos and client picks are stored in **Netlify Blobs**, Netlify's private storage for your site. Nothing is committed to GitHub, so none of it shows up in the public repository. Blobs works on every Netlify plan and needs no setup.
@@ -133,7 +133,7 @@ Drive and Google Photos images are loaded straight from Google, so anyone who ha
 
 ### Share it
 - **Copy invite message** gives you a ready-to-send text with the link and PIN.
-- Links look like `https://azmi-gallery.netlify.app/client/sarah-graduation-7k2qp`. The random ending means links can't be guessed.
+- Links look like `https://azmi.is-cool.dev/client/sarah-graduation-7k2qp`. The random ending means links can't be guessed.
 - If you can, send the PIN in a different message from the link.
 
 ### What the client sees

@@ -5,9 +5,9 @@ backend:
 media_folder: "dist/assets/Photography"
 public_folder: "dist/assets/Photography"
 
-site_url: "https://azmi-gallery.netlify.app"
-display_url: "https://azmi-gallery.netlify.app"
-logo_url: "https://azmi-gallery.netlify.app/dist/assets/Logo.png"
+site_url: "https://azmi.is-cool.dev"
+display_url: "https://azmi.is-cool.dev"
+logo_url: "https://azmi.is-cool.dev/dist/assets/Logo.png"
 
 collections:
   - name: "gallery_data"
