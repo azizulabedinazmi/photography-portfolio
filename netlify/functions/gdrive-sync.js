@@ -38,7 +38,7 @@ exports.handler = async function (event, context) {
 
   try {
     const params = event.queryStringParameters || {};
-    const folderId = params.folderId || process.env.GDRIVE_FOLDER_ID || '';
+    const folderId = params.folderId || process.env.GDRIVE_FOLDER_ID || '1D09ID20nLSdNItx2vYhqo5yJfBYFYxsv';
     const fileIdsParam = params.fileIds || '';
     const apiKey = params.apiKey || process.env.GDRIVE_API_KEY || '';
 

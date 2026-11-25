@@ -1,0 +1,67 @@
+---
+// Fullscreen Zen Exhibition Slideshow Mode with dynamic background blur, touch swipe, and haptics
+---
+
+<div id="zen-exhibition-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden opacity-0 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-8 select-none min-h-[100dvh] h-[100dvh]">
+  
+  <!-- Ambient Dynamic Blurred Glow Background -->
+  <div id="zen-ambient-bg" class="absolute inset-0 bg-cover bg-center filter blur-3xl opacity-20 pointer-events-none transition-all duration-700"></div>
+
+  <!-- Modal Top Bar -->
+  <div class="relative z-10 flex items-center justify-between w-full max-w-7xl mx-auto pt-2">
+    <div class="flex items-center gap-3">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+      <span class="text-xs font-mono tracking-widest uppercase text-white/80">Zen Exhibition Mode</span>
+      <span id="zen-photo-counter" class="text-xs font-mono text-white/50 pl-2 border-l border-white/20">1 / 55</span>
+    </div>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- EXIF Info button -->
+      <button id="zen-exif-btn" type="button" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition" title="Inspect Camera EXIF & Story (I)">
+        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+      </button>
+
+      <!-- Play / Pause Auto Slideshow -->
+      <button id="zen-play-btn" type="button" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition" title="Auto-advance slideshow (Space)">
+        <svg id="zen-play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="zen-pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+
+      <!-- Close Button -->
+      <button id="zen-close-btn" type="button" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition" title="Exit Zen Mode (Esc)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Center Stage: Photo Display -->
+  <div class="relative z-10 flex-1 flex items-center justify-center max-w-7xl mx-auto w-full my-2 overflow-hidden">
+    
+    <!-- Previous Button -->
+    <button id="zen-prev-btn" type="button" class="absolute left-0 p-3 sm:p-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition z-20" title="Previous Photo (←)">
+      <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </button>
+
+    <!-- Main Photo Container -->
+    <div class="max-h-[72dvh] max-w-full flex items-center justify-center p-2">
+      <img id="zen-main-img" src="" alt="Exhibition Photo" class="max-h-[72dvh] max-w-full object-contain rounded-xl shadow-2xl transition-opacity duration-300" draggable="false" />
+    </div>
+
+    <!-- Next Button -->
+    <button id="zen-next-btn" type="button" class="absolute right-0 p-3 sm:p-4 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition z-20" title="Next Photo (→)">
+      <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+    </button>
+
+  </div>
+
+  <!-- Modal Bottom Caption -->
+  <div class="relative z-10 max-w-3xl mx-auto text-center w-full pb-2">
+    <h3 id="zen-photo-title" class="text-lg sm:text-2xl font-serif font-bold text-white tracking-tight drop-shadow-md truncate">Photo Title</h3>
+    <p id="zen-photo-meta" class="text-xs sm:text-sm font-mono text-neutral-400 mt-0.5">Portrait · Canon EOS · Fine Art Series</p>
+    <div class="text-[10px] sm:text-[11px] font-mono text-white/40 mt-2">
+      <span class="hidden sm:inline">Navigate with Arrow Keys [← / →] · Space to Play/Pause · </span>
+      <span>Swipe Left/Right on Mobile · Esc to Exit</span>
+    </div>
+  </div>
+
+</div>

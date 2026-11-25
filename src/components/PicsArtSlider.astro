@@ -1,0 +1,148 @@
+---
+// Interactive Before & After comparison slider for PicsArt Digital Art manipulations
+---
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-neutral-200/80 dark:border-neutral-800/80">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 mb-3">
+        <span>🎨</span> Digital Artistry & Manipulation
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-neutral-900 dark:text-white">
+        Before & After: The PicsArt Edit
+      </h2>
+      <p class="text-sm sm:text-base text-neutral-500 mt-2 font-light max-w-xl">
+        Drag the split slider to reveal how intimate camera portraits transform into high-aesthetic surreal artworks and color dreamscapes.
+      </p>
+    </div>
+
+    <!-- Edit Switcher Pills -->
+    <div class="flex flex-wrap items-center gap-2">
+      <button type="button" class="ba-preset-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-600 text-white transition active:scale-95" data-before="/dist/assets/Photography/nikisha-hoque-dramatic-light.jpg" data-after="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=100" data-title="Nikisha Hoque — Dramatic Light to Ethereal Glow">
+        Nikisha Hoque
+      </button>
+      <button type="button" class="ba-preset-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition active:scale-95" data-before="/dist/assets/Photography/20220413163432__MG_7932-01 (1).jpg" data-after="https://hcdn.picsart.com/a260a662-0035-4c57-92dd-20edbcbcdc6b.jpg" data-title="Hafsa Prapti — Outdoor Portrait to Stylized Digital Art">
+        Hafsa Prapti
+      </button>
+      <button type="button" class="ba-preset-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition active:scale-95" data-before="/dist/assets/Photography/shadow-radiance.jpg" data-after="https://cdn271.picsart.com/c9073c72-bbdc-49c7-90aa-7bebd13d2e2f/461625628021201.png?to=crop&type=webp&r=1456x1820&q=100" data-title="Shadow & Radiance to Celestial Mirage">
+        Celestial Mirage
+      </button>
+    </div>
+  </div>
+
+  <!-- Split Comparison Container -->
+  <div class="relative w-full max-w-4xl mx-auto aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 dark:border-neutral-800 select-none bg-neutral-900 group" id="ba-container">
+    
+    <!-- "After" Image (Underneath, full size) -->
+    <img id="ba-img-after" src="https://hcdn.picsart.com/419bd7ca-d9a0-4a79-89ce-ffbd2720a9a4.jpg?to=crop&type=webp&r=1456x1507&q=100" alt="PicsArt Digital Manipulation" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
+    <span class="absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-purple-950/80 backdrop-blur-md text-purple-200 border border-purple-500/30">
+      After: PicsArt Edit ✨
+    </span>
+
+    <!-- "Before" Image (Clipped with inset) -->
+    <div id="ba-before-wrap" class="absolute inset-0 overflow-hidden w-1/2">
+      <img id="ba-img-before" src="/dist/assets/Photography/nikisha-hoque-dramatic-light.jpg" alt="Original Camera Capture" class="absolute inset-0 w-full h-full object-cover max-w-none" draggable="false" style="width: 100%;" />
+      <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-black/75 backdrop-blur-md text-white border border-white/20">
+        Before: Raw Capture 📷
+      </span>
+    </div>
+
+    <!-- Center Drag Handle Divider -->
+    <div id="ba-divider" class="absolute top-0 bottom-0 left-1/2 w-1 bg-white cursor-ew-resize shadow-[0_0_15px_rgba(0,0,0,0.8)] z-20 flex items-center justify-center transform -translate-x-1/2">
+      <div class="w-9 h-9 rounded-full bg-white text-neutral-900 shadow-xl border-2 border-purple-600 flex items-center justify-center text-xs font-bold font-mono">
+        ‹ ›
+      </div>
+    </div>
+
+    <!-- Active Caption Overlay -->
+    <div class="absolute bottom-4 inset-x-4 z-10 flex items-center justify-between pointer-events-none">
+      <div class="px-4 py-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/10 truncate max-w-md" id="ba-caption">
+        Nikisha Hoque — Dramatic Light to Ethereal Glow
+      </div>
+      <div class="hidden sm:inline-block px-3 py-1.5 rounded-xl bg-black/60 backdrop-blur-md text-white/70 text-[11px] font-mono border border-white/10">
+        Drag slider or click anywhere to compare
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+(function () {
+  const container = document.getElementById('ba-container');
+  const beforeWrap = document.getElementById('ba-before-wrap');
+  const divider = document.getElementById('ba-divider');
+  const imgBefore = document.getElementById('ba-img-before');
+  const imgAfter = document.getElementById('ba-img-after');
+  const caption = document.getElementById('ba-caption');
+  const presetBtns = document.querySelectorAll('.ba-preset-btn');
+
+  if (!container || !beforeWrap || !divider || !imgBefore) return;
+
+  function syncBeforeWidth() {
+    imgBefore.style.width = container.offsetWidth + 'px';
+  }
+  window.addEventListener('resize', syncBeforeWidth);
+  syncBeforeWidth();
+
+  let isDragging = false;
+
+  function setPosition(x) {
+    const rect = container.getBoundingClientRect();
+    let pos = (x - rect.left) / rect.width;
+    if (pos < 0.03) pos = 0.03;
+    if (pos > 0.97) pos = 0.97;
+    const pct = pos * 100;
+    beforeWrap.style.width = pct + '%';
+    divider.style.left = pct + '%';
+  }
+
+  container.addEventListener('mousedown', function (e) {
+    isDragging = true;
+    setPosition(e.clientX);
+  });
+  window.addEventListener('mousemove', function (e) {
+    if (!isDragging) return;
+    setPosition(e.clientX);
+  });
+  window.addEventListener('mouseup', function () {
+    isDragging = false;
+  });
+
+  // Touch support
+  container.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 0) {
+      isDragging = true;
+      setPosition(e.touches[0].clientX);
+    }
+  }, { passive: true });
+  window.addEventListener('touchmove', function (e) {
+    if (!isDragging || e.touches.length === 0) return;
+    setPosition(e.touches[0].clientX);
+  }, { passive: true });
+  window.addEventListener('touchend', function () {
+    isDragging = false;
+  });
+
+  // Preset switching
+  presetBtns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      presetBtns.forEach(b => {
+        b.classList.remove('bg-purple-600', 'text-white');
+        b.classList.add('bg-neutral-100', 'text-neutral-700', 'dark:bg-neutral-800', 'dark:text-neutral-300');
+      });
+      this.classList.remove('bg-neutral-100', 'text-neutral-700', 'dark:bg-neutral-800', 'dark:text-neutral-300');
+      this.classList.add('bg-purple-600', 'text-white');
+
+      const beforeSrc = this.dataset.before;
+      const afterSrc = this.dataset.after;
+      const title = this.dataset.title;
+
+      imgBefore.src = beforeSrc;
+      imgAfter.src = afterSrc;
+      if (caption) caption.textContent = title;
+      syncBeforeWidth();
+    });
+  });
+})();
+</script>

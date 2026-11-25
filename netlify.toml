@@ -1,6 +1,6 @@
 [build]
-  command = "node scripts/build-images.js && node scripts/build-seo.js"
-  publish = "."
+  command = "npm run build"
+  publish = "dist_site"
   functions = "netlify/functions"
 
 [functions]
@@ -12,6 +12,17 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Clean URL redirects for legacy about and contact links
+[[redirects]]
+  from = "/dist/about_me.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/dist/contact.html"
+  to = "/contact"
+  status = 301
 
 # Keep admin and client proofing pages out of search engines
 [[headers]]

@@ -1,0 +1,195 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="About Me — Azizul Abedin Azmi" description="Learn about Azizul Abedin Azmi — visual photographer, PicsArt digital artist, and software developer.">
+  <Navbar />
+
+  <main class="flex-1">
+    
+    <!-- About Me Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left: Polaroid / Framed Card -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative group max-w-sm w-full">
+            <!-- Ambient Glow behind frame -->
+            <div class="absolute -inset-4 bg-gradient-to-r from-amber-500/20 via-rose-500/20 to-purple-500/20 rounded-3xl filter blur-2xl opacity-50 group-hover:opacity-80 transition duration-700"></div>
+            
+            <!-- Polaroid Outer Container -->
+            <div class="relative bg-white dark:bg-neutral-900 p-5 pb-20 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+              <!-- Avatar Image -->
+              <div class="overflow-hidden rounded-xl aspect-square bg-neutral-100 dark:bg-neutral-800">
+                <img src="/dist/assets/Avatar.png" alt="Azizul Abedin Azmi" class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700" />
+              </div>
+              
+              <!-- Handwritten caption -->
+              <div class="absolute bottom-4 left-0 right-0 text-center">
+                <span class="font-nothingyoucoulddo text-4xl text-neutral-800 dark:text-neutral-200">Azmi</span>
+                <span class="text-xs font-mono text-neutral-400 block mt-0.5">Behind the lens</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Narrative Bio -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-6">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            Visual Storyteller & Portraitist
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-serif font-bold tracking-tight text-neutral-950 dark:text-white mb-6 leading-tight">
+            Hello there, I'm Azmi <span class="animate-wave inline-block">👋</span>
+          </h1>
+
+          <div class="space-y-5 text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-light leading-relaxed">
+            <p>
+              Photography for me began as an innate desire to freeze time. What fascinates me most is that every shutter click captures a fleeting moment of human emotion that will never repeat itself — impossible to recreate, yet immortalized forever in light and shadow.
+            </p>
+            <p>
+              Over the years, my work has evolved around emotive portraiture, cultural youth documentary (Scouts and ECPA), and fine art street narratives. I believe the greatest photographs don't come from stiff poses, but from creating a comfortable, authentic atmosphere where someone's true essence and vulnerability shine through.
+            </p>
+            <p>
+              Beyond the camera, I am passionate about color science. In post-production, I develop custom color grades inspired by analog film stocks — warm Kodak Portra tones, rich shadows, and gentle skin tones that feel nostalgic, cinematic, and timeless.
+            </p>
+          </div>
+
+          <!-- Direct CTA -->
+          <div class="pt-8 flex flex-wrap items-center gap-4">
+            <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:opacity-90 transition shadow-lg">
+              <span>Collaborate & Book a Shoot →</span>
+            </a>
+            <a href="/" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-800 font-medium text-sm hover:bg-neutral-200 dark:hover:bg-neutral-800 transition">
+              <span>View Full Portfolio</span>
+            </a>
+            <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 font-medium text-sm transition">
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+              <span>Developer Portfolio ↗</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Inside My Camera Bag (Gear Section) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-200 dark:border-neutral-800">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4">
+          <span>📷</span> The Gear & Tools
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-neutral-900 dark:text-white">
+          Inside My Camera Bag
+        </h2>
+        <p class="text-sm sm:text-base text-neutral-500 mt-3 font-light">
+          The precision glass, full-frame bodies, and digital darkroom suite used to bring visions to life.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1: Camera Body -->
+        <div class="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition group shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-5 text-xl font-bold font-mono">
+            01
+          </div>
+          <h3 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-1">Canon EOS System</h3>
+          <div class="text-xs font-mono text-neutral-400 mb-3">Primary Camera Body</div>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+            Full-frame sensor delivering rich dynamic range, exceptional color fidelity, and natural skin tone rendering even under demanding natural light.
+          </p>
+        </div>
+
+        <!-- Card 2: 50mm Prime -->
+        <div class="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition group shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mb-5 text-xl font-bold font-mono">
+            02
+          </div>
+          <h3 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-1">50mm f/1.8 STM</h3>
+          <div class="text-xs font-mono text-neutral-400 mb-3">The Nifty Fifty</div>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+            My primary storytelling lens. Replicates natural human vision perspective with razor-sharp subject isolation and gorgeous wide-aperture low-light rendering.
+          </p>
+        </div>
+
+        <!-- Card 3: 85mm Portrait -->
+        <div class="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition group shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center mb-5 text-xl font-bold font-mono">
+            03
+          </div>
+          <h3 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-1">85mm f/1.8 USM</h3>
+          <div class="text-xs font-mono text-neutral-400 mb-3">Portrait Specialization</div>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+            Flattering facial compression, creamy background separation, and exceptional micro-contrast tailored for fine art and classical portraiture.
+          </p>
+        </div>
+
+        <!-- Card 4: Post-Production -->
+        <div class="p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition group shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-5 text-xl font-bold font-mono">
+            04
+          </div>
+          <h3 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-1">Lightroom & Photoshop</h3>
+          <div class="text-xs font-mono text-neutral-400 mb-3">Color Darkroom</div>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+            Bespoke film emulation profiles, frequency separation skin retouching, and meticulous color grading for gallery exhibition standards.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Creative Principles -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-neutral-200 dark:border-neutral-800">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-center text-neutral-900 dark:text-white mb-12">
+          My Creative Principles
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div class="text-center p-6">
+            <div class="w-12 h-12 mx-auto rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-xl mb-4">
+              ✨
+            </div>
+            <h4 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-2">Authenticity First</h4>
+            <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+              Real human emotion over stiff poses. The unscripted laughter and reflective glances create the truest art.
+            </p>
+          </div>
+
+          <div class="text-center p-6">
+            <div class="w-12 h-12 mx-auto rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-xl mb-4">
+              🌤️
+            </div>
+            <h4 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-2">Respect for Light</h4>
+            <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+              Whether harnessing dramatic golden hour sun or moody shadow play, light dictates the emotional pulse of the frame.
+            </p>
+          </div>
+
+          <div class="text-center p-6">
+            <div class="w-12 h-12 mx-auto rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-xl mb-4">
+              🎞️
+            </div>
+            <h4 class="font-serif font-bold text-lg text-neutral-900 dark:text-white mb-2">Timeless Longevity</h4>
+            <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+              Avoiding fleeting filter trends. Color grading and composition designed to look as striking 20 years from today.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+  <script src="/dist/portfolio-smart.js" is:inline></script>
+</Layout>

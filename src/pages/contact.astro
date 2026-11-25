@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact & Bookings — Azizul Abedin Azmi" description="Get in touch with Azizul Abedin Azmi for portrait sessions, documentary events, and photography commissions worldwide.">
+  <Navbar />
+
+  <main class="flex-1">
+    
+    <!-- Contact & Booking Main Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      
+      <!-- Top Header -->
+      <div class="max-w-3xl mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Now Booking 2026 / 2027 Commissions
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-serif font-bold tracking-tight text-neutral-950 dark:text-white mb-4">
+          Let's Create <span class="italic font-normal">Together</span>.
+        </h1>
+        <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-light leading-relaxed">
+          Whether you're looking for an editorial portrait session, cultural event documentation, or fine art project, share your vision below and let's bring it to life.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        
+        <!-- Left: Interactive Inquiry Form -->
+        <div class="lg:col-span-7 bg-neutral-50 dark:bg-neutral-900/60 p-6 sm:p-10 rounded-3xl border border-neutral-200/80 dark:border-neutral-800 shadow-xl">
+          
+          <form name="contact" action="/success" method="POST" data-netlify="true" class="space-y-6">
+            <input type="hidden" name="form-name" value="contact" />
+            
+            <!-- Name & Email -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Your Name</label>
+                <input type="text" id="name" name="name" required placeholder="Azizul Abedin" class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
+              </div>
+              <div>
+                <label for="email" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Your Email</label>
+                <input type="email" id="email" name="email" required placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
+              </div>
+            </div>
+
+            <!-- Service Type Selection -->
+            <div>
+              <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Type of Photography</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <label class="cursor-pointer">
+                  <input type="radio" name="service_type" value="Portraits" class="peer sr-only" checked />
+                  <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
+                    Portraiture
+                  </div>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="service_type" value="Events" class="peer sr-only" />
+                  <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
+                    Events / Street
+                  </div>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="service_type" value="Editorial" class="peer sr-only" />
+                  <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
+                    Editorial Cut
+                  </div>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="service_type" value="Commercial" class="peer sr-only" />
+                  <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
+                    Commercial
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Subject -->
+            <div>
+              <label for="subject" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Subject / Shoot Concept</label>
+              <input type="text" id="subject" name="subject" required placeholder="e.g. Outdoor Golden Hour Portrait Session" class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
+            </div>
+
+            <!-- Message Body -->
+            <div>
+              <label for="message" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Message & Details</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Tell me about your planned date, preferred location, mood, or any questions..." class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full py-4 px-6 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:opacity-90 transition shadow-xl hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2">
+              <span>Send Inquiry Message</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+            </button>
+
+            <p class="text-[11px] font-mono text-center text-neutral-400">
+              🔒 Your contact info is strictly confidential. Typical response within 24 hours.
+            </p>
+
+          </form>
+
+        </div>
+
+        <!-- Right: Direct Connect & Studio Info -->
+        <div class="lg:col-span-5 space-y-8">
+          
+          <!-- Direct Communication Card -->
+          <div class="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/80 dark:border-neutral-800 shadow-xl space-y-6">
+            <h3 class="font-serif font-bold text-xl text-neutral-900 dark:text-white">Direct Connect</h3>
+            
+            <div class="space-y-4">
+              <!-- WhatsApp Direct Chat -->
+              <a href="https://wa.me/?text=Hi%20Azmi!%20I%20love%20your%20photography%20portfolio%20and%20would%20like%20to%20inquire%20about%20a%20session." target="_blank" rel="noreferrer" class="flex items-center gap-4 p-3.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700 hover:border-emerald-500 hover:shadow-md transition group">
+                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.186 1.564 5.938l-1.564 5.719 5.87-1.541c1.706.947 3.667 1.484 5.753 1.484 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-mono uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
+                    <span>Chat on WhatsApp</span>
+                    <span class="text-emerald-500 font-bold">↗</span>
+                  </div>
+                  <div class="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-emerald-500 transition">Instant Shoot Inquiry</div>
+                </div>
+              </a>
+
+              <!-- Instagram DM -->
+              <a href="https://www.instagram.com/azizulabedin" target="_blank" rel="noreferrer" class="flex items-center gap-4 p-3.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700 hover:border-rose-500 hover:shadow-md transition group">
+                <div class="w-10 h-10 rounded-lg bg-rose-500/10 text-rose-500 flex items-center justify-center group-hover:scale-110 transition">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-mono uppercase tracking-wider text-neutral-400">Instagram DM</div>
+                  <div class="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-rose-500 transition">@azizulabedin</div>
+                </div>
+              </a>
+
+              <!-- Developer Portfolio -->
+              <a href="http://azizulabedinazmi.is-a.dev/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-3.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700 hover:border-amber-500/50 hover:shadow-md transition group">
+                <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:scale-110 transition">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+                </div>
+                <div>
+                  <div class="text-xs font-mono uppercase tracking-wider text-neutral-400 flex items-center gap-1.5">
+                    <span>Developer Portfolio</span>
+                    <span class="text-amber-500 font-bold">↗</span>
+                  </div>
+                  <div class="text-sm font-semibold text-neutral-900 dark:text-white group-hover:text-amber-500 transition">azizulabedinazmi.is-a.dev</div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Frequently Asked Questions -->
+          <div class="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/80 dark:border-neutral-800 shadow-xl space-y-4">
+            <h3 class="font-serif font-bold text-xl text-neutral-900 dark:text-white mb-2">FAQ for Clients</h3>
+            
+            <div class="space-y-3 text-xs sm:text-sm">
+              <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
+                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">What is your delivery turnaround?</h4>
+                <p class="text-neutral-500 font-light leading-relaxed">Typically 5-7 business days for fully color-graded, high-resolution JPEG files ready for print and social media.</p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
+                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Do you travel for shoots?</h4>
+                <p class="text-neutral-500 font-light leading-relaxed">Yes! Available worldwide for travel sessions, remote digital commissions, and on-location editorial projects.</p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
+                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Do I get raw photos or edited only?</h4>
+                <p class="text-neutral-500 font-light leading-relaxed">You receive fully polished, signature color-graded images. RAW sensor files represent unfinished work and are curated into final masters.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+  <script src="/dist/portfolio-smart.js" is:inline></script>
+</Layout>

@@ -72,13 +72,13 @@ write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 ${imageTags}
   </url>
   <url>
-    <loc>${SITE}/dist/about_me.html</loc>
+    <loc>${SITE}/about</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${SITE}/dist/contact.html</loc>
+    <loc>${SITE}/contact</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -86,30 +86,32 @@ ${imageTags}
 </urlset>
 `);
 
-// 3. JSON-LD in index.html
-const ld = {
-  '@context': 'https://schema.org',
-  '@type': 'ImageGallery',
-  name: '〘卂乙爪丨〙ヅ - Portfolio',
-  url: `${SITE}/`,
-  image: images.map((im) => ({
-    '@type': 'ImageObject',
-    contentUrl: im.url,
-    name: im.name,
-    description: im.alt,
-    keywords: im.keywords
-  }))
-};
-const block = `${START}\n  <script type="application/ld+json">\n${JSON.stringify(ld).replace(/</g, '\\u003c')}\n  </script>\n  ${END}`;
+// 3. JSON-LD in index.html (if present)
+if (fs.existsSync(path.join(ROOT, 'index.html'))) {
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    name: '〘卂乙爪丨〙ヅ - Portfolio',
+    url: `${SITE}/`,
+    image: images.map((im) => ({
+      '@type': 'ImageObject',
+      contentUrl: im.url,
+      name: im.name,
+      description: im.alt,
+      keywords: im.keywords
+    }))
+  };
+  const block = `${START}\n  <script type="application/ld+json">\n${JSON.stringify(ld).replace(/</g, '\\u003c')}\n  </script>\n  ${END}`;
 
-let html = read('index.html');
-const a = html.indexOf(START.slice(0, 22));
-const b = html.indexOf(END);
-if (a !== -1 && b !== -1) {
-  html = html.slice(0, a) + block + html.slice(b + END.length);
-} else {
-  html = html.replace('</head>', `  ${block}\n</head>`);
+  let html = read('index.html');
+  const a = html.indexOf(START.slice(0, 22));
+  const b = html.indexOf(END);
+  if (a !== -1 && b !== -1) {
+    html = html.slice(0, a) + block + html.slice(b + END.length);
+  } else if (html.includes('</head>')) {
+    html = html.replace('</head>', `  ${block}\n</head>`);
+  }
+  write('index.html', html);
 }
-write('index.html', html);
 
 console.log(`SEO build: ${items.length} gallery items, ${images.length} images in sitemap and JSON-LD.`);

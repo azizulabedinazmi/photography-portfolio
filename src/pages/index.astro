@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import PicsArtSlider from '../components/PicsArtSlider.astro';
+import Gallery from '../components/Gallery.astro';
+import ExifModal from '../components/ExifModal.astro';
+import ZenMode from '../components/ZenMode.astro';
+import Footer from '../components/Footer.astro';
+import galleryData from '../../dist/gallery-data.json';
+
+const items = Array.isArray(galleryData) ? galleryData : (galleryData as any).items || [];
+
+const schemaImages = items.map((item: any) => ({
+  '@type': 'ImageObject',
+  contentUrl: item.src.startsWith('http') ? item.src : `https://azmi.is-cool.dev/${item.src.replace(/^\.?\//, '')}`,
+  name: item.title,
+  description: item.alt || item.title,
+  keywords: item.tags || ''
+}));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: '〘卂乙爪丨〙ヅ - Photography & Digital Art Portfolio',
+  url: 'https://azmi.is-cool.dev/',
+  image: schemaImages
+};
+---
+
+<Layout title="〘卂乙爪丨〙ヅ - Azizul Abedin Azmi | Photography & Digital Art Portfolio">
+  
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+  <Navbar />
+  
+  <main class="flex-1">
+    <Hero />
+    <PicsArtSlider />
+    <Gallery />
+    
+    <!-- Editorial Quote Strip -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center border-t border-neutral-200 dark:border-neutral-800">
+      <div class="max-w-3xl mx-auto">
+        <svg class="w-10 h-10 mx-auto text-neutral-300 dark:text-neutral-700 mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <blockquote class="text-xl sm:text-2xl font-serif italic text-neutral-800 dark:text-neutral-200 leading-relaxed mb-4">
+          “What I love about photographs is that they capture a fleeting human moment that is gone forever — impossible to reproduce, yet etched in light eternally.”
+        </blockquote>
+        <div class="text-xs font-mono tracking-widest uppercase text-neutral-500">— Azizul Abedin Azmi</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modals & Drawers -->
+  <ExifModal />
+  <ZenMode />
+
+  <Footer />
+
+  <!-- Client-side Gallery Dataset and Logic -->
+  <script src="/dist/gallery-data.js" is:inline></script>
+  <script src="/dist/image-variants.js" is:inline></script>
+  <script src="/dist/portfolio-smart.js" is:inline></script>
+  
+  <!-- Fancybox v5 Binding -->
+  <script is:inline>
+    if (window.Fancybox) {
+      Fancybox.bind('[data-fancybox="gallery"]', {
+        Thumbs: {
+          autoStart: true,
+        },
+        Toolbar: {
+          display: {
+            left: ["infobar"],
+            middle: ["zoomIn", "zoomOut", "toggle1to1", "rotateCCW", "rotateCW", "flipX", "flipY"],
+            right: ["slideshow", "thumbs", "close"],
+          },
+        },
+      });
+      Fancybox.bind('[data-fancybox="filmstrip"]', {
+        Thumbs: { autoStart: true }
+      });
+    }
+  </script>
+
+</Layout>

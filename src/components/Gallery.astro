@@ -1,0 +1,82 @@
+---
+// Gallery toolbar and interactive grid container
+---
+
+<section id="gallery-section" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
+  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+    
+    <!-- Category Filter Pills -->
+    <div class="flex flex-wrap items-center gap-2">
+      <button type="button" data-category="all" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black transition shadow-sm active:scale-95">
+        All Works (55)
+      </button>
+      <button type="button" data-category="portraits" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+        Portraits (28)
+      </button>
+      <button type="button" data-category="art" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95 flex items-center gap-1.5">
+        <span>🎨 Digital Art & PicsArt (16)</span>
+      </button>
+      <button type="button" data-category="events" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+        Events & Street (8)
+      </button>
+      <button type="button" data-category="nature" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+        Nature & Details (3)
+      </button>
+      <button type="button" data-category="series" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
+        Curated Series (6)
+      </button>
+    </div>
+
+    <!-- Search & Layout Switcher -->
+    <div class="flex flex-wrap items-center gap-3">
+      
+      <!-- Quick Search Input -->
+      <div class="relative w-full sm:w-64">
+        <svg class="w-4 h-4 absolute left-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        <input type="text" id="gallery-search-input" placeholder="Search by name, art, camera..." class="w-full pl-9 pr-8 py-2 rounded-full text-xs bg-neutral-100 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
+        <button id="gallery-search-clear" class="hidden absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-white">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- View Density Switcher -->
+      <div class="inline-flex p-1 bg-neutral-100 dark:bg-neutral-900 rounded-full border border-neutral-200/80 dark:border-neutral-800">
+        <button type="button" data-view="masonry" class="view-switcher-btn p-1.5 rounded-full text-black dark:text-white bg-white dark:bg-neutral-800 shadow-sm transition" title="Responsive Grid Layout">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        </button>
+        <button type="button" data-view="editorial" class="view-switcher-btn p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition" title="Editorial Magazine Layout (2 Columns)">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h4a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM11 4a1 1 0 011-1h4a1 1 0 011 1v12a1 1 0 01-1 1h-4a1 1 0 01-1-1V4z"/></svg>
+        </button>
+        <button type="button" data-view="compact" class="view-switcher-btn p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition" title="Compact Contact Sheet Grid">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 4a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1V4zM8 4a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H9a1 1 0 01-1-1V4zM14 4a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1V4zM2 10a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2zM8 10a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H9a1 1 0 01-1-1v-2zM14 10a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2zM2 16a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2zM8 16a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H9a1 1 0 01-1-1v-2zM14 16a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2z"/></svg>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Active Results Status -->
+  <div class="flex items-center justify-between text-xs font-mono text-neutral-500 dark:text-neutral-400 py-4">
+    <span id="gallery-results-count">Showing 55 Curated Works</span>
+    <span class="hidden sm:inline">Click any photo to zoom · 3D hover tilt · Tap ℹ️ for EXIF & Story</span>
+  </div>
+
+  <!-- Responsive CSS Grid (replaces broken columns masonry, prevents jumping on mobile/desktop) -->
+  <div id="portfolio-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <!-- Injected dynamically by client JS with 3D tilt and smooth entrance -->
+  </div>
+
+  <!-- Empty State for Zero Search Results -->
+  <div id="gallery-no-results" class="hidden py-24 text-center">
+    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-400">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+    </div>
+    <h3 class="text-xl font-serif font-bold text-neutral-900 dark:text-white mb-2">No matching works found</h3>
+    <p class="text-sm text-neutral-500 max-w-sm mx-auto mb-6">Try adjusting your search terms or clearing the category filter.</p>
+    <button onclick="document.getElementById('gallery-search-clear').click(); document.querySelector('[data-category=\'all\']').click();" class="px-5 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-semibold">
+      Reset All Filters
+    </button>
+  </div>
+
+</section>
