@@ -515,6 +515,9 @@
       container.style.gridAutoRows = '1px';
       container.style.rowGap = '0px';
       container.style.alignItems = 'start';
+      // Never let the browser's scroll anchoring follow a card while cards are re-placed
+      // (images loading trigger re-layouts; anchoring then jumped the page to the bottom).
+      container.style.overflowAnchor = 'none';
       let t = 0;
       this.layout = () => { clearTimeout(t); t = setTimeout(() => this.place(), 16); };
       this.place();
@@ -528,6 +531,14 @@
     },
 
     place() {
+      // Hold the gallery's height while cards are re-placed so the page never
+      // shrinks for a moment (which moved the scroll position).
+      const c = this.container;
+      c.style.minHeight = c.offsetHeight + 'px';
+      try { this.placeCards(); } finally { c.style.minHeight = ''; }
+    },
+
+    placeCards() {
       // Drop old placements first: a card pinned to column 4 would otherwise
       // create extra implicit columns after switching to a 2-column layout.
       this.cards.forEach((card) => { card.style.gridColumn = ''; card.style.gridRow = ''; });
