@@ -88,6 +88,7 @@ async function variantsFor(file, dir = SRC_DIR) {
 
 (async () => {
   const started = Date.now();
+  fs.mkdirSync(abs(SRC_DIR), { recursive: true }); // originals come from R2; the folder is not in git
   fs.mkdirSync(abs(OUT_DIR), { recursive: true });
   const files = fs.readdirSync(abs(SRC_DIR)).filter((f) => EXT.test(f) && fs.statSync(abs(`${SRC_DIR}/${f}`)).isFile());
 
