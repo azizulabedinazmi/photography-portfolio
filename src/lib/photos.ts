@@ -10,9 +10,10 @@ export const OWNER_IMAGE = `${SITE}/dist/assets/Avatar.png`;
 export const OWNER_PROFILES = [
   'https://www.instagram.com/azizulabedin',
   'https://www.facebook.com/azizul.abedin.azmi',
-  'https://bd.linkedin.com/in/azizulabedin',
+  'https://www.linkedin.com/in/azizulabedin/',
   'https://github.com/azizulabedinazmi',
-  'http://azizulabedinazmi.is-a.dev/'
+  'https://www.azizulabedinazmi.dev/',
+  'https://orcid.org/0009-0003-5269-6900'
 ];
 
 export type Variant = { w?: number; h?: number; srcset: [string, number][] };

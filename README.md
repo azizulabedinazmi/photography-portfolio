@@ -3,7 +3,7 @@
 [![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://bd.linkedin.com/in/azizulabedin)
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/azizulabedin/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717.svg?logo=GitHub&logoColor=white)](https://github.com/azizulabedinazmi)
-[![Dev Portfolio](https://img.shields.io/badge/Dev_Portfolio-azizulabedinazmi.is--a.dev-amber?logo=code&logoColor=black)](http://azizulabedinazmi.is-a.dev/)
+[![AI Portfolio](https://img.shields.io/badge/AI_Portfolio-azizulabedinazmi.dev-amber?logo=code&logoColor=black)](https://www.azizulabedinazmi.dev/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3421d5e3-e586-4553-bfc8-86d59a3c514c/deploy-status)](https://app.netlify.com/projects/azmi-gallery/deploys)
 
 <!-- HERO SHOWCASE BANNER -->
@@ -35,7 +35,7 @@
     ·
     <a href="https://azmi.is-cool.dev/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
     ·
-    <a href="http://azizulabedinazmi.is-a.dev/"><strong>💻 Developer Portfolio »</strong></a>
+    <a href="https://www.azizulabedinazmi.dev/"><strong>💻 AI & Research Portfolio »</strong></a>
     <br />
     <br />
     <a href="ADMIN_SETUP.md"><strong>📖 Read the Step-by-Step Admin Setup Guide »</strong></a>
@@ -70,7 +70,7 @@
 This is the personal portfolio of **Azizul Abedin Azmi**. It shows:
 - **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
 - **Digital Art & Photo Manipulations**: 22 surreal, concept and high-aesthetic digital edits, most with a step-by-step **Replay** of how they were made.
-- **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).
+- **Dual Identity Connection**: Linked to his AI & research portfolio at [azizulabedinazmi.dev](https://www.azizulabedinazmi.dev/).
 
 ---
 
@@ -323,7 +323,7 @@ Distributed under the GPL-3.0 License. See [LICENSE](LICENSE) for more informati
 ## 📧 Contact & Connect <a name="contact"></a>
 
 - **Azizul Abedin Azmi**
-- **Developer Portfolio**: [http://azizulabedinazmi.is-a.dev/](http://azizulabedinazmi.is-a.dev/)
+- **AI & Research Portfolio**: [https://www.azizulabedinazmi.dev/](https://www.azizulabedinazmi.dev/)
 - **LinkedIn**: [https://bd.linkedin.com/in/azizulabedin](https://bd.linkedin.com/in/azizulabedin)
 - **Instagram**: [@azizulabedin](https://www.instagram.com/azizulabedin/)
 - **GitHub**: [@azizulabedinazmi](https://github.com/azizulabedinazmi)
