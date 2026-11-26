@@ -26,7 +26,7 @@
   <h1 align="center">Azizul Abedin Azmi — Photography & Digital Art Portfolio</h1>
 
   <p align="center">
-    My hobby photography and digital art portfolio, built with Astro, Tailwind CSS, Decap CMS, Netlify Functions and Cloudflare R2. Photography is a hobby for me, not a business.
+    My personal photography and digital art portfolio, built with Astro, Tailwind CSS, Decap CMS, Netlify Functions and Cloudflare R2.
     <br />
     <br />
     <a href="https://azmi.is-cool.dev/"><strong>🌐 View Live Portfolio »</strong></a>
@@ -67,7 +67,7 @@
 
 ## 📋 About The Project <a name="about-the-project"></a>
 
-This is the personal, **hobby** portfolio of **Azizul Abedin Azmi** (a software developer who loves taking photos). It shows:
+This is the personal portfolio of **Azizul Abedin Azmi** (a software developer who loves taking photos). It shows:
 - **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
 - **Digital Art & Photo Manipulations**: 22 surreal, concept and high-aesthetic digital edits, most with a step-by-step **Replay** of how they were made.
 - **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).

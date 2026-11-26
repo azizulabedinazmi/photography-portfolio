@@ -18,14 +18,14 @@ interface Props {
 const SITE = 'https://azmi.is-cool.dev';
 const {
   title = "〘卂乙爪丨〙ヅ - Photography & Digital Art Portfolio",
-  description = "The hobby photography and digital art portfolio of Azizul Abedin Azmi: portraits, street and event moments, nature, and creative digital edits.",
+  description = "The personal photography and digital art portfolio of Azizul Abedin Azmi: portraits, street and event moments, nature, and creative digital edits.",
   // The owner's own picture: the only image tied to the owner's name.
   image = "/dist/assets/Avatar.png",
   robots = '',
-  keywords = "Azizul Abedin Azmi, hobby photography, portfolio, digital art, photo manipulation, portrait photography, developer",
+  keywords = "Azizul Abedin Azmi, photography, portfolio, digital art, photo manipulation, portrait photography, developer",
   author = "Azizul Abedin Azmi",
   ogType = 'website',
-  siteName = "Azizul Abedin Azmi · Hobby Photography & Art"
+  siteName = "Azizul Abedin Azmi · Photography & Art"
 } = Astro.props;
 const imageUrl = /^https?:/i.test(image) ? image : SITE + (image.startsWith('/') ? image : '/' + image);
 const path = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
