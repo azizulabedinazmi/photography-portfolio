@@ -78,31 +78,39 @@ Git Gateway allows Decap CMS to create Git commits using your GitHub credentials
 
 ## 4. Using the Studio Suite (/admin/studio.html)
 
-Located at `https://azmi.is-cool.dev/admin/studio.html`, this standalone tool runs 100% in your browser:
+Open `https://azmi.is-cool.dev/admin/studio.html` and log in with your Netlify Identity account (the same one as Decap CMS).
 
-### 1. Visual Drag-and-Drop Reordering (Tab 1)
-- See all current photos in a responsive grid.
-- Click and drag any photo card to reposition it.
-- Click **"Save / Copy Updated JSON"** to copy the sorted dataset.
-- Click **"Download JSON"** to save `gallery-data.json` directly.
+### Dashboard
+- **Live site** tells you whether your last change is live yet, still publishing, or stuck (then check Netlify deploys).
+- Counts of shown / hidden / featured photos, photos vs. digital art, and originals in R2.
+- **Needs attention**: problems found by the last build (an image missing from R2, missing alt text, duplicate IDs, unused originals). Click a title to fix it. **Check every image loads** tests each image in your browser.
 
-### 2. Smart Auto-EXIF Reader (Tab 2)
-- Drag and drop any raw camera JPEG (from Canon, Sony, Nikon, etc.).
-- The tool automatically parses:
-  - **Camera Model**: e.g., *Canon EOS 80D*
-  - **Lens**: e.g., *EF 50mm f/1.8 STM*
-  - **Focal Length**: e.g., *50mm*
-  - **Aperture**: e.g., *f/1.8*
-  - **Shutter Speed**: e.g., *1/640s*
-  - **ISO**: e.g., *100*
-  - **Date Shot**
-- Pre-fills all metadata fields for instant one-click copying.
+### Gallery
+- **Drag** cards to reorder (in the *All* view).
+- **👁** hides a photo from the site without deleting it; **★** puts it in the homepage filmstrip.
+- **Click** a photo to edit title, alt text, category, tags or series name, move it to the top, or remove it.
+- Changes collect in the yellow bar. Press **Save & publish**: the Studio commits `dist/gallery-data.json` to GitHub and the site is live in 1–2 minutes.
 
-### 3. In-Browser WebP Compressor (Tab 3)
-- Drop high-res camera files (up to 25MB).
-- Adjust quality slider (default: `82%`, max width `2000px`).
-- In-browser HTML5 Canvas compresses large camera files down to ~400–700KB WebP images with zero quality loss.
-- Download the compressed WebP file to drop into your `dist/assets/Photography/` folder.
+### Upload
+1. Drop one or more photos (JPG, PNG, WebP, TIFF, HEIC; up to 80 MB each).
+2. Fill in title, alt text (who/what is in it), category and tags. The camera details are read from the photo automatically when the site builds.
+3. Press **Upload & publish**. Originals go straight to your private R2 bucket (not GitHub), and the gallery is saved.
+
+**One-time setup:** uploads need a CORS rule on the R2 bucket (Cloudflare → R2 → bucket → Settings → CORS policy):
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://azmi.is-cool.dev"],
+    "AllowedMethods": ["PUT"],
+    "AllowedHeaders": ["content-type"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
+
+### Drive & Photos
+Convert Google Drive share links to direct image URLs, and list photos from a public Google Photos album.
 
 ---
 

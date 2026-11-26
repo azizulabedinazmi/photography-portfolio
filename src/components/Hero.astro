@@ -1,8 +1,8 @@
 ---
 // Hero component with dynamic rotating headline and cinematic filmstrip marquee
-import galleryData from '../../dist/gallery-data.json';
+import { items as visibleItems } from '../lib/photos';
 
-const heroItems: any[] = Array.isArray(galleryData) ? galleryData : (galleryData as any).items || [];
+const heroItems: any[] = visibleItems;
 const total = heroItems.length;
 const artCount = heroItems.filter((i) => i.category === 'art').length;
 const seriesCount = heroItems.filter((i) => i.isSeries).length;

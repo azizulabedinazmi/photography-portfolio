@@ -1,8 +1,8 @@
 ---
 // Gallery toolbar and interactive grid container
-import galleryData from '../../dist/gallery-data.json';
+import { items as visibleItems } from '../lib/photos';
 
-const items: any[] = Array.isArray(galleryData) ? galleryData : (galleryData as any).items || [];
+const items: any[] = visibleItems;
 const count = (cat: string) => items.filter((i) => i.category === cat).length;
 const total = items.length;
 const seriesCount = items.filter((i) => i.isSeries).length;

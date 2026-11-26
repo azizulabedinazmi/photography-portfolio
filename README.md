@@ -50,7 +50,7 @@
     <li><a href="#photo-storage">Photo Storage (Cloudflare R2)</a></li>
     <li><a href="#seo">Search Engines: One Page Per Photo</a></li>
     <li><a href="#admin-panel--cms">Admin Panel & Decap CMS</a></li>
-    <li><a href="#studio-admin-suite">Studio Admin Suite (EXIF & WebP)</a></li>
+    <li><a href="#studio-admin-suite">Admin Studio</a></li>
     <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
     <li><a href="#google-photos-live-sync">Google Photos Album Import (Admin)</a></li>
     <li><a href="#built-with">Built With</a></li>
@@ -183,21 +183,30 @@ Manage your portfolio without writing a single line of code!
 
 ---
 
-## 🛠️ Studio Admin Suite (EXIF & WebP) <a name="studio-admin-suite"></a>
+## 🛠️ Admin Studio <a name="studio-admin-suite"></a>
 
-Located at `https://azmi.is-cool.dev/admin/studio.html`:
+`https://azmi.is-cool.dev/admin/studio.html`, behind your Netlify Identity login (the same account as the CMS; sign-ups are closed). Every change is saved straight to GitHub as a commit, so the site rebuilds and is live in 1–2 minutes. No more copying JSON by hand.
 
-1. **🔁 Visual Drag-and-Drop Reordering**:
-   - Live visual grid of all portfolio cards.
-   - Drag and drop cards to change the display order on your homepage.
-   - Click **Save / Copy Updated JSON** or **Download JSON** to export `dist/gallery-data.json`.
-2. **📷 Smart Auto-EXIF Reader**:
-   - Drag and drop any raw camera JPEG (from Canon, Sony, Nikon, etc.).
-   - Automatically extracts Camera Body, Lens, Aperture (`f/1.8`), Shutter Speed (`1/640s`), and ISO via `exifr`.
-   - Pre-fills all metadata fields automatically.
-3. **⚡ In-Browser WebP Compressor**:
-   - Compresses large 20MB+ camera files directly in the browser down to ~600KB WebP files (up to 96% size savings).
-   - Generates a ready-to-use gallery entry object.
+- **📊 Dashboard**: whether your latest change is live yet (compares the live build with GitHub), counts (shown, hidden, featured, photos, art, originals in R2), and a **Needs attention** list from each build: images missing from storage, missing alt text, duplicate IDs, unused originals in R2. **Check every image loads** tests every image in your browser. Quick links to Netlify deploys, R2, Search Console, Analytics and contact-form messages.
+- **🖼️ Gallery**: drag to reorder, **👁 Hide** (keeps the photo but takes it off the site: no card, no photo page, not in the sitemap), **★ Feature** (choose the photos in the homepage filmstrip; with none featured it shows the first 18), click a photo to edit its title, alt text, category, tags or series name, move it to the top, or remove it. Changes collect in a yellow bar until you press **Save & publish**.
+- **⬆️ Upload**: drop photos and give each a title, alt text, category and tags. The full-size original goes **straight from your browser to the private R2 bucket** through a 15-minute signed link (`netlify/functions/admin-upload-url.js`, login required), never through GitHub. The gallery entry is saved automatically, and the build makes the WebP copies and reads the real EXIF.
+- **☁️ Drive & Photos**: Google Drive link → image URL, and Google Photos shared-album lister.
+
+Opened anywhere other than the live site (e.g. `npm run preview`), the Studio runs read-only with the local data.
+
+### One-time setup for uploads: R2 CORS rule
+Browsers may only upload to R2 from your site once the bucket allows it. In **Cloudflare → R2 → your bucket → Settings → CORS policy → Add CORS policy**, paste:
+
+```json
+[
+  {
+    "AllowedOrigins": ["https://azmi.is-cool.dev"],
+    "AllowedMethods": ["PUT"],
+    "AllowedHeaders": ["content-type"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -301,7 +310,7 @@ src/                     Astro pages (incl. photo/[slug] pages), layout, compone
 public/dist/             Browser script (portfolio-smart.js), served as-is
 dist/gallery-data.json   Gallery content (edited by Decap CMS)
 dist/assets/             Logos and icons; Photography/ and Art/ hold originals locally (not in git, stored in R2)
-scripts/                 photos-sync, art-sync + r2 (R2 storage), build-images, build-seo, copy-assets, fetch-replays (sync-art), build-banner
+scripts/                 photos-sync, art-sync + r2 (R2 storage), build-images, build-seo, copy-assets, build-info (Studio dashboard report), fetch-replays (sync-art), build-banner
 admin/                   Admin CMS and Studio Suite
 netlify/functions/       Serverless functions
 ```

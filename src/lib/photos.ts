@@ -16,7 +16,8 @@ export const OWNER_PROFILES = [
 
 export type Variant = { w?: number; h?: number; srcset: [string, number][] };
 
-export const items: any[] = Array.isArray(galleryData) ? galleryData : (galleryData as any).items || [];
+// Items marked "hidden" in the admin stay in the JSON but are left out of the site.
+export const items: any[] = (Array.isArray(galleryData) ? galleryData : (galleryData as any).items || []).filter((it: any) => !it.hidden);
 
 // Self-hosted WebP copies written by scripts/build-images.js (photos + mirrored art).
 export const variants: Record<string, Variant> = (() => {

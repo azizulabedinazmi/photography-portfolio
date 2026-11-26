@@ -729,7 +729,9 @@
       const inner = document.getElementById('filmstrip-marquee-inner');
       if (!inner || !window.GALLERY_DATA) return;
 
-      const highlights = window.GALLERY_DATA.slice(0, 18);
+      // Photos marked "Feature" in the admin; without any, the first 18.
+      const featured = window.GALLERY_DATA.filter((it) => it.featured);
+      const highlights = featured.length ? featured : window.GALLERY_DATA.slice(0, 18);
       // Each tile keeps the strip's height but takes its photo's real width,
       // so portraits show the whole frame instead of a cropped middle strip.
       const aspectOf = (item) => {

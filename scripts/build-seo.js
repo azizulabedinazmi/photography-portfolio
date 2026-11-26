@@ -22,7 +22,8 @@ const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 
 const raw = JSON.parse(read('dist/gallery-data.json'));
-const items = Array.isArray(raw) ? raw : raw.items || [];
+// Items marked "hidden" in the admin stay in the JSON but are left out of the site.
+const items = (Array.isArray(raw) ? raw : raw.items || []).filter((it) => !it.hidden);
 
 // Published WebP copies (originals are kept private in R2, see scripts/photos-sync.js).
 let VARIANTS = {};

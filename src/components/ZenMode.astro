@@ -1,8 +1,8 @@
 ---
 // Fullscreen Zen Exhibition Slideshow Mode with dynamic background blur, touch swipe, and haptics
-import galleryData from '../../dist/gallery-data.json';
+import { items as visibleItems } from '../lib/photos';
 
-const total = (Array.isArray(galleryData) ? galleryData : (galleryData as any).items || []).length;
+const total = visibleItems.length;
 ---
 
 <div id="zen-exhibition-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden opacity-0 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-8 select-none min-h-[100dvh] h-[100dvh]">
