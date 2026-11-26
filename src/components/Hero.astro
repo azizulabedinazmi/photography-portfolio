@@ -26,9 +26,10 @@ const seriesCount = heroItems.filter((i) => i.isSeries).length;
     </div>
 
     <!-- Animated Rotating Headline -->
-    <h1 class="text-4xl sm:text-[clamp(2.25rem,5.6vw,4.5rem)] font-serif font-bold tracking-tight text-neutral-950 dark:text-white leading-[1.08] mb-6">
-      Capturing <br class="sm:hidden" />
-      <span id="rotating-headline-word" class="inline-block whitespace-nowrap text-amber-500 dark:text-amber-400 underline decoration-amber-400/40 underline-offset-8 transition-all duration-300">
+    <!-- One line on every screen: the size follows the screen width so the longest phrase
+         ("Capturing Fine Art Moments", ~12.5em wide) always fits. -->
+    <h1 class="text-[clamp(1.25rem,calc((100vw-2.25rem)/13),4.25rem)] whitespace-nowrap font-serif font-bold tracking-tight text-neutral-950 dark:text-white leading-[1.08] mb-6">
+      Capturing{" "}<span id="rotating-headline-word" class="inline-block whitespace-nowrap text-amber-500 dark:text-amber-400 underline decoration-amber-400/40 underline-offset-8 transition-all duration-300">
         Soul & Light
       </span>
     </h1>
