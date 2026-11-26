@@ -25,14 +25,12 @@
   <h1 align="center">Azizul Abedin Azmi — Photography & Digital Art Portfolio</h1>
 
   <p align="center">
-    My personal photography and digital art portfolio, built with Astro, Tailwind CSS, Decap CMS, Netlify Functions and Cloudflare R2.
+    My personal photography and digital art portfolio, built with Astro, Tailwind CSS, Netlify (Identity, Functions) and Cloudflare R2.
     <br />
     <br />
     <a href="https://azmi.is-cool.dev/"><strong>🌐 View Live Portfolio »</strong></a>
     ·
-    <a href="https://azmi.is-cool.dev/admin/"><strong>⚡ Admin CMS »</strong></a>
-    ·
-    <a href="https://azmi.is-cool.dev/admin/studio"><strong>🛠️ Studio Suite »</strong></a>
+    <a href="https://azmi.is-cool.dev/admin/"><strong>⚡ Admin »</strong></a>
     <br />
     <br />
     <a href="ADMIN_SETUP.md"><strong>📖 Read the Step-by-Step Admin Setup Guide »</strong></a>
@@ -49,8 +47,7 @@
     <li><a href="#real-exif">Real Camera EXIF</a></li>
     <li><a href="#photo-storage">Photo Storage (Cloudflare R2)</a></li>
     <li><a href="#seo">Search Engines: One Page Per Photo</a></li>
-    <li><a href="#admin-panel--cms">Admin Panel & Decap CMS</a></li>
-    <li><a href="#studio-admin-suite">Admin Studio</a></li>
+    <li><a href="#studio-admin-suite">Admin (/admin/)</a></li>
     <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
     <li><a href="#google-photos-live-sync">Google Photos Album Import (Admin)</a></li>
     <li><a href="#built-with">Built With</a></li>
@@ -143,7 +140,7 @@ npm run art:sync      # copy any new digital-art / Replay images into R2 (art/ f
 
 > **Digital art is self-hosted too.** Every artwork and Replay step image is mirrored into the same bucket under `art/`; the build downloads them and publishes WebP copies, so the site never loads images from the original host.
 
-> New photos added through Decap CMS are committed to `dist/assets/Photography` as before. Run `npm run photos:push` afterwards to copy them to R2.
+> Add new photos in the admin (**/admin/ → Add**): they go straight to R2. Photos you add to `dist/assets/Photography` by hand need `npm run photos:push`.
 > If R2 isn't configured, the build uses whatever originals are on disk, and on Netlify it **fails with a clear message** instead of publishing a site with no photos.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -162,37 +159,17 @@ Each photo and artwork has its **own page** at `/photo/<title-slug>/` (`src/page
 
 ---
 
-## ⚡ Admin Panel & Decap CMS <a name="admin-panel--cms"></a>
+## ⚡ Admin (/admin/) <a name="studio-admin-suite"></a>
 
-Manage your portfolio without writing a single line of code!
+`https://azmi.is-cool.dev/admin/`, behind your Netlify Identity login (invite only). Every change is saved straight to GitHub as a commit, and the site is live in 1–2 minutes. Full guide: [ADMIN_SETUP.md](ADMIN_SETUP.md).
 
-- **URL**: `https://azmi.is-cool.dev/admin/`
-- **Powered by**: Decap CMS (formerly Netlify CMS) via Git Gateway.
-- **Detailed Setup Guide**: See [ADMIN_SETUP.md](ADMIN_SETUP.md) for full instructions on enabling Identity, user invitations, and setting your password.
-- **How it works**:
-  1. Go to your Netlify dashboard → **Settings** → **Identity** → Enable **Netlify Identity**.
-  2. Set registration to **Invite only**.
-  3. Enable **Git Gateway** under **Services** → **Git Gateway**.
-  4. Invite your own email address in the Identity tab.
-  5. Accept the invite in your email and create your password.
-  6. Visit `https://azmi.is-cool.dev/admin/`, log in with your credentials.
-  7. Add new photos, change categories, update camera gear, or reorder items.
-  8. Click **Publish** — Netlify automatically commits the changes to GitHub and redeploys the live site in ~15 seconds.
+- **📊 Dashboard**: whether your latest change is live yet, counts, a **Needs attention** list from each build (images missing from storage, missing alt text, duplicate IDs, unused originals), an image checker, and quick links (deploys, contact messages, R2, Search Console, Analytics, admin users).
+- **🖼️ Gallery**: drag to reorder; **👁 Hide** / **★ Feature** (homepage filmstrip); **Select** for bulk hide/show/feature/move/remove; click a photo for the full editor: every field, series photos (add, reorder, set cover, remove), digital-art Replay info, duplicate, remove.
+- **⬆️ Add**: upload originals **straight from the browser to private R2** (signed link from `netlify/functions/admin-upload-url.js`, login required), optionally **as one series**; or **add by link** (the build copies it into R2).
+- **🕘 History**: every save is a version; bring back any older one.
+- **☁️ Drive & Photos**: Google Drive link → image link, Google Photos album lister.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-## 🛠️ Admin Studio <a name="studio-admin-suite"></a>
-
-`https://azmi.is-cool.dev/admin/studio`, behind your Netlify Identity login (the same account as the CMS; sign-ups are closed). Every change is saved straight to GitHub as a commit, so the site rebuilds and is live in 1–2 minutes. No more copying JSON by hand.
-
-- **📊 Dashboard**: whether your latest change is live yet (compares the live build with GitHub), counts (shown, hidden, featured, photos, art, originals in R2), and a **Needs attention** list from each build: images missing from storage, missing alt text, duplicate IDs, unused originals in R2. **Check every image loads** tests every image in your browser. Quick links to Netlify deploys, R2, Search Console, Analytics and contact-form messages.
-- **🖼️ Gallery**: drag to reorder, **👁 Hide** (keeps the photo but takes it off the site: no card, no photo page, not in the sitemap), **★ Feature** (choose the photos in the homepage filmstrip; with none featured it shows the first 18), click a photo to edit its title, alt text, category, tags or series name, move it to the top, or remove it. Changes collect in a yellow bar until you press **Save & publish**.
-- **⬆️ Upload**: drop photos and give each a title, alt text, category and tags. The full-size original goes **straight from your browser to the private R2 bucket** through a 15-minute signed link (`netlify/functions/admin-upload-url.js`, login required), never through GitHub. The gallery entry is saved automatically, and the build makes the WebP copies and reads the real EXIF.
-- **☁️ Drive & Photos**: Google Drive link → image URL, and Google Photos shared-album lister.
-
-Opened anywhere other than the live site (e.g. `npm run preview`), the Studio runs read-only with the local data.
+Files: `admin/index.html` + `admin/studio-core.js`, `studio-gallery.js`, `studio-add.js`. Opened anywhere other than the live site (e.g. `npm run preview`) it runs read-only with the local data. Netlify invite and password-reset email links are forwarded to `/admin/`.
 
 ### One-time setup for uploads: R2 CORS rule
 Browsers may only upload to R2 from your site once the bucket allows it. In **Cloudflare → R2 → your bucket → Settings → CORS policy → Add CORS policy**, paste:
@@ -240,9 +217,9 @@ https://lh3.googleusercontent.com/d/1A2B3C4D5E...=w1600
 Pull photos from a public Google Photos shared album into the portfolio. This is an **admin-only workflow**: there is no sync button or URL parameter on the public site, so visitors can't load outside albums into the gallery.
 
 1. In Google Photos, open an album → **Share** → **Create link**.
-2. Open the **Studio Suite** (`/admin/studio`) → **Google Drive & Google Photos** tab.
+2. Open the admin (`/admin/`) → **Drive & Photos** tab.
 3. Paste the album link and click **Fetch Album Photos**.
-4. Click **Copy As Gallery JSON**, pick the photos you want, and add them to `dist/gallery-data.json` (or through Decap CMS). Commit, and Netlify redeploys.
+4. Click **Copy as JSON**, then add the photos you want with **Add → Add by link**.
 
 Behind the scenes the Studio calls `/.netlify/functions/google-photos-album?albumUrl=...`. The function only accepts `photos.app.goo.gl` / `photos.google.com` links.
 
@@ -256,11 +233,11 @@ Behind the scenes the Studio calls `/.netlify/functions/google-photos-album?albu
 - **Tailwind CSS v4**: Utility-first styling with dark/light variants (via `@tailwindcss/vite`).
 - **Vanilla JavaScript (ES6+)**: Gallery, masonry, Replay player and interactions in `public/dist/portfolio-smart.js`, with no client-side framework.
 - **sharp + exif-reader**: WebP image sizes and real EXIF at build time.
-- **Decap CMS**: Git-based headless content management.
+- **Netlify Identity + Git Gateway**: admin login and saving to GitHub.
 - **Netlify Functions**: Google Photos album import and Google Drive folder sync for the Studio.
 - **Cloudflare R2 (aws4fetch)**: Private storage for photo originals and digital-art images.
 - **Web Audio API**: Synthetic mechanical DSLR shutter sound.
-- **exifr**: In-browser EXIF reading in the Studio Suite.
+- **exifr**: In-browser EXIF reading in the admin.
 - **Fancybox v5**: Lightbox presentation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -308,10 +285,10 @@ This serves the site together with the serverless functions (`/.netlify/function
 ```
 src/                     Astro pages (incl. photo/[slug] pages), layout, components and lib/photos.ts
 public/dist/             Browser script (portfolio-smart.js), served as-is
-dist/gallery-data.json   Gallery content (edited by Decap CMS)
+dist/gallery-data.json   Gallery content (edited in the admin)
 dist/assets/             Logos and icons; Photography/ and Art/ hold originals locally (not in git, stored in R2)
 scripts/                 photos-sync, art-sync + r2 (R2 storage), build-images, build-seo, copy-assets, build-info (Studio dashboard report), fetch-replays (sync-art), build-banner
-admin/                   Admin CMS and Studio Suite
+admin/                   The admin (index.html + studio-*.js)
 netlify/functions/       Serverless functions
 ```
 

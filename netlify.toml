@@ -38,22 +38,21 @@
   status = 301
   force = true
 
-# Admin Studio at a clean address (must come before the /admin/* rule below)
+# The admin lives at /admin/. Old Studio and Decap CMS addresses go there.
 [[redirects]]
   from = "/admin/studio"
-  to = "/admin/studio.html"
-  status = 200
+  to = "/admin/"
+  status = 301
 
 [[redirects]]
   from = "/admin/studio/"
-  to = "/admin/studio.html"
-  status = 200
+  to = "/admin/"
+  status = 301
 
-# Netlify Identity & Decap CMS Single-Page App rule
 [[redirects]]
-  from = "/admin/*"
-  to = "/admin/index.html"
-  status = 200
+  from = "/admin/studio.html"
+  to = "/admin/"
+  status = 301
 
 # Old photo file names (renamed to descriptive names) -> new names, so existing links and Google keep working
 [[redirects]]

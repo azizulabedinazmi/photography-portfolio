@@ -42,6 +42,12 @@ const robotsContent = [/noindex/.test(robots) ? '' : 'index, follow', robots, 'm
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
 
+  <!-- Netlify Identity emails (invite, password reset, email confirm) link to the homepage:
+       hand them to the admin, where the login widget completes them. -->
+  <script is:inline>
+    if (/(invite|recovery|confirmation|email_change)_token=/.test(location.hash)) location.replace('/admin/' + location.hash);
+  </script>
+
   <!-- Loading screen fast-lock -->
   <script is:inline>
     document.documentElement.classList.add('sl-lock');

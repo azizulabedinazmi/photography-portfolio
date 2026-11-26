@@ -1,7 +1,7 @@
 /**
  * Azizul Abedin Azmi - Photography Portfolio Gallery Dataset
  * GENERATED from dist/gallery-data.json by scripts/build-seo.js.
- * Edit the JSON (or use Decap CMS at /admin/) instead of this file.
+ * Edit the gallery in the admin at /admin/ (or the JSON) instead of this file.
  */
 
 window.GALLERY_DATA = [

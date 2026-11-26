@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Keeps search-engine data in sync with dist/gallery-data.json (the file Decap CMS edits).
+ * Keeps search-engine data in sync with dist/gallery-data.json (the file the admin at /admin/ edits).
  * Runs on every Netlify deploy (see netlify.toml) and can be run locally: `node scripts/build-seo.js`
  *
  *  1. dist/gallery-data.js  – regenerated from the JSON so the homepage always shows the latest edits
@@ -83,7 +83,7 @@ items.forEach((it, idx) => {
 
 // 1. gallery-data.js
 write('dist/gallery-data.js',
-  `/**\n * Azizul Abedin Azmi - Photography Portfolio Gallery Dataset\n * GENERATED from dist/gallery-data.json by scripts/build-seo.js.\n * Edit the JSON (or use Decap CMS at /admin/) instead of this file.\n */\n\nwindow.GALLERY_DATA = ${JSON.stringify(items, null, 2)};\n`);
+  `/**\n * Azizul Abedin Azmi - Photography Portfolio Gallery Dataset\n * GENERATED from dist/gallery-data.json by scripts/build-seo.js.\n * Edit the gallery in the admin at /admin/ (or the JSON) instead of this file.\n */\n\nwindow.GALLERY_DATA = ${JSON.stringify(items, null, 2)};\n`);
 
 // 2. sitemap.xml
 const today = new Date().toISOString().slice(0, 10);
