@@ -26,42 +26,15 @@
   <!-- Scrollable Details -->
   <div class="flex-1 overflow-y-auto py-5 space-y-6">
     
-    <!-- Shooting Parameters Grid -->
+    <!-- Details: real camera EXIF for photos, edit details for digital art (filled by portfolio-smart.js) -->
     <div>
-      <div class="text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-3 flex items-center gap-1.5">
-        <span>📷</span> Camera & Exposure Parameters
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800 text-center">
-          <div class="text-[10px] font-mono text-neutral-400 uppercase">Shutter</div>
-          <div id="exif-shutter" class="text-sm font-bold font-mono text-neutral-900 dark:text-white mt-0.5">1/500s</div>
-        </div>
-        <div class="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800 text-center">
-          <div class="text-[10px] font-mono text-neutral-400 uppercase">Aperture</div>
-          <div id="exif-aperture" class="text-sm font-bold font-mono text-neutral-900 dark:text-white mt-0.5">f/1.8</div>
-        </div>
-        <div class="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800 text-center">
-          <div class="text-[10px] font-mono text-neutral-400 uppercase">ISO</div>
-          <div id="exif-iso" class="text-sm font-bold font-mono text-neutral-900 dark:text-white mt-0.5">ISO 100</div>
-        </div>
-        <div class="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800 text-center">
-          <div class="text-[10px] font-mono text-neutral-400 uppercase">Focal Length</div>
-          <div id="exif-focal" class="text-sm font-bold font-mono text-neutral-900 dark:text-white mt-0.5">50mm</div>
-        </div>
-      </div>
+      <div id="exif-params-title" class="text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-3 flex items-center gap-1.5"></div>
+      <div id="exif-params" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+      <p id="exif-params-note" class="hidden text-[11px] text-neutral-400 mt-2"></p>
     </div>
 
-    <!-- Gear Details -->
-    <div class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800 space-y-2">
-      <div class="flex items-center justify-between text-xs font-mono">
-        <span class="text-neutral-500">Camera Body:</span>
-        <span id="exif-camera" class="font-semibold text-neutral-900 dark:text-white">Canon EOS System</span>
-      </div>
-      <div class="flex items-center justify-between text-xs font-mono">
-        <span class="text-neutral-500">Collection:</span>
-        <span id="exif-location" class="font-semibold text-neutral-900 dark:text-white">Fine Art Series</span>
-      </div>
-    </div>
+    <!-- Gear / Tools -->
+    <div id="exif-gear" class="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800 space-y-2"></div>
 
     <!-- Story Behind the Shot -->
     <div>

@@ -16,22 +16,22 @@ collections:
       - name: "curated_photos"
         label: "Curated Photos & Artworks (55+ Items)"
         file: "dist/gallery-data.json"
-        description: "Add, edit, reorder, or update your portfolio photographs and PicsArt digital artworks."
+        description: "Add, edit, reorder, or update your portfolio photographs and digital artworks."
         fields:
           - label: "Photos & Artworks List"
             name: "items"
             widget: "list"
             summary: "{{fields.title}} [{{fields.category}}]"
             fields:
-              - { label: "Unique ID", name: "id", widget: "string", hint: "e.g. photo-golden-hour or picsart-mirage" }
+              - { label: "Unique ID", name: "id", widget: "string", hint: "e.g. photo-golden-hour or art-mirage" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Alt text for Google (who / what is in the photo)", name: "alt", widget: "string", required: false, hint: "Describe who/what is in the photo, e.g. Hafsa Prapti — outdoor portrait. Searching that name on Google can then find this photo. Leave your own name out so a search for you doesn't list every photo." }
-              - { label: "Image Source (Upload local image, PicsArt URL, or Google Drive link/ID)", name: "src", widget: "image" }
+              - { label: "Image Source (Upload local image, image URL, or Google Drive link/ID)", name: "src", widget: "image" }
               - { label: "Category", name: "category", widget: "select", options: [
                   { label: "Portraits", value: "portraits" },
                   { label: "Events & Documentary", value: "events" },
                   { label: "Nature & Details", value: "nature" },
-                  { label: "🎨 PicsArt Digital Art", value: "art" }
+                  { label: "🎨 Digital Art", value: "art" }
                 ], default: "portraits" }
               - { label: "Camera Gear / Medium", name: "camera", widget: "string", default: "Canon EOS · 50mm f/1.8 · 1/640s · ISO 100" }
               - { label: "Collection / Series Name", name: "location", widget: "string", default: "Fine Art Series" }

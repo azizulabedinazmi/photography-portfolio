@@ -24,7 +24,7 @@ const CARDS = [
   // front left     (unchanged)
   { src: 'dist/assets/Photography/20220413163432__MG_7932-01 (1).jpg', w: 205, h: 300, angle: -6, x: 745, y: 272, focus: 0.4, alt: 'Hafsa Prapti portrait' },
   // front right    (azmi.is-cool.dev/#gallery-78)
-  { src: 'https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg', w: 225, h: 320, angle: 4, x: 1055, y: 255, focus: 0.45, alt: 'Littolpotat PicsArt digital art' }
+  { src: 'https://hcdn.picsart.com/5a5132a0-34ed-441b-ac3e-bf30a8abd104.jpg', w: 225, h: 320, angle: 4, x: 1055, y: 255, focus: 0.45, alt: 'Littolpotat digital art' }
 ];
 
 const PILLS = ['Portraits', 'Events &amp; Street', 'Digital Art', 'Nature &amp; Details'];

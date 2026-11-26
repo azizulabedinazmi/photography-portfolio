@@ -15,6 +15,33 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const exifReader = require('exif-reader');
+
+// Real camera settings read from the photo file itself (null when the file has none).
+function readExif(buf) {
+  if (!buf) return null;
+  let e;
+  try { e = exifReader(buf); } catch { return null; }
+  const img = e.Image || e.image || {};
+  const ph = e.Photo || e.exif || {};
+  const out = {};
+  const make = (img.Make || '').trim();
+  const model = (img.Model || '').trim();
+  if (model) out.camera = model.toLowerCase().startsWith(make.toLowerCase()) || !make ? model : `${make} ${model}`;
+  if (ph.LensModel) out.lens = String(ph.LensModel).trim();
+  if (ph.FocalLength) out.focal = `${Math.round(ph.FocalLength)}mm`;
+  if (ph.FNumber) out.aperture = `f/${+Number(ph.FNumber).toFixed(1)}`;
+  if (ph.ExposureTime) {
+    const t = Number(ph.ExposureTime);
+    out.shutter = t >= 1 ? `${+t.toFixed(1)}s` : `1/${Math.round(1 / t)}s`;
+  }
+  const iso = ph.ISOSpeedRatings || ph.PhotographicSensitivity;
+  if (iso) out.iso = `ISO ${Array.isArray(iso) ? iso[0] : iso}`;
+  const taken = ph.DateTimeOriginal || img.DateTime;
+  if (taken instanceof Date && !isNaN(taken)) out.taken = taken.toISOString().slice(0, 10);
+  if (img.Software) out.software = String(img.Software).replace(/\s*\((Windows|Macintosh|Mac OS)\)\s*$/i, '').trim();
+  return Object.keys(out).length ? out : null;
+}
 
 const ROOT = path.join(__dirname, '..');
 const SRC_DIR = 'dist/assets/Photography';
@@ -37,6 +64,8 @@ async function variantsFor(file) {
   const height = swap ? meta.width : meta.height;
 
   const entry = { w: width, h: height, srcset: [] };
+  const exif = readExif(meta.exif);
+  if (exif) entry.exif = exif;
   for (const target of WIDTHS) {
     const w = Math.min(target, width);
     const out = `${OUT_DIR}/${base}-${target}.webp`;

@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -7,7 +9,7 @@ interface Props {
 
 const {
   title = "〘卂乙爪丨〙ヅ - Photography & Digital Art Portfolio",
-  description = "Explore the fine art photography and PicsArt digital artwork portfolio of Azizul Abedin Azmi. Professional portraiture, cultural street photojournalism, and creative digital edits.",
+  description = "Explore the fine art photography and digital artwork portfolio of Azizul Abedin Azmi. Professional portraiture, cultural street photojournalism, and creative digital edits.",
   image = "/dist/assets/Logo.png"
 } = Astro.props;
 ---
@@ -78,7 +80,7 @@ const {
 
   <!-- SEO Meta Tags -->
   <meta name="description" content={description} />
-  <meta name="keywords" content="Azizul Abedin Azmi, photography, portfolio, photographer, PicsArt, digital art, photo manipulation, portrait photography, developer portfolio" />
+  <meta name="keywords" content="Azizul Abedin Azmi, photography, portfolio, photographer, digital art, photo manipulation, portrait photography, developer portfolio" />
   <meta name="author" content="Azizul Abedin Azmi" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#0a0a0a" />

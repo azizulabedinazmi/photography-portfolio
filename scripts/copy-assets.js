@@ -29,7 +29,7 @@ copyRecursiveSync(path.join(ROOT, 'dist/assets'), path.join(OUT, 'dist/assets'))
 copyRecursiveSync(path.join(ROOT, 'dist/assets'), path.join(OUT, 'assets'));
 
 // 2. Copy gallery data & variants into dist_site/dist/
-['gallery-data.json', 'gallery-data.js', 'image-variants.js', 'output.css', 'portfolio-smart.js'].forEach((file) => {
+['gallery-data.json', 'gallery-data.js', 'image-variants.js', 'output.css'].forEach((file) => {
   const p = path.join(ROOT, 'dist', file);
   if (fs.existsSync(p)) {
     fs.copyFileSync(p, path.join(OUT, 'dist', file));

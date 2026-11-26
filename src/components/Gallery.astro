@@ -1,5 +1,11 @@
 ---
 // Gallery toolbar and interactive grid container
+import galleryData from '../../dist/gallery-data.json';
+
+const items: any[] = Array.isArray(galleryData) ? galleryData : (galleryData as any).items || [];
+const count = (cat: string) => items.filter((i) => i.category === cat).length;
+const total = items.length;
+const seriesCount = items.filter((i) => i.isSeries).length;
 ---
 
 <section id="gallery-section" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
@@ -8,22 +14,22 @@
     <!-- Category Filter Pills -->
     <div class="flex flex-wrap items-center gap-2">
       <button type="button" data-category="all" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-black text-white dark:bg-white dark:text-black transition shadow-sm active:scale-95">
-        All Works (55)
+        All Works ({total})
       </button>
       <button type="button" data-category="portraits" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
-        Portraits (28)
+        Portraits ({count('portraits')})
       </button>
       <button type="button" data-category="art" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95 flex items-center gap-1.5">
-        <span>🎨 Digital Art & PicsArt (16)</span>
+        <span>🎨 Digital Art ({count('art')})</span>
       </button>
       <button type="button" data-category="events" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
-        Events & Street (8)
+        Events & Street ({count('events')})
       </button>
       <button type="button" data-category="nature" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
-        Nature & Details (3)
+        Nature & Details ({count('nature')})
       </button>
       <button type="button" data-category="series" class="category-filter-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-neutral-100 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition active:scale-95">
-        Curated Series (6)
+        Curated Series ({seriesCount})
       </button>
     </div>
 
@@ -58,12 +64,12 @@
 
   <!-- Active Results Status -->
   <div class="flex items-center justify-between text-xs font-mono text-neutral-500 dark:text-neutral-400 py-4">
-    <span id="gallery-results-count">Showing 55 Curated Works</span>
+    <span id="gallery-results-count">Showing {total} Curated Works</span>
     <span class="hidden sm:inline">Click any photo to zoom · 3D hover tilt · Tap ℹ️ for EXIF & Story</span>
   </div>
 
   <!-- Responsive CSS Grid (replaces broken columns masonry, prevents jumping on mobile/desktop) -->
-  <div id="portfolio-gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+  <div id="portfolio-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
     <!-- Injected dynamically by client JS with 3D tilt and smooth entrance -->
   </div>
 

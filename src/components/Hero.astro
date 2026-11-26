@@ -1,5 +1,11 @@
 ---
 // Hero component with dynamic rotating headline and cinematic filmstrip marquee
+import galleryData from '../../dist/gallery-data.json';
+
+const heroItems: any[] = Array.isArray(galleryData) ? galleryData : (galleryData as any).items || [];
+const total = heroItems.length;
+const artCount = heroItems.filter((i) => i.category === 'art').length;
+const seriesCount = heroItems.filter((i) => i.isSeries).length;
 ---
 
 <section class="relative pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
@@ -16,7 +22,7 @@
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
       </span>
-      Photography & PicsArt Digital Artworks
+      Photography & Digital Artworks
     </div>
 
     <!-- Animated Rotating Headline -->
@@ -29,7 +35,7 @@
 
     <!-- Subtitle -->
     <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl font-light mb-8">
-      Portfolio of <strong class="text-neutral-900 dark:text-white font-medium">Azizul Abedin Azmi</strong> — exploring human vulnerability, cultural street stories, and imaginative PicsArt digital photo edits. Also a software developer.
+      Portfolio of <strong class="text-neutral-900 dark:text-white font-medium">Azizul Abedin Azmi</strong> — exploring human vulnerability, cultural street stories, and imaginative digital photo edits. Also a software developer.
     </p>
 
     <!-- Action Buttons -->
@@ -57,19 +63,19 @@
     <!-- Quick Metrics Strip -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-10 mt-10 border-t border-neutral-200/80 dark:border-neutral-800/80">
       <div>
-        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">55+</div>
+        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">{total}+</div>
         <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Master Works</div>
       </div>
       <div>
-        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">16</div>
+        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">{artCount}</div>
         <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Digital Artworks</div>
       </div>
       <div>
-        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">6 Series</div>
+        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">{seriesCount} Series</div>
         <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Curated Stories</div>
       </div>
       <div>
-        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">Canon & PicsArt</div>
+        <div class="text-2xl sm:text-3xl font-bold font-serif text-neutral-900 dark:text-white">Camera & Canvas</div>
         <div class="text-xs text-neutral-500 dark:text-neutral-400 font-mono uppercase tracking-wider mt-0.5">Dual Mediums</div>
       </div>
     </div>
