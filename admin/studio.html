@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Studio — Admin</title>
-  <link rel="icon" type="image/x-icon" href="../dist/assets/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../dist/assets/favicon-32x32.png" />
+  <link rel="icon" type="image/x-icon" href="/dist/assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/dist/assets/favicon-32x32.png" />
 
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
   <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
@@ -22,13 +22,14 @@
 <body class="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col antialiased">
 
   <!-- ===== Login gate ===== -->
-  <div id="gate" class="fixed inset-0 z-[100] bg-neutral-950 flex items-center justify-center p-6">
+  <!-- Stays below the Netlify login window (z-index 99), or it would cover it. -->
+  <div id="gate" class="fixed inset-0 z-[90] bg-neutral-950 flex items-center justify-center p-6">
     <div class="max-w-sm w-full text-center space-y-5">
-      <img src="../dist/assets/logo-on-dark.webp" alt="" class="h-9 mx-auto" />
+      <img src="/dist/assets/logo-on-dark.webp" alt="" class="h-9 mx-auto" />
       <h1 class="text-2xl font-bold">Studio</h1>
       <p id="gate-msg" class="text-sm text-neutral-400">Log in with your Netlify admin account to manage the portfolio.</p>
       <button id="login-btn" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-semibold">Log in</button>
-      <a href="../" class="block text-xs text-neutral-500 hover:text-white">← Back to the site</a>
+      <a href="/" class="block text-xs text-neutral-500 hover:text-white">← Back to the site</a>
     </div>
   </div>
 
@@ -36,7 +37,7 @@
   <header class="border-b border-neutral-800 bg-neutral-900/90 backdrop-blur sticky top-0 z-40 px-4 sm:px-6 py-3">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <img src="../dist/assets/logo-on-dark.webp" alt="" class="h-6" />
+        <img src="/dist/assets/logo-on-dark.webp" alt="" class="h-6" />
         <span class="text-xs mono text-neutral-500">Studio</span>
         <span id="mode-badge" class="hidden px-2 py-0.5 rounded-full text-[10px] mono bg-sky-500/15 text-sky-300">Preview · read-only</span>
       </div>
@@ -48,8 +49,8 @@
       </nav>
       <div class="flex items-center gap-2 text-xs">
         <span id="user-email" class="hidden sm:inline text-neutral-500 mono"></span>
-        <a href="./" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300">CMS</a>
-        <a href="../" target="_blank" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300">Site ↗</a>
+        <a href="/admin/" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300">CMS</a>
+        <a href="/" target="_blank" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300">Site ↗</a>
         <button id="logout-btn" class="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-300">Log out</button>
       </div>
     </div>
@@ -201,7 +202,7 @@
 
   <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] px-4 py-2.5 rounded-xl text-sm shadow-2xl"></div>
 
-  <script src="../dist/image-variants.js"></script>
+  <script src="/dist/image-variants.js"></script>
   <script>
   (() => {
     'use strict';
@@ -324,7 +325,7 @@
     // ---------- dashboard ----------
     async function loadDashboard() {
       let info = null;
-      try { info = await (await fetch('build-info.json', { cache: 'no-store' })).json(); } catch (e) {}
+      try { info = await (await fetch('/admin/build-info.json', { cache: 'no-store' })).json(); } catch (e) {}
       state.info = info;
       const status = $('#deploy-status'), detail = $('#deploy-detail');
       if (!info) { status.textContent = 'No build report yet'; detail.textContent = 'It appears after the next deploy.'; }
@@ -664,12 +665,14 @@
       const id = window.netlifyIdentity;
       if (!id) { $('#gate-msg').textContent = 'The login service could not load. Check your connection and reload.'; }
       else {
+        // The widget sets itself up once the page has loaded (calling init() again made a
+        // second, hidden login window). Already set up? Use the current user.
         id.on('init', (user) => { if (user) start(user); });
         id.on('login', (user) => { id.close(); start(user); });
         id.on('logout', () => location.reload());
         $('#login-btn').addEventListener('click', () => id.open('login'));
         $('#logout-btn').addEventListener('click', () => id.logout());
-        id.init();
+        if (document.readyState !== 'loading' && id.currentUser()) start(id.currentUser());
       }
     }
   })();

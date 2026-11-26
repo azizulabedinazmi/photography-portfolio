@@ -38,6 +38,17 @@
   status = 301
   force = true
 
+# Admin Studio at a clean address (must come before the /admin/* rule below)
+[[redirects]]
+  from = "/admin/studio"
+  to = "/admin/studio.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/studio/"
+  to = "/admin/studio.html"
+  status = 200
+
 # Netlify Identity & Decap CMS Single-Page App rule
 [[redirects]]
   from = "/admin/*"

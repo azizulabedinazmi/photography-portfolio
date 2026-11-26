@@ -9,7 +9,7 @@ This guide provides step-by-step instructions for activating and configuring you
 1. [Overview of the Admin Ecosystem](#1-overview-of-the-admin-ecosystem)
 2. [Setting Up Netlify Identity & Decap CMS](#2-setting-up-netlify-identity--decap-cms)
 3. [Logging Into Decap CMS (/admin/)](#3-logging-into-decap-cms-admin)
-4. [Using the Studio Suite (/admin/studio.html)](#4-using-the-studio-suite-adminstudiohtml)
+4. [Using the Studio Suite (/admin/studio)](#4-using-the-studio-suite-adminstudiohtml)
 5. [Google Drive & Google Photos Live Sync](#5-google-drive--google-photos-live-sync)
 6. [Troubleshooting & FAQs](#6-troubleshooting--faqs)
 
@@ -22,7 +22,7 @@ Your portfolio features a dual-tier administration suite:
 | Interface | URL | Purpose |
 |---|---|---|
 | **Decap CMS** | `https://azmi.is-cool.dev/admin/` | Form-based content manager. Add new photos, change titles, update camera gear, and publish directly to GitHub without code. |
-| **Studio Suite** | `https://azmi.is-cool.dev/admin/studio.html` | Client-side power tools: Visual drag-and-drop gallery reordering, auto-EXIF camera metadata extractor, and in-browser WebP compressor. |
+| **Studio Suite** | `https://azmi.is-cool.dev/admin/studio` | Client-side power tools: Visual drag-and-drop gallery reordering, auto-EXIF camera metadata extractor, and in-browser WebP compressor. |
 
 ---
 
@@ -76,9 +76,9 @@ Git Gateway allows Decap CMS to create Git commits using your GitHub credentials
 
 ---
 
-## 4. Using the Studio Suite (/admin/studio.html)
+## 4. Using the Studio Suite (/admin/studio)
 
-Open `https://azmi.is-cool.dev/admin/studio.html` and log in with your Netlify Identity account (the same one as Decap CMS).
+Open `https://azmi.is-cool.dev/admin/studio` and log in with your Netlify Identity account (the same one as Decap CMS).
 
 ### Dashboard
 - **Live site** tells you whether your last change is live yet, still publishing, or stuck (then check Netlify deploys).
@@ -128,7 +128,7 @@ You can host full-resolution images on Google Drive without backend storage:
 
 ### Google Photos Album Import (admin only)
 1. In Google Photos, open any album → click **Share** → **Create link**.
-2. Open the Studio Suite (`/admin/studio.html`) → **Google Drive & Google Photos** tab.
+2. Open the Studio Suite (`/admin/studio`) → **Google Drive & Google Photos** tab.
 3. Paste the public album link and click **Fetch Album Photos**.
 4. Click **Copy As Gallery JSON**, keep the photos you want, and add them to `dist/gallery-data.json` (or via Decap CMS).
 

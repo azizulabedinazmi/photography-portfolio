@@ -32,7 +32,7 @@
     ·
     <a href="https://azmi.is-cool.dev/admin/"><strong>⚡ Admin CMS »</strong></a>
     ·
-    <a href="https://azmi.is-cool.dev/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
+    <a href="https://azmi.is-cool.dev/admin/studio"><strong>🛠️ Studio Suite »</strong></a>
     <br />
     <br />
     <a href="ADMIN_SETUP.md"><strong>📖 Read the Step-by-Step Admin Setup Guide »</strong></a>
@@ -185,7 +185,7 @@ Manage your portfolio without writing a single line of code!
 
 ## 🛠️ Admin Studio <a name="studio-admin-suite"></a>
 
-`https://azmi.is-cool.dev/admin/studio.html`, behind your Netlify Identity login (the same account as the CMS; sign-ups are closed). Every change is saved straight to GitHub as a commit, so the site rebuilds and is live in 1–2 minutes. No more copying JSON by hand.
+`https://azmi.is-cool.dev/admin/studio`, behind your Netlify Identity login (the same account as the CMS; sign-ups are closed). Every change is saved straight to GitHub as a commit, so the site rebuilds and is live in 1–2 minutes. No more copying JSON by hand.
 
 - **📊 Dashboard**: whether your latest change is live yet (compares the live build with GitHub), counts (shown, hidden, featured, photos, art, originals in R2), and a **Needs attention** list from each build: images missing from storage, missing alt text, duplicate IDs, unused originals in R2. **Check every image loads** tests every image in your browser. Quick links to Netlify deploys, R2, Search Console, Analytics and contact-form messages.
 - **🖼️ Gallery**: drag to reorder, **👁 Hide** (keeps the photo but takes it off the site: no card, no photo page, not in the sitemap), **★ Feature** (choose the photos in the homepage filmstrip; with none featured it shows the first 18), click a photo to edit its title, alt text, category, tags or series name, move it to the top, or remove it. Changes collect in a yellow bar until you press **Save & publish**.
@@ -240,7 +240,7 @@ https://lh3.googleusercontent.com/d/1A2B3C4D5E...=w1600
 Pull photos from a public Google Photos shared album into the portfolio. This is an **admin-only workflow**: there is no sync button or URL parameter on the public site, so visitors can't load outside albums into the gallery.
 
 1. In Google Photos, open an album → **Share** → **Create link**.
-2. Open the **Studio Suite** (`/admin/studio.html`) → **Google Drive & Google Photos** tab.
+2. Open the **Studio Suite** (`/admin/studio`) → **Google Drive & Google Photos** tab.
 3. Paste the album link and click **Fetch Album Photos**.
 4. Click **Copy As Gallery JSON**, pick the photos you want, and add them to `dist/gallery-data.json` (or through Decap CMS). Commit, and Netlify redeploys.
 
