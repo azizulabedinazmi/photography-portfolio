@@ -148,16 +148,10 @@ const robotsContent = [/noindex/.test(robots) ? '' : 'index, follow', robots, 'm
   <!-- Theme initialization to prevent FOUC -->
   <script is:inline>
     (function () {
-      const stored = localStorage.getItem('azmi_theme');
-      if (stored === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else if (stored === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
-      }
+      // Dark is the default for everyone; light only when the visitor picked it with the toggle.
+      let stored = null;
+      try { stored = localStorage.getItem('azmi_theme'); } catch (e) {}
+      document.documentElement.classList.toggle('dark', stored !== 'light');
     })();
   </script>
   <slot name="head" />
