@@ -3,12 +3,9 @@
 
 User-agent: *
 Allow: /
-Allow: /dist/
-Allow: /src/
 
-# Keep private pages out of search results
+# Keep the admin pages out of search results
 Disallow: /admin/
-Disallow: /client/
 
 # Sitemap location
 Sitemap: https://azmi.is-cool.dev/sitemap.xml

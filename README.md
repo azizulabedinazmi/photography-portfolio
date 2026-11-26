@@ -26,7 +26,7 @@
   <h1 align="center">Azizul Abedin Azmi — Photography & Digital Art Portfolio</h1>
 
   <p align="center">
-    An editorial fine art photography, digital art, and client proofing platform built with Astro, Tailwind CSS, Decap CMS, Netlify Functions, and the Web Audio API.
+    My hobby photography and digital art portfolio, built with Astro, Tailwind CSS, Decap CMS, Netlify Functions and Cloudflare R2. Photography is a hobby for me, not a business.
     <br />
     <br />
     <a href="https://azmi.is-cool.dev/"><strong>🌐 View Live Portfolio »</strong></a>
@@ -35,12 +35,10 @@
     ·
     <a href="https://azmi.is-cool.dev/admin/studio.html"><strong>🛠️ Studio Suite »</strong></a>
     ·
-    <a href="https://azmi.is-cool.dev/admin/proofing.html"><strong>🔒 Client Proofing Manager »</strong></a>
-    ·
     <a href="http://azizulabedinazmi.is-a.dev/"><strong>💻 Developer Portfolio »</strong></a>
     <br />
     <br />
-    <a href="ADMIN_SETUP.md"><strong>📖 Read the Step-by-Step Admin & PIN Setup Guide »</strong></a>
+    <a href="ADMIN_SETUP.md"><strong>📖 Read the Step-by-Step Admin Setup Guide »</strong></a>
   </p>
 </div>
 
@@ -53,11 +51,11 @@
     <li><a href="#digital-art-replay">Digital Art Replay & Sync</a></li>
     <li><a href="#real-exif">Real Camera EXIF</a></li>
     <li><a href="#photo-storage">Photo Storage (Cloudflare R2)</a></li>
+    <li><a href="#seo">Search Engines: One Page Per Photo</a></li>
     <li><a href="#admin-panel--cms">Admin Panel & Decap CMS</a></li>
     <li><a href="#studio-admin-suite">Studio Admin Suite (EXIF & WebP)</a></li>
     <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
     <li><a href="#google-photos-live-sync">Google Photos Album Import (Admin)</a></li>
-    <li><a href="#private-client-proofing">Private Client Proofing</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#getting-started">Getting Started & Local Dev</a></li>
     <li><a href="#license">License</a></li>
@@ -69,10 +67,9 @@
 
 ## 📋 About The Project <a name="about-the-project"></a>
 
-This repository contains the complete portfolio and creative studio system for **Azizul Abedin Azmi**, showcasing:
+This is the personal, **hobby** portfolio of **Azizul Abedin Azmi** (a software developer who loves taking photos). It shows:
 - **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
 - **Digital Art & Photo Manipulations**: 22 surreal, concept and high-aesthetic digital edits, most with a step-by-step **Replay** of how they were made.
-- **Private Client Proofing**: PIN-protected galleries built from uploads, Google Drive or Google Photos, where clients pick their favourites for retouching.
 - **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).
 
 ---
@@ -248,22 +245,6 @@ Behind the scenes the Studio calls `/.netlify/functions/google-photos-album?albu
 
 ---
 
-## 🔒 Private Client Proofing <a name="private-client-proofing"></a>
-
-Build a private gallery for each shoot and let the client pick their favourites.
-
-- **Proofing Manager** (`/admin/proofing.html`, Netlify Identity login): create a session per client with a title, message, PIN, max picks, expiry date and optional downloads.
-- **Three photo sources**: upload straight from your computer (resized to WebP in the browser), paste Google Drive links (or a whole folder with `GDRIVE_API_KEY`), or import a Google Photos shared album. Mix them and drag to reorder.
-- **Private by design**: sessions, PINs, uploads and picks live in Netlify Blobs, not in this public repo. The PIN is checked on the server, uploaded photos are served only through short-lived signed links, and repeated wrong PINs lock the gallery for 15 minutes.
-- **Client gallery** (`/client/<code>`): masonry grid, full-screen viewer with swipe and arrow keys, ♡ picking with a live counter, an optional note, and resubmitting until the gallery closes.
-- **Picks in your dashboard**: see chosen frames, the client's note and submit time; copy or download the list.
-
-Full walkthrough: [ADMIN_SETUP.md → Client Proofing Manager](ADMIN_SETUP.md#5-client-proofing-manager).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
 ## 🛠️ Built With <a name="built-with"></a>
 
 - **Astro 7**: Static site generator; pages and components live in `src/` and build to `dist_site/`.
@@ -271,7 +252,8 @@ Full walkthrough: [ADMIN_SETUP.md → Client Proofing Manager](ADMIN_SETUP.md#5-
 - **Vanilla JavaScript (ES6+)**: Gallery, masonry, Replay player and interactions in `public/dist/portfolio-smart.js`, with no client-side framework.
 - **sharp + exif-reader**: WebP image sizes and real EXIF at build time.
 - **Decap CMS**: Git-based headless content management.
-- **Netlify Functions + Netlify Blobs**: Private client proofing storage, Google Photos album import and Google Drive folder sync.
+- **Netlify Functions**: Google Photos album import and Google Drive folder sync for the Studio.
+- **Cloudflare R2 (aws4fetch)**: Private storage for photo originals and digital-art images.
 - **Web Audio API**: Synthetic mechanical DSLR shutter sound.
 - **exifr**: In-browser EXIF reading in the Studio Suite.
 - **Fancybox v5**: Lightbox presentation.
@@ -295,7 +277,7 @@ npm install
 ```bash
 npm run dev
 ```
-Open **http://localhost:4321**. The home, about and contact pages, plus `/admin/`, `/client/` and everything under `/dist/`, are served with live reload.
+Open **http://localhost:4321**. The home, about, contact and photo pages, plus `/admin/` and everything under `/dist/`, are served with live reload.
 
 The photo originals are not in git. To get them, set up `.env` (see [Photo Storage](#photo-storage)) and pull them, then generate the WebP copies and EXIF:
 ```bash
@@ -315,16 +297,16 @@ Netlify runs the same `npm run build` on every push to `main` and publishes `dis
 npm install -g netlify-cli
 netlify dev
 ```
-This serves the site together with the serverless functions (client proofing, `/.netlify/functions/google-photos-album` and `/.netlify/functions/gdrive-sync`) at `http://localhost:8888`.
+This serves the site together with the serverless functions (`/.netlify/functions/google-photos-album` and `/.netlify/functions/gdrive-sync`) at `http://localhost:8888`.
 
 ### 5. Project layout
 ```
-src/                     Astro pages, layout and components
+src/                     Astro pages (incl. photo/[slug] pages), layout, components and lib/photos.ts
 public/dist/             Browser script (portfolio-smart.js), served as-is
 dist/gallery-data.json   Gallery content (edited by Decap CMS)
-dist/assets/             Logos and icons; Photography/ holds originals locally (not in git, stored in R2)
-scripts/                 photos-sync + r2 (R2 storage), build-images, build-seo, copy-assets, fetch-replays (sync-art)
-admin/  client/          Admin CMS, Studio Suite, proofing manager and client galleries
+dist/assets/             Logos and icons; Photography/ and Art/ hold originals locally (not in git, stored in R2)
+scripts/                 photos-sync, art-sync + r2 (R2 storage), build-images, build-seo, copy-assets, fetch-replays (sync-art), build-banner
+admin/                   Admin CMS and Studio Suite
 netlify/functions/       Serverless functions
 ```
 

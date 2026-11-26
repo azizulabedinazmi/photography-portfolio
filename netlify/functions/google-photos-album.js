@@ -6,7 +6,7 @@
  * so it can't be used as an open proxy.
  */
 
-const { fetchGooglePhotosAlbum } = require('../lib/proofing');
+const { fetchGooglePhotosAlbum } = require('../lib/google-photos');
 
 exports.handler = async function (event) {
   const headers = {

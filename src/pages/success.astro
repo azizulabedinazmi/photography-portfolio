@@ -1,0 +1,25 @@
+---
+// Shown after the contact form is sent (Netlify Forms posts to /success).
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Message Sent — Azizul Abedin Azmi" description="Thanks for your message." robots="noindex">
+  <Navbar />
+  <main class="flex-1 flex items-center">
+    <section class="max-w-2xl mx-auto px-4 sm:px-6 py-24 text-center">
+      <div class="text-5xl mb-6">📨</div>
+      <h1 class="text-4xl sm:text-5xl font-serif font-bold tracking-tight text-neutral-950 dark:text-white mb-4">Thanks for the message!</h1>
+      <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-light leading-relaxed mb-10">
+        It reached me. Photography is a hobby for me, so replies can take a little while, but I read every message.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:opacity-90 transition">Back to the gallery</a>
+        <a href="https://www.instagram.com/azizulabedin" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-800 font-semibold text-sm">Instagram ↗</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <script src="/dist/portfolio-smart.js" is:inline></script>
+</Layout>

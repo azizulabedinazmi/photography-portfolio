@@ -10,7 +10,7 @@ const TYPES = {
   '.ico': 'image/x-icon',
 };
 
-// In `astro dev`, serve the plain-HTML admin suite, client proofing pages and
+// In `astro dev`, serve the plain-HTML admin suite and
 // the generated /dist data + photos straight from disk, always fresh (the
 // production build copies them in via scripts/copy-assets.js).
 function serveStaticFolders(folders) {
@@ -63,7 +63,7 @@ export default defineConfig({
   outDir: './dist_site',
   publicDir: './public',
   vite: {
-    plugins: [tailwindcss(), serveStaticFolders(['admin', 'client', 'dist'])],
+    plugins: [tailwindcss(), serveStaticFolders(['admin', 'dist'])],
     server: {
       fs: {
         allow: ['.'],

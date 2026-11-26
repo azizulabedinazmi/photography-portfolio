@@ -39,16 +39,15 @@ copyRecursiveSync(path.join(ROOT, 'dist/assets'), path.join(OUT, 'dist/assets'))
 copyRecursiveSync(path.join(ROOT, 'dist/assets'), path.join(OUT, 'assets'));
 
 // 2. Copy gallery data & variants into dist_site/dist/
-['gallery-data.json', 'gallery-data.js', 'image-variants.js', 'output.css'].forEach((file) => {
+['gallery-data.json', 'gallery-data.js', 'image-variants.js'].forEach((file) => {
   const p = path.join(ROOT, 'dist', file);
   if (fs.existsSync(p)) {
     fs.copyFileSync(p, path.join(OUT, 'dist', file));
   }
 });
 
-// 3. Copy admin suite & client proofing into dist_site
+// 3. Copy the admin suite into dist_site
 copyRecursiveSync(path.join(ROOT, 'admin'), path.join(OUT, 'admin'));
-copyRecursiveSync(path.join(ROOT, 'client'), path.join(OUT, 'client'));
 
 // 4. Copy SEO and root config files
 ['robots.txt', 'sitemap.xml', 'ads.txt'].forEach((file) => {

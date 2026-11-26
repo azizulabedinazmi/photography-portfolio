@@ -1,7 +1,7 @@
 # ⚡ Admin Panel & Decap CMS Setup Guide
 **Azizul Abedin Azmi — Photography & Visual Art Portfolio**
 
-This guide provides step-by-step instructions for activating and configuring your **Decap CMS Admin Panel**, managing photo uploads, configuring the **Studio Suite**, and running private client proofing galleries.
+This guide provides step-by-step instructions for activating and configuring your **Decap CMS Admin Panel**, managing photo uploads and using the **Studio Suite**.
 
 ---
 
@@ -10,9 +10,8 @@ This guide provides step-by-step instructions for activating and configuring you
 2. [Setting Up Netlify Identity & Decap CMS](#2-setting-up-netlify-identity--decap-cms)
 3. [Logging Into Decap CMS (/admin/)](#3-logging-into-decap-cms-admin)
 4. [Using the Studio Suite (/admin/studio.html)](#4-using-the-studio-suite-adminstudiohtml)
-5. [Client Proofing Manager](#5-client-proofing-manager)
-6. [Google Drive & Google Photos Live Sync](#6-google-drive--google-photos-live-sync)
-7. [Troubleshooting & FAQs](#7-troubleshooting--faqs)
+5. [Google Drive & Google Photos Live Sync](#5-google-drive--google-photos-live-sync)
+6. [Troubleshooting & FAQs](#6-troubleshooting--faqs)
 
 ---
 
@@ -24,8 +23,6 @@ Your portfolio features a dual-tier administration suite:
 |---|---|---|
 | **Decap CMS** | `https://azmi.is-cool.dev/admin/` | Form-based content manager. Add new photos, change titles, update camera gear, and publish directly to GitHub without code. |
 | **Studio Suite** | `https://azmi.is-cool.dev/admin/studio.html` | Client-side power tools: Visual drag-and-drop gallery reordering, auto-EXIF camera metadata extractor, and in-browser WebP compressor. |
-| **Client Proofing Manager** | `https://azmi.is-cool.dev/admin/proofing.html` | Create private galleries for clients from uploads, Google Drive or Google Photos, and see which photos they picked. |
-| **Client gallery** | `https://azmi.is-cool.dev/client/<code>` | What your client opens. Needs the session PIN. |
 
 ---
 
@@ -109,46 +106,7 @@ Located at `https://azmi.is-cool.dev/admin/studio.html`, this standalone tool ru
 
 ---
 
-## 5. Client Proofing Manager
-
-Open **`https://azmi.is-cool.dev/admin/proofing.html`** and log in with your Netlify Identity account (the same one you use for Decap CMS).
-
-### Where the data lives
-Client sessions, PINs, uploaded photos and client picks are stored in **Netlify Blobs**, Netlify's private storage for your site. Nothing is committed to GitHub, so none of it shows up in the public repository. Blobs works on every Netlify plan and needs no setup.
-
-### Create a client gallery
-1. Click **+ New client session**.
-2. Fill in the title, the client's name, and a message they'll see at the top. A random 6-digit PIN is generated for you; change it if you like.
-3. Set **Max selections** (0 = no limit), an optional **expiry date**, and whether the client may **download** uploaded photos.
-4. Click **Save session**. The share link and photo tools appear.
-
-### Add photos (mix any of these)
-- **Upload**: drop photos on the upload box. Each one is resized to 2400px WebP in your browser (usually 200–500 KB) and stored privately. Uploaded photos can only be viewed through a short-lived link the client gets after entering the PIN.
-- **Google Drive**: paste file links or IDs, one per line. Each file must be shared as *Anyone with the link*. To import a whole folder, add a `GDRIVE_API_KEY` environment variable in Netlify (Site settings → Environment variables) and paste the folder link.
-- **Google Photos**: in Google Photos open the album → **Share** → **Create link**, then paste it and click **Import album**.
-
-Drag thumbnails to change the order. Frame numbers (#1, #2…) follow this order.
-
-Drive and Google Photos images are loaded straight from Google, so anyone who has the exact image URL can open it. Use **Upload** for anything that must stay fully private.
-
-### Share it
-- **Copy invite message** gives you a ready-to-send text with the link and PIN.
-- Links look like `https://azmi.is-cool.dev/client/sarah-graduation-7k2qp`. The random ending means links can't be guessed.
-- If you can, send the PIN in a different message from the link.
-
-### What the client sees
-They enter the PIN, browse the photos (tap for full screen, swipe or arrow keys to move), tap ♡ on their favourites, add an optional note, and press **Submit picks**. They can change and resubmit until the gallery closes. After 8 wrong PINs, the gallery locks for 15 minutes.
-
-### See the picks
-Open the session in the manager. **Client's picks** shows the chosen frames, the note and when they submitted. Use **Copy list** or **Download .txt** to work from it, or **Clear** to let them start over.
-
-### Close or delete
-- Set **Status → Closed** (or an expiry date) to stop the client opening the gallery.
-- **Delete session** permanently removes the gallery, its uploaded photos and the picks.
-
----
-
-## 6. Google Drive & Google Photos Live Sync
+## 5. Google Drive & Google Photos Live Sync
 
 ### Google Drive Direct Linking
 You can host full-resolution images on Google Drive without backend storage:
@@ -170,7 +128,7 @@ The public homepage has no sync button, so visitors can't load other albums into
 
 ---
 
-## 7. Troubleshooting & FAQs
+## 6. Troubleshooting & FAQs
 
 ### Q: Decap CMS says "API_ERROR: Git Gateway Error: [404]"
 **Solution**: Make sure **Git Gateway** is enabled in Netlify Site Settings → Identity → Services → Git Gateway, and that you have authorized GitHub permissions.

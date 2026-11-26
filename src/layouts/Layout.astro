@@ -18,20 +18,20 @@ interface Props {
 const SITE = 'https://azmi.is-cool.dev';
 const {
   title = "〘卂乙爪丨〙ヅ - Photography & Digital Art Portfolio",
-  description = "Explore the fine art photography and digital artwork portfolio of Azizul Abedin Azmi. Professional portraiture, cultural street photojournalism, and creative digital edits.",
+  description = "The hobby photography and digital art portfolio of Azizul Abedin Azmi: portraits, street and event moments, nature, and creative digital edits.",
   // The owner's own picture: the only image tied to the owner's name.
   image = "/dist/assets/Avatar.png",
   robots = '',
-  keywords = "Azizul Abedin Azmi, photography, portfolio, photographer, digital art, photo manipulation, portrait photography, developer portfolio",
+  keywords = "Azizul Abedin Azmi, hobby photography, portfolio, digital art, photo manipulation, portrait photography, developer",
   author = "Azizul Abedin Azmi",
   ogType = 'website',
-  siteName = "Azizul Abedin Azmi Photography & Art"
+  siteName = "Azizul Abedin Azmi · Hobby Photography & Art"
 } = Astro.props;
 const imageUrl = /^https?:/i.test(image) ? image : SITE + (image.startsWith('/') ? image : '/' + image);
 const path = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
 // Netlify serves pages as /about/ (and 301s /about there), so canonicals end with a slash.
 const canonical = SITE + (path.endsWith('/') ? path : path + '/');
-const robotsContent = ['index, follow', robots, 'max-image-preview:large, max-snippet:-1, max-video-preview:-1'].filter(Boolean).join(', ');
+const robotsContent = [/noindex/.test(robots) ? '' : 'index, follow', robots, 'max-image-preview:large, max-snippet:-1, max-video-preview:-1'].filter(Boolean).join(', ');
 ---
 
 <!DOCTYPE html>

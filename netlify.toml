@@ -24,17 +24,12 @@
   to = "/contact"
   status = 301
 
-# Keep admin and client proofing pages out of search engines
+# Keep the admin pages out of search engines
 [[headers]]
   for = "/admin/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-[[headers]]
-  for = "/client/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-    Referrer-Policy = "no-referrer"
 
 # Old Netlify address -> custom domain (keeps old links and Google results working)
 [[redirects]]
@@ -47,12 +42,6 @@
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
-  status = 200
-
-# Client proofing gallery links (/client/<session-code>)
-[[redirects]]
-  from = "/client/:slug"
-  to = "/client/index.html?session=:slug"
   status = 200
 
 # Old photo file names (renamed to descriptive names) -> new names, so existing links and Google keep working

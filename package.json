@@ -14,7 +14,6 @@
     "art:sync": "node scripts/art-sync.js"
   },
   "dependencies": {
-    "@netlify/blobs": "^8.1.0",
     "aws4fetch": "^1.0.20",
     "exif-reader": "^2.0.3",
     "sharp": "^0.35.5"

@@ -4,31 +4,31 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Contact & Bookings — Azizul Abedin Azmi" description="Get in touch with Azizul Abedin Azmi for portrait sessions, documentary events, and photography commissions worldwide.">
+<Layout title="Say Hello — Azizul Abedin Azmi" description="Say hello to Azizul Abedin Azmi: questions about a photo, collab ideas, or just to chat about photography and digital art.">
   <Navbar />
 
   <main class="flex-1">
     
-    <!-- Contact & Booking Main Section -->
+    <!-- Contact Main Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       
       <!-- Top Header -->
       <div class="max-w-3xl mb-12">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium tracking-wider uppercase bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Now Booking 2026 / 2027 Commissions
+          Hobby photographer · Always happy to chat
         </div>
         <h1 class="text-4xl sm:text-6xl font-serif font-bold tracking-tight text-neutral-950 dark:text-white mb-4">
-          Let's Create <span class="italic font-normal">Together</span>.
+          Say <span class="italic font-normal">Hello</span>.
         </h1>
         <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-light leading-relaxed">
-          Whether you're looking for an editorial portrait session, cultural event documentation, or fine art project, share your vision below and let's bring it to life.
+          Photography is my hobby, not a business, so I don't take paid bookings. But if you liked a photo, spotted yourself in one, have a fun collab or photo-walk idea, or just want to talk cameras and editing, drop me a message.
         </p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
-        <!-- Left: Interactive Inquiry Form -->
+        <!-- Left: Message Form -->
         <div class="lg:col-span-7 bg-neutral-50 dark:bg-neutral-900/60 p-6 sm:p-10 rounded-3xl border border-neutral-200/80 dark:border-neutral-800 shadow-xl">
           
           <form name="contact" action="/success" method="POST" data-netlify="true" class="space-y-6">
@@ -46,32 +46,32 @@ import Footer from '../components/Footer.astro';
               </div>
             </div>
 
-            <!-- Service Type Selection -->
+            <!-- Topic Selection -->
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Type of Photography</label>
+              <label class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">What's it about?</label>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <label class="cursor-pointer">
-                  <input type="radio" name="service_type" value="Portraits" class="peer sr-only" checked />
+                  <input type="radio" name="service_type" value="A photo" class="peer sr-only" checked />
                   <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
-                    Portraiture
+                    A Photo
                   </div>
                 </label>
                 <label class="cursor-pointer">
-                  <input type="radio" name="service_type" value="Events" class="peer sr-only" />
+                  <input type="radio" name="service_type" value="Collab idea" class="peer sr-only" />
                   <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
-                    Events / Street
+                    Collab Idea
                   </div>
                 </label>
                 <label class="cursor-pointer">
-                  <input type="radio" name="service_type" value="Editorial" class="peer sr-only" />
+                  <input type="radio" name="service_type" value="Digital art" class="peer sr-only" />
                   <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
-                    Editorial Cut
+                    Digital Art
                   </div>
                 </label>
                 <label class="cursor-pointer">
-                  <input type="radio" name="service_type" value="Commercial" class="peer sr-only" />
+                  <input type="radio" name="service_type" value="Just saying hi" class="peer sr-only" />
                   <div class="p-3 text-center rounded-xl border border-neutral-200 dark:border-neutral-700 peer-checked:border-black peer-checked:dark:border-white peer-checked:bg-neutral-200/50 peer-checked:dark:bg-neutral-800 text-xs font-medium transition">
-                    Commercial
+                    Just Hi
                   </div>
                 </label>
               </div>
@@ -79,24 +79,24 @@ import Footer from '../components/Footer.astro';
 
             <!-- Subject -->
             <div>
-              <label for="subject" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Subject / Shoot Concept</label>
-              <input type="text" id="subject" name="subject" required placeholder="e.g. Outdoor Golden Hour Portrait Session" class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
+              <label for="subject" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Subject</label>
+              <input type="text" id="subject" name="subject" required placeholder="e.g. Loved the Golden Hour series" class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition" />
             </div>
 
             <!-- Message Body -->
             <div>
               <label for="message" class="block text-xs font-mono uppercase tracking-wider text-neutral-600 dark:text-neutral-400 mb-2">Message & Details</label>
-              <textarea id="message" name="message" rows="5" required placeholder="Tell me about your planned date, preferred location, mood, or any questions..." class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"></textarea>
+              <textarea id="message" name="message" rows="5" required placeholder="Write anything: a question about a photo, an idea, or just hello..." class="w-full px-4 py-3 rounded-xl text-sm bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition"></textarea>
             </div>
 
             <!-- Submit Button -->
             <button type="submit" class="w-full py-4 px-6 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:opacity-90 transition shadow-xl hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2">
-              <span>Send Inquiry Message</span>
+              <span>Send Message</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
             </button>
 
             <p class="text-[11px] font-mono text-center text-neutral-400">
-              🔒 Your contact info is strictly confidential. Typical response within 24 hours.
+              🔒 Your email is only used to reply. I answer when I can.
             </p>
 
           </form>
@@ -140,22 +140,22 @@ import Footer from '../components/Footer.astro';
 
           <!-- Frequently Asked Questions -->
           <div class="p-8 rounded-3xl bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/80 dark:border-neutral-800 shadow-xl space-y-4">
-            <h3 class="font-serif font-bold text-xl text-neutral-900 dark:text-white mb-2">FAQ for Clients</h3>
+            <h3 class="font-serif font-bold text-xl text-neutral-900 dark:text-white mb-2">Quick Questions</h3>
             
             <div class="space-y-3 text-xs sm:text-sm">
               <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
-                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">What is your delivery turnaround?</h4>
-                <p class="text-neutral-500 font-light leading-relaxed">Typically 5-7 business days for fully color-graded, high-resolution JPEG files ready for print and social media.</p>
+                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Do you do paid shoots?</h4>
+                <p class="text-neutral-500 font-light leading-relaxed">No. Photography is my hobby, so I don't take bookings or commissions. I shoot friends, events I'm part of, and whatever catches my eye.</p>
               </div>
 
               <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
-                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Do you travel for shoots?</h4>
-                <p class="text-neutral-500 font-light leading-relaxed">Yes! Available worldwide for travel sessions, remote digital commissions, and on-location editorial projects.</p>
+                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Can I collab or join a photo walk?</h4>
+                <p class="text-neutral-500 font-light leading-relaxed">Sure! If you have a fun idea or a place worth shooting, send a message and we'll see if it works out.</p>
               </div>
 
               <div class="p-4 rounded-xl bg-white dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-800">
-                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">Do I get raw photos or edited only?</h4>
-                <p class="text-neutral-500 font-light leading-relaxed">You receive fully polished, signature color-graded images. RAW sensor files represent unfinished work and are curated into final masters.</p>
+                <h4 class="font-semibold text-neutral-900 dark:text-white mb-1">You posted a photo of me. Can I get it?</h4>
+                <p class="text-neutral-500 font-light leading-relaxed">Of course. Message me with the photo's name and I'll send you the full-size edit, or take it down if you'd rather it wasn't online.</p>
               </div>
             </div>
           </div>
