@@ -11,9 +11,7 @@ export const OWNER_PROFILES = [
   'https://www.instagram.com/azizulabedin',
   'https://www.facebook.com/azizul.abedin.azmi',
   'https://www.linkedin.com/in/azizulabedin/',
-  'https://github.com/azizulabedinazmi',
-  'https://www.azizulabedinazmi.dev/',
-  'https://orcid.org/0009-0003-5269-6900'
+  'https://github.com/azizulabedinazmi'
 ];
 
 export type Variant = { w?: number; h?: number; srcset: [string, number][] };
