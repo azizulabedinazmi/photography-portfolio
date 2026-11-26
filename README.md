@@ -67,7 +67,7 @@
 
 ## 📋 About The Project <a name="about-the-project"></a>
 
-This is the personal portfolio of **Azizul Abedin Azmi** (a software developer who loves taking photos). It shows:
+This is the personal portfolio of **Azizul Abedin Azmi**. It shows:
 - **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
 - **Digital Art & Photo Manipulations**: 22 surreal, concept and high-aesthetic digital edits, most with a step-by-step **Replay** of how they were made.
 - **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).
