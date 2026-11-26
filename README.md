@@ -26,7 +26,7 @@
   <h1 align="center">Azizul Abedin Azmi — Photography & Digital Art Portfolio</h1>
 
   <p align="center">
-    An editorial fine art photography, PicsArt digital manipulation, and client proofing platform built with Tailwind CSS, Decap CMS, Netlify Functions, and the Web Audio API.
+    An editorial fine art photography, digital art, and client proofing platform built with Astro, Tailwind CSS, Decap CMS, Netlify Functions, and the Web Audio API.
     <br />
     <br />
     <a href="https://azmi.is-cool.dev/"><strong>🌐 View Live Portfolio »</strong></a>
@@ -50,6 +50,9 @@
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#core-features">Core Features</a></li>
+    <li><a href="#digital-art-replay">Digital Art Replay & Sync</a></li>
+    <li><a href="#real-exif">Real Camera EXIF</a></li>
+    <li><a href="#photo-storage">Photo Storage (Cloudflare R2)</a></li>
     <li><a href="#admin-panel--cms">Admin Panel & Decap CMS</a></li>
     <li><a href="#studio-admin-suite">Studio Admin Suite (EXIF & WebP)</a></li>
     <li><a href="#google-drive-integration">Google Drive Storage Integration</a></li>
@@ -68,7 +71,7 @@
 
 This repository contains the complete portfolio and creative studio system for **Azizul Abedin Azmi**, showcasing:
 - **Fine Art Portraiture & Human Stories**: Intimate expressions, natural light, and cultural youth photojournalism (Scouts & ECPA).
-- **PicsArt Digital Art & Photo Manipulations**: 16 surreal, concept art, and high-aesthetic digital edits.
+- **Digital Art & Photo Manipulations**: 22 surreal, concept and high-aesthetic digital edits, most with a step-by-step **Replay** of how they were made.
 - **Private Client Proofing**: PIN-protected galleries built from uploads, Google Drive or Google Photos, where clients pick their favourites for retouching.
 - **Dual Identity Connection**: Direct synergy with his software engineering portfolio at [azizulabedinazmi.is-a.dev](http://azizulabedinazmi.is-a.dev/).
 
@@ -76,14 +79,76 @@ This repository contains the complete portfolio and creative studio system for *
 
 ## ✨ Core Features <a name="core-features"></a>
 
-- **🎨 55+ Curated Works**: Complete dataset of portraits, street stories, botanical studies, and restored PicsArt masterworks.
-- **🎞️ Cinematic Hero Filmstrip Marquee**: Auto-scrolling, infinite continuous filmstrip highlight reel in the hero section.
-- **🎭 3D Perspective Tilt & Scroll Reveal**: Cards tilt dynamically based on cursor movement (`.tilt-card`) with subtle glare and smooth entry animations (`IntersectionObserver`).
-- **🌓 Dark / Light Theme Engine**: Instant theme switcher with memory persistence (`localStorage`) and smooth transitions (`T` key).
-- **🔊 Synthesized DSLR Shutter Audio & Camera Flash**: Real-time mechanical camera click powered by the browser's Web Audio API with zero audio files, plus an optional screen flash burst (`S` key).
-- **❤️ Client Moodboard & Favorites Drawer**: Visitors shortlist works with a heart click (♡), view their selection in a sliding glass drawer, and click **"Inquire with this Moodboard"** to pre-fill inquiry forms automatically.
-- **✨ Fullscreen Zen Exhibition Mode**: Distraction-free digital gallery exhibition with ambient background lighting and auto-play slideshow (`Z` key).
-- **⚡ Live Search & Category Filtering**: Instantly filter between *All Works*, *Portraits*, *Digital Art & PicsArt*, *Events & Street*, *Nature & Details*, *Curated Series*, and *My Moodboard*.
+- **🎨 60 Curated Works**: Portraits, street and event stories, botanical studies, curated series and 22 digital artworks. Every count on the site is computed from the gallery data, so it never goes stale.
+- **🧱 True Masonry Gallery**: Every photo keeps its real shape (no portrait-cropped landscapes). 4 columns on laptops and desktops, 3 on tablets, 2 or 1 on phones.
+- **🖼️ Dedicated Art Column**: In *All Works* on wide screens, digital art runs down column 4 alongside the photos, then flows into the space below once the photos end, so every column finishes evenly.
+- **▶ Edit Replay**: Digital art cards have a **Replay** button that plays the artwork's real editing steps (Original → Cutout → Add Object → … → Final) full-screen, with a step strip, autoplay, arrow keys and swipe.
+- **👆 Hover Slideshow**: Hovering a series card cycles through its frames; hovering an art card plays its edit steps (mouse/trackpad only).
+- **📷 Real Photo Details**: The ⓘ panel shows camera, lens, shutter, aperture, ISO and date read from the photo file itself, and real edit details (tools, filters, canvas, date) for digital art. Nothing is invented: missing values are left out.
+- **🎞️ Cinematic Hero Filmstrip Marquee**: Auto-scrolling, infinite filmstrip highlight reel in the hero section.
+- **🎭 3D Perspective Tilt & Scroll Reveal**: Cards tilt with the cursor (`.tilt-card`) and fade in as you scroll (`IntersectionObserver`).
+- **🌓 Dark / Light Theme Engine**: Instant theme switcher remembered in `localStorage` (`T` key).
+- **🔊 Synthesized DSLR Shutter Audio & Camera Flash**: A mechanical camera click made with the Web Audio API (no audio files), plus a screen flash (`S` key).
+- **✨ Fullscreen Zen Exhibition Mode**: Distraction-free slideshow with ambient lighting and swipe support (`Z` key).
+- **⚡ Live Search, Filters & Layouts**: Filter by *All Works*, *Portraits*, *Digital Art*, *Events & Street*, *Nature & Details* and *Curated Series*; search by name, tag or camera; switch between Grid, Editorial and Contact-sheet layouts.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## ▶ Digital Art Replay & Sync <a name="digital-art-replay"></a>
+
+Each digital artwork in `dist/gallery-data.json` can be linked to its original post with a `postId` (the number at the end of the post link, e.g. `.../i/image-416248407049203`). One command then fills in the rest automatically:
+
+```bash
+npm run sync-art             # fill in missing details and replays
+npm run sync-art -- --force  # refresh every replay
+node scripts/build-seo.js    # regenerate dist/gallery-data.js (or run npm run build)
+```
+
+- **`editDetails`**: canvas size, date made, tools used (Cutout, Square Fit, Add Objects, Free Style, …) and filters (HDR One, Icy 1, …).
+- **`replay`**: one image per editing step, used by the Replay player and the hover slideshow.
+- Requests are spaced out; if the source rate-limits, the script stops, keeps what it already fetched, and can simply be run again later.
+- Pieces posted without their edit history (e.g. *Celestial Mirage*) still get their edit details, just no Replay.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📷 Real Camera EXIF <a name="real-exif"></a>
+
+`scripts/build-images.js` reads the EXIF stored in every original photo (with `sharp` + `exif-reader`) and saves it next to the WebP sizes in `dist/image-variants.js`. The site uses it for the ⓘ panel, card captions and Zen mode:
+
+- Camera body and lens (e.g. *Canon EOS 750D · EF50mm f/1.8 STM*), shutter, aperture, ISO, focal length, date taken and editing software.
+- Photos re-saved by apps that strip EXIF (e.g. Google Photos) say so honestly instead of showing made-up settings.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🔐 Photo Storage (Cloudflare R2) <a name="photo-storage"></a>
+
+The full-size photo originals are **not stored in GitHub**. They live in a **private Cloudflare R2 bucket**, and the website never serves them:
+
+1. On every deploy, `npm run build` downloads the originals from R2 (`scripts/photos-sync.js pull`).
+2. `scripts/build-images.js` turns them into small WebP copies (480/960/1600px) and reads their EXIF.
+3. Only the WebP copies are published. Any old link to an original (search engines, shared links) is redirected to its WebP copy.
+
+### One-time setup
+1. **Cloudflare dashboard → R2 → Create bucket** (keep public access **off**).
+2. **R2 → Manage API tokens → Create API token** with **Object Read & Write**, limited to that bucket. Copy the *Access Key ID* and *Secret Access Key*.
+3. Copy `.env.example` to `.env` (git-ignored) and fill in `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` and `R2_BUCKET`.
+4. Add the **same four variables** in **Netlify → Site configuration → Environment variables**.
+
+### Everyday use
+```bash
+npm run photos:push   # upload new or changed originals from dist/assets/Photography to R2 (verified after upload)
+npm run photos:pull   # download originals you don't have locally (e.g. on a fresh clone)
+# add --dry-run to either command to preview without transferring anything
+```
+
+> New photos added through Decap CMS are committed to `dist/assets/Photography` as before. Run `npm run photos:push` afterwards to copy them to R2.
+> If R2 isn't configured, the build uses whatever originals are on disk, and on Netlify it **fails with a clear message** instead of publishing a site with no photos.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -186,13 +251,14 @@ Full walkthrough: [ADMIN_SETUP.md → Client Proofing Manager](ADMIN_SETUP.md#5-
 
 ## 🛠️ Built With <a name="built-with"></a>
 
-- **HTML5 & Semantic Markup**: Structured for SEO and accessibility.
-- **Tailwind CSS**: Modern utility-first styling with dark/light variables.
-- **Vanilla JavaScript (ES6+)**: Zero bulky frameworks, high frame-rate performance.
-- **Decap CMS**: Git-based headless content management system.
-- **Netlify Functions + Netlify Blobs**: private client proofing storage, Google Photos album import and Google Drive folder sync.
+- **Astro 7**: Static site generator; pages and components live in `src/` and build to `dist_site/`.
+- **Tailwind CSS v4**: Utility-first styling with dark/light variants (via `@tailwindcss/vite`).
+- **Vanilla JavaScript (ES6+)**: Gallery, masonry, Replay player and interactions in `public/dist/portfolio-smart.js`, with no client-side framework.
+- **sharp + exif-reader**: WebP image sizes and real EXIF at build time.
+- **Decap CMS**: Git-based headless content management.
+- **Netlify Functions + Netlify Blobs**: Private client proofing storage, Google Photos album import and Google Drive folder sync.
 - **Web Audio API**: Synthetic mechanical DSLR shutter sound.
-- **exifr**: Client-side EXIF metadata parsing.
+- **exifr**: In-browser EXIF reading in the Studio Suite.
 - **Fancybox v5**: Lightbox presentation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -201,38 +267,51 @@ Full walkthrough: [ADMIN_SETUP.md → Client Proofing Manager](ADMIN_SETUP.md#5-
 
 ## 🎯 Getting Started & Local Dev <a name="getting-started"></a>
 
-### 1. Clone the Repository
+Requires **Node.js 20+**.
+
+### 1. Clone and install
 ```bash
 git clone https://github.com/azizulabedinazmi/photography-portfolio.git
 cd photography-portfolio
+npm install
 ```
 
-### 2. Build the fast-loading images (optional locally, automatic on Netlify)
-Every deploy runs `node scripts/build-images.js && node scripts/build-seo.js`. The first creates small WebP copies of each photo (480/960/1600px, about 20× smaller than the originals) in `dist/assets/Photography/_web/`; the second updates the sitemap and search data. To see the same thing locally:
+### 2. Run the dev server
 ```bash
-npm install
+npm run dev
+```
+Open **http://localhost:4321**. The home, about and contact pages, plus `/admin/`, `/client/` and everything under `/dist/`, are served with live reload.
+
+The photo originals are not in git. To get them, set up `.env` (see [Photo Storage](#photo-storage)) and pull them, then generate the WebP copies and EXIF:
+```bash
+npm run photos:pull
 node scripts/build-images.js && node scripts/build-seo.js
 ```
-Without this step the site still works locally; it just loads the original full-size photos.
 
-### 3. Run Local Development Server
-Any static HTTP server works:
+### 3. Production build and preview
 ```bash
-# Python
-python -m http.server 3000
-
-# Or Node.js
-npx serve .
+npm run build     # pull originals from R2 + images + SEO data + Astro build + copy into dist_site/
+npm run preview   # serves dist_site/ at http://localhost:4321
 ```
+Netlify runs the same `npm run build` on every push to `main` and publishes `dist_site/` (see `netlify.toml`).
 
 ### 4. Test Netlify Functions Locally (Optional)
-If you have the Netlify CLI installed:
 ```bash
-npm install
 npm install -g netlify-cli
 netlify dev
 ```
-This serves both the static site and the serverless functions (`/.netlify/functions/google-photos-album` and `/.netlify/functions/gdrive-sync`) at `http://localhost:8888`.
+This serves the site together with the serverless functions (client proofing, `/.netlify/functions/google-photos-album` and `/.netlify/functions/gdrive-sync`) at `http://localhost:8888`.
+
+### 5. Project layout
+```
+src/                     Astro pages, layout and components
+public/dist/             Browser script (portfolio-smart.js), served as-is
+dist/gallery-data.json   Gallery content (edited by Decap CMS)
+dist/assets/             Logos and icons; Photography/ holds originals locally (not in git, stored in R2)
+scripts/                 photos-sync + r2 (R2 storage), build-images, build-seo, copy-assets, fetch-replays (sync-art)
+admin/  client/          Admin CMS, Studio Suite, proofing manager and client galleries
+netlify/functions/       Serverless functions
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

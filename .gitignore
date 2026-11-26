@@ -5,3 +5,12 @@ dist_site/
 .DS_Store
 dist/assets/Photography/_web/
 dist/image-variants.js
+
+# Secrets (R2 keys etc.): never commit
+.env
+.env.*
+!.env.example
+
+# Full-size photo originals live in private Cloudflare R2 (npm run photos:push / photos:pull)
+dist/assets/Photography/*
+!dist/assets/Photography/.gitkeep

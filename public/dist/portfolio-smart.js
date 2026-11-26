@@ -698,8 +698,18 @@
       if (!inner || !window.GALLERY_DATA) return;
 
       const highlights = window.GALLERY_DATA.slice(0, 18);
+      // Each tile keeps the strip's height but takes its photo's real width,
+      // so portraits show the whole frame instead of a cropped middle strip.
+      const aspectOf = (item) => {
+        const v = window.IMAGE_VARIANTS && window.IMAGE_VARIANTS[item.src];
+        let w = v && v.w, h = v && v.h;
+        const canvas = !w && item.editDetails && item.editDetails.canvas;
+        if (canvas) [w, h] = canvas.split('×').map(Number);
+        const r = w && h ? w / h : 1;
+        return Math.min(2, Math.max(0.5, r)).toFixed(3);
+      };
       const renderItem = (item) => `
-        <a href="${resolveMediaUrl(item.src)}" data-fancybox="filmstrip" class="block shrink-0 w-36 sm:w-48 h-24 sm:h-32 rounded-xl overflow-hidden border border-neutral-300 dark:border-neutral-800 shadow-md group relative">
+        <a href="${resolveMediaUrl(item.src)}" data-fancybox="filmstrip" style="aspect-ratio:${aspectOf(item)}" class="block shrink-0 h-24 sm:h-32 rounded-xl overflow-hidden border border-neutral-300 dark:border-neutral-800 shadow-md group relative">
           <img src="${resolveMediaUrl(item.src, 'w480')}" alt="${altText(item)}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" loading="lazy" />
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
             <span class="text-[11px] font-mono text-white text-center px-2 truncate">${item.title}</span>

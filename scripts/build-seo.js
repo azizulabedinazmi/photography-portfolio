@@ -25,13 +25,23 @@ const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 const raw = JSON.parse(read('dist/gallery-data.json'));
 const items = Array.isArray(raw) ? raw : raw.items || [];
 
+// Published WebP copies (originals are kept private in R2, see scripts/photos-sync.js).
+let VARIANTS = {};
+try {
+  const vt = read('dist/image-variants.js');
+  VARIANTS = JSON.parse(vt.slice(vt.indexOf('{'), vt.lastIndexOf('}') + 1));
+} catch { /* not built yet: fall back to original paths */ }
+
 function absoluteUrl(src) {
   if (!src) return null;
   const s = String(src).trim();
   if (/^https?:\/\//i.test(s)) return s;
   const drive = s.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || (/^[a-zA-Z0-9_-]{25,}$/.test(s) ? [null, s] : null);
   if (drive) return `https://lh3.googleusercontent.com/d/${drive[1]}=w1600`;
-  return SITE + '/' + encodeURI(s.replace(/^\.?\//, ''));
+  const local = s.replace(/^\.?\//, '');
+  const v = VARIANTS[local];
+  const published = v ? v.srcset[v.srcset.length - 1][0] : local;
+  return SITE + '/' + encodeURI(published);
 }
 
 const xml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

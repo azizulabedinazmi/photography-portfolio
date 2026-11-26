@@ -5,13 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/build-images.js && node scripts/build-seo.js && astro build && node scripts/copy-assets.js",
+    "build": "node scripts/photos-sync.js pull && node scripts/build-images.js && node scripts/build-seo.js && astro build && node scripts/copy-assets.js",
     "preview": "astro preview",
     "fetch-replays": "node scripts/fetch-replays.js",
-    "sync-art": "node scripts/fetch-replays.js"
+    "sync-art": "node scripts/fetch-replays.js",
+    "photos:push": "node scripts/photos-sync.js push",
+    "photos:pull": "node scripts/photos-sync.js pull"
   },
   "dependencies": {
     "@netlify/blobs": "^8.1.0",
+    "aws4fetch": "^1.0.20",
     "exif-reader": "^2.0.3",
     "sharp": "^0.35.5"
   },
