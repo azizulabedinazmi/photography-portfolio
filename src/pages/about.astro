@@ -2,9 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { SITE, OWNER, OWNER_IMAGE, OWNER_PROFILES } from '../lib/photos';
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    '@id': `${SITE}/#person`,
+    name: OWNER,
+    alternateName: ['Azmi', '〘卂乙爪丨〙ヅ'],
+    url: `${SITE}/`,
+    image: OWNER_IMAGE,
+    jobTitle: 'Photographer & Digital Artist',
+    sameAs: OWNER_PROFILES
+  }
+};
 ---
 
 <Layout title="About Me — Azizul Abedin Azmi" description="Learn about Azizul Abedin Azmi — visual photographer, digital artist, and software developer.">
+  <script type="application/ld+json" set:html={JSON.stringify(person)} is:inline slot="head" />
   <Navbar />
 
   <main class="flex-1">
@@ -23,7 +40,7 @@ import Footer from '../components/Footer.astro';
             <div class="relative bg-white dark:bg-neutral-900 p-5 pb-20 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
               <!-- Avatar Image -->
               <div class="overflow-hidden rounded-xl aspect-square bg-neutral-100 dark:bg-neutral-800">
-                <img src="/dist/assets/Avatar.png" alt="Azizul Abedin Azmi" class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700" />
+                <img src="/dist/assets/Avatar.png" alt="Azizul Abedin Azmi, photographer and digital artist" width="1080" height="1350" class="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700" />
               </div>
               
               <!-- Handwritten caption -->

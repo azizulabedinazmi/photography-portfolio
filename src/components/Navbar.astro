@@ -15,8 +15,11 @@ const isContact = pathname === '/contact' || pathname === '/contact/';
           <img src="/dist/assets/favicon-32x32.png" alt="Azmi Brand Icon" class="w-full h-full object-contain rounded-lg">
         </div>
         <div>
-          <div class="text-lg sm:text-xl font-bold font-serif tracking-tight leading-none text-neutral-900 dark:text-white group-hover:opacity-80 transition">
-            Azizul Abedin Azmi
+          <!-- Transparent wordmark: black logo on the light theme, white logo on the dark theme -->
+          <div class="h-6 sm:h-7 group-hover:opacity-80 transition">
+            <span class="sr-only">〘卂乙爪丨〙ヅ Azmi</span>
+            <img src="/dist/assets/logo-on-light.webp" alt="" aria-hidden="true" width="453" height="96" class="h-full w-auto block dark:hidden" />
+            <img src="/dist/assets/logo-on-dark.webp" alt="" aria-hidden="true" width="453" height="96" class="h-full w-auto hidden dark:block" />
           </div>
           <div class="flex items-center gap-2 mt-1">
             <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>

@@ -144,11 +144,26 @@ The full-size photo originals are **not stored in GitHub**. They live in a **pri
 ```bash
 npm run photos:push   # upload new or changed originals from dist/assets/Photography to R2 (verified after upload)
 npm run photos:pull   # download originals you don't have locally (e.g. on a fresh clone)
-# add --dry-run to either command to preview without transferring anything
+npm run art:sync      # copy any new digital-art / Replay images into R2 (art/ folder) and download them
+# add --dry-run to the photos commands to preview without transferring anything
 ```
+
+> **Digital art is self-hosted too.** Every artwork and Replay step image is mirrored into the same bucket under `art/`; the build downloads them and publishes WebP copies, so the site never loads images from the original host.
 
 > New photos added through Decap CMS are committed to `dist/assets/Photography` as before. Run `npm run photos:push` afterwards to copy them to R2.
 > If R2 isn't configured, the build uses whatever originals are on disk, and on Netlify it **fails with a clear message** instead of publishing a site with no photos.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🔎 Search Engines: One Page Per Photo <a name="seo"></a>
+
+Each photo and artwork has its **own page** at `/photo/<title-slug>/` (`src/pages/photo/[slug].astro`), titled and described only by **its own subject and tags**. The sitemap lists every image under its own page, so a search for a person's name shows *their* photo.
+
+- The **only** image tied to the owner's name is `dist/assets/Avatar.png` (About page + `Person` schema).
+- The homepage uses `noimageindex`, so gallery thumbnails there are not filed under the owner's name.
+- After deploying, resubmit `https://azmi.is-cool.dev/sitemap.xml` in Google Search Console. Google takes days to weeks to re-crawl and drop the old associations.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

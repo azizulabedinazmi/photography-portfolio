@@ -4,8 +4,10 @@
  * Runs on every Netlify deploy (see netlify.toml) and can be run locally: `node scripts/build-seo.js`
  *
  *  1. dist/gallery-data.js  – regenerated from the JSON so the homepage always shows the latest edits
- *  2. sitemap.xml           – lists every gallery image (with Google's image sitemap extension)
- *  3. index.html            – schema.org ImageGallery JSON-LD with each photo's name and alt text
+ *  2. sitemap.xml           – one URL per photo page (/photo/<slug>/, built by src/pages/photo/[slug].astro)
+ *                             carrying that photo's images, so each image is indexed under its own title.
+ *                             The only image listed under the owner's pages is the Avatar (on /about/).
+ *  3. index.html            – legacy root page (if present): schema.org JSON-LD for the photos
  *
  * Each photo is described only by who/what is in it (no photographer name or credit), so a search for a
  * person's name finds their photo, but a search for the photographer's name doesn't pull up every image.
@@ -35,6 +37,8 @@ try {
 function absoluteUrl(src) {
   if (!src) return null;
   const s = String(src).trim();
+  // Self-hosted WebP copy (photos and mirrored digital art).
+  if (VARIANTS[s]) return SITE + '/' + encodeURI(VARIANTS[s].srcset[VARIANTS[s].srcset.length - 1][0]);
   if (/^https?:\/\//i.test(s)) return s;
   const drive = s.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || (/^[a-zA-Z0-9_-]{25,}$/.test(s) ? [null, s] : null);
   if (drive) return `https://lh3.googleusercontent.com/d/${drive[1]}=w1600`;
@@ -46,23 +50,38 @@ function absoluteUrl(src) {
 
 const xml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-// Every photo, including extra frames inside a series.
+// Same slugs as src/lib/photos.ts and public/dist/portfolio-smart.js (one page per gallery item).
+const slugify = (t) => String(t || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const usedSlugs = new Set();
+const slugs = items.map((it) => {
+  const base = slugify(it.title) || slugify(it.id) || 'photo';
+  let s = base;
+  for (let n = 2; usedSlugs.has(s); n++) s = `${base}-${n}`;
+  usedSlugs.add(s);
+  return s;
+});
+
+// Every photo, including extra frames inside a series, grouped by its page.
 const images = [];
+const pages = items.map(() => []);
 const seen = new Set();
-for (const it of items) {
+items.forEach((it, idx) => {
   const srcs = [it.src, ...(Array.isArray(it.seriesExtra) ? it.seriesExtra : [])];
   srcs.forEach((src, i) => {
     const url = absoluteUrl(typeof src === 'string' ? src : src && src.image);
     if (!url || seen.has(url)) return;
     seen.add(url);
-    images.push({
+    const im = {
       url,
       name: i === 0 ? it.title : `${it.title} (${i + 1})`,
       alt: it.alt || it.title,
       keywords: it.tags || ''
-    });
+    };
+    images.push(im);
+    pages[idx].push(im);
   });
-}
+});
 
 // 1. gallery-data.js
 write('dist/gallery-data.js',
@@ -70,7 +89,14 @@ write('dist/gallery-data.js',
 
 // 2. sitemap.xml
 const today = new Date().toISOString().slice(0, 10);
-const imageTags = images.map((im) => `    <image:image>\n      <image:loc>${xml(im.url)}</image:loc>\n    </image:image>`).join('\n');
+const imageTag = (u) => `    <image:image>\n      <image:loc>${xml(u)}</image:loc>\n    </image:image>`;
+const photoUrls = items.map((it, i) => `  <url>
+    <loc>${SITE}/photo/${slugs[i]}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+${pages[i].map((im) => imageTag(im.url)).join('\n')}
+  </url>`).join('\n');
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -79,24 +105,25 @@ write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-${imageTags}
   </url>
   <url>
-    <loc>${SITE}/about</loc>
+    <loc>${SITE}/about/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+${imageTag(`${SITE}/dist/assets/Avatar.png`)}
+  </url>
+  <url>
+    <loc>${SITE}/contact/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>${SITE}/contact</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+${photoUrls}
 </urlset>
 `);
 
-// 3. JSON-LD in index.html (if present)
+// 3. JSON-LD in the legacy root index.html (if present)
 if (fs.existsSync(path.join(ROOT, 'index.html'))) {
   const ld = {
     '@context': 'https://schema.org',
@@ -124,4 +151,4 @@ if (fs.existsSync(path.join(ROOT, 'index.html'))) {
   write('index.html', html);
 }
 
-console.log(`SEO build: ${items.length} gallery items, ${images.length} images in sitemap and JSON-LD.`);
+console.log(`SEO build: ${items.length} photo pages, ${images.length} images in sitemap.`);

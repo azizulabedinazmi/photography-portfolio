@@ -14,3 +14,7 @@ dist/image-variants.js
 # Full-size photo originals live in private Cloudflare R2 (npm run photos:push / photos:pull)
 dist/assets/Photography/*
 !dist/assets/Photography/.gitkeep
+
+# Digital-art images mirrored from R2 (npm run art:sync) and their manifest
+dist/assets/Art/
+dist/art-manifest.json

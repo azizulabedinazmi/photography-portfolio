@@ -37,7 +37,8 @@ const prefix = () => {
   return p && !p.endsWith('/') ? p + '/' : p;
 };
 
-function client() {
+// folder: object-key prefix inside the bucket (default R2_PREFIX, e.g. "photography/").
+function client(folder = prefix()) {
   if (!configured()) throw new Error(`R2 is not configured; missing: ${missing().join(', ')}`);
   const aws = new AwsClient({
     accessKeyId: process.env.R2_ACCESS_KEY_ID,
@@ -64,7 +65,7 @@ function client() {
       const out = [];
       let token = '';
       do {
-        const q = `?list-type=2&prefix=${encodeURIComponent(prefix())}${token ? `&continuation-token=${encodeURIComponent(token)}` : ''}`;
+        const q = `?list-type=2&prefix=${encodeURIComponent(folder)}${token ? `&continuation-token=${encodeURIComponent(token)}` : ''}`;
         const res = await aws.fetch(`${base}${q}`);
         const xml = await res.text();
         if (!res.ok) throw new Error(`R2 list failed (${res.status}): ${xml.slice(0, 200)}`);
@@ -73,7 +74,7 @@ function client() {
           if (!key || key.endsWith('/')) continue;
           out.push({
             key,
-            name: key.slice(prefix().length),
+            name: key.slice(folder.length),
             size: Number((c.match(/<Size>(\d+)<\/Size>/) || [])[1] || 0),
             etag: ((c.match(/<ETag>([\s\S]*?)<\/ETag>/) || [])[1] || '').replace(/&quot;|"/g, ''),
           });
@@ -84,13 +85,13 @@ function client() {
     },
 
     async get(name) {
-      const res = await request('GET', prefix() + name);
+      const res = await request('GET', folder + name);
       if (!res.ok) throw new Error(`R2 download failed for ${name} (${res.status})`);
       return Buffer.from(await res.arrayBuffer());
     },
 
     async put(name, body, contentType) {
-      const res = await request('PUT', prefix() + name, {
+      const res = await request('PUT', folder + name, {
         body,
         headers: { 'Content-Type': contentType || 'application/octet-stream', 'Content-Length': String(body.length) },
       });

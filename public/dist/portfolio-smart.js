@@ -43,6 +43,24 @@
     return `srcset="${set}" sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw" width="${v.w}" height="${v.h}"`;
   }
 
+  // Each work's own page (/photo/<slug>/). Keep in sync with src/lib/photos.ts.
+  const slugify = (t) => String(t || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  let SLUGS = null;
+  function photoPageUrl(index) {
+    if (!SLUGS) {
+      const seen = new Set();
+      SLUGS = (window.GALLERY_DATA || []).map((it) => {
+        const base = slugify(it.title) || slugify(it.id) || 'photo';
+        let s = base;
+        for (let n = 2; seen.has(s); n++) s = base + '-' + n;
+        seen.add(s);
+        return s;
+      });
+    }
+    return SLUGS[index] ? '/photo/' + SLUGS[index] + '/' : '/';
+  }
+
   function resolveMediaUrl(url, size = 'w1600') {
     if (!url) return '';
     const variant = variantUrl(url, size);
@@ -314,6 +332,9 @@
   const replayLabel = (type) => REPLAY_LABELS[type] ||
     String(type || 'Step').replace(/[_-]+/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\b\w/g, (c) => c.toUpperCase());
   const replaySize = (src, q) => src + (src.includes('?') ? '&' : '?') + q;
+  // Self-hosted WebP size of an edit-step image (mirrored into R2 at build time);
+  // falls back to the original host only if the mirror doesn't have it.
+  const stepImg = (src, size, q) => variantUrl(src, size) || replaySize(src, q);
   // Checkerboard shown behind transparent edit steps (cutouts), like an editor canvas,
   // so a cutout never blends with whatever image sits underneath it.
   const STEP_BG = 'background-color:#fff;background-image:conic-gradient(#e7e7e7 25%,#fff 0 50%,#e7e7e7 0 75%,#fff 0);background-size:16px 16px;';
@@ -400,13 +421,13 @@
       this.el.querySelector('#replay-strip').innerHTML = this.steps.map((s, i) => `
         <button type="button" data-step="${i}" class="replay-step shrink-0 flex flex-col items-center gap-1.5 group/step">
           <span class="block w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden ring-2 ring-transparent transition">
-            <img src="${replaySize(s.src, 'to=crop&type=webp&r=144x144&q=85')}" alt="" class="w-full h-full object-cover" loading="lazy" draggable="false" />
+            <img src="${stepImg(s.src, 'w480', 'to=crop&type=webp&r=144x144&q=85')}" alt="" class="w-full h-full object-cover" loading="lazy" draggable="false" />
           </span>
           <span class="text-[10px] font-medium text-white/50 whitespace-nowrap transition">${s.label}</span>
         </button>`).join('');
       this.el.querySelectorAll('.replay-step').forEach((b) => b.addEventListener('click', () => { this.pause(); this.go(+b.dataset.step); }));
       // Warm the cache so steps swap instantly.
-      this.steps.forEach((s) => { const i = new Image(); i.src = replaySize(s.src, 'type=webp&to=min&r=1200&q=85'); });
+      this.steps.forEach((s) => { const i = new Image(); i.src = stepImg(s.src, 'w1600', 'type=webp&to=min&r=1200&q=85'); });
 
       this.el.classList.remove('hidden');
       void this.el.offsetWidth;
@@ -437,7 +458,7 @@
       const hide = this.el.querySelector(`#replay-img-${this.front}`);
       show.onload = () => { show.style.opacity = '1'; hide.style.opacity = '0'; };
       show.alt = `${this.item.title} — step ${i + 1}: ${step.label}`;
-      show.src = replaySize(step.src, 'type=webp&to=min&r=1200&q=85');
+      show.src = stepImg(step.src, 'w1600', 'type=webp&to=min&r=1200&q=85');
       if (show.complete && show.naturalWidth) show.onload();
       this.front = this.front === 'a' ? 'b' : 'a';
 
@@ -566,7 +587,7 @@
 
     framesFor(item) {
       if (Array.isArray(item.replay) && item.replay.length > 1) {
-        return item.replay.map((s) => replaySize(s.src, 'type=webp&to=min&r=720&q=80'));
+        return item.replay.map((s) => stepImg(s.src, 'w960', 'type=webp&to=min&r=720&q=80'));
       }
       if (item.isSeries && Array.isArray(item.seriesExtra) && item.seriesExtra.length) {
         return [item.src, ...item.seriesExtra]
@@ -915,6 +936,8 @@
       if (zoomBtn) {
         zoomBtn.href = resolveMediaUrl(item.src);
       }
+      const pageLink = document.getElementById('exif-page-link');
+      if (pageLink) pageLink.href = photoPageUrl(index);
 
       if (this.backdrop) {
         this.backdrop.classList.remove('opacity-0', 'pointer-events-none');

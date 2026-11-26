@@ -1,0 +1,123 @@
+---
+// One page per photo / artwork. Search engines index each image here, under its own title,
+// subject and tags — never under the photographer's name (that is reserved for the Avatar).
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import {
+  items, slugs, SITE, framesOf, publicUrl, largestPath, srcsetOf, variantOf, tagList, categoryLabel
+} from '../../lib/photos';
+
+export function getStaticPaths() {
+  return items.map((item, i) => ({ params: { slug: slugs[i] }, props: { index: i } }));
+}
+
+const { index } = Astro.props as { index: number };
+const item = items[index];
+const slug = slugs[index];
+const frames = framesOf(item);
+const tags = tagList(item);
+const kind = categoryLabel(item.category);
+const alt = item.alt || item.title;
+const pageTitle = `${item.title} | ${kind}${frames.length > 1 ? ' Series' : ''}`;
+const description = `${alt}.${tags.length ? ' ' + tags.slice(0, 8).join(', ') + '.' : ''}`;
+const prev = (index - 1 + items.length) % items.length;
+const next = (index + 1) % items.length;
+const pageUrl = `${SITE}/photo/${slug}/`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': frames.length > 1 ? 'ImageGallery' : 'ItemPage',
+  name: item.title,
+  url: pageUrl,
+  description: alt,
+  keywords: tags.join(', '),
+  primaryImageOfPage: { '@type': 'ImageObject', contentUrl: publicUrl(frames[0]) },
+  image: frames.map((src, i) => {
+    const v = variantOf(src);
+    return {
+      '@type': 'ImageObject',
+      contentUrl: publicUrl(src),
+      name: i === 0 ? item.title : `${item.title} (${i + 1})`,
+      description: alt,
+      ...(v && v.w && v.h ? { width: v.w, height: v.h } : {})
+    };
+  })
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  image={publicUrl(frames[0])}
+  keywords={tags.join(', ')}
+  author={null}
+  ogType="article"
+  siteName="〘卂乙爪丨〙ヅ"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline slot="head" />
+
+  <Navbar />
+
+  <main class="flex-1">
+    <article class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-500 hover:text-black dark:hover:text-white transition">← Back to gallery</a>
+
+      <header class="mt-6 mb-8">
+        <div class="text-[11px] font-mono uppercase tracking-widest text-neutral-500">
+          {kind}{frames.length > 1 ? ` · Series of ${frames.length}` : ''}{item.location ? ` · ${item.location}` : ''}
+        </div>
+        <h1 class="mt-2 text-3xl sm:text-5xl font-serif font-bold tracking-tight text-neutral-950 dark:text-white leading-tight">{item.title}</h1>
+        <p class="mt-3 text-base text-neutral-600 dark:text-neutral-300 font-light">{alt}</p>
+      </header>
+
+      <div class="space-y-6">
+        {frames.map((src, i) => {
+          const v = variantOf(src);
+          return (
+            <figure class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+              <a href={largestPath(src)} data-fancybox="photo-page" data-caption={i === 0 ? item.title : `${item.title} (${i + 1})`}>
+                <img
+                  src={largestPath(src)}
+                  srcset={srcsetOf(src)}
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                  alt={i === 0 ? alt : `${alt} (${i + 1})`}
+                  width={v?.w}
+                  height={v?.h}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  class="w-full h-auto block"
+                />
+              </a>
+            </figure>
+          );
+        })}
+      </div>
+
+      {tags.length > 0 && (
+        <ul class="mt-8 flex flex-wrap gap-2" aria-label="Tags">
+          {tags.map((t) => (
+            <li class="px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-[11px] font-mono text-neutral-600 dark:text-neutral-400">#{t}</li>
+          ))}
+        </ul>
+      )}
+
+      <nav class="mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-2 gap-4 text-sm" aria-label="More works">
+        <a href={`/photo/${slugs[prev]}/`} class="group min-w-0">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-neutral-400">← Previous</div>
+          <div class="truncate text-neutral-700 dark:text-neutral-300 group-hover:text-black dark:group-hover:text-white">{items[prev].title}</div>
+        </a>
+        <a href={`/photo/${slugs[next]}/`} class="group min-w-0 text-right">
+          <div class="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Next →</div>
+          <div class="truncate text-neutral-700 dark:text-neutral-300 group-hover:text-black dark:group-hover:text-white">{items[next].title}</div>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <Footer />
+
+  <script is:inline>
+    if (window.Fancybox) Fancybox.bind('[data-fancybox="photo-page"]', { Thumbs: { autoStart: true } });
+  </script>
+</Layout>
