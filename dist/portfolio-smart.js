@@ -1,17 +1,17 @@
 /**
- * Azmi Photography & Digital Art Portfolio - Smart Features & Interactions
+ * Azmi Photography & Digital Art Portfolio - Modern Smart Features & Interactions
  * Features:
  * - 55-Item Unified Gallery Renderer (Photography + PicsArt Digital Artworks)
  * - Dynamic Rotating Headline Animation (Soul & Light, PicsArt Digital Art, etc.)
  * - Cinematic Continuous Horizontal Highlights Marquee
  * - 3D Card Hover Tilt with Dynamic Specular Reflection
  * - Staggered Scroll Reveal Animations (Intersection Observer)
- * - DSLR Shutter Audio Synthesizer & Camera Flash Burst
+ * - DSLR Shutter Audio Synthesizer & Camera Flash Burst + Mobile Haptic Feedback
  * - Dark / Light Theme Engine with localStorage & System sync
- * - Client Moodboard / Favorites with pre-filled inquiry integration
  * - Instant Category & Keyword Search filtering
- * - Adaptive Layout Switcher (Fluid Masonry, Editorial Magazine, Contact Sheet)
- * - Fullscreen Zen Exhibition Slideshow Mode
+ * - Adaptive Layout Switcher (Grid Masonry, Editorial Magazine, Contact Sheet)
+ * - Fullscreen Zen Exhibition Slideshow Mode with Mobile Touch Swipe Navigation
+ * - Dedicated EXIF & Behind-the-Scenes Story Popover Modal
  * - Keyboard Shortcuts & Micro-interactions
  */
 
@@ -19,51 +19,78 @@
   'use strict';
 
   // --- HELPER: UNIVERSAL MEDIA URL RESOLVER (Google Drive, PicsArt, Local) ---
-  // Escape a value for use inside an HTML attribute.
   function attr(value) {
     return String(value == null ? '' : value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   }
 
-  // SEO alt text: the descriptive `alt` (with people's names) when set, else the title.
   function altText(item) {
     return attr(item.alt || item.title);
   }
 
-  // Optimized WebP sizes made at deploy time by scripts/build-images.js (dist/image-variants.js).
   const VARIANT_WIDTH = { w480: 480, w600: 480, w960: 960, w1600: 1600 };
   function variantUrl(url, size) {
     const v = window.IMAGE_VARIANTS && window.IMAGE_VARIANTS[url];
     if (!v) return null;
     const want = VARIANT_WIDTH[size] || 1600;
     const hit = v.srcset.find(([, w]) => w >= want) || v.srcset[v.srcset.length - 1];
-    return encodeURI(hit[0]);
+    return encodeURI(hit[0].startsWith('/') ? hit[0] : '/' + hit[0]);
   }
 
-  // srcset/sizes/width/height so the browser downloads only the size it needs and the layout doesn't jump.
   function responsiveAttrs(url) {
     const v = window.IMAGE_VARIANTS && window.IMAGE_VARIANTS[url];
     if (!v) return '';
-    const set = v.srcset.map(([p, w]) => `${encodeURI(p)} ${w}w`).join(', ');
+    const set = v.srcset.map(([p, w]) => `${encodeURI(p.startsWith('/') ? p : '/' + p)} ${w}w`).join(', ');
     return `srcset="${set}" sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" width="${v.w}" height="${v.h}"`;
   }
 
-  // Display URL: the optimized WebP when one exists, otherwise the original (Drive links become Google's CDN).
   function resolveMediaUrl(url, size = 'w1600') {
     if (!url) return '';
-    return variantUrl(url, size) || sourceUrl(url, size);
+    const variant = variantUrl(url, size);
+    if (variant) return variant;
+    return sourceUrl(url, size);
   }
 
-  // The photo's own address (used as its stable ID, e.g. for saved favourites).
   function sourceUrl(url, size = 'w1600') {
     if (!url) return '';
-    // Google Drive URL formats:
-    // https://drive.google.com/file/d/ID/view, https://drive.google.com/open?id=ID, uc?id=ID, gdrive:ID
     const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|gdrive:)?([a-zA-Z0-9_\-]{25,})/i;
     const match = url.match(driveRegex);
-    if (match && match[1] && !url.includes('picsart.com') && !url.startsWith('dist/')) {
+    if (match && match[1] && !url.includes('picsart.com') && !url.startsWith('dist/') && !url.startsWith('/dist/')) {
       return `https://lh3.googleusercontent.com/d/${match[1]}=${size}`;
     }
+    if (url.startsWith('dist/')) return '/' + url;
     return url;
+  }
+
+  // Parse camera specs string into detailed parts
+  function parseExif(cameraStr) {
+    const res = {
+      body: 'Canon EOS System',
+      lens: 'Prime / Zoom Glass',
+      shutter: '1/500s',
+      aperture: 'f/1.8',
+      iso: 'ISO 100',
+      focal: '50mm'
+    };
+    if (!cameraStr) return res;
+
+    const parts = cameraStr.split('·').map(s => s.trim());
+    if (parts.length >= 1) res.body = parts[0];
+    if (parts.length >= 2) {
+      res.lens = parts[1];
+      const fMatch = parts[1].match(/(\d+mm)/i);
+      if (fMatch) res.focal = fMatch[1];
+      const apMatch = parts[1].match(/(f\/[\d.]+)/i);
+      if (apMatch) res.aperture = apMatch[1];
+    }
+    if (parts.length >= 3) {
+      const sMatch = parts[2].match(/(\d+\/\d+s|\d+s)/i);
+      if (sMatch) res.shutter = sMatch[1];
+    }
+    if (parts.length >= 4) {
+      const isoMatch = parts[3].match(/(ISO\s*\d+)/i);
+      if (isoMatch) res.iso = isoMatch[1];
+    }
+    return res;
   }
 
   // --- 0. GALLERY RENDERER ---
@@ -112,12 +139,12 @@
           }[item.category] || 'Fine Art';
 
           return `
-            <div class="gallery-item tilt-card break-inside-avoid mb-4 group relative overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800/80 opacity-0 translate-y-8 transition-all duration-500 hover:shadow-2xl hover:border-neutral-400 dark:hover:border-neutral-600"
+            <div class="gallery-item tilt-card group relative overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-800/80 opacity-0 translate-y-8 transition-all duration-500 hover:shadow-2xl hover:border-neutral-400 dark:hover:border-neutral-600"
                  data-category="${item.category}"
                  data-title="${item.title}"
-                 data-tags="${item.tags}"
-                 data-camera="${item.camera}"
-                 data-location="${item.location}"
+                 data-tags="${item.tags || ''}"
+                 data-camera="${item.camera || ''}"
+                 data-location="${item.location || ''}"
                  data-photo-id="${item.id}"
                  data-photo-src="${itemSrc}"
                  data-is-series="${isSeries ? 'true' : 'false'}">
@@ -138,16 +165,13 @@
 
               ${badge}
 
+              <!-- Info / EXIF Button (Replaces Moodboard Heart) -->
               <button type="button"
-                      class="favorite-btn absolute top-3 right-3 z-10 p-2.5 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-md border border-white/15 text-white transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 hover:scale-110 focus:opacity-100"
-                      data-photo-id="${item.id}"
-                      data-photo-src="${itemSrc}"
-                      data-photo-title="${item.title}"
-                      data-photo-category="${item.category}"
-                      data-photo-camera="${item.camera}"
-                      title="Add to Client Moodboard (♡)">
-                <svg class="heart-icon w-4 h-4 text-white text-opacity-90 fill-transparent transition-colors" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                      class="exif-btn absolute top-3 right-3 z-10 p-2.5 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-md border border-white/15 text-white transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 hover:scale-110 focus:opacity-100"
+                      data-index="${index}"
+                      title="View Camera EXIF & Story Behind Shot (I)">
+                <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
                 </svg>
               </button>
 
@@ -169,17 +193,15 @@
         }).join('');
       }
 
-      // Initialize Staggered Scroll Animations & 3D Tilt
       CardAnimations.init();
-      // Render Highlights Filmstrip Marquee
       FilmstripMarquee.render();
+      ExifModalManager.bind();
     }
   };
 
   // --- CARD ANIMATIONS & 3D TILT ---
   const CardAnimations = {
     init() {
-      // 1. Intersection Observer for Smooth Scroll Reveal
       const items = document.querySelectorAll('.gallery-item');
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -200,509 +222,482 @@
         });
       }
 
-      // 2. Interactive 3D Perspective Tilt on Mousemove
+      // 3D Perspective Tilt on Mouse Movement
       items.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -6;
-          const rotateY = ((x - centerX) / centerX) * 6;
-          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+        let bounds;
+        function rotateToMouse(e) {
+          const mouseX = e.clientX;
+          const mouseY = e.clientY;
+          const leftX = mouseX - bounds.x;
+          const topY = mouseY - bounds.y;
+          const center = { x: leftX - bounds.width / 2, y: topY - bounds.height / 2 };
+          const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
+          
+          card.style.transform = `
+            scale3d(1.02, 1.02, 1.02)
+            rotate3d(
+              ${center.y / 100},
+              ${-center.x / 100},
+              0,
+              ${Math.log(distance) * 1.5}deg
+            )
+          `;
+        }
+
+        card.addEventListener('mouseenter', () => {
+          bounds = card.getBoundingClientRect();
+          document.addEventListener('mousemove', rotateToMouse);
         });
 
         card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+          document.removeEventListener('mousemove', rotateToMouse);
+          card.style.transform = '';
         });
       });
     }
   };
 
-  // --- DYNAMIC ROTATING HEADLINE WORDS ---
-  const RotatingHeadline = {
-    words: ['Soul & Light', 'Untold Stories', 'PicsArt Digital Art', 'Emotive Portraits', 'Cultural Heritage'],
-    currentIndex: 0,
-
-    init() {
-      const el = document.getElementById('rotating-headline-word');
-      if (!el) return;
-
-      setInterval(() => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(-10px)';
-
-        setTimeout(() => {
-          this.currentIndex = (this.currentIndex + 1) % this.words.length;
-          el.textContent = this.words[this.currentIndex];
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, 300);
-      }, 3000);
-    }
-  };
-
-  // --- CONTINUOUS FILMSTRIP MARQUEE ---
+  // --- FILMSTRIP MARQUEE ---
   const FilmstripMarquee = {
     render() {
-      const marqueeInner = document.getElementById('filmstrip-marquee-inner');
-      if (!marqueeInner || !window.GALLERY_DATA) return;
+      const inner = document.getElementById('filmstrip-marquee-inner');
+      if (!inner || !window.GALLERY_DATA) return;
 
-      // Select top 10 diverse highlight items (photography + picsart)
-      const highlights = window.GALLERY_DATA.slice(0, 10);
-      const allItems = [...highlights, ...highlights]; // duplicate for seamless loop
-
-      marqueeInner.innerHTML = allItems.map(item => {
-        const imgSrc = resolveMediaUrl(item.src, 'w600');
-        return `
-        <a href="${resolveMediaUrl(item.src)}" data-thumb-src="${imgSrc}" data-fancybox="gallery" class="inline-block flex-shrink-0 w-36 sm:w-48 aspect-[3/4] rounded-xl overflow-hidden relative group border border-neutral-200/60 dark:border-neutral-800 shadow-md transform hover:scale-105 transition-all duration-300">
-          <img src="${imgSrc}" alt="${altText(item)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-end">
-            <span class="text-[10px] font-mono uppercase text-amber-400 font-semibold truncate">${item.category === 'art' ? '🎨 Digital Art' : '📷 Photography'}</span>
-            <span class="text-xs font-serif text-white font-bold truncate">${item.title}</span>
+      const highlights = window.GALLERY_DATA.slice(0, 18);
+      const renderItem = (item) => `
+        <a href="${resolveMediaUrl(item.src)}" data-fancybox="filmstrip" class="block shrink-0 w-36 sm:w-48 h-24 sm:h-32 rounded-xl overflow-hidden border border-neutral-300 dark:border-neutral-800 shadow-md group relative">
+          <img src="${resolveMediaUrl(item.src, 'w480')}" alt="${altText(item)}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" loading="lazy" />
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="text-[11px] font-mono text-white text-center px-2 truncate">${item.title}</span>
           </div>
         </a>
       `;
-      }).join('');
+
+      inner.innerHTML = highlights.map(renderItem).join('') + highlights.map(renderItem).join('');
     }
   };
 
-  // --- 1. THEME MANAGER ---
-  const ThemeManager = {
+  // --- ROTATING HEADLINE ---
+  const HeadlineRotator = {
+    words: ['Soul & Light', 'PicsArt Digital Art', 'Cultural Stories', 'Fine Art Moments', 'Raw Emotions'],
+    idx: 0,
     init() {
-      const storedTheme = localStorage.getItem('portfolio_theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark;
-      
-      this.setTheme(initialDark ? 'dark' : 'light', false);
+      const el = document.getElementById('rotating-headline-word');
+      if (!el) return;
+      setInterval(() => {
+        this.idx = (this.idx + 1) % this.words.length;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          el.textContent = this.words[this.idx];
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 300);
+      }, 3500);
+    }
+  };
 
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('portfolio_theme')) {
-          this.setTheme(e.matches ? 'dark' : 'light', false);
+  // --- DSLR SHUTTER AUDIO SYNTHESIZER & FLASH WITH HAPTIC FEEDBACK ---
+  const ShutterSound = {
+    enabled: false,
+    audioCtx: null,
+    init() {
+      const btn = document.querySelector('.sound-toggle-btn');
+      if (!btn) return;
+      const iconOn = document.querySelector('.sound-icon-on');
+      const iconOff = document.querySelector('.sound-icon-off');
+
+      const saved = localStorage.getItem('azmi_sound');
+      if (saved === 'true') {
+        this.enabled = true;
+        if (iconOn) iconOn.classList.remove('hidden');
+        if (iconOff) iconOff.classList.add('hidden');
+      }
+
+      btn.addEventListener('click', () => {
+        this.enabled = !this.enabled;
+        localStorage.setItem('azmi_sound', this.enabled ? 'true' : 'false');
+        if (this.enabled) {
+          if (iconOn) iconOn.classList.remove('hidden');
+          if (iconOff) iconOff.classList.add('hidden');
+          this.playClick();
+        } else {
+          if (iconOn) iconOn.classList.add('hidden');
+          if (iconOff) iconOff.classList.remove('hidden');
         }
       });
 
-      document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
-        btn.addEventListener('click', () => this.toggle());
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 's' || e.key === 'S') {
+          if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            btn.click();
+          }
+        }
       });
     },
 
-    setTheme(theme, save = true) {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
+    playClick() {
+      // Trigger Haptic Vibration on mobile
+      if ('vibrate' in navigator) {
+        try { navigator.vibrate(25); } catch (e) {}
       }
-      if (save) {
-        localStorage.setItem('portfolio_theme', theme);
-      }
-      this.updateIcons(theme === 'dark');
-    },
-
-    toggle() {
-      const isDark = document.documentElement.classList.contains('dark');
-      const nextTheme = isDark ? 'light' : 'dark';
-      this.setTheme(nextTheme, true);
-      SoundFX.playShutter();
-    },
-
-    updateIcons(isDark) {
-      document.querySelectorAll('.theme-icon-moon').forEach(el => {
-        el.classList.toggle('hidden', isDark);
-      });
-      document.querySelectorAll('.theme-icon-sun').forEach(el => {
-        el.classList.toggle('hidden', !isDark);
-      });
-    }
-  };
-
-  // --- 2. SOUND FX SYNTHESIZER & FLASH BURST ---
-  const SoundFX = {
-    audioCtx: null,
-    enabled: localStorage.getItem('portfolio_sound') === 'true',
-
-    init() {
-      this.updateUI();
-      document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
-        btn.addEventListener('click', () => this.toggle());
-      });
-    },
-
-    toggle() {
-      this.enabled = !this.enabled;
-      localStorage.setItem('portfolio_sound', this.enabled);
-      this.updateUI();
-      if (this.enabled) {
-        this.playShutter();
-      }
-    },
-
-    updateUI() {
-      document.querySelectorAll('.sound-icon-on').forEach(el => {
-        el.classList.toggle('hidden', !this.enabled);
-      });
-      document.querySelectorAll('.sound-icon-off').forEach(el => {
-        el.classList.toggle('hidden', this.enabled);
-      });
-      document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
-        btn.setAttribute('aria-pressed', this.enabled ? 'true' : 'false');
-        btn.title = this.enabled ? 'Mute Shutter Sounds (S)' : 'Enable Shutter Sounds (S)';
-      });
-    },
-
-    triggerFlash() {
-      let flash = document.getElementById('camera-flash-overlay');
-      if (!flash) {
-        flash = document.createElement('div');
-        flash.id = 'camera-flash-overlay';
-        flash.className = 'fixed inset-0 bg-white pointer-events-none z-[100] opacity-0';
-        document.body.appendChild(flash);
-      }
-      flash.classList.remove('camera-flash-active');
-      void flash.offsetWidth; // trigger reflow
-      flash.classList.add('camera-flash-active');
-    },
-
-    playShutter() {
-      // Trigger flash burst visual animation
-      this.triggerFlash();
 
       if (!this.enabled) return;
       try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        if (!this.audioCtx) {
-          this.audioCtx = new AudioCtx();
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!this.audioCtx) this.audioCtx = new AudioContext();
+        if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(320, this.audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(80, this.audioCtx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.4, this.audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.audioCtx.currentTime + 0.08);
+
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        osc.start();
+        osc.stop(this.audioCtx.currentTime + 0.08);
+
+        // Flash burst
+        const flash = document.getElementById('camera-flash');
+        if (flash) {
+          flash.classList.remove('camera-flash-active');
+          void flash.offsetWidth;
+          flash.classList.add('camera-flash-active');
         }
-        if (this.audioCtx.state === 'suspended') {
-          this.audioCtx.resume();
-        }
-
-        const t = this.audioCtx.currentTime;
-
-        // Stage 1: Mirror Up
-        const osc1 = this.audioCtx.createOscillator();
-        const gain1 = this.audioCtx.createGain();
-        osc1.type = 'triangle';
-        osc1.frequency.setValueAtTime(160, t);
-        osc1.frequency.exponentialRampToValueAtTime(35, t + 0.035);
-        gain1.gain.setValueAtTime(0.3, t);
-        gain1.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
-        osc1.connect(gain1);
-        gain1.connect(this.audioCtx.destination);
-        osc1.start(t);
-        osc1.stop(t + 0.035);
-
-        // Stage 2: Curtain Sweep Noise
-        const bufferSize = Math.floor(this.audioCtx.sampleRate * 0.04);
-        const noiseBuffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
-        }
-        const whiteNoise = this.audioCtx.createBufferSource();
-        whiteNoise.buffer = noiseBuffer;
-        const filter = this.audioCtx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.value = 2400;
-        filter.Q.value = 2.5;
-        const noiseGain = this.audioCtx.createGain();
-        noiseGain.gain.setValueAtTime(0.18, t + 0.008);
-        noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
-        whiteNoise.connect(filter);
-        filter.connect(noiseGain);
-        noiseGain.connect(this.audioCtx.destination);
-        whiteNoise.start(t + 0.008);
-        whiteNoise.stop(t + 0.045);
-
-        // Stage 3: Mirror Drop Click
-        const osc2 = this.audioCtx.createOscillator();
-        const gain2 = this.audioCtx.createGain();
-        osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(220, t + 0.06);
-        osc2.frequency.exponentialRampToValueAtTime(30, t + 0.1);
-        gain2.gain.setValueAtTime(0.35, t + 0.06);
-        gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
-        osc2.connect(gain2);
-        gain2.connect(this.audioCtx.destination);
-        osc2.start(t + 0.06);
-        osc2.stop(t + 0.1);
-      } catch (e) {
-        console.warn('Audio playback error', e);
-      }
+      } catch (err) {}
     }
   };
 
-  // --- 3. MOODBOARD / CLIENT FAVORITES MANAGER ---
-  const Moodboard = {
-    items: [],
-
+  // --- DARK / LIGHT THEME ENGINE ---
+  const ThemeEngine = {
     init() {
-      try {
-        const saved = localStorage.getItem('portfolio_favorites');
-        this.items = saved ? JSON.parse(saved) : [];
-      } catch (e) {
-        this.items = [];
-      }
+      const toggle = document.querySelector('.theme-toggle-btn');
+      if (!toggle) return;
+      const sun = document.querySelector('.theme-icon-sun');
+      const moon = document.querySelector('.theme-icon-moon');
 
-      this.updateBadges();
-      this.syncHeartIcons();
-      this.bindEvents();
-    },
-
-    save() {
-      try {
-        localStorage.setItem('portfolio_favorites', JSON.stringify(this.items));
-      } catch (e) {}
-      this.updateBadges();
-      this.syncHeartIcons();
-    },
-
-    toggle(photo) {
-      const idx = this.items.findIndex(item => item.id === photo.id || item.src === photo.src);
-      if (idx > -1) {
-        this.items.splice(idx, 1);
-        this.notify(`Removed "${photo.title}" from Moodboard`);
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        if (sun) sun.classList.remove('hidden');
+        if (moon) moon.classList.add('hidden');
       } else {
-        this.items.push(photo);
-        SoundFX.playShutter();
-        this.notify(`Added "${photo.title}" to Moodboard! ❤️`);
+        if (sun) sun.classList.add('hidden');
+        if (moon) moon.classList.remove('hidden');
       }
-      this.save();
-      this.renderDrawerContent();
-      
-      if (GalleryFilter.currentCategory === 'moodboard') {
-        GalleryFilter.apply();
-      }
-    },
 
-    isFavorite(id, src) {
-      return this.items.some(item => item.id === id || item.src === src);
-    },
-
-    updateBadges() {
-      const count = this.items.length;
-      document.querySelectorAll('.moodboard-count').forEach(el => {
-        el.textContent = count;
-        el.classList.toggle('hidden', count === 0);
+      toggle.addEventListener('click', () => {
+        const currentlyDark = document.documentElement.classList.contains('dark');
+        if (currentlyDark) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('azmi_theme', 'light');
+          if (sun) sun.classList.add('hidden');
+          if (moon) moon.classList.remove('hidden');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('azmi_theme', 'dark');
+          if (sun) sun.classList.remove('hidden');
+          if (moon) moon.classList.add('hidden');
+        }
+        ShutterSound.playClick();
       });
 
-      const floatingPill = document.getElementById('moodboard-floating-pill');
-      if (floatingPill) {
-        floatingPill.classList.toggle('translate-y-24', count === 0);
-        floatingPill.classList.toggle('opacity-0', count === 0);
-        floatingPill.classList.toggle('pointer-events-none', count === 0);
-      }
-    },
-
-    syncHeartIcons() {
-      document.querySelectorAll('.favorite-btn').forEach(btn => {
-        const id = btn.dataset.photoId;
-        const src = btn.dataset.photoSrc;
-        const isFav = this.isFavorite(id, src);
-        btn.classList.toggle('is-favorited', isFav);
-        const icon = btn.querySelector('.heart-icon');
-        if (icon) {
-          if (isFav) {
-            icon.classList.remove('text-white', 'text-opacity-80', 'fill-transparent');
-            icon.classList.add('text-rose-500', 'fill-rose-500');
-            btn.classList.add('heart-pop');
-            setTimeout(() => btn.classList.remove('heart-pop'), 400);
-          } else {
-            icon.classList.remove('text-rose-500', 'fill-rose-500');
-            icon.classList.add('text-white', 'text-opacity-80', 'fill-transparent');
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 't' || e.key === 'T') {
+          if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            toggle.click();
           }
+        }
+      });
+    }
+  };
+
+  // --- DEDICATED EXIF & STORY MODAL MANAGER ---
+  const ExifModalManager = {
+    backdrop: null,
+    modal: null,
+    currentIdx: 0,
+
+    init() {
+      this.backdrop = document.getElementById('exif-modal-backdrop');
+      this.modal = document.getElementById('exif-modal');
+      const closeBtn = document.getElementById('exif-close-btn');
+
+      if (closeBtn) closeBtn.addEventListener('click', () => this.close());
+      if (this.backdrop) this.backdrop.addEventListener('click', () => this.close());
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.modal && !this.modal.classList.contains('opacity-0')) {
+          this.close();
         }
       });
     },
 
-    openDrawer() {
-      const drawer = document.getElementById('moodboard-drawer');
-      const backdrop = document.getElementById('moodboard-backdrop');
-      if (!drawer) return;
-      this.renderDrawerContent();
-      drawer.classList.remove('translate-x-full');
-      if (backdrop) {
-        backdrop.classList.remove('opacity-0', 'pointer-events-none');
-      }
-      document.body.classList.add('overflow-hidden');
-    },
-
-    closeDrawer() {
-      const drawer = document.getElementById('moodboard-drawer');
-      const backdrop = document.getElementById('moodboard-backdrop');
-      if (!drawer) return;
-      drawer.classList.add('translate-x-full');
-      if (backdrop) {
-        backdrop.classList.add('opacity-0', 'pointer-events-none');
-      }
-      document.body.classList.remove('overflow-hidden');
-    },
-
-    renderDrawerContent() {
-      const container = document.getElementById('moodboard-items-container');
-      const emptyState = document.getElementById('moodboard-empty-state');
-      const footerActions = document.getElementById('moodboard-footer-actions');
-      if (!container) return;
-
-      if (this.items.length === 0) {
-        container.innerHTML = '';
-        if (emptyState) emptyState.classList.remove('hidden');
-        if (footerActions) footerActions.classList.add('hidden');
-        return;
-      }
-
-      if (emptyState) emptyState.classList.add('hidden');
-      if (footerActions) footerActions.classList.remove('hidden');
-
-      container.innerHTML = this.items.map(item => `
-        <div class="flex items-center gap-4 p-3 bg-neutral-100 dark:bg-neutral-900 rounded-xl border border-neutral-200/60 dark:border-neutral-800 group hover:border-neutral-300 dark:hover:border-neutral-700 transition">
-          <img src="${resolveMediaUrl(item.src, 'w480')}" alt="${altText(item)}" class="w-16 h-16 object-cover rounded-lg shadow-sm" />
-          <div class="flex-1 min-w-0">
-            <h4 class="font-medium text-sm text-neutral-900 dark:text-neutral-100 truncate">${item.title}</h4>
-            <p class="text-xs text-neutral-500 dark:text-neutral-400 capitalize">${item.category === 'art' ? '🎨 PicsArt Digital Art' : (item.category || 'Fine Art')}</p>
-            ${item.camera ? `<p class="text-[11px] font-mono text-neutral-400 dark:text-neutral-500 mt-0.5 truncate">${item.camera}</p>` : ''}
-          </div>
-          <button data-remove-id="${item.id || item.src}" class="moodboard-remove-btn p-2 text-neutral-400 hover:text-rose-500 transition rounded-lg hover:bg-neutral-200/50 dark:hover:bg-neutral-800" title="Remove from shortlist">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-          </button>
-        </div>
-      `).join('');
-
-      container.querySelectorAll('.moodboard-remove-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const targetId = btn.getAttribute('data-remove-id');
-          const target = this.items.find(i => (i.id || i.src) === targetId);
-          if (target) {
-            this.toggle(target);
-          }
-        });
-      });
-
-      const inquireBtn = document.getElementById('moodboard-inquire-btn');
-      if (inquireBtn) {
-        const titles = this.items.map(i => i.title).join(', ');
-        const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/dist/');
-        const contactPath = isRoot ? 'dist/contact.html' : 'contact.html';
-        inquireBtn.href = `${contactPath}?moodboard=${encodeURIComponent(titles)}`;
-      }
-    },
-
-    clearAll() {
-      if (confirm('Clear all photos from your moodboard?')) {
-        this.items = [];
-        this.save();
-        this.renderDrawerContent();
-        this.notify('Moodboard cleared');
-      }
-    },
-
-    bindEvents() {
-      document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.favorite-btn');
-        if (btn) {
+    bind() {
+      document.querySelectorAll('.exif-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const photo = {
-            id: btn.dataset.photoId || btn.dataset.photoSrc,
-            src: btn.dataset.photoSrc,
-            title: btn.dataset.photoTitle || 'Untitled Photograph',
-            category: btn.dataset.photoCategory || 'Fine Art',
-            camera: btn.dataset.photoCamera || ''
-          };
-          this.toggle(photo);
-        }
-      });
-
-      document.querySelectorAll('.open-moodboard-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.openDrawer();
+          const idx = parseInt(btn.dataset.index, 10);
+          this.open(idx);
         });
       });
-
-      const closeBtn = document.getElementById('close-moodboard-btn');
-      if (closeBtn) closeBtn.addEventListener('click', () => this.closeDrawer());
-
-      const backdrop = document.getElementById('moodboard-backdrop');
-      if (backdrop) backdrop.addEventListener('click', () => this.closeDrawer());
-
-      const clearBtn = document.getElementById('clear-moodboard-btn');
-      if (clearBtn) clearBtn.addEventListener('click', () => this.clearAll());
     },
 
-    notify(msg) {
-      let toast = document.getElementById('portfolio-toast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'portfolio-toast';
-        toast.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-neutral-900/90 dark:bg-white/95 text-white dark:text-neutral-900 text-xs sm:text-sm font-medium px-4 py-2.5 rounded-full shadow-2xl backdrop-blur-md transition-all duration-300 pointer-events-none opacity-0 translate-y-4';
-        document.body.appendChild(toast);
+    open(index) {
+      if (!window.GALLERY_DATA || !window.GALLERY_DATA[index]) return;
+      this.currentIdx = index;
+      const item = window.GALLERY_DATA[index];
+      const exif = parseExif(item.camera);
+
+      const titleEl = document.getElementById('exif-title');
+      const catEl = document.getElementById('exif-category');
+      const shutterEl = document.getElementById('exif-shutter');
+      const apEl = document.getElementById('exif-aperture');
+      const isoEl = document.getElementById('exif-iso');
+      const focalEl = document.getElementById('exif-focal');
+      const cameraEl = document.getElementById('exif-camera');
+      const locEl = document.getElementById('exif-location');
+      const storyEl = document.getElementById('exif-story');
+      const tagsEl = document.getElementById('exif-tags');
+      const zoomBtn = document.getElementById('exif-zoom-btn');
+
+      if (titleEl) titleEl.textContent = item.title;
+      if (catEl) catEl.textContent = `${item.category.toUpperCase()} · ${item.location}`;
+      if (shutterEl) shutterEl.textContent = exif.shutter;
+      if (apEl) apEl.textContent = exif.aperture;
+      if (isoEl) isoEl.textContent = exif.iso;
+      if (focalEl) focalEl.textContent = exif.focal;
+      if (cameraEl) cameraEl.textContent = exif.body + (exif.lens ? ` · ${exif.lens}` : '');
+      if (locEl) locEl.textContent = item.location || 'Curated Portfolio Collection';
+
+      if (storyEl) {
+        if (item.category === 'art') {
+          storyEl.textContent = `Aesthetic digital manipulation created with PicsArt. Explores high-contrast digital sculpting, surreal color overlays, and imaginative conceptual glow.`;
+        } else if (item.isSeries) {
+          storyEl.textContent = `Part of the "${item.title}" editorial series (${item.seriesCount} frames). Shot on location using natural ambient light to evoke authentic intimacy and raw emotional expression.`;
+        } else {
+          storyEl.textContent = `Captured with ${exif.body}. Focuses on human vulnerability, natural contrast gradients, and signature cinematic color science inspired by analog film stocks.`;
+        }
       }
-      toast.textContent = msg;
-      toast.classList.remove('opacity-0', 'translate-y-4');
-      toast.classList.add('opacity-100', 'translate-y-0');
-      clearTimeout(this._toastTimer);
-      this._toastTimer = setTimeout(() => {
-        toast.classList.remove('opacity-100', 'translate-y-0');
-        toast.classList.add('opacity-0', 'translate-y-4');
-      }, 2500);
+
+      if (tagsEl) {
+        const tags = (item.tags || '').split(',').map(s => s.trim()).filter(Boolean);
+        tagsEl.innerHTML = tags.map(t => `<span class="px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-[10px] font-mono text-neutral-600 dark:text-neutral-400">#${t}</span>`).join('');
+      }
+
+      if (zoomBtn) {
+        zoomBtn.href = resolveMediaUrl(item.src);
+      }
+
+      if (this.backdrop) {
+        this.backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        this.backdrop.classList.add('opacity-100');
+      }
+      if (this.modal) {
+        this.modal.classList.remove('translate-y-full', 'sm:translate-y-8', 'opacity-0', 'pointer-events-none');
+        this.modal.classList.add('translate-y-0', 'opacity-100');
+      }
+
+      ShutterSound.playClick();
+    },
+
+    close() {
+      if (this.backdrop) {
+        this.backdrop.classList.add('opacity-0', 'pointer-events-none');
+        this.backdrop.classList.remove('opacity-100');
+      }
+      if (this.modal) {
+        this.modal.classList.add('translate-y-full', 'sm:translate-y-8', 'opacity-0', 'pointer-events-none');
+        this.modal.classList.remove('translate-y-0', 'opacity-100');
+      }
     }
   };
 
-  // --- 4. GALLERY FILTER & SEARCH ---
-  const GalleryFilter = {
-    currentCategory: 'all',
-    searchQuery: '',
+  // --- FULLSCREEN ZEN EXHIBITION MODE WITH TOUCH SWIPE ---
+  const ZenMode = {
+    active: false,
+    currentIndex: 0,
+    timer: null,
+    touchStartX: 0,
 
     init() {
-      document.querySelectorAll('.category-filter-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+      const modal = document.getElementById('zen-exhibition-modal');
+      if (!modal) return;
+      const openBtns = document.querySelectorAll('.open-zen-btn');
+      const closeBtn = document.getElementById('zen-close-btn');
+      const prevBtn = document.getElementById('zen-prev-btn');
+      const nextBtn = document.getElementById('zen-next-btn');
+      const playBtn = document.getElementById('zen-play-btn');
+      const exifBtn = document.getElementById('zen-exif-btn');
+
+      openBtns.forEach(btn => btn.addEventListener('click', () => this.open()));
+      if (closeBtn) closeBtn.addEventListener('click', () => this.close());
+      if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
+      if (nextBtn) nextBtn.addEventListener('click', () => this.next());
+      if (playBtn) playBtn.addEventListener('click', () => this.togglePlay());
+      if (exifBtn) exifBtn.addEventListener('click', () => {
+        ExifModalManager.open(this.currentIndex);
+      });
+
+      // Mobile Touch Swipe Gesture Support
+      modal.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          this.touchStartX = e.touches[0].clientX;
+        }
+      }, { passive: true });
+
+      modal.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches.length > 0) {
+          const diff = e.changedTouches[0].clientX - this.touchStartX;
+          if (Math.abs(diff) > 45) {
+            diff > 0 ? this.prev() : this.next();
+          }
+        }
+      }, { passive: true });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'z' || e.key === 'Z') {
+          if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+            this.active ? this.close() : this.open();
+          }
+        }
+        if (!this.active) return;
+        if (e.key === 'Escape') this.close();
+        if (e.key === 'ArrowRight') this.next();
+        if (e.key === 'ArrowLeft') this.prev();
+        if (e.key === ' ' || e.code === 'Space') {
           e.preventDefault();
-          const category = btn.dataset.category;
-          this.setCategory(category);
+          this.togglePlay();
+        }
+        if (e.key === 'i' || e.key === 'I') {
+          ExifModalManager.open(this.currentIndex);
+        }
+      });
+    },
+
+    open() {
+      const modal = document.getElementById('zen-exhibition-modal');
+      if (!modal || !window.GALLERY_DATA) return;
+      this.active = true;
+      modal.classList.remove('hidden');
+      void modal.offsetWidth;
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+      document.body.classList.add('overflow-hidden');
+      this.showPhoto(this.currentIndex);
+      ShutterSound.playClick();
+    },
+
+    close() {
+      const modal = document.getElementById('zen-exhibition-modal');
+      if (!modal) return;
+      this.active = false;
+      modal.classList.remove('opacity-100');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 300);
+      document.body.classList.remove('overflow-hidden');
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    },
+
+    showPhoto(idx) {
+      if (!window.GALLERY_DATA || window.GALLERY_DATA.length === 0) return;
+      this.currentIndex = (idx + window.GALLERY_DATA.length) % window.GALLERY_DATA.length;
+      const item = window.GALLERY_DATA[this.currentIndex];
+      const img = document.getElementById('zen-main-img');
+      const ambient = document.getElementById('zen-ambient-bg');
+      const title = document.getElementById('zen-photo-title');
+      const meta = document.getElementById('zen-photo-meta');
+      const counter = document.getElementById('zen-photo-counter');
+
+      const fullUrl = resolveMediaUrl(item.src);
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = fullUrl;
+          img.onload = () => { img.style.opacity = '1'; };
+        }, 150);
+      }
+      if (ambient) ambient.style.backgroundImage = `url('${resolveMediaUrl(item.src, 'w480')}')`;
+      if (title) title.textContent = item.title;
+      if (meta) meta.textContent = `${item.category.toUpperCase()} · ${item.camera} · ${item.location}`;
+      if (counter) counter.textContent = `${this.currentIndex + 1} / ${window.GALLERY_DATA.length}`;
+    },
+
+    next() {
+      this.showPhoto(this.currentIndex + 1);
+      ShutterSound.playClick();
+    },
+
+    prev() {
+      this.showPhoto(this.currentIndex - 1);
+      ShutterSound.playClick();
+    },
+
+    togglePlay() {
+      const playIcon = document.getElementById('zen-play-icon');
+      const pauseIcon = document.getElementById('zen-pause-icon');
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+        if (playIcon) playIcon.classList.remove('hidden');
+        if (pauseIcon) pauseIcon.classList.add('hidden');
+      } else {
+        this.next();
+        this.timer = setInterval(() => this.next(), 4000);
+        if (playIcon) playIcon.classList.add('hidden');
+        if (pauseIcon) pauseIcon.classList.remove('hidden');
+      }
+    }
+  };
+
+  // --- CATEGORY & SEARCH FILTERING ---
+  const FilterEngine = {
+    activeCategory: 'all',
+    searchTerm: '',
+
+    init() {
+      const catBtns = document.querySelectorAll('.category-filter-btn');
+      const searchInput = document.getElementById('gallery-search-input');
+      const clearBtn = document.getElementById('gallery-search-clear');
+
+      catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          catBtns.forEach(b => {
+            b.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+            b.classList.add('bg-neutral-100', 'text-neutral-700', 'dark:bg-neutral-900', 'dark:text-neutral-300');
+          });
+          btn.classList.remove('bg-neutral-100', 'text-neutral-700', 'dark:bg-neutral-900', 'dark:text-neutral-300');
+          btn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black');
+
+          this.activeCategory = btn.dataset.category || 'all';
+          this.apply();
         });
       });
 
-      const searchInput = document.getElementById('gallery-search-input');
-      const searchClear = document.getElementById('gallery-search-clear');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-          this.searchQuery = e.target.value.trim().toLowerCase();
-          if (searchClear) searchClear.classList.toggle('hidden', !this.searchQuery);
+          this.searchTerm = e.target.value.toLowerCase().trim();
+          if (clearBtn) clearBtn.classList.toggle('hidden', this.searchTerm.length === 0);
           this.apply();
         });
       }
 
-      if (searchClear) {
-        searchClear.addEventListener('click', () => {
-          if (searchInput) {
-            searchInput.value = '';
-            this.searchQuery = '';
-            searchClear.classList.add('hidden');
-            this.apply();
-          }
+      if (clearBtn && searchInput) {
+        clearBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          this.searchTerm = '';
+          clearBtn.classList.add('hidden');
+          this.apply();
         });
       }
-    },
-
-    setCategory(category) {
-      this.currentCategory = category;
-      document.querySelectorAll('.category-filter-btn').forEach(btn => {
-        const isMatch = btn.dataset.category === category;
-        btn.classList.toggle('bg-black', isMatch);
-        btn.classList.toggle('text-white', isMatch);
-        btn.classList.toggle('dark:bg-white', isMatch);
-        btn.classList.toggle('dark:text-black', isMatch);
-        btn.classList.toggle('bg-neutral-100', !isMatch);
-        btn.classList.toggle('text-neutral-700', !isMatch);
-        btn.classList.toggle('dark:bg-neutral-900', !isMatch);
-        btn.classList.toggle('dark:text-neutral-300', !isMatch);
-      });
-      this.apply();
     },
 
     apply() {
@@ -710,293 +705,75 @@
       let visibleCount = 0;
 
       items.forEach(item => {
-        const itemCat = item.dataset.category || '';
-        const itemTitle = (item.dataset.title || '').toLowerCase();
-        const itemTags = (item.dataset.tags || '').toLowerCase();
-        const itemCamera = (item.dataset.camera || '').toLowerCase();
-        const photoId = item.dataset.photoId;
-        const photoSrc = item.dataset.photoSrc;
+        const cat = item.dataset.category;
+        const isSeries = item.dataset.isSeries === 'true';
+        const title = (item.dataset.title || '').toLowerCase();
+        const tags = (item.dataset.tags || '').toLowerCase();
+        const camera = (item.dataset.camera || '').toLowerCase();
 
-        let matchesCategory = false;
-        if (this.currentCategory === 'all') {
-          matchesCategory = true;
-        } else if (this.currentCategory === 'moodboard') {
-          matchesCategory = Moodboard.isFavorite(photoId, photoSrc);
-        } else if (this.currentCategory === 'series') {
-          matchesCategory = item.dataset.isSeries === 'true';
-        } else if (this.currentCategory === 'art') {
-          matchesCategory = itemCat === 'art' || itemTags.includes('picsart');
-        } else {
-          matchesCategory = itemCat.toLowerCase() === this.currentCategory.toLowerCase();
+        // Category match
+        let catMatch = false;
+        if (this.activeCategory === 'all') catMatch = true;
+        else if (this.activeCategory === 'series') catMatch = isSeries;
+        else if (this.activeCategory === cat) catMatch = true;
+
+        // Search match
+        let searchMatch = true;
+        if (this.searchTerm) {
+          searchMatch = title.includes(this.searchTerm) || tags.includes(this.searchTerm) || camera.includes(this.searchTerm);
         }
 
-        let matchesSearch = true;
-        if (this.searchQuery) {
-          matchesSearch = itemTitle.includes(this.searchQuery) ||
-                          itemTags.includes(this.searchQuery) ||
-                          itemCamera.includes(this.searchQuery) ||
-                          itemCat.toLowerCase().includes(this.searchQuery);
-        }
-
-        const show = matchesCategory && matchesSearch;
-        if (show) {
-          item.classList.remove('hidden');
-          setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'scale(1)';
-          }, 10);
+        if (catMatch && searchMatch) {
+          item.style.display = '';
           visibleCount++;
         } else {
-          item.style.opacity = '0';
-          item.style.transform = 'scale(0.96)';
-          item.classList.add('hidden');
+          item.style.display = 'none';
         }
       });
 
       const countEl = document.getElementById('gallery-results-count');
-      if (countEl) {
-        countEl.textContent = `Showing ${visibleCount} ${visibleCount === 1 ? 'Work' : 'Curated Works'}`;
-      }
+      if (countEl) countEl.textContent = `Showing ${visibleCount} Curated Works`;
 
       const noResults = document.getElementById('gallery-no-results');
-      if (noResults) {
-        noResults.classList.toggle('hidden', visibleCount > 0);
-      }
+      if (noResults) noResults.classList.toggle('hidden', visibleCount > 0);
     }
   };
 
-  // --- 5. VIEW LAYOUT SWITCHER ---
-  const ViewSwitcher = {
-    currentView: localStorage.getItem('portfolio_view') || 'masonry',
-
+  // --- VIEW DENSITY SWITCHER ---
+  const LayoutSwitcher = {
     init() {
-      this.apply(this.currentView, false);
-
-      document.querySelectorAll('.view-switcher-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const view = btn.dataset.view;
-          this.apply(view, true);
-        });
-      });
-    },
-
-    apply(view, save = true) {
-      this.currentView = view;
-      if (save) localStorage.setItem('portfolio_view', view);
-
+      const btns = document.querySelectorAll('.view-switcher-btn');
       const gallery = document.getElementById('portfolio-gallery');
-      if (!gallery) return;
+      if (!btns || !gallery) return;
 
-      document.querySelectorAll('.view-switcher-btn').forEach(btn => {
-        const isMatch = btn.dataset.view === view;
-        btn.classList.toggle('text-black', isMatch);
-        btn.classList.toggle('dark:text-white', isMatch);
-        btn.classList.toggle('bg-white', isMatch);
-        btn.classList.toggle('dark:bg-neutral-800', isMatch);
-        btn.classList.toggle('shadow-sm', isMatch);
-        btn.classList.toggle('text-neutral-400', !isMatch);
-      });
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => {
+            b.classList.remove('bg-white', 'text-black', 'dark:bg-neutral-800', 'dark:text-white', 'shadow-sm');
+            b.classList.add('text-neutral-400');
+          });
+          btn.classList.add('bg-white', 'text-black', 'dark:bg-neutral-800', 'dark:text-white', 'shadow-sm');
+          btn.classList.remove('text-neutral-400');
 
-      gallery.className = gallery.className
-        .replace(/columns-\S+/g, '')
-        .replace(/grid-\S+/g, '')
-        .replace(/grid\b/g, '')
-        .replace(/space-y-\S+/g, '');
-
-      if (view === 'masonry') {
-        gallery.classList.add('columns-1', 'sm:columns-2', 'lg:columns-3', 'xl:columns-4', 'gap-4', 'space-y-4');
-      } else if (view === 'editorial') {
-        gallery.classList.add('columns-1', 'md:columns-2', 'gap-8', 'space-y-8');
-      } else if (view === 'compact') {
-        gallery.classList.add('columns-2', 'sm:columns-3', 'md:columns-4', 'xl:columns-5', 'gap-2.5', 'space-y-2.5');
-      }
-    }
-  };
-
-  // --- 6. ZEN EXHIBITION SLIDESHOW MODE ---
-  const ZenMode = {
-    isOpen: false,
-    photos: [],
-    currentIndex: 0,
-    intervalTimer: null,
-    isPlaying: false,
-
-    init() {
-      const items = document.querySelectorAll('.gallery-item');
-      this.photos = Array.from(items).map(item => ({
-        src: item.dataset.photoSrc,
-        title: item.dataset.title || 'Untitled Work',
-        category: item.dataset.category === 'art' ? '🎨 PicsArt Digital Art' : (item.dataset.category || 'Fine Art'),
-        camera: item.dataset.camera || 'Canon EOS',
-        location: item.dataset.location || 'Fine Art Series'
-      })).filter(p => p.src);
-
-      document.querySelectorAll('.open-zen-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.open();
+          const view = btn.dataset.view;
+          gallery.className = '';
+          if (view === 'editorial') {
+            gallery.className = 'grid grid-cols-1 md:grid-cols-2 gap-8';
+          } else if (view === 'compact') {
+            gallery.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3';
+          } else {
+            gallery.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5';
+          }
         });
       });
-
-      const closeBtn = document.getElementById('zen-close-btn');
-      if (closeBtn) closeBtn.addEventListener('click', () => this.close());
-
-      const nextBtn = document.getElementById('zen-next-btn');
-      if (nextBtn) nextBtn.addEventListener('click', () => this.next());
-
-      const prevBtn = document.getElementById('zen-prev-btn');
-      if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
-
-      const playBtn = document.getElementById('zen-play-btn');
-      if (playBtn) playBtn.addEventListener('click', () => this.toggleAutoPlay());
-    },
-
-    open(startIndex = 0) {
-      if (this.photos.length === 0) return;
-      this.currentIndex = startIndex;
-      this.isOpen = true;
-
-      const modal = document.getElementById('zen-exhibition-modal');
-      if (!modal) return;
-
-      modal.classList.remove('hidden');
-      setTimeout(() => {
-        modal.classList.remove('opacity-0');
-      }, 20);
-
-      document.body.classList.add('overflow-hidden');
-      this.render();
-      SoundFX.playShutter();
-    },
-
-    close() {
-      this.isOpen = false;
-      this.stopAutoPlay();
-      const modal = document.getElementById('zen-exhibition-modal');
-      if (!modal) return;
-      modal.classList.add('opacity-0');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 300);
-      document.body.classList.remove('overflow-hidden');
-    },
-
-    next() {
-      this.currentIndex = (this.currentIndex + 1) % this.photos.length;
-      this.render();
-      SoundFX.playShutter();
-    },
-
-    prev() {
-      this.currentIndex = (this.currentIndex - 1 + this.photos.length) % this.photos.length;
-      this.render();
-      SoundFX.playShutter();
-    },
-
-    toggleAutoPlay() {
-      if (this.isPlaying) {
-        this.stopAutoPlay();
-      } else {
-        this.startAutoPlay();
-      }
-    },
-
-    startAutoPlay() {
-      this.isPlaying = true;
-      this.updatePlayBtn();
-      this.intervalTimer = setInterval(() => {
-        this.next();
-      }, 4500);
-    },
-
-    stopAutoPlay() {
-      this.isPlaying = false;
-      this.updatePlayBtn();
-      if (this.intervalTimer) {
-        clearInterval(this.intervalTimer);
-        this.intervalTimer = null;
-      }
-    },
-
-    updatePlayBtn() {
-      const playIcon = document.getElementById('zen-play-icon');
-      const pauseIcon = document.getElementById('zen-pause-icon');
-      if (playIcon) playIcon.classList.toggle('hidden', this.isPlaying);
-      if (pauseIcon) pauseIcon.classList.toggle('hidden', !this.isPlaying);
-    },
-
-    render() {
-      const current = this.photos[this.currentIndex];
-      if (!current) return;
-
-      const img = document.getElementById('zen-main-img');
-      const bg = document.getElementById('zen-ambient-bg');
-      const title = document.getElementById('zen-photo-title');
-      const meta = document.getElementById('zen-photo-meta');
-      const counter = document.getElementById('zen-photo-counter');
-
-      if (img) {
-        img.style.opacity = '0';
-        setTimeout(() => {
-          img.src = resolveMediaUrl(current.src);
-          img.alt = current.alt || current.title;
-          img.onload = () => {
-            img.style.opacity = '1';
-          };
-        }, 150);
-      }
-
-      if (bg) {
-        bg.style.backgroundImage = `url('${resolveMediaUrl(current.src, 'w480')}')`;
-      }
-
-      if (title) title.textContent = current.title;
-      if (meta) {
-        meta.textContent = `${current.category} · ${current.camera} · ${current.location}`;
-      }
-      if (counter) {
-        counter.textContent = `${this.currentIndex + 1} / ${this.photos.length}`;
-      }
     }
   };
 
-  // --- 7. KEYBOARD SHORTCUTS ---
-  const KeyboardShortcuts = {
-    init() {
-      window.addEventListener('keydown', (e) => {
-        if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
-
-        if (e.key === 'Escape') {
-          if (ZenMode.isOpen) ZenMode.close();
-          Moodboard.closeDrawer();
-        } else if (e.key === 't' || e.key === 'T') {
-          ThemeManager.toggle();
-        } else if (e.key === 's' || e.key === 'S') {
-          SoundFX.toggle();
-        } else if (e.key === 'm' || e.key === 'M' || e.key === 'f' || e.key === 'F') {
-          Moodboard.openDrawer();
-        } else if (e.key === 'z' || e.key === 'Z') {
-          if (ZenMode.isOpen) ZenMode.close();
-          else ZenMode.open();
-        } else if (ZenMode.isOpen) {
-          if (e.key === 'ArrowRight' || e.key === ' ') {
-            e.preventDefault();
-            ZenMode.next();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            ZenMode.prev();
-          }
-        }
-      });
-    }
-  };
-
-  // --- 8. BACK TO TOP BUTTON ---
+  // --- BACK TO TOP ---
   const BackToTop = {
     init() {
       const btn = document.getElementById('back-to-top-btn');
       if (!btn) return;
-
       window.addEventListener('scroll', () => {
         if (window.scrollY > 400) {
           btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
@@ -1005,7 +782,7 @@
           btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
           btn.classList.remove('opacity-100', 'translate-y-0');
         }
-      });
+      }, { passive: true });
 
       btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1013,89 +790,22 @@
     }
   };
 
-  // --- 9. CONTACT PAGE MOODBOARD AUTOFILL ---
-  const ContactAutofill = {
-    init() {
-      const params = new URLSearchParams(window.location.search);
-      const moodboardParam = params.get('moodboard') || params.get('selection');
-      const subjectInput = document.getElementById('subject');
-      const messageInput = document.getElementById('message');
-      const moodboardPreview = document.getElementById('contact-moodboard-preview');
-      const moodboardTags = document.getElementById('contact-moodboard-tags');
-
-      if (moodboardParam) {
-        if (subjectInput && !subjectInput.value) {
-          subjectInput.value = 'Photography & Art Inquiry (Referencing Portfolio Moodboard)';
-        }
-        if (messageInput && !messageInput.value) {
-          messageInput.value = `Hello Azmi,\n\nI was browsing your photography and digital art portfolio and loved your work! I am especially inspired by these selected styles/shots:\n• ${moodboardParam.split(', ').join('\n• ')}\n\nI would love to inquire about your availability and rates for an upcoming project.`;
-        }
-        if (moodboardPreview && moodboardTags) {
-          moodboardPreview.classList.remove('hidden');
-          const titles = moodboardParam.split(', ');
-          moodboardTags.innerHTML = titles.map(t => `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">📷 ${t}</span>`).join('');
-        }
-      }
-    }
-  };
-
-  // --- 10. CLOUD & GOOGLE DATA LOADER ---
-  const DataLoader = {
-    async init() {
-      // 1. Asynchronously load dist/gallery-data.json if needed
-      if (!window.GALLERY_DATA || window.GALLERY_DATA.length === 0) {
-        try {
-          const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/dist/');
-          const res = await fetch(isRoot ? 'dist/gallery-data.json' : 'gallery-data.json');
-          if (res.ok) {
-            const data = await res.json();
-            window.GALLERY_DATA = data.items || data;
-            const container = document.getElementById('portfolio-gallery');
-            if (container) container.innerHTML = '';
-            GalleryRenderer.render();
-            FilmstripMarquee.render();
-            ZenMode.init();
-          }
-        } catch (e) {
-          console.warn('Using embedded gallery dataset', e);
-        }
-      }
-
-      // 2. Netlify Identity Login Redirect for Decap CMS
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    }
-  };
-
-  // Initialize all smart modules when DOM is ready
-  document.addEventListener('DOMContentLoaded', () => {
-    DataLoader.init();
+  // --- INITIALIZE EVERYTHING ON DOM READY ---
+  function init() {
     GalleryRenderer.render();
-    RotatingHeadline.init();
-    ThemeManager.init();
-    SoundFX.init();
-    Moodboard.init();
-    GalleryFilter.init();
-    ViewSwitcher.init();
+    HeadlineRotator.init();
+    ShutterSound.init();
+    ThemeEngine.init();
+    ExifModalManager.init();
     ZenMode.init();
-    KeyboardShortcuts.init();
+    FilterEngine.init();
+    LayoutSwitcher.init();
     BackToTop.init();
-    ContactAutofill.init();
-  });
+  }
 
-  window.AzmiPortfolio = {
-    ThemeManager,
-    SoundFX,
-    Moodboard,
-    GalleryFilter,
-    ViewSwitcher,
-    ZenMode
-  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
