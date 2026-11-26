@@ -8,7 +8,7 @@ const artCount = heroItems.filter((i) => i.category === 'art').length;
 const seriesCount = heroItems.filter((i) => i.isSeries).length;
 ---
 
-<section class="relative pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+<section id="hero" class="relative pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
   
   <!-- Ambient Animated Aurora Glow Orbs in Background -->
   <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-gradient-to-tr from-amber-500/15 via-rose-500/15 to-purple-500/15 filter blur-3xl pointer-events-none animate-aurora-1"></div>
@@ -93,3 +93,14 @@ const seriesCount = heroItems.filter((i) => i.isSeries).length;
   </div>
 
 </section>
+
+<!-- Pause the hero's looping animations (glow, filmstrip) while it is scrolled out of view. -->
+<script is:inline>
+  (function () {
+    var hero = document.getElementById('hero');
+    if (!hero || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { hero.toggleAttribute('data-offscreen', !e.isIntersecting); });
+    }).observe(hero);
+  })();
+</script>

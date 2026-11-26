@@ -219,7 +219,7 @@
           if (isSeries) {
             badge = `
               <div class="absolute top-3 left-3 pointer-events-none z-10">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium tracking-wide bg-black/60 dark:bg-black/75 backdrop-blur-md text-white border border-white/10 shadow-lg">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium tracking-wide bg-black/75 text-white border border-white/10 shadow-lg">
                   <svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
                   Series (${item.seriesCount})
                 </span>
@@ -227,7 +227,7 @@
           } else if (isArt) {
             badge = `
               <div class="absolute top-3 left-3 pointer-events-none z-10">
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium tracking-wide bg-gradient-to-r from-purple-600/80 to-pink-600/80 backdrop-blur-md text-white border border-white/15 shadow-lg">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium tracking-wide bg-gradient-to-r from-purple-600/90 to-pink-600/90 text-white border border-white/15 shadow-lg">
                   <span>🎨</span> Digital Art
                 </span>
               </div>`;
@@ -275,7 +275,7 @@
 
               ${Array.isArray(item.replay) && item.replay.length > 1 ? `
               <button type="button"
-                      class="replay-btn absolute top-3 right-14 z-10 inline-flex items-center gap-1.5 pl-2.5 pr-3 py-2 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-md border border-white/15 text-white text-[11px] font-semibold tracking-wide transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 focus:opacity-100"
+                      class="replay-btn absolute top-3 right-14 z-10 inline-flex items-center gap-1.5 pl-2.5 pr-3 py-2 rounded-full bg-black/60 hover:bg-black/80 border border-white/15 text-white text-[11px] font-semibold tracking-wide transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 focus:opacity-100"
                       data-index="${index}"
                       title="Replay how this edit was made">
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.84A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.27l9.34-5.89a1.5 1.5 0 000-2.54L6.3 2.84z"/></svg>
@@ -284,7 +284,7 @@
 
               <!-- Info / EXIF Button (Replaces Moodboard Heart) -->
               <button type="button"
-                      class="exif-btn absolute top-3 right-3 z-10 p-2.5 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-md border border-white/15 text-white transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 hover:scale-110 focus:opacity-100"
+                      class="exif-btn absolute top-3 right-3 z-10 p-2.5 rounded-full bg-black/60 hover:bg-black/80 border border-white/15 text-white transition-all duration-300 opacity-90 sm:opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 hover:scale-110 focus:opacity-100"
                       data-index="${index}"
                       title="View Camera EXIF & Story Behind Shot (I)">
                 <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -294,7 +294,7 @@
 
               <div class="absolute inset-x-0 bottom-0 p-4 pt-12 photo-card-overlay opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex flex-col justify-end">
                 <div class="flex items-center gap-2 mb-1">
-                  <span class="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-white/20 backdrop-blur-sm text-white font-semibold">${categoryText}</span>
+                  <span class="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded bg-black/45 text-white font-semibold">${categoryText}</span>
                   <span class="text-[11px] text-white/70 font-mono truncate">${item.location.split(',')[0]}</span>
                 </div>
                 <h3 class="text-white text-base font-semibold tracking-tight drop-shadow-sm truncate">${item.title}</h3>
@@ -522,7 +522,8 @@
       this.layout = () => { clearTimeout(t); t = setTimeout(() => this.place(), 16); };
       this.place();
       window.addEventListener('resize', this.layout);
-      this.cards.forEach((card) => card.querySelectorAll('img').forEach((img) => img.addEventListener('load', this.layout)));
+      // Images that already carry width/height keep their size, so only unknown ones need a re-layout on load.
+      this.cards.forEach((card) => card.querySelectorAll('img:not([width])').forEach((img) => img.addEventListener('load', this.layout)));
       // Also catches layout-switch and filter changes that alter card sizes.
       if ('ResizeObserver' in window) {
         const ro = new ResizeObserver(this.layout);
@@ -688,35 +689,28 @@
         });
       }
 
-      // 3D Perspective Tilt on Mouse Movement
+      // 3D tilt on hover: only with a real mouse and when motion is allowed. It updates at most
+      // once per frame and reads the card's position fresh (it moves while you scroll).
+      const canTilt = window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!canTilt) return;
       items.forEach(card => {
-        let bounds;
-        function rotateToMouse(e) {
-          const mouseX = e.clientX;
-          const mouseY = e.clientY;
-          const leftX = mouseX - bounds.x;
-          const topY = mouseY - bounds.y;
-          const center = { x: leftX - bounds.width / 2, y: topY - bounds.height / 2 };
-          const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
-          
-          card.style.transform = `
-            scale3d(1.02, 1.02, 1.02)
-            rotate3d(
-              ${center.y / 100},
-              ${-center.x / 100},
-              0,
-              ${Math.log(distance) * 1.5}deg
-            )
-          `;
-        }
-
-        card.addEventListener('mouseenter', () => {
-          bounds = card.getBoundingClientRect();
-          document.addEventListener('mousemove', rotateToMouse);
+        let frame = 0, lastX = 0, lastY = 0;
+        const apply = () => {
+          frame = 0;
+          const b = card.getBoundingClientRect();
+          const cx = lastX - b.left - b.width / 2;
+          const cy = lastY - b.top - b.height / 2;
+          const distance = Math.max(1, Math.sqrt(cx * cx + cy * cy));
+          card.style.transform = `perspective(1000px) scale3d(1.02, 1.02, 1.02) rotate3d(${cy / 100}, ${-cx / 100}, 0, ${Math.log(distance) * 1.5}deg)`;
+        };
+        card.addEventListener('mousemove', (e) => {
+          lastX = e.clientX; lastY = e.clientY;
+          if (!frame) frame = requestAnimationFrame(apply);
         });
-
         card.addEventListener('mouseleave', () => {
-          document.removeEventListener('mousemove', rotateToMouse);
+          if (frame) cancelAnimationFrame(frame);
+          frame = 0;
           card.style.transform = '';
         });
       });

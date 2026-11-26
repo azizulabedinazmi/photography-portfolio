@@ -71,9 +71,19 @@
 
 .animate-aurora-1 {
   animation: auroraGlow 12s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 .animate-aurora-2 {
   animation: auroraGlow 16s ease-in-out infinite reverse;
+  will-change: transform, opacity;
+}
+/* Set by Layout.astro when the hero has scrolled out of view: no need to keep animating. */
+[data-offscreen] .animate-aurora-1,
+[data-offscreen] .animate-aurora-2,
+[data-offscreen] .animate-marquee,
+[data-offscreen] .animate-ping,
+[data-offscreen] .animate-bounce {
+  animation-play-state: paused;
 }
 
 /* Camera Flash Burst Effect */
@@ -88,8 +98,6 @@
 
 /* 3D Tilt Card Container */
 .tilt-card {
-  transform-style: preserve-3d;
-  perspective: 1000px;
   transition: transform 0.15s ease-out, box-shadow 0.3s ease-out;
 }
 .tilt-card:hover {
