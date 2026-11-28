@@ -86,38 +86,41 @@ write('dist/gallery-data.js',
   `/**\n * Azizul Abedin Azmi - Photography Portfolio Gallery Dataset\n * GENERATED from dist/gallery-data.json by scripts/build-seo.js.\n * Edit the gallery in the admin at /admin/ (or the JSON) instead of this file.\n */\n\nwindow.GALLERY_DATA = ${JSON.stringify(items, null, 2)};\n`);
 
 // 2. sitemap.xml
+// <lastmod> is when the page's own source last changed (its newest git commit, or today if it has
+// uncommitted edits), not the build date: a lastmod that moves on every deploy teaches Google to
+// ignore it. If git isn't available the tag is left out. <changefreq> and <priority> are left out
+// because Google ignores them.
+const { execFileSync } = require('child_process');
 const today = new Date().toISOString().slice(0, 10);
+function lastChanged(paths) {
+  try {
+    const git = (args) => execFileSync('git', ['--literal-pathspecs', ...args], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    if (git(['status', '--porcelain', '--', ...paths])) return today;
+    return git(['log', '-1', '--format=%cs', '--', ...paths]) || null;
+  } catch {
+    return null;
+  }
+}
 const imageTag = (u) => `    <image:image>\n      <image:loc>${xml(u)}</image:loc>\n    </image:image>`;
-const photoUrls = items.map((it, i) => `  <url>
-    <loc>${SITE}/photo/${slugs[i]}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-${pages[i].map((im) => imageTag(im.url)).join('\n')}
-  </url>`).join('\n');
+const urlEntry = (loc, lastmod, imgs = []) => [
+  '  <url>',
+  `    <loc>${xml(loc)}</loc>`,
+  ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
+  ...imgs.map(imageTag),
+  '  </url>'
+].join('\n');
+
+const photoLastmod = lastChanged(['dist/gallery-data.json', 'src/pages/photo/[slug].astro', 'src/lib/photos.ts']);
+const urls = [
+  urlEntry(`${SITE}/`, lastChanged(['src/pages/index.astro', 'src/components', 'dist/gallery-data.json'])),
+  urlEntry(`${SITE}/about/`, lastChanged(['src/pages/about.astro']), [`${SITE}/dist/assets/Avatar.png`]),
+  urlEntry(`${SITE}/contact/`, lastChanged(['src/pages/contact.astro'])),
+  ...items.map((it, i) => urlEntry(`${SITE}/photo/${slugs[i]}/`, photoLastmod, pages[i].map((im) => im.url)))
+];
 write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>${SITE}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>${SITE}/about/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-${imageTag(`${SITE}/dist/assets/Avatar.png`)}
-  </url>
-  <url>
-    <loc>${SITE}/contact/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-${photoUrls}
+${urls.join('\n')}
 </urlset>
 `);
 

@@ -1,17 +1,11 @@
-# Robots.txt for Photography Portfolio
-# Allow all search engines to crawl the website
+# robots.txt for https://azmi.is-cool.dev
+#
+# Everything may be crawled. The admin at /admin/ is kept out of search results by its
+# "noindex, nofollow" header and meta tag (see netlify.toml). It is deliberately NOT
+# disallowed here: a crawler that is blocked from a page can't see its noindex, and may
+# then list the bare URL anyway ("Indexed, though blocked by robots.txt").
 
 User-agent: *
 Allow: /
 
-# Keep the admin pages out of search results
-Disallow: /admin/
-
-# Sitemap location
 Sitemap: https://azmi.is-cool.dev/sitemap.xml
-
-# Crawl delay (optional - time in seconds between requests)
-Crawl-delay: 1
-
-# Request rate (optional)
-Request-rate: 1/1s
