@@ -3,30 +3,26 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://azmi.is-cool.dev/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://azmi.is-cool.dev/works/</loc>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/about/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Avatar.png</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/contact/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-28</lastmod>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/expressions-of-sharna/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/expressions-of-sharna-1600.webp</image:loc>
     </image:image>
@@ -39,18 +35,14 @@
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/sanzana-bashar-golden-hour/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/IMG_20200908_021024_949-960.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/golden-hour-reverie/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/golden-hour-reverie-1600.webp</image:loc>
     </image:image>
@@ -66,36 +58,28 @@
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/scout-brotherhood-assembly/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/_MG_3944-01-1-960.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/whiskers-at-golden-dusk/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/20210723182456_IMG_5546-01-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/hafsa-prapti-studio-outdoor/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/20220413163432__MG_7932-01-1-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/shadow-radiance/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/shadow-radiance-1600.webp</image:loc>
     </image:image>
@@ -108,45 +92,35 @@
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/nikisha-hoque-dramatic-light/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/nikisha-hoque-dramatic-light-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/botanical-bloom-petals/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/20210802144001_IMG_5708-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/barisha-apu-heritage-saree/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/barisha-apu-heritage-saree-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/asmita-islam-sharna-radiant-focus/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/asmita-islam-sharna-radiant-focus-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/ecpa-celebration-energy/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/ecpa-celebration-energy-1600.webp</image:loc>
     </image:image>
@@ -156,36 +130,28 @@
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/nikisha-hoque-monochromatic-noir/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/nikisha-hoque-monochromatic-noir-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/nayeem-candid-gaze/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/20210824200717_IMG_0546-01-960.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/campfire-vigil-comradery/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/IMG_5500-01-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/classical-grace-arpita-das/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/classical-grace-arpita-das-1600.webp</image:loc>
     </image:image>
@@ -195,27 +161,21 @@
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/sharmin-akter-shila-poise/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/sharmin-akter-shila-poise-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/verdant-canopy-sky/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/20210802144133_IMG_5711-960.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/the-editorial-cut/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/the-editorial-cut-1600.webp</image:loc>
     </image:image>
@@ -228,369 +188,287 @@
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/the-gathering-ecpa-moments/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/the-gathering-ecpa-moments-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/sakida-meem-ambient-portrait/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/sakida-meem-ambient-portrait-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/spotlight-stage-energy/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/spotlight-stage-energy-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/salsabil-jannat-scout-honor/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/IMG_9710-02-2-960.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/ecpa-silhouette-gaze/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/ecpa-silhouette-gaze-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/character-presence/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/character-presence-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/introspection-in-warm-tone/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/introspection-in-warm-tone-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/youth-natural-radiance/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/youth-natural-radiance-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/harmony-stillness/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/harmony-stillness-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/cultural-elegance/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/cultural-elegance-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/traditional-poise/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/traditional-poise-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/honor-guard-march/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/IMG-20220104-WA0029-01-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/serenity-soft-focus/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/serenity-soft-focus-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/the-storyteller-gaze/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/the-storyteller-gaze-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/joy-jubilation/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/joy-jubilation-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/festive-radiance/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/festive-radiance-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/candid-warmth/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/candid-warmth-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/painted-gaze-digital-portrait/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/20220805_173041-960.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/reflection-form/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/reflection-form-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/shadow-study-monochromatic-gaze/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Photography/_web/shadow-study-monochromatic-gaze-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/scarlet-aesthetic/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/cf094e546bcd46b1bdea-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/jhumur-maryam-beauty-bloom/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/a9377c075f1b8be8f882-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/tender-embrace/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/fc710665a467477420c7-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/floral-nightfall/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/93b0bdf32d3e0e75272d-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/pink-butterfly-dream/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/74f93db9a5ebe0c2ccad-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/nikisha-hoque-digital-art-edit/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/79c63af9d50f2788b8b3-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/celestial-mirage/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/b1a6839bc66e514bac9a-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/ethereal-prism/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/f9d28f7f27c06422245c-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/neon-dreamscape/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/dccf2c6926f2a1d77d37-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/hafsa-prapti-digital-art-portrait/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/11b6a70caae11514547a-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/sumaiya-hossain-stylized-portrait/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/43dd01fdd9d7e8ac76b7-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/sumaiya-shifa-fantasy-tone/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/f36320bd13e4dc306681-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/littolpotat-creative-cut/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/48be4e98d873ac9d7464-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/abstract-harmony/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/30c957fcec7b3b8bef7b-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/nazmun-nahar-meem-digital-portrait/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/0f36c75c376f14c99beb-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/cosmic-solitude/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/cc1be57984c6dedaefb8-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/vibrant-silhouette/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/d324a5516ea647ea3a16-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/zarin-shuvah-mashtura-digital-edit/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/4c746784c6f319253c9b-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/farhat-faiza-taha-dreamscape/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/608d8f4d6cb0cd685b33-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/aurora-fantasy/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/807e9a702405827794a3-1600.webp</image:loc>
     </image:image>
   </url>
   <url>
     <loc>https://azmi.is-cool.dev/photo/retro-futurism/</loc>
-    <lastmod>2026-11-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-11-28</lastmod>
     <image:image>
       <image:loc>https://azmi.is-cool.dev/dist/assets/Art/_web/e7d1d73e394b9d65e686-1600.webp</image:loc>
     </image:image>
