@@ -113,6 +113,7 @@ const urlEntry = (loc, lastmod, imgs = []) => [
 const photoLastmod = lastChanged(['dist/gallery-data.json', 'src/pages/photo/[slug].astro', 'src/lib/photos.ts']);
 const urls = [
   urlEntry(`${SITE}/`, lastChanged(['src/pages/index.astro', 'src/components', 'dist/gallery-data.json'])),
+  urlEntry(`${SITE}/works/`, lastChanged(['src/pages/works.astro', 'dist/gallery-data.json'])),
   urlEntry(`${SITE}/about/`, lastChanged(['src/pages/about.astro']), [`${SITE}/dist/assets/Avatar.png`]),
   urlEntry(`${SITE}/contact/`, lastChanged(['src/pages/contact.astro'])),
   ...items.map((it, i) => urlEntry(`${SITE}/photo/${slugs[i]}/`, photoLastmod, pages[i].map((im) => im.url)))
